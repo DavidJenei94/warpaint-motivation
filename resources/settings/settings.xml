@@ -22,4 +22,8 @@
         <settingConfig type="boolean" />
     </setting>
 
+    <setting propertyKey="@Properties.UpdateSecondInLowPowerMode" title="@Strings.UpdateSecondInLowPowerModeTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
 </settings>

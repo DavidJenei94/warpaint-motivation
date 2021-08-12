@@ -1,4 +1,10 @@
 <layout id="WatchFace">
     <drawable class="Background" />
-    <label id="TimeLabel" x="center" y="center" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_BLUE" />
+
+    <drawable class="Time" id="TimeLabel">
+		<param name="locX">center</param>
+		<param name="locY">center</param>
+		<param name="font">largeFont</param>
+		<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+	</drawable>
 </layout>

@@ -6,13 +6,28 @@ import Toybox.WatchUi;
 
 class WarpaintMotivationView extends WatchUi.WatchFace {
 
+    private var viewDrawables = {};
+	private var _isAwake as Boolean;
+	private var _partialUpdatesAllowed as Boolean;
+	private var _SecondsBoundingBox = new Number[4];
+
+    //! Constructor
     function initialize() {
         WatchFace.initialize();
+        _isAwake = true;
+        _partialUpdatesAllowed = (WatchUi.WatchFace has :onPartialUpdate);
     }
 
-    // Load your resources here
+    //! Load resources and drawables
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.WatchFace(dc));
+        loadDrawables();
+    }
+
+    //! Load drawables
+    private function loadDrawables() as Void {
+        viewDrawables[:timeText] = View.findDrawableById("TimeLabel");
+        viewDrawables[:dateText] = View.findDrawableById("DateLabel");
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -21,31 +36,41 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     function onShow() as Void {
     }
 
-    // Update the view
+    //! Update the view
+    //! @param dc Device context
     function onUpdate(dc as Dc) as Void {
-        // Get the current time and format it correctly
-        var timeFormat = "$1$:$2$";
-        var clockTime = System.getClockTime();
-        var hours = clockTime.hour;
-        if (!System.getDeviceSettings().is24Hour) {
-            if (hours > 12) {
-                hours = hours - 12;
-            }
-        } else {
-            if (getApp().getProperty("UseMilitaryFormat")) {
-                timeFormat = "$1$$2$";
-                hours = hours.format("%02d");
-            }
-        }
-        var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
+		
+        // Clear dc with backgroundcolor
+        dc.setColor(foregroundColor, backgroundColor);
+    	dc.clear();
+    
+    	// Set and draw time, AM/PM
+        viewDrawables[:timeText].drawTime(dc);
+        viewDrawables[:timeText].drawAmPm(dc);
 
-        // Update the view
-        var view = View.findDrawableById("TimeLabel") as Text;
-        view.setColor(getApp().getProperty("ForegroundColor") as Number);
-        view.setText(timeString);
+    	// Draw seconds
+        if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
+            // If this device supports partial updates
+            onPartialUpdate(dc);
+        } else if (_isAwake) {
+	        viewDrawables[:timeText].drawSeconds(dc);
+    	}
+    }
 
-        // Call the parent onUpdate function to redraw the layout
-        View.onUpdate(dc);
+    //! Handle the partial update event - Draw seconds every second
+    //! @param dc Device context
+    public function onPartialUpdate(dc as Dc) as Void {
+		if (updatingSecondsInLowPowerMode) {
+	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc);
+	  
+            // Set clip to the region of bounding box and which only updates that
+	        dc.setClip(_SecondsBoundingBox[0], _SecondsBoundingBox[1], _SecondsBoundingBox[2], _SecondsBoundingBox[3]);
+	        dc.setColor(foregroundColor, backgroundColor);
+	    	dc.clear();
+	        viewDrawables[:timeText].drawSeconds(dc);
+	        
+	        dc.clearClip();
+		}
     }
 
     // Called when this View is removed from the screen. Save the
@@ -60,6 +85,14 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
+    }
+
+    //! Load fonts - in View, because WatchUI is not supported in background events
+    function loadFonts() as Void {
+		smallFont = WatchUi.loadResource(Rez.Fonts.SmallFont);
+		mediumFont = WatchUi.loadResource(Rez.Fonts.MediumFont);
+		largeFont = WatchUi.loadResource(Rez.Fonts.LargeFont);
+		iconFont = WatchUi.loadResource(Rez.Fonts.IconFont);
     }
 
 }
