@@ -7,4 +7,12 @@
 		<param name="font">largeFont</param>
 		<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
 	</drawable>
+	
+    <drawable class="Date" id="DateLabel">
+		<param name="locX">center</param>
+		<param name="locY">dc.getHeight() * 0.33</param>
+		<param name="font">smallFont</param>
+		<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+	</drawable>
+
 </layout>

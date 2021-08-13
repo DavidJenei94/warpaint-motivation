@@ -48,6 +48,9 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
         viewDrawables[:timeText].drawTime(dc);
         viewDrawables[:timeText].drawAmPm(dc);
 
+        // Set and draw date
+    	viewDrawables[:dateText].drawDate(dc);
+
     	// Draw seconds
         if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
             // If this device supports partial updates
