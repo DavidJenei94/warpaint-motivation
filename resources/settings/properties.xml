@@ -8,4 +8,6 @@
 
     <property id="CaloriesGoal" type="number">0</property>
 
+    <property id="DataBarWidth" type="number">6</property>
+
 </properties>

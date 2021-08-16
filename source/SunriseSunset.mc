@@ -1,0 +1,222 @@
+import Toybox.Math;
+import Toybox.System;
+import Toybox.Time.Gregorian;
+import Toybox.Time;
+import Toybox.Activity;
+
+class SunriseSunset {
+
+	private var _sunrise as Number; // in hour, eg. 8.23
+	private var _sunset as Number;
+	private var _hour as Number;
+	private var _min as Number;
+	
+	//! Constructor
+    function initialize() {
+        calculateSunriseSunset();
+    }
+    
+	//! Get next sunrise/sunset time
+	//! @return array of the next sunrise or sunset (according to current time) in string 
+	//! and a bool value if it is sunrise or not
+    function getNextSunriseSunset() as Array<String or Boolean> {
+    	var currentTime = _hour + _min / 60.0;
+    	if (currentTime < _sunrise || currentTime > _sunset) {
+    		return [formatHoursToTimeString(_sunrise), true];
+    	} else {
+    		return [formatHoursToTimeString(_sunset), false];
+    	}
+    }
+    
+	//! Format sunrise/sunset time
+	//! @param time the hour in Float
+	//! @return formatted sunrise or sunset in string
+    private function formatHoursToTimeString(time as Number) as String {
+    	var hour = Math.floor(time);
+    	var min = (time - hour) * 100 * 0.6;
+    	if (!System.getDeviceSettings().is24Hour) {
+            if (hour > 12) {
+                hour -= 12;
+            }
+    	}
+
+        return Lang.format("$1$:$2$", [hour.format("%02d"), min.format("%02d")]);	
+    }
+    
+	//! Draw arcs for day and night and also the sun's current position
+	//! only for round screens and only for outer circle
+	//! @param dc as Device Content
+    function drawSunriseSunsetArc(dc as Dc) as Void {
+    	// center of arcs = center of round screen
+    	var arcX = dc.getWidth() / 2;
+    	var arcY = dc.getHeight() / 2;
+    	var width = dataBarWidth + 4; // the outer circle has to be greater because the center of the circle is not at the center of the screen
+    	var radius = arcX - dataBarWidth / 2 + 2;
+    	
+    	var color = 0xFFAA00; //day color
+	    var startAngle = (90.0 - (_sunrise * (360.0 / 24.0)));
+	    var endAngle = (90.0 - (_sunset * (360.0 / 24.0)));
+	    dc.setPenWidth(width);
+		dc.setColor(color, backgroundColor);
+		dc.drawArc(
+	    	arcX, 
+	    	arcY, 
+	    	radius, 
+	    	Graphics.ARC_CLOCKWISE, 
+	    	startAngle, 
+	    	endAngle
+	    );
+	    
+	    color = 0x555555; //night color
+	    dc.setColor(color, backgroundColor);    	
+    	dc.drawArc(
+    		arcX, 
+    		arcY, 
+    		radius, 
+    		Graphics.ARC_CLOCKWISE, 
+    		endAngle, 
+    		startAngle
+    	);
+    	
+    	color = 0xFF0000; //sun color
+    	dc.setColor(color, backgroundColor);
+    	
+    	var currentTime = _hour + _min / 60.0;
+    	var degree = 180 - (currentTime * (360.0 / 24.0));
+    	var radians = Math.toRadians(degree);
+    	var distance = arcX - (dataBarWidth / 2) + 1; // distance of the center of the sun from the center of screen
+    	var x = distance + distance * Math.sin(radians);
+    	var y = distance + distance * Math.cos(radians);
+    	
+    	var coordinates = xyCorrection(x, y, distance, dc);
+    	x = coordinates[0];
+    	y = coordinates[1];
+    	
+    	dc.fillCircle(x, y, dataBarWidth / 2);
+    }
+    
+	//! Calculates sunrise and sunset values according to date/time and location
+	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
+	//! @return boolean value if the calculation is successful or not
+    private function calculateSunriseSunset() as Boolean {  		
+    	var latitude = 0.0;
+	    var longitude = 0.0;
+    	var curLoc = Activity.getActivityInfo().currentLocation;
+		if (curLoc != null) {
+	    	latitude = curLoc.toDegrees()[0].toFloat();
+	    	longitude = curLoc.toDegrees()[1].toFloat();
+    	} 
+
+// commented because the simulator has issues with locations		
+		/*else {
+			return false;
+		}*/
+    	
+// hardcode for testing the lat and lon, comment in prod version
+    	latitude = 46.2539;
+	    longitude = 20.1461;
+
+    	var clockTime = System.getClockTime();
+    	_hour = clockTime.hour;
+    	_min = clockTime.min;
+    	var dst = clockTime.dst / 3600; // The daylight savings time offset in hour
+    	var timeZoneOffset = clockTime.timeZoneOffset / 3600; // Timezone offset in hour
+    	
+		var today = new Time.Moment(Time.today().value());
+		var todayInfo = Gregorian.info(today, Time.FORMAT_SHORT);
+		var options = {
+		    :year   => todayInfo.year,
+		    :month  => 01,
+		    :day    => 01,
+		    :hour   => 00,
+		    :minute => 00
+		};
+		var firstDayOfYear = Gregorian.moment(options);
+    	var dayOfYear = Math.ceil(today.subtract(firstDayOfYear).value() / 60.0 / 60.0 / 24.0) + 1;
+    	var totalDaysInYear = todayInfo.year % 4 == 0 ? 366 : 365;
+    	var fractionalYear = ((2 * Math.PI) / totalDaysInYear) * (dayOfYear - 1 + ((_hour - 12) / 24));
+    	
+		// equation of time in minutes
+    	var eqtime = 229.18 * (0.000075 + 0.001868 * Math.cos(fractionalYear) - 0.032077 * Math.sin(fractionalYear) - 
+    		0.014615 * Math.cos(2 * fractionalYear) - 0.040849 * Math.sin(2 * fractionalYear));
+    	// declination angle in radians
+		var decl = 0.006918 - 0.399912 * Math.cos(fractionalYear) + 0.070257 * Math.sin(fractionalYear) - 0.006758 * Math.cos(2 * fractionalYear) + 
+    		0.000907 * Math.sin(2 * fractionalYear) - 0.002697 * Math.cos(3 * fractionalYear) + 0.00148 * Math.sin(3 * fractionalYear);
+	    
+		// hour angle in radians
+    	var hourAngle = Math.acos(Math.cos(Math.toRadians(90.833)) / (Math.cos(latitude) * Math.cos(decl))) - 
+    		(Math.tan(latitude) * Math.tan(decl));
+    		
+    	_sunrise = ((720 - 4 * (longitude + Math.toDegrees(hourAngle)) - eqtime) / 60) + timeZoneOffset + dst; // in hour
+    	_sunset = ((720 - 4 * (longitude - Math.toDegrees(hourAngle)) - eqtime) / 60) + timeZoneOffset + dst; // in hour
+    }
+    
+    //! x, y position needs adjustment to be in a good place
+    //! simultaniously makes changes to temp x, y and original x, y to be in the correct pos
+	//! @param x original x coordinate
+	//! @param y original y coordinate
+	//! @param distance the distance of the center of the sun from the middle of screen
+	//! @param dc Device context
+	//! @return array of adjusted original x, y coordinates
+    private function xyCorrection(x, y, distance, dc) as Array<Number> {
+    	var coordinates = new [2];
+    	var xOriginal = x;
+    	var yOriginal = y;
+		// x and y recalculated as the center of screen is the origin (0, 0: middle of coordinate pane) (not the top left corner (0, 0))
+		// calculate the distance this way from the origin to center the sun
+    	x = x - dc.getWidth() / 2;
+    	y = y - dc.getHeight() / 2;    	
+    	var changesDict;
+    	
+		// Try out change in every dimension and select the one which is closest to the original distance
+    	var c = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    	while (c < distance - 0.2 || c > distance + 0.2) {
+    		changesDict = {
+    			:noChangeEffect => (distance - c).abs(),
+			    :xPlusChangeEffect => (distance - Math.sqrt(Math.pow(x + 1, 2) + Math.pow(y, 2))).abs(),
+			    :yPlusChangeEffect => (distance - Math.sqrt(Math.pow(x, 2) + Math.pow(y + 1, 2))).abs(),
+			    :xMinusChangeEffect => (distance - Math.sqrt(Math.pow(x - 1, 2) + Math.pow(y, 2))).abs(),
+			    :yMinusChangeEffect => (distance - Math.sqrt(Math.pow(x, 2) + Math.pow(y - 1, 2))).abs()
+			};
+			
+			var min = distance;
+			var minKey = "";
+			for (var i = 0; i < changesDict.size(); i++) {
+				var keys = changesDict.keys();
+				if (changesDict.get(keys[i]) < min) {
+					min = changesDict.get(keys[i]);
+					minKey = keys[i];
+				}
+			}
+			
+	    	switch (minKey) {
+    			case :noChangeEffect:
+			    	coordinates[0] = xOriginal;
+    				coordinates[1] = yOriginal;
+    				return coordinates;
+    			case :xPlusChangeEffect:
+	    			x++;
+    				xOriginal++;
+    				break;
+    			case :yPlusChangeEffect:
+	    			y++;
+    				yOriginal++;
+    				break;
+    			case :xMinusChangeEffect:
+	    			x--;
+    				xOriginal--;
+    				break;    			
+    			case :yMinusChangeEffect:
+	    			y--;
+    				yOriginal--;
+    				break;    			
+    		}
+    		c = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    	}
+    
+    	coordinates[0] = xOriginal;
+    	coordinates[1] = yOriginal;
+    	return coordinates;
+    }
+    
+}

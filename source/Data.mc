@@ -110,14 +110,13 @@ class Data {
 				values[:iconText] = "J";
 				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_PINK;
 				break;				
-			/*
+
 			case DATA_SUNRISE_SUNSET:
 				var nextSunriseSunset = getNextSunriseSunsetTime();
 				values[:displayData] = nextSunriseSunset[0] == -1 ? _errorDisplay : nextSunriseSunset[0];
 				values[:iconText] = nextSunriseSunset[1] ? "E" : "F";
 				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_ORANGE;
-				break;	
-			*/						
+				break;						
 		}
 		
 		return values;
@@ -369,8 +368,6 @@ class Data {
     	return _deviceSettings.notificationCount  != null ? _deviceSettings.notificationCount  : -1;
     }
 
-// CREATE SunriseSunset CLASS LATER
-/*
 	//! Get the next sunrise or sunset
 	//! @return the next sunrise or sunset according to which is the next	
     private function getNextSunriseSunsetTime() as String {
@@ -380,5 +377,5 @@ class Data {
     	  
     	return _sunriseSunset.getNextSunriseSunset();
 	}
-*/
+
 }

@@ -13,6 +13,8 @@ var backgroundColor as Number;
 var updatingSecondsInLowPowerMode as Boolean;
 var militaryFormat as Boolean;
 
+var dataBarWidth as Integer;
+
 var smallFont as Font;
 var mediumFont as Font;
 var largeFont as Font;
@@ -79,12 +81,16 @@ class WarpaintMotivationApp extends Application.AppBase {
 
             updatingSecondsInLowPowerMode = Properties.getValue("UpdateSecondInLowPowerMode");
             militaryFormat = Properties.getValue("UseMilitaryFormat");
+
+            dataBarWidth = Properties.getValue("DataBarWidth");
 		} else {
 		    theme = getApp().getProperty("Theme");
             dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
 
             updatingSecondsInLowPowerMode = getApp().getProperty("UpdateSecondInLowPowerMode");
             militaryFormat = getApp().getProperty("UseMilitaryFormat");
+
+            dataBarWidth = getApp().getProperty("DataBarWidth");
 		}
     }
 
