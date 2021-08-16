@@ -5,16 +5,41 @@ import Toybox.WatchUi;
 // global variables
 var myView as View;
 
-var updatingSecondsInLowPowerMode as Boolean;
-var militaryFormat as Boolean;
-
+var theme as Number;
+var dataIconsThemeColor as Boolean;
 var foregroundColor as Number;
 var backgroundColor as Number;
+
+var updatingSecondsInLowPowerMode as Boolean;
+var militaryFormat as Boolean;
 
 var smallFont as Font;
 var mediumFont as Font;
 var largeFont as Font;
 var iconFont as Font;
+
+var totalCaloriesGoal as Number;
+
+enum { 
+    THEME_WHITE_DARK,
+    THEME_BLUE_DARK,
+    THEME_RED_DARK,
+    THEME_GREEN_DARK,
+    THEME_BLACK_LIGHT
+}
+
+enum { 
+    DATA_BATTERY,   
+    DATA_STEPS,
+    DATA_HEARTRATE,
+    DATA_CALORIES,
+    DATA_SUNRISE_SUNSET,
+    DATA_DISTANCE,
+    DATA_FLOORS_CLIMBED,
+    DATA_ACTIVE_MINUTES_WEEK,
+    DATA_WEATHER,
+    DATA_NOTIFICATION
+}
 
 class WarpaintMotivationApp extends Application.AppBase {
 
@@ -41,30 +66,58 @@ class WarpaintMotivationApp extends Application.AppBase {
     // New app settings have been received so trigger a UI update
     function onSettingsChanged() as Void {
         setGlobalVariables();
-        myView.loadFonts();        
+        selectThemeColors();
+        myView.loadFonts();    
         WatchUi.requestUpdate();
     }
 
-    //! Set global variables (fonts are in the View
+    //! Set global variables (fonts are in the View)
     private function setGlobalVariables() as Void {
     	if (Toybox.Application has :Storage) {
-		    foregroundColor = Properties.getValue("ForegroundColor");
-		    backgroundColor = Properties.getValue("BackgroundColor");
+		    theme = Properties.getValue("Theme");
+            dataIconsThemeColor = Properties.getValue("ThemeDataIconsColor");
 
             updatingSecondsInLowPowerMode = Properties.getValue("UpdateSecondInLowPowerMode");
             militaryFormat = Properties.getValue("UseMilitaryFormat");
 		} else {
-		    foregroundColor = getApp().getProperty("ForegroundColor");
-		    backgroundColor = getApp().getProperty("BackgroundColor");
+		    theme = getApp().getProperty("Theme");
+            dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
 
             updatingSecondsInLowPowerMode = getApp().getProperty("UpdateSecondInLowPowerMode");
             militaryFormat = getApp().getProperty("UseMilitaryFormat");
 		}
     }
 
+    //! Set forground and backgorund colors
+    private function selectThemeColors() as Void {
+    	switch (theme) {
+    		case THEME_WHITE_DARK:
+    			foregroundColor = Graphics.COLOR_WHITE;
+    			backgroundColor = Graphics.COLOR_BLACK;
+    			break;
+    		case THEME_BLUE_DARK:
+    			foregroundColor = Graphics.COLOR_BLUE;
+    			backgroundColor = Graphics.COLOR_BLACK;
+    			break;
+    		case THEME_RED_DARK:
+    			foregroundColor = Graphics.COLOR_RED;
+    			backgroundColor = Graphics.COLOR_BLACK;
+    			break;
+    		case THEME_GREEN_DARK:
+    			foregroundColor = Graphics.COLOR_GREEN;
+    			backgroundColor = Graphics.COLOR_BLACK;
+    			break;
+    		case THEME_BLACK_LIGHT:
+    			foregroundColor = Graphics.COLOR_BLACK;
+    			backgroundColor = Graphics.COLOR_WHITE;
+    			break;
+    	}
+    }
+
 }
 
 //! Give back App
+//! @return App
 function getApp() as WarpaintMotivationApp {
     return Application.getApp() as WarpaintMotivationApp;
 }
