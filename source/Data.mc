@@ -167,10 +167,10 @@ class Data {
     	
     	if (_deviceSettings.distanceUnits == System.UNIT_METRIC) {
     		distance[0] = _info.distance / 100000.0;
-    		distance[1] = "km";
+    		distance[1] = "k";
     	} else if (_deviceSettings.distanceUnits == System.UNIT_STATUTE) {
     		distance[0] = _info.distance / 100000.0 * 0.621371192;
-    		distance[1] = "mi";
+    		distance[1] = "m";
     	}
     	
 		// convert to specified decimal places (0,1,2)

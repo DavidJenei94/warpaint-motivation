@@ -10,6 +10,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	private var _isAwake as Boolean;
 	private var _partialUpdatesAllowed as Boolean;
 	private var _SecondsBoundingBox = new Number[4];
+    private var _data as Data;
 
     //! Constructor
     function initialize() {
@@ -28,6 +29,10 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     private function loadDrawables() as Void {
         viewDrawables[:timeText] = View.findDrawableById("TimeLabel");
         viewDrawables[:dateText] = View.findDrawableById("DateLabel");
+
+        viewDrawables[:middleDataText] = View.findDrawableById("DataFieldMiddle");
+		viewDrawables[:leftDataText] = View.findDrawableById("DataFieldLeft");
+		viewDrawables[:rightDataText] = View.findDrawableById("DataFieldRight");
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -50,6 +55,15 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
         // Set and draw date
     	viewDrawables[:dateText].drawDate(dc);
+
+    	// set data fields and icons
+        _data = new Data();
+    	var middleValues = _data.getDataForDataField(selectedValueForDataFieldMiddle);
+    	var leftValues = _data.getDataForDataField(selectedValueForDataFieldLeft);
+    	var rightValues = _data.getDataForDataField(selectedValueForDataFieldRight);
+    	viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor]);
+    	viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor]);
+    	viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
 
     	// Draw seconds
         if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {

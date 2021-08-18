@@ -14,6 +14,9 @@ var updatingSecondsInLowPowerMode as Boolean;
 var militaryFormat as Boolean;
 
 var dataBarWidth as Integer;
+var selectedValueForDataFieldMiddle as Integer;
+var selectedValueForDataFieldLeft as Integer;
+var selectedValueForDataFieldRight as Integer;
 
 var smallFont as Font;
 var mediumFont as Font;
@@ -83,6 +86,9 @@ class WarpaintMotivationApp extends Application.AppBase {
             militaryFormat = Properties.getValue("UseMilitaryFormat");
 
             dataBarWidth = Properties.getValue("DataBarWidth");
+            selectedValueForDataFieldMiddle = Properties.getValue("DataFieldMiddle");
+			selectedValueForDataFieldLeft = Properties.getValue("DataFieldLeft");
+			selectedValueForDataFieldRight = Properties.getValue("DataFieldRight");
 		} else {
 		    theme = getApp().getProperty("Theme");
             dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
@@ -91,6 +97,9 @@ class WarpaintMotivationApp extends Application.AppBase {
             militaryFormat = getApp().getProperty("UseMilitaryFormat");
 
             dataBarWidth = getApp().getProperty("DataBarWidth");
+		    selectedValueForDataFieldMiddle = getApp().getProperty("DataFieldMiddle");
+			selectedValueForDataFieldLeft = getApp().getProperty("DataFieldLeft");
+			selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");
 		}
     }
 

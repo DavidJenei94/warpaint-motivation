@@ -18,4 +18,19 @@
 	<string id="CaloriesGoalPrompt">Outside 1000-10000 will trigger automatic average calculation</string>
 	<string id="CaloriesGoalError">Only numbers between 1000 and 10000 is accepted as manual</string>
 
+    <string id="DataFieldMiddleTitle">Middle Data Field</string>
+    <string id="DataFieldLeftTitle">Left Data Field</string>
+    <string id="DataFieldRightTitle">Right Data Field</string>
+
+    <string id="Battery">Battery</string>
+    <string id="Steps">Steps</string>
+	<string id="HeartRate">Heart Rate (current if available, otherwise resting)</string>
+	<string id="Calories">Calories (kCal)</string>
+	<string id="SunriseSunset">Next Sunrise or Sunset</string>
+	<string id="Distance">Distance</string>
+	<string id="FloorsClimbed">Floors Climbed</string>
+	<string id="ActiveMinutesWeek">Active minutes of the week</string>
+	<string id="Weather">Current Weather</string>
+	<string id="NotificationCount">Notifications Count</string>
+
 </strings>

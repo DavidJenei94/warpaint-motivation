@@ -15,4 +15,25 @@
 		<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
 	</drawable>
 
+    <drawable class="DataField" id="DataFieldMiddle">
+		<param name="locX">dc.getWidth() * 0.5</param>
+		<param name="locY">dc.getHeight() * 0.15</param>
+		<param name="font">mediumFont</param>
+		<param name="justification">Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER</param>
+	</drawable>
+	
+    <drawable class="DataField" id="DataFieldLeft">
+		<param name="locX">dc.getWidth() * 0.33</param>
+		<param name="locY">dc.getHeight() * 0.25</param>
+		<param name="font">mediumFont</param>
+		<param name="justification">Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER</param>
+	</drawable>
+	
+    <drawable class="DataField" id="DataFieldRight">
+		<param name="locX">dc.getWidth() * 0.67</param>
+		<param name="locY">dc.getHeight() * 0.25</param>
+		<param name="font">mediumFont</param>
+		<param name="justification">Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER</param>
+	</drawable>
+
 </layout>
