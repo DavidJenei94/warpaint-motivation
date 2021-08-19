@@ -20,12 +20,17 @@ class Data {
 	
 	//! Constructor
     function initialize() {
+		refreshData();
+    }
+
+	// Refresh the actual data
+	function refreshData() as Void {
         _info = ActivityMonitor.getInfo();
         _activityInfo = Activity.getActivityInfo();
         _systemStats = System.getSystemStats();
         _userProfile = UserProfile.getProfile();
         _deviceSettings = System.getDeviceSettings();
-    }
+	}
     
 	//! Get the selected data in dataField or dataBar
 	//! @param selectedType selected data type
@@ -377,5 +382,4 @@ class Data {
     	  
     	return _sunriseSunset.getNextSunriseSunset();
 	}
-
 }

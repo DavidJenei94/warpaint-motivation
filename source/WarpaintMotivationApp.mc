@@ -1,6 +1,7 @@
 import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
+import Toybox.Graphics;
 
 // global variables
 var myView as View;
@@ -13,10 +14,14 @@ var backgroundColor as Number;
 var updatingSecondsInLowPowerMode as Boolean;
 var militaryFormat as Boolean;
 
-var dataBarWidth as Integer;
 var selectedValueForDataFieldMiddle as Integer;
 var selectedValueForDataFieldLeft as Integer;
 var selectedValueForDataFieldRight as Integer;
+
+var dataBarWidth as Integer;
+var unfilledDataBarColor = Graphics.COLOR_DK_GRAY;
+var selectedValueForDataBarOuterLeftTop as Integer;
+var selectedValueForDataBarInnerRightBottom as Integer;
 
 var smallFont as Font;
 var mediumFont as Font;
@@ -44,6 +49,11 @@ enum {
     DATA_ACTIVE_MINUTES_WEEK,
     DATA_WEATHER,
     DATA_NOTIFICATION
+}
+
+enum { 
+    DATABAR_OUTER_LEFT_TOP,
+    DATABAR_INNER_RIGHT_BOTTOM
 }
 
 class WarpaintMotivationApp extends Application.AppBase {
@@ -89,6 +99,8 @@ class WarpaintMotivationApp extends Application.AppBase {
             selectedValueForDataFieldMiddle = Properties.getValue("DataFieldMiddle");
 			selectedValueForDataFieldLeft = Properties.getValue("DataFieldLeft");
 			selectedValueForDataFieldRight = Properties.getValue("DataFieldRight");
+            selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
+			selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
 		} else {
 		    theme = getApp().getProperty("Theme");
             dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
@@ -100,6 +112,8 @@ class WarpaintMotivationApp extends Application.AppBase {
 		    selectedValueForDataFieldMiddle = getApp().getProperty("DataFieldMiddle");
 			selectedValueForDataFieldLeft = getApp().getProperty("DataFieldLeft");
 			selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");
+            selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
+			selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
 		}
     }
 

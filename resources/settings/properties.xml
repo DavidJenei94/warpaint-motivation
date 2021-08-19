@@ -13,4 +13,8 @@
     <property id="DataFieldMiddle" type="number">5</property>
     <property id="DataFieldLeft" type="number">2</property>
     <property id="DataFieldRight" type="number">1</property>
+
+    <property id="DataBarOuterLeftTop" type="number">0</property>
+    <property id="DataBarInnerRightBottom" type="number">1</property>
+
 </properties>
