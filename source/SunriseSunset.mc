@@ -10,16 +10,22 @@ class SunriseSunset {
 	private var _sunset as Number;
 	private var _hour as Number;
 	private var _min as Number;
+
+	private var _successfulCalculation as Boolean;
 	
 	//! Constructor
     function initialize() {
-        calculateSunriseSunset();
+        _successfulCalculation = calculateSunriseSunset();
     }
     
 	//! Get next sunrise/sunset time
 	//! @return array of the next sunrise or sunset (according to current time) in string 
 	//! and a bool value if it is sunrise or not
-    function getNextSunriseSunset() as Array<String or Boolean> {
+    function getNextSunriseSunset() as Array<Number or String or Boolean> {
+		if (!_successfulCalculation) {
+			return [-1, true];
+		}
+
     	var currentTime = _hour + _min / 60.0;
     	if (currentTime < _sunrise || currentTime > _sunset) {
     		return [formatHoursToTimeString(_sunrise), true];
@@ -47,7 +53,11 @@ class SunriseSunset {
 	//! only for round screens and only for outer circle
 	//! @param dc as Device Content
     function drawSunriseSunsetArc(dc as Dc) as Void {
-    	// center of arcs = center of round screen
+		if (!_successfulCalculation) {
+			return;
+		}
+		
+		// center of arcs = center of round screen
     	var arcX = dc.getWidth() / 2;
     	var arcY = dc.getHeight() / 2;
     	var width = dataBarWidth + 4; // the outer circle has to be greater because the center of the circle is not at the center of the screen
@@ -99,22 +109,21 @@ class SunriseSunset {
 	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
 	//! @return boolean value if the calculation is successful or not
     private function calculateSunriseSunset() as Boolean {  		
-    	var latitude = 0.0;
+		var latitude = 0.0;
 	    var longitude = 0.0;
-    	var curLoc = Activity.getActivityInfo().currentLocation;
-		if (curLoc != null) {
-	    	latitude = curLoc.toDegrees()[0].toFloat();
-	    	longitude = curLoc.toDegrees()[1].toFloat();
-    	} 
-
-// commented because the simulator has issues with locations		
-		/*else {
+		if (locationLat != null && locationLng != null) {
+			latitude = locationLat;
+	    	longitude = locationLng;
+		} 
+		
+// commented because the simulator has issues with locations
+		else {
 			return false;
-		}*/
-    	
+		}
+
 // hardcode for testing the lat and lon, comment in prod version
-    	latitude = 46.2539;
-	    longitude = 20.1461;
+    	//latitude = 46.2539;
+	    //longitude = 20.1461;
 
     	var clockTime = System.getClockTime();
     	_hour = clockTime.hour;
@@ -149,6 +158,8 @@ class SunriseSunset {
     		
     	_sunrise = ((720 - 4 * (longitude + Math.toDegrees(hourAngle)) - eqtime) / 60) + timeZoneOffset + dst; // in hour
     	_sunset = ((720 - 4 * (longitude - Math.toDegrees(hourAngle)) - eqtime) / 60) + timeZoneOffset + dst; // in hour
+
+		return true;
     }
     
     //! x, y position needs adjustment to be in a good place

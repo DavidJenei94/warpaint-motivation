@@ -1,7 +1,11 @@
 import Toybox.Application;
+import Toybox.Application.Properties;
+import Toybox.Application.Storage;
 import Toybox.Lang;
 import Toybox.WatchUi;
-import Toybox.Graphics;
+import Toybox.Background;
+import Toybox.Time;
+import Toybox.Activity;
 
 // global variables
 var myView as View;
@@ -19,7 +23,7 @@ var selectedValueForDataFieldLeft as Integer;
 var selectedValueForDataFieldRight as Integer;
 
 var dataBarWidth as Integer;
-var unfilledDataBarColor = Graphics.COLOR_DK_GRAY;
+var unfilledDataBarColor = 0x555555; // Graphics.COLOR_DK_GRAY;
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
 
@@ -29,6 +33,11 @@ var largeFont as Font;
 var iconFont as Font;
 
 var totalCaloriesGoal as Number;
+
+var motivationalQuote as String;
+
+var locationLat = null;
+var locationLng = null;
 
 enum { 
     THEME_WHITE_DARK,
@@ -56,11 +65,17 @@ enum {
     DATABAR_INNER_RIGHT_BOTTOM
 }
 
+(:background)
 class WarpaintMotivationApp extends Application.AppBase {
 
     //! Constructor
     function initialize() {
         AppBase.initialize();
+
+        // register for temporal event every 5 minutes
+        if (Toybox has :Background) {
+        	Background.registerForTemporalEvent(new Time.Duration(5 * 60));
+    	}
     }
 
     // onStart() is called on application start up
@@ -81,10 +96,36 @@ class WarpaintMotivationApp extends Application.AppBase {
     // New app settings have been received so trigger a UI update
     function onSettingsChanged() as Void {
         setGlobalVariables();
-        selectThemeColors();
+        setCoordinates();
+        myView.selectThemeColors();
         myView.loadFonts();    
         WatchUi.requestUpdate();
     }
+
+    //! Set the motivational quote
+    function onBackgroundData(data) as Void {
+		var apiData = data["motivationalQuote"];
+		if (apiData instanceof String) {
+			motivationalQuote = apiData;		
+		} else if (apiData instanceof Number) {
+			motivationalQuote = "HTTP error number: " + apiData;
+		} else {
+			motivationalQuote = "Unknown error. Please contact developer.";
+		}
+
+		if (Toybox.Application has :Storage) {
+			Properties.setValue("MotivationalQuote", motivationalQuote);
+		} else {
+			getApp().setProperty("MotivationalQuote", motivationalQuote);
+		}
+		WatchUi.requestUpdate();
+	}
+	
+    //! Get Service Delegate
+    //! @return new ServiceDelegate for backkground service
+	function getServiceDelegate() as Array<ServiceDelegate> {
+		return [new BackgroundService()];
+	}
 
     //! Set global variables (fonts are in the View)
     private function setGlobalVariables() as Void {
@@ -101,6 +142,8 @@ class WarpaintMotivationApp extends Application.AppBase {
 			selectedValueForDataFieldRight = Properties.getValue("DataFieldRight");
             selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
 			selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
+
+            motivationalQuote = Properties.getValue("MotivationalQuote");
 		} else {
 		    theme = getApp().getProperty("Theme");
             dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
@@ -114,33 +157,48 @@ class WarpaintMotivationApp extends Application.AppBase {
 			selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");
             selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
 			selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
+
+            motivationalQuote = getApp().getProperty("MotivationalQuote");
 		}
     }
 
-    //! Set forground and backgorund colors
-    private function selectThemeColors() as Void {
-    	switch (theme) {
-    		case THEME_WHITE_DARK:
-    			foregroundColor = Graphics.COLOR_WHITE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-    			break;
-    		case THEME_BLUE_DARK:
-    			foregroundColor = Graphics.COLOR_BLUE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-    			break;
-    		case THEME_RED_DARK:
-    			foregroundColor = Graphics.COLOR_RED;
-    			backgroundColor = Graphics.COLOR_BLACK;
-    			break;
-    		case THEME_GREEN_DARK:
-    			foregroundColor = Graphics.COLOR_GREEN;
-    			backgroundColor = Graphics.COLOR_BLACK;
-    			break;
-    		case THEME_BLACK_LIGHT:
-    			foregroundColor = Graphics.COLOR_BLACK;
-    			backgroundColor = Graphics.COLOR_WHITE;
-    			break;
-    	}
+    //! Set coordinates for sunrise sunset calculation and store it
+    private function setCoordinates() as Void {
+        var location = Activity.getActivityInfo().currentLocation;
+        if (location) {
+            locationLat = location.toDegrees()[0].toFloat();
+            locationLng = location.toDegrees()[1].toFloat();
+
+            if (Toybox.Application has :Storage) {
+                Storage.setValue("LastLocationLat", locationLat);
+                Storage.setValue("LastLocationLng", locationLng);
+            } else {
+                getApp().setProperty("LastLocationLat", locationLat);
+                getApp().setProperty("LastLocationLng", locationLng);
+            }
+        } else {
+            if (Toybox.Application has :Storage) {
+                var lat = Storage.getValue("LastLocationLat");
+                if (lat != null) {
+                    locationLat = lat;
+                }
+
+                var lng = Storage.getValue("LastLocationLng");
+                if (lng != null) {
+                    locationLng = lng;
+                }
+            } else {
+                var lat = getApp().getProperty("LastLocationLat");
+                if (lat != null) {
+                    locationLat = lat;
+                }
+
+                var lng = getApp().getProperty("LastLocationLng");
+                if (lng != null) {
+                    locationLng = lng;
+                }
+            }
+        }
     }
 
 }

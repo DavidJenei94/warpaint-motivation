@@ -38,6 +38,10 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
         viewDrawables[:middleDataText] = View.findDrawableById("DataFieldMiddle");
 		viewDrawables[:leftDataText] = View.findDrawableById("DataFieldLeft");
 		viewDrawables[:rightDataText] = View.findDrawableById("DataFieldRight");
+
+        viewDrawables[:topMotivationText] = View.findDrawableById("MotivationFieldTop");
+		viewDrawables[:middleMotivationText] = View.findDrawableById("MotivationFieldMiddle");
+		viewDrawables[:bottomMotivationText] = View.findDrawableById("MotivationFieldBottom");
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -92,6 +96,12 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor], DATABAR_INNER_RIGHT_BOTTOM);
 		}
 
+        // Set motivational quote
+        var splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
+    	viewDrawables[:topMotivationText].drawMotivationText(dc, splittedMotivationalQuote[0]);
+    	viewDrawables[:middleMotivationText].drawMotivationText(dc, splittedMotivationalQuote[1]);
+    	viewDrawables[:bottomMotivationText].drawMotivationText(dc, splittedMotivationalQuote[2]);
+
     	// Draw seconds
         if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
             // If this device supports partial updates
@@ -140,6 +150,32 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		mediumFont = WatchUi.loadResource(Rez.Fonts.MediumFont);
 		largeFont = WatchUi.loadResource(Rez.Fonts.LargeFont);
 		iconFont = WatchUi.loadResource(Rez.Fonts.IconFont);
+    }
+
+    //! Set forground and backgorund colors
+    function selectThemeColors() as Void {
+    	switch (theme) {
+    		case THEME_WHITE_DARK:
+    			foregroundColor = Graphics.COLOR_WHITE;
+    			backgroundColor = Graphics.COLOR_BLACK;
+    			break;
+    		case THEME_BLUE_DARK:
+    			foregroundColor = Graphics.COLOR_BLUE;
+    			backgroundColor = Graphics.COLOR_BLACK;
+    			break;
+    		case THEME_RED_DARK:
+    			foregroundColor = Graphics.COLOR_RED;
+    			backgroundColor = Graphics.COLOR_BLACK;
+    			break;
+    		case THEME_GREEN_DARK:
+    			foregroundColor = Graphics.COLOR_GREEN;
+    			backgroundColor = Graphics.COLOR_BLACK;
+    			break;
+    		case THEME_BLACK_LIGHT:
+    			foregroundColor = Graphics.COLOR_BLACK;
+    			backgroundColor = Graphics.COLOR_WHITE;
+    			break;
+    	}
     }
 
 }
