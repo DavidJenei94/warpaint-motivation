@@ -71,8 +71,6 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     	viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
 
         // Set data bars
-
-    	
 		var outerLeftTopValues = _data.getDataForDataField(selectedValueForDataBarOuterLeftTop);
     	var innerRightBottomValues = _data.getDataForDataField(selectedValueForDataBarInnerRightBottom);
     	
@@ -127,10 +125,13 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
     // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
+        _isAwake = true;
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
+        _isAwake = false;
+		WatchUi.requestUpdate(); // call onUpdate()
     }
 
     //! Load fonts - in View, because WatchUI is not supported in background events
