@@ -14,8 +14,6 @@ class Data {
 	private var _userProfile as UserProfile.Profile;
 	private var _deviceSettings as System.DeviceSettings;
 	
-	private var _sunriseSunset as SunriseSunset;
-	
 	private var _errorDisplay = "-";
 	
 	//! Constructor
@@ -376,10 +374,8 @@ class Data {
 	//! Get the next sunrise or sunset
 	//! @return the next sunrise or sunset according to which is the next	
     private function getNextSunriseSunsetTime() as String {
-    	if (_sunriseSunset == null) {
-    		_sunriseSunset = new SunriseSunset();
-    	}
+		var sunriseSunset = new SunriseSunset();
     	  
-    	return _sunriseSunset.getNextSunriseSunset();
+    	return sunriseSunset.getNextSunriseSunset();
 	}
 }

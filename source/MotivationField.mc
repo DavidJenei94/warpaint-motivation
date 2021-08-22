@@ -57,11 +57,6 @@ class MotivationField extends WatchUi.Text {
     	var motivationLengthInPixels = dc.getTextWidthInPixels(motivation, smallFont);
     	var screenWidth = dc.getWidth();
     	
-    	//percent of line that is useful (out of range for the data bars)
-    	var firstLineWidthPercent = 0.78;
-    	var secondLineWidthPercent = 0.67;
-    	var thirdLineWidthPercent = 0.47;
-    	
     	var maxTextLength = screenWidth * firstLineWidthPercent + screenWidth * secondLineWidthPercent + screenWidth * thirdLineWidthPercent;
     	
     	var firstMiddleSpaceIndex = null;

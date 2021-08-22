@@ -11,7 +11,7 @@ class DataBar {
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
 	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
-    (:roundDataBar)    
+    (:roundShape)    
     function drawRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number, side as Integer) as Void {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {
@@ -82,7 +82,7 @@ class DataBar {
 	//! @param actual the current value of the data
 	//! @param max the maximum value of the data
 	//! @return the degree according to the current value
-   	(:roundDataBar)   
+   	(:roundShape) 
 	private function getDegreeForActualValue(actual, max) as Number {
     	if (actual >= max) {
     		return 90; //max value is at 90 degrees
@@ -98,7 +98,7 @@ class DataBar {
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
 	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
-    (:semiRoundDataBar)   
+    (:semiroundShape)   
     function drawSemiRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number, side as Integer) as Void {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {
@@ -160,7 +160,7 @@ class DataBar {
 	//! @param angleCorrection plus degree needed because with semiround shape only the corner of arc touches the top/bottom side
 	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
 	//! @return the degree according to the current value
-    (:semiRoundDataBar)  
+    (:semiroundShape)
 	private function getDegreeForActualValueSemi(actual, max, startAngle, endAngle, angleCorrection, side) {
     	if (actual >= max) {
     		return endAngle;
@@ -180,7 +180,7 @@ class DataBar {
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
 	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
-    (:rectangleDataBar)
+    (:rectangleShape)
     function drawRectangleDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number, side as Integer) {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {

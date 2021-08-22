@@ -4,6 +4,10 @@ import Toybox.Time.Gregorian;
 import Toybox.Time;
 import Toybox.Activity;
 
+import Toybox.Application.Properties;
+import Toybox.Application.Storage;
+import Toybox.Position;
+
 class SunriseSunset {
 
 	private var _sunrise as Number; // in hour, eg. 8.23
@@ -52,6 +56,7 @@ class SunriseSunset {
 	//! Draw arcs for day and night and also the sun's current position
 	//! only for round screens and only for outer circle
 	//! @param dc as Device Content
+	(:roundShape)
     function drawSunriseSunsetArc(dc as Dc) as Void {
 		if (!_successfulCalculation) {
 			return;
@@ -108,22 +113,16 @@ class SunriseSunset {
 	//! Calculates sunrise and sunset values according to date/time and location
 	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
 	//! @return boolean value if the calculation is successful or not
-    private function calculateSunriseSunset() as Boolean {  		
+    private function calculateSunriseSunset() as Boolean {  
+		setCoordinates();
 		var latitude = 0.0;
 	    var longitude = 0.0;
 		if (locationLat != null && locationLng != null) {
 			latitude = locationLat;
 	    	longitude = locationLng;
-		} 
-		
-// commented because the simulator has issues with locations
-		else {
+		} else {
 			return false;
 		}
-
-// hardcode for testing the lat and lon, comment in prod version
-    	//latitude = 46.2539;
-	    //longitude = 20.1461;
 
     	var clockTime = System.getClockTime();
     	_hour = clockTime.hour;
@@ -169,7 +168,8 @@ class SunriseSunset {
 	//! @param distance the distance of the center of the sun from the middle of screen
 	//! @param dc Device context
 	//! @return array of adjusted original x, y coordinates
-    private function xyCorrection(x, y, distance, dc) as Array<Number> {
+    (:roundShape)
+	private function xyCorrection(x, y, distance, dc) as Array<Number> {
     	var coordinates = new [2];
     	var xOriginal = x;
     	var yOriginal = y;
@@ -228,6 +228,45 @@ class SunriseSunset {
     	coordinates[0] = xOriginal;
     	coordinates[1] = yOriginal;
     	return coordinates;
+    }
+
+    //! Set coordinates for sunrise sunset calculation and store it in Storage or Appbase properties
+    private function setCoordinates() as Void {
+        var location = Activity.getActivityInfo().currentLocation;
+        if (location) {
+            locationLat = location.toDegrees()[0].toFloat();
+            locationLng = location.toDegrees()[1].toFloat();
+
+            if (Toybox.Application has :Storage) {
+                Storage.setValue("LastLocationLat", locationLat);
+                Storage.setValue("LastLocationLng", locationLng);
+            } else {
+                getApp().setProperty("LastLocationLat", locationLat);
+                getApp().setProperty("LastLocationLng", locationLng);
+            }
+        } else {
+            if (Toybox.Application has :Storage) {
+                var lat = Storage.getValue("LastLocationLat");
+                if (lat != null) {
+                    locationLat = lat;
+                }
+
+                var lng = Storage.getValue("LastLocationLng");
+                if (lng != null) {
+                    locationLng = lng;
+                }
+            } else {
+                var lat = getApp().getProperty("LastLocationLat");
+                if (lat != null) {
+                    locationLat = lat;
+                }
+
+                var lng = getApp().getProperty("LastLocationLng");
+                if (lng != null) {
+                    locationLng = lng;
+                }
+            }
+        }
     }
     
 }

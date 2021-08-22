@@ -6,6 +6,8 @@ import Toybox.WatchUi;
 import Toybox.Background;
 import Toybox.Time;
 import Toybox.Activity;
+import Toybox.System;
+import Toybox.Position;
 
 // global variables
 var myView as View;
@@ -35,6 +37,9 @@ var iconFont as Font;
 var totalCaloriesGoal as Number;
 
 var motivationalQuote as String;
+var firstLineWidthPercent as Number;
+var secondLineWidthPercent as Number;
+var thirdLineWidthPercent as Number;
 
 var locationLat = null;
 var locationLng = null;
@@ -96,7 +101,6 @@ class WarpaintMotivationApp extends Application.AppBase {
     // New app settings have been received so trigger a UI update
     function onSettingsChanged() as Void {
         setGlobalVariables();
-        setCoordinates();
         myView.selectThemeColors();
         myView.loadFonts();    
         WatchUi.requestUpdate();
@@ -144,6 +148,9 @@ class WarpaintMotivationApp extends Application.AppBase {
 			selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
 
             motivationalQuote = Properties.getValue("MotivationalQuote");
+            firstLineWidthPercent = Properties.getValue("FirstMotivationLineWidthPercent");
+            secondLineWidthPercent = Properties.getValue("SecondMotivationLineWidthPercent");
+            thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
 		} else {
 		    theme = getApp().getProperty("Theme");
             dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
@@ -159,46 +166,10 @@ class WarpaintMotivationApp extends Application.AppBase {
 			selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
 
             motivationalQuote = getApp().getProperty("MotivationalQuote");
+            firstLineWidthPercent = getApp().getProperty("FirstMotivationLineWidthPercent");
+            secondLineWidthPercent = getApp().getProperty("SecondMotivationLineWidthPercent");
+            thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
 		}
-    }
-
-    //! Set coordinates for sunrise sunset calculation and store it
-    private function setCoordinates() as Void {
-        var location = Activity.getActivityInfo().currentLocation;
-        if (location) {
-            locationLat = location.toDegrees()[0].toFloat();
-            locationLng = location.toDegrees()[1].toFloat();
-
-            if (Toybox.Application has :Storage) {
-                Storage.setValue("LastLocationLat", locationLat);
-                Storage.setValue("LastLocationLng", locationLng);
-            } else {
-                getApp().setProperty("LastLocationLat", locationLat);
-                getApp().setProperty("LastLocationLng", locationLng);
-            }
-        } else {
-            if (Toybox.Application has :Storage) {
-                var lat = Storage.getValue("LastLocationLat");
-                if (lat != null) {
-                    locationLat = lat;
-                }
-
-                var lng = Storage.getValue("LastLocationLng");
-                if (lng != null) {
-                    locationLng = lng;
-                }
-            } else {
-                var lat = getApp().getProperty("LastLocationLat");
-                if (lat != null) {
-                    locationLat = lat;
-                }
-
-                var lng = getApp().getProperty("LastLocationLng");
-                if (lng != null) {
-                    locationLng = lng;
-                }
-            }
-        }
     }
 
 }
