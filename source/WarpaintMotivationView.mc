@@ -1,4 +1,5 @@
 import Toybox.Application;
+import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.System;
@@ -97,6 +98,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		}
 
         // Set motivational quote
+		MotivationField.setMotivationalQuote();
         var splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
     	viewDrawables[:topMotivationText].drawMotivationText(dc, splittedMotivationalQuote[0]);
     	viewDrawables[:middleMotivationText].drawMotivationText(dc, splittedMotivationalQuote[1]);

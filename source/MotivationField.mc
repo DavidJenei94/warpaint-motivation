@@ -1,3 +1,5 @@
+import Toybox.Application;
+import Toybox.Application.Storage;
 import Toybox.WatchUi;
 import Toybox.System;
 import Toybox.Math;
@@ -5,7 +7,7 @@ import Toybox.Math;
 // Extend text to set as drawable text
 class MotivationField extends WatchUi.Text {
 
-	private var hardcodedMotivationalQuotes = [
+	static private var hardcodedMotivationalQuotes = [
 		"Go hard or go home!",
 		"Be the best you can be!",
 		"Yesterday you said tomorrow"
@@ -114,11 +116,32 @@ class MotivationField extends WatchUi.Text {
     		
     	return [motivationFirstPart, motivationSecondPart, motivationThirdPart]; 
 	}
-	
+
+	//! Set the motivational Quote
+	static function setMotivationalQuote() as Void {
+		if (motivationalQuoteProperty.equals("")) {
+			if (!(Toybox has :Background)) {
+				motivationalQuote = MotivationField.getRandomHardcodedMotivationalQuote();
+			} else {
+				if (Toybox.Application has :Storage) {
+					motivationalQuote = Storage.getValue("MotivationalQuote");
+				} else {
+					motivationalQuote = getApp().getProperty("MotivationalQuote");
+				}
+
+				if (motivationalQuote == null) {
+					motivationalQuote = MotivationField.getRandomHardcodedMotivationalQuote();
+				}
+			}
+		} else {
+			motivationalQuote = motivationalQuoteProperty;
+		}
+	}
+
 	//! Get a random motivational quote 
 	//! return a random quote from the list hard coded
 	static function getRandomHardcodedMotivationalQuote() as String {
-		var randomIndex = Math.rand() % hardcodedMotivationalQuotes.length;
+		var randomIndex = Math.rand() % hardcodedMotivationalQuotes.size();
 		return hardcodedMotivationalQuotes[randomIndex];
 	}
 	

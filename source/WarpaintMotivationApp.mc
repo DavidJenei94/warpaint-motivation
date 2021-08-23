@@ -37,6 +37,7 @@ var iconFont as Font;
 var totalCaloriesGoal as Number;
 
 var motivationalQuote as String;
+var motivationalQuoteProperty as String;
 var firstLineWidthPercent as Number;
 var secondLineWidthPercent as Number;
 var thirdLineWidthPercent as Number;
@@ -118,7 +119,7 @@ class WarpaintMotivationApp extends Application.AppBase {
 		}
 
 		if (Toybox.Application has :Storage) {
-			Properties.setValue("MotivationalQuote", motivationalQuote);
+			Storage.setValue("MotivationalQuote", motivationalQuote);
 		} else {
 			getApp().setProperty("MotivationalQuote", motivationalQuote);
 		}
@@ -147,7 +148,7 @@ class WarpaintMotivationApp extends Application.AppBase {
             selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
 			selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
 
-            motivationalQuote = Properties.getValue("MotivationalQuote");
+            motivationalQuoteProperty = Properties.getValue("MotivationalQuote");
             firstLineWidthPercent = Properties.getValue("FirstMotivationLineWidthPercent");
             secondLineWidthPercent = Properties.getValue("SecondMotivationLineWidthPercent");
             thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
@@ -165,7 +166,7 @@ class WarpaintMotivationApp extends Application.AppBase {
             selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
 			selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
 
-            motivationalQuote = getApp().getProperty("MotivationalQuote");
+            motivationalQuoteProperty = getApp().getProperty("MotivationalQuote");
             firstLineWidthPercent = getApp().getProperty("FirstMotivationLineWidthPercent");
             secondLineWidthPercent = getApp().getProperty("SecondMotivationLineWidthPercent");
             thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");

@@ -26,6 +26,10 @@
         <settingConfig type="numeric" errorMessage="@Strings.CaloriesGoalError" />
     </setting>
 
+    <setting propertyKey="@Properties.MotivationalQuote" title="@Strings.MotivationalQuoteTitle">
+        <settingConfig type="alphaNumeric" />
+    </setting>	
+
 	<setting propertyKey="@Properties.DataFieldMiddle" title="@Strings.DataFieldMiddleTitle">
 		<settingConfig type="list">
 			<listEntry value="0">@Strings.Battery</listEntry>

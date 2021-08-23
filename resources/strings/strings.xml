@@ -25,6 +25,8 @@
     <string id="DataBarOuterLeftTopTitle">Outer-Left-Top Data Bar</string>
     <string id="DataBarInnerRightBottomTitle">Inner-Right-Bottom Data Bar</string>
 
+    <string id="MotivationalQuoteTitle">Motivational Quote (Leave empty for automatic)</string>
+
     <string id="Battery">Battery</string>
     <string id="Steps">Steps</string>
 	<string id="HeartRate">Heart Rate (current if available, otherwise resting)</string>
