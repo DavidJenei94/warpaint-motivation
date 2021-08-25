@@ -26,6 +26,15 @@
     <string id="DataBarInnerRightBottomTitle">Inner-Right-Bottom Data Bar</string>
 
     <string id="MotivationalQuoteTitle">Motivational Quote (Leave empty for automatic)</string>
+    <string id="MotivationalQuoteChangeIntervalTitle">Motivational Quote Change Interval</string>
+    <string id="Min10">10 minutes</string>
+    <string id="Min20">20 minutes</string>
+    <string id="Min30">30 minutes</string>
+    <string id="Min60">1 hour</string>
+    <string id="Min120">2 hours</string>
+    <string id="Min240">4 hours</string>
+    <string id="Min640">12 hours</string>
+    <string id="Min2">2 minutes</string>
 
     <string id="Battery">Battery</string>
     <string id="Steps">Steps</string>

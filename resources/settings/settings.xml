@@ -26,9 +26,22 @@
         <settingConfig type="numeric" errorMessage="@Strings.CaloriesGoalError" />
     </setting>
 
-    <setting propertyKey="@Properties.MotivationalQuote" title="@Strings.MotivationalQuoteTitle">
+    <setting propertyKey="@Properties.MotivationalQuoteProperty" title="@Strings.MotivationalQuoteTitle">
         <settingConfig type="alphaNumeric" />
-    </setting>	
+    </setting>
+
+	<setting propertyKey="@Properties.MotivationalQuoteChangeInterval" title="@Strings.MotivationalQuoteChangeIntervalTitle">
+        <settingConfig type="list">
+            <listEntry value="10">@Strings.Min10</listEntry>
+            <listEntry value="20">@Strings.Min20</listEntry>
+            <listEntry value="30">@Strings.Min30</listEntry>
+            <listEntry value="60">@Strings.Min60</listEntry>
+            <listEntry value="120">@Strings.Min120</listEntry>
+            <listEntry value="240">@Strings.Min240</listEntry>
+            <listEntry value="640">@Strings.Min640</listEntry>
+            <listEntry value="2">@Strings.Min2</listEntry>
+        </settingConfig>
+    </setting>
 
 	<setting propertyKey="@Properties.DataFieldMiddle" title="@Strings.DataFieldMiddleTitle">
 		<settingConfig type="list">

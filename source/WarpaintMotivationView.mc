@@ -9,6 +9,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
     private var viewDrawables = {};
 	private var _isAwake as Boolean;
+	private var _isMotivationalQuoteSet as Boolean;
+	private var _splittedMotivationalQuote = new String[3];
 	private var _partialUpdatesAllowed as Boolean;
 	private var _SecondsBoundingBox = new Number[4];
     private var _data as Data;
@@ -19,6 +21,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     function initialize() {
         WatchFace.initialize();
         _isAwake = true;
+		_isMotivationalQuoteSet = false;
         _partialUpdatesAllowed = (WatchUi.WatchFace has :onPartialUpdate);
         _data = new Data();
         _outerLeftTopDataBar = new DataBar();
@@ -26,9 +29,12 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     }
 
     //! Load resources and drawables
+	//! Split motivational quote initially (need dc, can't be in initialized)
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.WatchFace(dc));
         loadDrawables();
+
+		_splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
     }
 
     //! Load drawables
@@ -98,11 +104,21 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		}
 
         // Set motivational quote
-		MotivationField.setMotivationalQuote();
-        var splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
-    	viewDrawables[:topMotivationText].drawMotivationText(dc, splittedMotivationalQuote[0]);
-    	viewDrawables[:middleMotivationText].drawMotivationText(dc, splittedMotivationalQuote[1]);
-    	viewDrawables[:bottomMotivationText].drawMotivationText(dc, splittedMotivationalQuote[2]);
+		// Minutes to change motivational quote
+		// If motivational quote is null or the minute is the selected one to refresh quote
+		var intervalToChangeQuote = motivationalQuoteChangeInterval > 60 ? (motivationalQuoteChangeInterval / 60) : motivationalQuoteChangeInterval;
+		var remainder = motivationalQuoteChangeInterval > 60 ? System.getClockTime().hour % intervalToChangeQuote : System.getClockTime().min % intervalToChangeQuote;
+		if (motivationalQuote == null || (!_isMotivationalQuoteSet && remainder == 0)) {
+			MotivationField.setMotivationalQuote();
+			_splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
+			_isMotivationalQuoteSet = true;
+		}
+		if (_isMotivationalQuoteSet && remainder == 1) {
+			_isMotivationalQuoteSet = false;
+		}
+    	viewDrawables[:topMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[0]);
+    	viewDrawables[:middleMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[1]);
+    	viewDrawables[:bottomMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[2]);
 
     	// Draw seconds
         if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {

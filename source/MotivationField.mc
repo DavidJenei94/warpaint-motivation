@@ -48,8 +48,8 @@ class MotivationField extends WatchUi.Text {
 			secondVerticalLineIndex = motivationSecondPart.find("|");
 			if (secondVerticalLineIndex != null) {
 				secondVerticalLineIndex += firstVerticalLineIndex;
-				motivationSecondPart = motivation.substring(firstVerticalLineIndex, secondVerticalLineIndex + 1);
-				motivationThirdPart = motivation.substring(secondVerticalLineIndex + 1, motivationLength);
+				motivationSecondPart = motivation.substring(firstVerticalLineIndex + 1, secondVerticalLineIndex + 1);
+				motivationThirdPart = motivation.substring(secondVerticalLineIndex + 2, motivationLength); //+2 because there are 2 vertical lines before
 			}
 			return [motivationFirstPart, motivationSecondPart, motivationThirdPart];
 		}
@@ -119,27 +119,65 @@ class MotivationField extends WatchUi.Text {
 
 	//! Set the motivational Quote
 	static function setMotivationalQuote() as Void {
+		var motivation = null;
 		if (motivationalQuoteProperty.equals("")) {
 			if (!(Toybox has :Background)) {
-				motivationalQuote = MotivationField.getRandomHardcodedMotivationalQuote();
+				motivation = MotivationField.getRandomHardcodedMotivationalQuote();
 			} else {
-				if (Toybox.Application has :Storage) {
-					motivationalQuote = Storage.getValue("MotivationalQuote");
-				} else {
-					motivationalQuote = getApp().getProperty("MotivationalQuote");
-				}
+				if (motivationalQuoteArray.size() != 0) {
+					motivation = motivationalQuoteArray[motivationalQuoteArray.size() - 1];
+        			motivationalQuoteArray = motivationalQuoteArray.slice(0, motivationalQuoteArray.size() - 1);
+					if (Toybox.Application has :Storage) {
+						Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
+					} else {
+						getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
+					}
+				} 
 
-				if (motivationalQuote == null) {
-					motivationalQuote = MotivationField.getRandomHardcodedMotivationalQuote();
+				if (motivation == null) {
+					motivation = MotivationField.getRandomHardcodedMotivationalQuote();
 				}
 			}
 		} else {
-			motivationalQuote = motivationalQuoteProperty;
+			motivation = getUserMotivationalQuote(motivationalQuoteProperty);
+		}
+
+		motivationalQuote = motivation;
+
+		// Does not work:
+		// Same issue as https://forums.garmin.com/developer/connect-iq/i/bug-reports/strange-symbol-not-found-error
+		// Save last used motivational quote in case app is restarted
+		/*if (Toybox.Application has :Storage) {
+			Storage.setValue("MotivationalQuote", motivation);
+		} else {
+			getApp().setProperty("MotivationalQuote", motivation);
+		}*/
+	}
+
+	//! Get a random user defined motivational quote
+	//! @param userMotivationInput the user input in the motivational field in settings
+	//! @return a random quote from the user defined list
+	private static function getUserMotivationalQuote(userMotivationInput as String) as String {
+		var motivationArray = [];
+		var separatorIndex = null;
+		separatorIndex = userMotivationInput.find(";");
+		if (separatorIndex != null) {
+ 	    	do {
+				motivationArray.add(userMotivationInput.substring(0, separatorIndex));
+				userMotivationInput = userMotivationInput.substring(separatorIndex + 1, userMotivationInput.length());
+				separatorIndex = userMotivationInput.find(";");
+	    	} while (separatorIndex != null);
+			motivationArray.add(userMotivationInput);
+
+			var randomIndex = Math.rand() % motivationArray.size();
+			return motivationArray[randomIndex];
+		} else {
+			return userMotivationInput;
 		}
 	}
 
 	//! Get a random motivational quote 
-	//! return a random quote from the list hard coded
+	//! @return a random quote from the list hard coded
 	static function getRandomHardcodedMotivationalQuote() as String {
 		var randomIndex = Math.rand() % hardcodedMotivationalQuotes.size();
 		return hardcodedMotivationalQuotes[randomIndex];

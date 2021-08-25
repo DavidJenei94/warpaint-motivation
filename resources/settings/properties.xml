@@ -17,7 +17,8 @@
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
 
-    <property id="MotivationalQuote" type="string"></property>
+    <property id="MotivationalQuoteProperty" type="string"></property>
+    <property id="MotivationalQuoteChangeInterval" type="number">2</property>
     <property id="FirstMotivationLineWidthPercent" type="float">0.78</property>
     <property id="SecondMotivationLineWidthPercent" type="float">0.67</property>
     <property id="ThirdMotivationLineWidthPercent" type="float">0.47</property>

@@ -38,6 +38,8 @@ var totalCaloriesGoal as Number;
 
 var motivationalQuote as String;
 var motivationalQuoteProperty as String;
+var motivationalQuoteChangeInterval as Number;
+var motivationalQuoteArray = [];
 var firstLineWidthPercent as Number;
 var secondLineWidthPercent as Number;
 var thirdLineWidthPercent as Number;
@@ -110,18 +112,15 @@ class WarpaintMotivationApp extends Application.AppBase {
     //! Set the motivational quote
     function onBackgroundData(data) as Void {
 		var apiData = data["motivationalQuote"];
-		if (apiData instanceof String) {
-			motivationalQuote = apiData;		
+        System.println("No of Motivational quotes downloaded: " + apiData.size());
+        if (apiData instanceof Array) {
+            motivationalQuoteArray.addAll(apiData);
+        } else if (apiData instanceof String) {
+			motivationalQuoteArray.add(apiData);
 		} else if (apiData instanceof Number) {
-			motivationalQuote = "HTTP error number: " + apiData;
+			// motivationalQuote = "HTTP error number: " + apiData;
 		} else {
-			motivationalQuote = "Unknown error. Please contact developer.";
-		}
-
-		if (Toybox.Application has :Storage) {
-			Storage.setValue("MotivationalQuote", motivationalQuote);
-		} else {
-			getApp().setProperty("MotivationalQuote", motivationalQuote);
+			// motivationalQuote = "Unknown error. Please contact developer.";
 		}
 		WatchUi.requestUpdate();
 	}
@@ -148,10 +147,13 @@ class WarpaintMotivationApp extends Application.AppBase {
             selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
 			selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
 
-            motivationalQuoteProperty = Properties.getValue("MotivationalQuote");
+            motivationalQuoteProperty = Properties.getValue("MotivationalQuoteProperty");
+            motivationalQuoteChangeInterval = Properties.getValue("MotivationalQuoteChangeInterval");
             firstLineWidthPercent = Properties.getValue("FirstMotivationLineWidthPercent");
             secondLineWidthPercent = Properties.getValue("SecondMotivationLineWidthPercent");
             thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
+
+            motivationalQuote = Storage.getValue("MotivationalQuote");
 		} else {
 		    theme = getApp().getProperty("Theme");
             dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
@@ -166,10 +168,13 @@ class WarpaintMotivationApp extends Application.AppBase {
             selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
 			selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
 
-            motivationalQuoteProperty = getApp().getProperty("MotivationalQuote");
+            motivationalQuoteProperty = getApp().getProperty("MotivationalQuoteProperty");
+            motivationalQuoteChangeInterval = getApp().getProperty("MotivationalQuoteChangeInterval");
             firstLineWidthPercent = getApp().getProperty("FirstMotivationLineWidthPercent");
             secondLineWidthPercent = getApp().getProperty("SecondMotivationLineWidthPercent");
             thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
+
+            motivationalQuote = getApp().getProperty("MotivationalQuote");
 		}
     }
 
