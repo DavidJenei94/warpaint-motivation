@@ -14,6 +14,7 @@ class MotivationField extends WatchUi.Text {
 	];
 	
 	//! Constructor
+	//! @param params in the layout.xml the drawable object's param tags
 	function initialize(params) {
 		Text.initialize(params);
 	}
@@ -69,7 +70,8 @@ class MotivationField extends WatchUi.Text {
     	} else if (dc.getTextWidthInPixels(motivation, smallFont) <= maxTextLength) {
  	    	// split text at 0.50 and 1.00 and find first spaces
 			// if not found it goes back with some characters
- 	    	var firstSplitPart = 0.50;
+			// if it fits in the first line, the first split part should be earlier (eg. because of "no more weakness")
+ 	    	var firstSplitPart = dc.getTextWidthInPixels(motivation, smallFont) <= screenWidth * firstLineWidthPercent ? 0.25 : 0.50;
  	    	var secondSplitPart = 1.00;
  	    	
  	    	do {

@@ -1,4 +1,4 @@
-import Toybox.System;
+import Toybox.Graphics;
 
 class DataBar {
 	

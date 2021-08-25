@@ -3,7 +3,7 @@ import Toybox.System;
 import Toybox.Time.Gregorian;
 import Toybox.Time;
 import Toybox.Activity;
-
+import Toybox.Application;
 import Toybox.Application.Properties;
 import Toybox.Application.Storage;
 import Toybox.Position;

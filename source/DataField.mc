@@ -1,4 +1,5 @@
 import Toybox.WatchUi;
+import Toybox.Graphics;
 
 // Extend text to set as drawable text
 class DataField extends WatchUi.Text {
@@ -8,6 +9,7 @@ class DataField extends WatchUi.Text {
 	private var _pixelsBetweenIconAndData as Number;
 	
 	//! Constructor
+	//! @param params in the layout.xml the drawable object's param tags
 	function initialize(params) {
 		Text.initialize(params);
 		_x = params[:locX];

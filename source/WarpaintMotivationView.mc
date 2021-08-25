@@ -1,7 +1,4 @@
-import Toybox.Application;
-import Toybox.Application.Storage;
 import Toybox.Graphics;
-import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
 
@@ -29,7 +26,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     }
 
     //! Load resources and drawables
-	//! Split motivational quote initially (need dc, can't be in initialized)
+	//! Split motivational quote initially (need dc, can't be in initialize())
+	//! @param dc Device Content
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.WatchFace(dc));
         loadDrawables();
@@ -104,8 +102,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		}
 
         // Set motivational quote
-		// Minutes to change motivational quote
-		// If motivational quote is null or the minute is the selected one to refresh quote
+		// Interval is to change motivational quote
+		// If motivational quote is null or the minute is the selected one, refresh quote
 		var intervalToChangeQuote = motivationalQuoteChangeInterval > 60 ? (motivationalQuoteChangeInterval / 60) : motivationalQuoteChangeInterval;
 		var remainder = motivationalQuoteChangeInterval > 60 ? System.getClockTime().hour % intervalToChangeQuote : System.getClockTime().min % intervalToChangeQuote;
 		if (motivationalQuote == null || (!_isMotivationalQuoteSet && remainder == 0)) {
@@ -159,7 +157,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
         _isAwake = false;
-		WatchUi.requestUpdate(); // call onUpdate()
+		WatchUi.requestUpdate(); // call onUpdate() in order to draw seconds
     }
 
     //! Load fonts - in View, because WatchUI is not supported in background events
@@ -170,7 +168,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		iconFont = WatchUi.loadResource(Rez.Fonts.IconFont);
     }
 
-    //! Set forground and backgorund colors
+    //! Set forground and backgorund colors for themes
     function selectThemeColors() as Void {
     	switch (theme) {
     		case THEME_WHITE_DARK:

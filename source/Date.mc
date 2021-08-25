@@ -9,11 +9,13 @@ class Date extends WatchUi.Text {
     private var _months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	
 	//! Constructor
+	//! @param params in the layout.xml the drawable object's param tags
 	function initialize(params) {
 		Text.initialize(params);
 	}
 	
 	//! Draw the date
+	//! @param dc Device Content
 	function drawDate(dc as Dc) as Void {
 		var date = getDate();
 		self.setColor(foregroundColor);	

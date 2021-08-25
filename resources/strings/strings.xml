@@ -40,7 +40,8 @@
     <string id="Steps">Steps</string>
 	<string id="HeartRate">Heart Rate (current if available, otherwise resting)</string>
 	<string id="Calories">Calories (kCal)</string>
-	<string id="SunriseSunset">Next Sunrise or Sunset</string>
+	<string id="NextSunriseSunset">Next Sunrise or Sunset</string>
+    <string id="SunriseSunset">Sunrise and Sunset around watchface</string>
 	<string id="Distance">Distance</string>
 	<string id="FloorsClimbed">Floors Climbed</string>
 	<string id="ActiveMinutesWeek">Active minutes of the week</string>

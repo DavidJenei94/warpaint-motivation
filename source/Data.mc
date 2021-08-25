@@ -255,7 +255,7 @@ class Data {
 	//! get floors climbed for current day
     //! @return array of floors climbed and floors climbed goal 
     private function getFloorsClimbed () as Array<Number or String> {
-    	if(_info has :floorsClimbed) {
+    	if (_info has :floorsClimbed) {
 	    	var floorsClimbed  = _info.floorsClimbed  != null ? _info.floorsClimbed  : -1;
 	    	var floorsClimbedGoal = _info.floorsClimbedGoal != null ? _info.floorsClimbedGoal : 10; // if floorsClimbedGoal is not set, 10 is my default
 	   		return [floorsClimbed , floorsClimbedGoal];
@@ -268,23 +268,25 @@ class Data {
 	//! get current temperature and condition
     //! @return array of temperature according to device settings and condition for icon
     private function getCurrentWeather() as Array<Number or String> {
-    	if(Application has :Weather) {
+    	if (Application has :Weather) {
     		var currentCondition = Weather.getCurrentConditions();
-    		var condition = " ";
-    		var temperature = currentCondition.temperature != null ? currentCondition.temperature : -1;
-    		
-    		if (temperature != -1) {
-				if (_deviceSettings.temperatureUnits == System.UNIT_STATUTE) {
-					temperature = ((temperature * (9.0 / 5)) + 32).format("%.1f");
+			if (currentCondition != null) {
+				var condition = " ";
+				var temperature = currentCondition.temperature != null ? currentCondition.temperature : -1;
+				
+				if (temperature != -1) {
+					if (_deviceSettings.temperatureUnits == System.UNIT_STATUTE) {
+						temperature = ((temperature * (9.0 / 5)) + 32).format("%.1f");
+					}
+					
+					condition = getWeatherIcon(currentCondition.condition);
 				}
 				
-				condition = getWeatherIcon(currentCondition.condition);
+				return [temperature, condition];
 			}
-			
-			return [temperature, condition];
-    	} else {
-    		return [-1, " "];
     	}
+
+    	return [-1, "O"];
     }
 
 	//! Get weather icon

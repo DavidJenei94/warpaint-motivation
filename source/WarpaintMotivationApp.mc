@@ -1,13 +1,10 @@
 import Toybox.Application;
 import Toybox.Application.Properties;
 import Toybox.Application.Storage;
-import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.Background;
 import Toybox.Time;
-import Toybox.Activity;
 import Toybox.System;
-import Toybox.Position;
 
 // global variables
 var myView as View;
