@@ -144,6 +144,8 @@ class WarpaintMotivationApp extends Application.AppBase {
             selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
 			selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
 
+            totalCaloriesGoal = Properties.getValue("CaloriesGoal");
+
             motivationalQuoteProperty = Properties.getValue("MotivationalQuoteProperty");
             motivationalQuoteChangeInterval = Properties.getValue("MotivationalQuoteChangeInterval");
             firstLineWidthPercent = Properties.getValue("FirstMotivationLineWidthPercent");
@@ -164,6 +166,8 @@ class WarpaintMotivationApp extends Application.AppBase {
 			selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");
             selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
 			selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
+
+            totalCaloriesGoal = getApp().getProperty("CaloriesGoal");
 
             motivationalQuoteProperty = getApp().getProperty("MotivationalQuoteProperty");
             motivationalQuoteChangeInterval = getApp().getProperty("MotivationalQuoteChangeInterval");

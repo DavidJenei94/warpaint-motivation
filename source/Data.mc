@@ -130,9 +130,9 @@ class Data {
     private function getCalories() as Array<Number> {
     	var calories = _info.calories != null ? _info.calories : -1;
     	var caloriesGoal = totalCaloriesGoal;
-    	
+
     	// Caloriesgoal calculation has no meaning if no calorie data was collected or user selected a reasonable range
-    	if (calories != -1 && (caloriesGoal < 1000 || caloriesGoal > 10000)) {
+    	if (calories != -1 && (caloriesGoal == null || caloriesGoal < 1000 || caloriesGoal > 10000)) {
 	    	var weight = _userProfile.weight; // g
 	    	var height = _userProfile.height; // cm
 	    	var birthYear = _userProfile.birthYear; // year

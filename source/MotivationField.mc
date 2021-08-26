@@ -33,6 +33,11 @@ class MotivationField extends WatchUi.Text {
 	//! @param motivation the motivational quote in string
 	//! @return Array of the splitted part of motivational quote
 	static function splitMotivationalQuote(dc as Dc, motivation as String) as Array<String> {
+		// When starting the app (until storage problem is solved)
+		if (motivation == null) {
+			motivation = getRandomHardcodedMotivationalQuote();
+		}
+
 		var motivationLength = motivation.length();
 		var motivationFirstPart = "";
     	var motivationSecondPart = "";
