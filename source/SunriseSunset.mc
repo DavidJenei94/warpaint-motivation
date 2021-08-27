@@ -21,6 +21,11 @@ class SunriseSunset {
     function initialize() {
         _successfulCalculation = calculateSunriseSunset();
     }
+
+	//! Refresh the sunrise and sunset data
+	function refreshSunsetSunrise() as Void {
+		 _successfulCalculation = calculateSunriseSunset();
+	}
     
 	//! Get next sunrise/sunset time
 	//! @return array of the next sunrise or sunset (according to current time) in string 

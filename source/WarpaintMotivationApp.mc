@@ -109,9 +109,9 @@ class WarpaintMotivationApp extends Application.AppBase {
     //! Set the motivational quote
     function onBackgroundData(data) as Void {
 		var apiData = data["motivationalQuote"];
-        System.println("No of Motivational quotes downloaded: " + apiData.size());
         if (apiData instanceof Array) {
             motivationalQuoteArray.addAll(apiData);
+            System.println("No of Motivational quotes downloaded: " + apiData.size());
         } else if (apiData instanceof String) {
 			motivationalQuoteArray.add(apiData);
 		} else if (apiData instanceof Number) {

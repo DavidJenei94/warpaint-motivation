@@ -79,8 +79,6 @@ class Time extends WatchUi.Text {
 			_seconds, 
 			Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
 		);
-		
-        System.println("Time: " + _time + ":" + _seconds);
 	}
 	
 	//! Refresh time data

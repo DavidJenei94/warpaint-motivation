@@ -13,6 +13,8 @@ class Data {
 	private var _systemStats as System.Stats;
 	private var _userProfile as UserProfile.Profile;
 	private var _deviceSettings as System.DeviceSettings;
+
+	private var _sunriseSunset as SunriseSunset;
 	
 	private var _errorDisplay = "-";
 	
@@ -376,8 +378,15 @@ class Data {
 	//! Get the next sunrise or sunset
 	//! @return the next sunrise or sunset according to which is the next	
     private function getNextSunriseSunsetTime() as String {
-		var sunriseSunset = new SunriseSunset();
+		if (_sunriseSunset == null) {
+			_sunriseSunset = new SunriseSunset();
+		}
+		
+		var intervalToRefreshSunriseSunset = 30;
+		if (System.getClockTime().min % intervalToRefreshSunriseSunset == 1) {
+			_sunriseSunset.refreshSunsetSunrise();
+		}
     	  
-    	return sunriseSunset.getNextSunriseSunset();
+    	return _sunriseSunset.getNextSunriseSunset();
 	}
 }
