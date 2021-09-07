@@ -1,0 +1,7 @@
+<fonts>
+	<font id="SmallFont" filename="edo_sz_text_18.fnt" antialias="false"/>
+	<font id="MediumFont" filename="edo_sz_datafield_22.fnt" antialias="false" filter="0123456789:.-%ºkm"/>
+	<font id="LargeFont" filename="edo_sz_time_65.fnt" antialias="false" filter="0123456789:"/>
+	
+	<font id="IconFont" filename="arcmotivation_icons_16.fnt" antialias="false"/>
+</fonts>
