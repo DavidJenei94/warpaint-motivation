@@ -86,6 +86,10 @@
 		</settingConfig>
 	</setting>
 
+    <setting propertyKey="@Properties.UnfilledDataBar" title="@Strings.UnfilledDataBar">
+        <settingConfig type="boolean" />
+    </setting>
+
 	<setting propertyKey="@Properties.DataBarOuterLeftTop" title="@Strings.DataBarOuterLeftTopTitle">
 		<settingConfig type="list">
 			<listEntry value="0">@Strings.Battery</listEntry>

@@ -14,6 +14,7 @@
     <property id="DataFieldLeft" type="number">2</property>
     <property id="DataFieldRight" type="number">3</property>
 
+    <property id="UnfilledDataBar" type="boolean">false</property>
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
 

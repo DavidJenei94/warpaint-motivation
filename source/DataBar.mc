@@ -49,15 +49,17 @@ class DataBar {
 				);
 
 				// draw unfilled part of the bar
-				dc.setColor(unfilledDataBarColor, backgroundColor);
-				dc.drawArc(
-					x, 
-					y, 
-					radius, 
-					Graphics.ARC_CLOCKWISE, 
-					actualDegree, 
-					90
-				);
+				if (unfilledDataBarColor != backgroundColor) {
+					dc.setColor(unfilledDataBarColor, backgroundColor);
+					dc.drawArc(
+						x, 
+						y, 
+						radius, 
+						Graphics.ARC_CLOCKWISE, 
+						actualDegree, 
+						90
+					);
+				}
 
 			} else {
 				dc.drawCircle(
@@ -66,7 +68,7 @@ class DataBar {
 					radius
 				);
 			}
-        } else {
+        } else if (unfilledDataBarColor != backgroundColor) {
 			// Draw the whole unfilled part if actual value is 0
 			dc.setPenWidth(width);
 			dc.setColor(unfilledDataBarColor, backgroundColor);
@@ -139,7 +141,7 @@ class DataBar {
         }
         
         // Draw the unfilled part if actual value is not max
-        if (actualAngle != endAngle) { 
+        if (actualAngle != endAngle && unfilledDataBarColor != backgroundColor) { 
 	        dc.setColor(unfilledDataBarColor, backgroundColor);
 	        dc.drawArc(
 	        	x, 
@@ -234,7 +236,9 @@ class DataBar {
     	dc.fillRectangle(x, y, barWidth, barHeight);
     	
 		// Fill the unfilled bar
-		dc.setColor(unfilledDataBarColor, backgroundColor);
-		dc.fillRectangle(unfilledBarX, unfilledBarY, unfilledBarWidth, unfilledBarHeight);
+		if (unfilledDataBarColor != backgroundColor) {
+			dc.setColor(unfilledDataBarColor, backgroundColor);
+			dc.fillRectangle(unfilledBarX, unfilledBarY, unfilledBarWidth, unfilledBarHeight);
+		}
     }
 }

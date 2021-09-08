@@ -174,24 +174,36 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     		case THEME_WHITE_DARK:
     			foregroundColor = Graphics.COLOR_WHITE;
     			backgroundColor = Graphics.COLOR_BLACK;
+				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_DK_GRAY);
     			break;
     		case THEME_BLUE_DARK:
     			foregroundColor = Graphics.COLOR_BLUE;
     			backgroundColor = Graphics.COLOR_BLACK;
+				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_DK_GRAY);
     			break;
     		case THEME_RED_DARK:
     			foregroundColor = Graphics.COLOR_RED;
     			backgroundColor = Graphics.COLOR_BLACK;
+				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_DK_GRAY);
     			break;
     		case THEME_GREEN_DARK:
     			foregroundColor = Graphics.COLOR_GREEN;
     			backgroundColor = Graphics.COLOR_BLACK;
+				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_DK_GRAY);
     			break;
     		case THEME_BLACK_LIGHT:
     			foregroundColor = Graphics.COLOR_BLACK;
     			backgroundColor = Graphics.COLOR_WHITE;
+				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_DK_GRAY);
     			break;
     	}
     }
+
+	//! Select the unfilled data bar color according to the Settings
+	//! @param color the color of the unfilled data bar if not the background color
+	//! @return final color of the unfilled data bar
+	private function selectUnfilledDataBarColor(color as Number) as Number {
+		return unfilledDataBarAsBGColor ? backgroundColor : color;
+	}
 
 }

@@ -105,7 +105,7 @@ class Data {
 				break;	
 			case DATA_WEATHER:
 				var weather = getCurrentWeather();
-				values[:displayData] = weather[0] == -1 ? _errorDisplay : weather[0].toString() + "°";
+				values[:displayData] = weather[0] == -1 ? _errorDisplay : weather[0].toString() + "º";  //unicode 186, \u00BA : real degree icon: ° unicode 176;
 				values[:iconText] = weather[1];
 				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_DK_BLUE;
 				break;

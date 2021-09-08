@@ -22,8 +22,9 @@
     <string id="DataFieldLeftTitle">Left Data Field</string>
     <string id="DataFieldRightTitle">Right Data Field</string>
 
-    <string id="DataBarOuterLeftTopTitle">Outer-Left-Top Data Bar</string>
-    <string id="DataBarInnerRightBottomTitle">Inner-Right-Bottom Data Bar</string>
+    <string id="DataBarOuterLeftTopTitle">Outer/Left/Top Data Bar</string>
+    <string id="DataBarInnerRightBottomTitle">Inner/Right/Bottom Data Bar</string>
+    <string id="UnfilledDataBar">Unfilled data bar color is the same as background</string>
 
     <string id="MotivationalQuoteTitle">Motivational Quote (Leave empty for automatic)</string>
     <string id="MotivationalQuoteChangeIntervalTitle">Motivational Quote Change Interval</string>

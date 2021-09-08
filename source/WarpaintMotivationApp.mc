@@ -22,7 +22,8 @@ var selectedValueForDataFieldLeft as Integer;
 var selectedValueForDataFieldRight as Integer;
 
 var dataBarWidth as Integer;
-var unfilledDataBarColor = 0x555555; // Graphics.COLOR_DK_GRAY;
+var unfilledDataBarAsBGColor as Boolean;
+var unfilledDataBarColor as Number;
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
 
@@ -138,6 +139,7 @@ class WarpaintMotivationApp extends Application.AppBase {
             militaryFormat = Properties.getValue("UseMilitaryFormat");
 
             dataBarWidth = Properties.getValue("DataBarWidth");
+            unfilledDataBarAsBGColor = Properties.getValue("UnfilledDataBar");
             selectedValueForDataFieldMiddle = Properties.getValue("DataFieldMiddle");
 			selectedValueForDataFieldLeft = Properties.getValue("DataFieldLeft");
 			selectedValueForDataFieldRight = Properties.getValue("DataFieldRight");
@@ -161,6 +163,7 @@ class WarpaintMotivationApp extends Application.AppBase {
             militaryFormat = getApp().getProperty("UseMilitaryFormat");
 
             dataBarWidth = getApp().getProperty("DataBarWidth");
+            unfilledDataBarAsBGColor = getApp().getProperty("UnfilledDataBar");
 		    selectedValueForDataFieldMiddle = getApp().getProperty("DataFieldMiddle");
 			selectedValueForDataFieldLeft = getApp().getProperty("DataFieldLeft");
 			selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");
