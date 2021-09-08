@@ -70,13 +70,12 @@ class MotivationField extends WatchUi.Text {
     	var firstMiddleSpaceIndex = null;
     	var secondMiddleSpaceIndex = null;
     	
-    	if (dc.getTextWidthInPixels(motivation, smallFont) <= screenWidth * secondLineWidthPercent * 0.90) {
+    	if (dc.getTextWidthInPixels(motivation, smallFont) <= screenWidth * secondLineWidthPercent * 0.95) {
     		motivationSecondPart = motivation;
     	} else if (dc.getTextWidthInPixels(motivation, smallFont) <= maxTextLength) {
  	    	// split text at 0.50 and 1.00 and find first spaces
 			// if not found it goes back with some characters
-			// if it fits in the first line, the first split part should be earlier (eg. because of "no more weakness")
- 	    	var firstSplitPart = dc.getTextWidthInPixels(motivation, smallFont) <= screenWidth * firstLineWidthPercent ? 0.25 : 0.50;
+			var firstSplitPart = 0.49;
  	    	var secondSplitPart = 1.00;
  	    	
  	    	do {
@@ -86,8 +85,12 @@ class MotivationField extends WatchUi.Text {
 					firstMiddleSpaceIndex = motivationSecondPart.find(" ") + Math.ceil(motivationLength * firstSplitPart);
 					motivationFirstPart = motivation.substring(0, firstMiddleSpaceIndex);
 				}
+
 		    	firstSplitPart -= 0.03;
-	    	} while (dc.getTextWidthInPixels(motivationFirstPart, smallFont) >= screenWidth * firstLineWidthPercent);
+				if (firstSplitPart < 0) {
+					break;
+				}
+	    	} while (dc.getTextWidthInPixels(motivationFirstPart, smallFont) >= screenWidth * firstLineWidthPercent || firstMiddleSpaceIndex == null);
 	    	
 	    	do {
 		    	motivationThirdPart = motivation.substring(Math.ceil(motivationLength * secondSplitPart), motivationLength);
@@ -105,12 +108,22 @@ class MotivationField extends WatchUi.Text {
 					motivationFirstPart = motivation.substring(0, 10) + "...";
 					motivationSecondPart = "Too long word";
 					motivationThirdPart = "in text";
-			    }			 
+					break;
+			    }
+
 			    secondSplitPart -= 0.03;
-			    
+				if (secondSplitPart < 0) {
+					break;
+				}
 			} while (dc.getTextWidthInPixels(motivationSecondPart, smallFont) >= screenWidth * secondLineWidthPercent);
 			
-	  		if (dc.getTextWidthInPixels(motivationThirdPart, smallFont) >= screenWidth * thirdLineWidthPercent) {
+			firstSplitPart = (firstSplitPart * 100).toNumber();
+			secondSplitPart = (secondSplitPart * 100).toNumber();
+			if (firstSplitPart == secondSplitPart) {
+				motivationFirstPart = motivation.substring(0, 10) + "...";
+				motivationSecondPart = "Too long word";
+				motivationThirdPart = "in text";				
+			} else if (dc.getTextWidthInPixels(motivationThirdPart, smallFont) >= screenWidth * thirdLineWidthPercent) {
 				// too long motivational quote
 				motivationThirdPart = "...";
 	  		}
