@@ -42,6 +42,7 @@ var firstLineWidthPercent as Number;
 var secondLineWidthPercent as Number;
 var thirdLineWidthPercent as Number;
 
+// Store in storage/property
 var locationLat = null;
 var locationLng = null;
 
@@ -78,9 +79,9 @@ class WarpaintMotivationApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
 
-        // register for temporal event every 5 minutes
+        // register for temporal event every X minutes (in X * 60)
         if (Toybox has :Background) {
-        	Background.registerForTemporalEvent(new Time.Duration(5 * 60));
+        	Background.registerForTemporalEvent(new Time.Duration(60 * 60));
     	}
     }
 
@@ -115,11 +116,8 @@ class WarpaintMotivationApp extends Application.AppBase {
             System.println("No of Motivational quotes downloaded: " + apiData.size());
         } else if (apiData instanceof String) {
 			motivationalQuoteArray.add(apiData);
-		} else if (apiData instanceof Number) {
-			// motivationalQuote = "HTTP error number: " + apiData;
-		} else {
-			// motivationalQuote = "Unknown error. Please contact developer.";
 		}
+
 		WatchUi.requestUpdate();
 	}
 	
@@ -154,7 +152,10 @@ class WarpaintMotivationApp extends Application.AppBase {
             secondLineWidthPercent = Properties.getValue("SecondMotivationLineWidthPercent");
             thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
 
+            //Does not work. Issue in Motivationfield.mc
             motivationalQuote = Storage.getValue("MotivationalQuote");
+
+            Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 		} else {
 		    theme = getApp().getProperty("Theme");
             dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
@@ -179,6 +180,8 @@ class WarpaintMotivationApp extends Application.AppBase {
             thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
 
             motivationalQuote = getApp().getProperty("MotivationalQuote");
+
+            getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 		}
     }
 

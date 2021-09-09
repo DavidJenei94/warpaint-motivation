@@ -32,14 +32,14 @@
 
 	<setting propertyKey="@Properties.MotivationalQuoteChangeInterval" title="@Strings.MotivationalQuoteChangeIntervalTitle">
         <settingConfig type="list">
-            <listEntry value="10">@Strings.Min10</listEntry>
-            <listEntry value="20">@Strings.Min20</listEntry>
+            <listEntry value="15">@Strings.Min15</listEntry>
             <listEntry value="30">@Strings.Min30</listEntry>
             <listEntry value="60">@Strings.Min60</listEntry>
             <listEntry value="120">@Strings.Min120</listEntry>
+			<listEntry value="180">@Strings.Min180</listEntry>
             <listEntry value="240">@Strings.Min240</listEntry>
-            <listEntry value="640">@Strings.Min640</listEntry>
-            <listEntry value="2">@Strings.Min2</listEntry>
+			<listEntry value="480">@Strings.Min480</listEntry>
+            <listEntry value="720">@Strings.Min720</listEntry>
         </settingConfig>
     </setting>
 

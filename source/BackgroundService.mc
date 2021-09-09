@@ -28,7 +28,7 @@ class BackgroundService extends System.ServiceDelegate {
 			motivationalQuoteArraySize = 0;
 		}
 
-		var motivationalQuoteArrayMaxSize = 5;
+		var motivationalQuoteArrayMaxSize = 10;
 		if (motivationalQuoteArraySize < motivationalQuoteArrayMaxSize) {
 			var options = {
 				:method => Communications.HTTP_REQUEST_METHOD_GET,

@@ -382,8 +382,9 @@ class Data {
 			_sunriseSunset = new SunriseSunset();
 		}
 		
-		var intervalToRefreshSunriseSunset = 30;
-		if (System.getClockTime().min % intervalToRefreshSunriseSunset == 1) {
+		// interval in minutes
+		var intervalToRefreshSunriseSunset = 15;
+		if (currentSunriseSunsetIsDisplayed() || System.getClockTime().min % intervalToRefreshSunriseSunset == 1) {
 			_sunriseSunset.refreshSunsetSunrise();
 		}
     	  
