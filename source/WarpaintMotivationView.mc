@@ -78,6 +78,11 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
         // Clear dc with backgroundcolor
         dc.setColor(foregroundColor, backgroundColor);
     	dc.clear();
+
+		// Set anti-aliasing if possible
+		if (dc has :setAntiAlias) {
+			dc.setAntiAlias(true);
+		}
     
 		// If AMOLED watch is in low power mode it shows different layout
 		if (_burnInProtection && !_isAwake) {
