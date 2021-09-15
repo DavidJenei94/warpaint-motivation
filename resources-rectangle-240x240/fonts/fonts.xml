@@ -1,7 +1,7 @@
 <fonts>
 	<font id="SmallFont" filename="edo_sz_text_20.fnt" antialias="true"/>
-	<font id="MediumFont" filename="edo_sz_datafield_24.fnt" antialias="true" filter="0123456789:.-%ºkm"/>
+	<font id="MediumFont" filename="edo_sz_datafield_24.fnt" antialias="true" filter="0123456789:.-%ºKM"/>
 	<font id="LargeFont" filename="edo_sz_time_72.fnt" antialias="true" filter="0123456789:"/>
 	
-	<font id="IconFont" filename="arcmotivation_icons_16.fnt" antialias="true"/>
+	<font id="IconFont" filename="warpaint_icons_24.fnt" antialias="true"/>
 </fonts>

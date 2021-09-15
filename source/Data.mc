@@ -107,7 +107,7 @@ class Data {
 				var weather = getCurrentWeather();
 				values[:displayData] = weather[0] == -1 ? _errorDisplay : weather[0].toString() + "º";  //unicode 186, \u00BA : real degree icon: ° unicode 176;
 				values[:iconText] = weather[1];
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_DK_BLUE;
+				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_BLUE;
 				break;
 			case DATA_NOTIFICATION:
 				var notificationCount = getNotificationCount();
@@ -172,10 +172,10 @@ class Data {
     	
     	if (_deviceSettings.distanceUnits == System.UNIT_METRIC) {
     		distance[0] = _info.distance / 100000.0;
-    		distance[1] = "k";
+    		distance[1] = "K";
     	} else if (_deviceSettings.distanceUnits == System.UNIT_STATUTE) {
     		distance[0] = _info.distance / 100000.0 * 0.621371192;
-    		distance[1] = "m";
+    		distance[1] = "M";
     	}
     	
 		// convert to specified decimal places (0,1,2)
@@ -186,7 +186,7 @@ class Data {
     	} else {
     		distance[0] = distance[0].format("%.2f");
     	}
-    	
+
     	return distance;
     }
     
@@ -298,40 +298,46 @@ class Data {
     	var iconText = "";
     	switch (condition) {
     		case Weather.CONDITION_CLEAR:
-			case Weather.CONDITION_PARTLY_CLEAR:
 			case Weather.CONDITION_MOSTLY_CLEAR:
 			case Weather.CONDITION_FAIR:
     			iconText = "K";
     			break;
+			case Weather.CONDITION_PARTLY_CLEAR:
 			case Weather.CONDITION_PARTLY_CLOUDY:
 			case Weather.CONDITION_MOSTLY_CLOUDY:
 			case Weather.CONDITION_WINDY:
+			case Weather.CONDITION_THIN_CLOUDS:			
+    			iconText = "L";
+    			break;
 			case Weather.CONDITION_HAZY:
 			case Weather.CONDITION_FOG:
 			case Weather.CONDITION_CLOUDY:
 			case Weather.CONDITION_MIST:
 			case Weather.CONDITION_DUST:
-			case Weather.CONDITION_THIN_CLOUDS:			
 			case Weather.CONDITION_HAZE:
-    			iconText = "L";
-    			break;							
-			case Weather.CONDITION_RAIN:
-			case Weather.CONDITION_THUNDERSTORMS:
-			case Weather.CONDITION_SCATTERED_SHOWERS:
-			case Weather.CONDITION_SCATTERED_THUNDERSTORMS:
-			case Weather.CONDITION_UNKNOWN_PRECIPITATION:
-			case Weather.CONDITION_LIGHT_RAIN:
-			case Weather.CONDITION_HEAVY_RAIN:
-			case Weather.CONDITION_LIGHT_SHOWERS:
-			case Weather.CONDITION_SHOWERS:
-			case Weather.CONDITION_HEAVY_SHOWERS:
-			case Weather.CONDITION_CHANCE_OF_SHOWERS:
-			case Weather.CONDITION_CHANCE_OF_THUNDERSTORMS:		
-			case Weather.CONDITION_DRIZZLE:
-			case Weather.CONDITION_CLOUDY_CHANCE_OF_RAIN:	
-			case Weather.CONDITION_FLURRIES:		
     			iconText = "M";
-    			break;					
+    			break;
+			case Weather.CONDITION_LIGHT_RAIN:
+			case Weather.CONDITION_CLOUDY_CHANCE_OF_RAIN:
+			case Weather.CONDITION_CHANCE_OF_SHOWERS:
+			case Weather.CONDITION_SCATTERED_SHOWERS:
+			case Weather.CONDITION_DRIZZLE:
+    			iconText = "N";
+    			break;
+			case Weather.CONDITION_RAIN:
+			case Weather.CONDITION_UNKNOWN_PRECIPITATION:
+			case Weather.CONDITION_HEAVY_RAIN:
+			case Weather.CONDITION_SHOWERS:
+			case Weather.CONDITION_LIGHT_SHOWERS:
+			case Weather.CONDITION_HEAVY_SHOWERS:
+			case Weather.CONDITION_FLURRIES:		
+    			iconText = "O";
+    			break;
+			case Weather.CONDITION_THUNDERSTORMS:
+			case Weather.CONDITION_SCATTERED_THUNDERSTORMS:
+			case Weather.CONDITION_CHANCE_OF_THUNDERSTORMS:	
+    			iconText = "P";
+    			break;
 			case Weather.CONDITION_SNOW:
 			case Weather.CONDITION_WINTRY_MIX:
 			case Weather.CONDITION_HAIL:
@@ -347,7 +353,7 @@ class Data {
 			case Weather.CONDITION_FREEZING_RAIN:
 			case Weather.CONDITION_SLEET:
 			case Weather.CONDITION_ICE_SNOW:
-    			iconText = "N";
+    			iconText = "Q";
     			break;
 			case Weather.CONDITION_SANDSTORM:
 			case Weather.CONDITION_VOLCANIC_ASH:
@@ -358,7 +364,7 @@ class Data {
 			case Weather.CONDITION_TROPICAL_STORM:			
 			case Weather.CONDITION_SAND:
 			case Weather.CONDITION_SQUALL:
-    			iconText = "O";
+    			iconText = "R";
     			break;
 			case Weather.CONDITION_UNKNOWN:
 			default:
