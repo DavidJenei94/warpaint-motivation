@@ -35,7 +35,18 @@ class DataBar {
     	if (actualValue != 0) {
 			// Draw data bar and unfilled part
 			dc.setPenWidth(width);
-			dc.setColor(color, backgroundColor);
+			if (side == DATABAR_INNER_RIGHT_BOTTOM && !isColorful) {
+				if (!unfilledDataBarAsBGColor) {
+					dc.setColor(foregroundColor, backgroundColor);
+				} else {
+					dc.setColor(foregroundTriColor, backgroundColor);
+				}
+				
+			} else if (side == DATABAR_OUTER_LEFT_TOP && !isColorful) {
+				dc.setColor(foregroundColor, backgroundColor);
+			} else {
+				dc.setColor(color, backgroundColor);
+			}
 						
 			if (actualValue < maxValue) {
 				// draw actual value

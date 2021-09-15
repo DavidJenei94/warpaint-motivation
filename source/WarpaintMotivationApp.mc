@@ -10,9 +10,10 @@ import Toybox.System;
 var myView as View;
 
 var theme as Number;
-var dataIconsThemeColor as Boolean;
 var foregroundColor as Number;
 var backgroundColor as Number;
+var foregroundTriColor as Number;
+var isColorful as Boolean;
 
 var updatingSecondsInLowPowerMode as Boolean;
 var militaryFormat as Boolean;
@@ -47,11 +48,60 @@ var locationLat = null;
 var locationLng = null;
 
 enum { 
-    THEME_WHITE_DARK,
-    THEME_BLUE_DARK,
-    THEME_RED_DARK,
-    THEME_GREEN_DARK,
-    THEME_BLACK_LIGHT
+    THEME_WHITE_DARK_COLORFUL,
+    THEME_WHITE_DARK_BICOLOR,
+    THEME_WHITE_DARK_TRICOLOR,
+    THEME_BLACK_LIGHT_COLORFUL,
+    THEME_BLACK_LIGHT_BIICOLOR,
+    THEME_BLACK_LIGHT_TRICOLOR,
+    THEME_GRAY_DARK_COLORFUL,
+    THEME_GRAY_DARK_BICOLOR,
+    THEME_GRAY_DARK_TRICOLOR,
+    THEME_GRAY_LIGHT_COLORFUL,
+    THEME_GRAY_LIGHT_BICOLOR,
+    THEME_GRAY_LIGHT_TRICOLOR,
+    THEME_RED_DARK_COLORFUL,
+    THEME_RED_DARK_BICOLOR,
+    THEME_RED_DARK_TRICOLOR,
+    THEME_RED_LIGHT_COLORFUL,
+    THEME_RED_LIGHT_BICOLOR,
+    THEME_RED_LIGHT_TRICOLOR,
+    THEME_BLUE_DARK_COLORFUL,
+    THEME_BLUE_DARK_BICOLOR,
+    THEME_BLUE_DARK_TRICOLOR,
+    THEME_BLUE_LIGHT_COLORFUL,
+    THEME_BLUE_LIGHT_BICOLOR,
+    THEME_BLUE_LIGHT_TRICOLOR,
+    THEME_GREEN_DARK_COLORFUL,
+    THEME_GREEN_DARK_BICOLOR,
+    THEME_GREEN_DARK_TRICOLOR,
+    THEME_GREEN_LIGHT_COLORFUL,
+    THEME_GREEN_LIGHT_BICOLOR,
+    THEME_GREEN_LIGHT_TRICOLOR,
+    THEME_YELLOW_DARK_COLORFUL,
+    THEME_YELLOW_DARK_BICOLOR,
+    THEME_YELLOW_DARK_TRICOLOR,
+    THEME_YELLOW_LIGHT_COLORFUL,
+    THEME_YELLOW_LIGHT_BICOLOR,
+    THEME_YELLOW_LIGHT_TRICOLOR,
+    THEME_ORANGE_DARK_COLORFUL,
+    THEME_ORANGE_DARK_BICOLOR,
+    THEME_ORANGE_DARK_TRICOLOR,
+    THEME_ORANGE_LIGHT_COLORFUL,
+    THEME_ORANGE_LIGHT_BICOLOR,
+    THEME_ORANGE_LIGHT_TRICOLOR,
+    THEME_PURPLE_DARK_COLORFUL,
+    THEME_PURPLE_DARK_BICOLOR,
+    THEME_PURPLE_DARK_TRICOLOR,
+    THEME_PURPLE_LIGHT_COLORFUL,
+    THEME_PURPLE_LIGHT_BICOLOR,
+    THEME_PURPLE_LIGHT_TRICOLOR,
+    THEME_PINK_DARK_COLORFUL,
+    THEME_PINK_DARK_BICOLOR,
+    THEME_PINK_DARK_TRICOLOR,
+    THEME_PINK_LIGHT_COLORFUL,
+    THEME_PINK_LIGHT_BICOLOR,
+    THEME_PINK_LIGHT_TRICOLOR
 }
 
 enum { 
@@ -131,7 +181,6 @@ class WarpaintMotivationApp extends Application.AppBase {
     private function setGlobalVariables() as Void {
     	if (Toybox.Application has :Storage) {
 		    theme = Properties.getValue("Theme");
-            dataIconsThemeColor = Properties.getValue("ThemeDataIconsColor");
 
             updatingSecondsInLowPowerMode = Properties.getValue("UpdateSecondInLowPowerMode");
             militaryFormat = Properties.getValue("UseMilitaryFormat");
@@ -158,7 +207,6 @@ class WarpaintMotivationApp extends Application.AppBase {
             Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 		} else {
 		    theme = getApp().getProperty("Theme");
-            dataIconsThemeColor = getApp().getProperty("ThemeDataIconsColor");
 
             updatingSecondsInLowPowerMode = getApp().getProperty("UpdateSecondInLowPowerMode");
             militaryFormat = getApp().getProperty("UseMilitaryFormat");

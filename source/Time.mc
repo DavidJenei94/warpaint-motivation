@@ -42,7 +42,7 @@ class Time extends WatchUi.Text {
 	//! @param dc Device Content
 	function drawTime(dc as Dc) as Void {
 		refreshTimeData();
-		self.setColor(foregroundColor);	
+		self.setColor(foregroundTriColor);	
         self.setText(_time);
 		Text.draw(dc);
 	}

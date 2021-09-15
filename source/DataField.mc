@@ -38,7 +38,11 @@ class DataField extends WatchUi.Text {
 	//! @param color color of the icon
 	//! @param dataText Data in string format
 	function drawIcon(dc as Dc, iconText as String, color as Number, dataText as String) as Void {
-		dc.setColor(color, Graphics.COLOR_TRANSPARENT);
+		if (!isColorful) {
+			dc.setColor(foregroundTriColor, Graphics.COLOR_TRANSPARENT);
+		} else {
+			dc.setColor(color, Graphics.COLOR_TRANSPARENT);
+		}
 		dc.drawText(calculateNewXForData(dc, dataText, iconText) - _pixelsBetweenIconAndData / 2, _y, iconFont, iconText, Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
 	}
 	

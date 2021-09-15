@@ -2,15 +2,64 @@
 
     <setting propertyKey="@Properties.Theme" title="@Strings.ThemeTitle">
         <settingConfig type="list">
-            <listEntry value="0">@Strings.WhiteDark</listEntry>
-            <listEntry value="1">@Strings.BlueDark</listEntry>
-            <listEntry value="2">@Strings.RedDark</listEntry>
-            <listEntry value="3">@Strings.GreenDark</listEntry>
-            <listEntry value="4">@Strings.BlackLight</listEntry>
+            <listEntry value="0">@Strings.WhiteDarkColorful</listEntry>
+            <listEntry value="1">@Strings.WhiteDarkBicolor</listEntry>
+            <listEntry value="2">@Strings.WhiteDarkTricolor</listEntry>
+            <listEntry value="3">@Strings.BlackLightColorful</listEntry>
+            <listEntry value="4">@Strings.BlackLightBicolor</listEntry>
+			<listEntry value="5">@Strings.BlackLightTricolor</listEntry>
+			<listEntry value="6">@Strings.GrayDarkColorful</listEntry>
+            <listEntry value="7">@Strings.GrayDarkBicolor</listEntry>
+            <listEntry value="8">@Strings.GrayDarkTricolor</listEntry>
+            <listEntry value="9">@Strings.GrayLightColorful</listEntry>
+            <listEntry value="10">@Strings.GrayLightBicolor</listEntry>
+            <listEntry value="11">@Strings.GrayLightTricolor</listEntry>
+			<listEntry value="12">@Strings.RedDarkColorful</listEntry>
+			<listEntry value="13">@Strings.RedDarkBicolor</listEntry>
+            <listEntry value="14">@Strings.RedDarkTricolor</listEntry>
+            <listEntry value="15">@Strings.RedLightColorful</listEntry>
+            <listEntry value="16">@Strings.RedLightBicolor</listEntry>
+            <listEntry value="17">@Strings.RedLightTricolor</listEntry>
+            <listEntry value="18">@Strings.BlueDarkColorful</listEntry>
+			<listEntry value="19">@Strings.BlueDarkBicolor</listEntry>
+			<listEntry value="20">@Strings.BlueDarkTricolor</listEntry>
+            <listEntry value="21">@Strings.BlueLightColorful</listEntry>
+            <listEntry value="22">@Strings.BlueLightBicolor</listEntry>
+            <listEntry value="23">@Strings.BlueLightTricolor</listEntry>
+            <listEntry value="24">@Strings.GreenDarkColorful</listEntry>
+            <listEntry value="25">@Strings.GreenDarkBicolor</listEntry>
+			<listEntry value="26">@Strings.GreenDarkTricolor</listEntry>
+			<listEntry value="27">@Strings.GreenLightColorful</listEntry>
+            <listEntry value="28">@Strings.GreenLightBicolor</listEntry>
+            <listEntry value="29">@Strings.GreenLightTricolor</listEntry>
+            <listEntry value="30">@Strings.YellowDarkColorful</listEntry>
+            <listEntry value="31">@Strings.YellowDarkBicolor</listEntry>
+            <listEntry value="32">@Strings.YellowDarkTricolor</listEntry>
+			<listEntry value="33">@Strings.YellowLightColorful</listEntry>
+			<listEntry value="34">@Strings.YellowLightBicolor</listEntry>
+            <listEntry value="35">@Strings.YellowLightTricolor</listEntry>
+            <listEntry value="36">@Strings.OrangeDarkColorful</listEntry>
+            <listEntry value="37">@Strings.OrangeDarkBicolor</listEntry>
+            <listEntry value="38">@Strings.OrangeDarkTricolor</listEntry>
+            <listEntry value="39">@Strings.OrangeLightColorful</listEntry>
+			<listEntry value="40">@Strings.OrangeLightBicolor</listEntry>
+			<listEntry value="41">@Strings.OrangeLightTricolor</listEntry>
+            <listEntry value="42">@Strings.PurpleDarkColorful</listEntry>
+            <listEntry value="43">@Strings.PurpleDarkBicolor</listEntry>
+            <listEntry value="44">@Strings.PurpleDarkTricolor</listEntry>
+            <listEntry value="45">@Strings.PurpleLightColorful</listEntry>
+            <listEntry value="46">@Strings.PurpleLightBicolor</listEntry>
+			<listEntry value="47">@Strings.PurpleLightTricolor</listEntry>
+			<listEntry value="48">@Strings.PinkDarkColorful</listEntry>
+            <listEntry value="49">@Strings.PinkDarkBicolor</listEntry>
+            <listEntry value="50">@Strings.PinkDarkTricolor</listEntry>
+            <listEntry value="51">@Strings.PinkLightColorful</listEntry>
+            <listEntry value="52">@Strings.PinkLightBicolor</listEntry>
+            <listEntry value="53">@Strings.PinkLightTricolor</listEntry>
         </settingConfig>
     </setting>
 
-    <setting propertyKey="@Properties.ThemeDataIconsColor" title="@Strings.ThemeDataIconsColorTitle">
+	<setting propertyKey="@Properties.UnfilledDataBar" title="@Strings.UnfilledDataBar">
         <settingConfig type="boolean" />
     </setting>
 
@@ -85,10 +134,6 @@
 			<listEntry value="9">@Strings.NotificationCount</listEntry>
 		</settingConfig>
 	</setting>
-
-    <setting propertyKey="@Properties.UnfilledDataBar" title="@Strings.UnfilledDataBar">
-        <settingConfig type="boolean" />
-    </setting>
 
 	<setting propertyKey="@Properties.DataBarOuterLeftTop" title="@Strings.DataBarOuterLeftTopTitle">
 		<settingConfig type="list">

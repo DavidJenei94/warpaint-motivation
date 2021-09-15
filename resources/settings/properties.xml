@@ -1,7 +1,6 @@
 <properties>
 
 	<property id="Theme" type="number">0</property>
-    <property id="ThemeDataIconsColor" type="boolean">false</property>
 
     <property id="UseMilitaryFormat" type="boolean">false</property>
     <property id="UpdateSecondInLowPowerMode" type="boolean">false</property>
@@ -10,9 +9,9 @@
 
     <property id="DataBarWidth" type="number">6</property>
     
-    <property id="DataFieldMiddle" type="number">4</property>
+    <property id="DataFieldMiddle" type="number">0</property>
     <property id="DataFieldLeft" type="number">2</property>
-    <property id="DataFieldRight" type="number">3</property>
+    <property id="DataFieldRight" type="number">5</property>
 
     <property id="UnfilledDataBar" type="boolean">false</property>
     <property id="DataBarOuterLeftTop" type="number">0</property>

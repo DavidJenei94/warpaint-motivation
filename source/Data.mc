@@ -52,8 +52,8 @@ class Data {
 				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
 				values[:dataMaxValue] = steps[1];
 				values[:iconText] = "B";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_BLUE;
-				values[:barColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_BLUE;
+				values[:iconColor] = Graphics.COLOR_BLUE;
+				values[:barColor] = Graphics.COLOR_BLUE;
 				break;
 			case DATA_BATTERY:
 				var battery = getBatteryStat();
@@ -61,14 +61,14 @@ class Data {
 				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toNumber().toString() + "%";
 				values[:dataMaxValue] = battery[1];
 				values[:iconText] = "D";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_YELLOW;
-				values[:barColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_GREEN;
+				values[:iconColor] = Graphics.COLOR_YELLOW;
+				values[:barColor] = Graphics.COLOR_GREEN;
 				break;
 			case DATA_HEARTRATE:
 				var heartRate = getCurrentHeartRate();
 				values[:displayData] = heartRate == -1 ? _errorDisplay : heartRate.toString();				
 				values[:iconText] = "A";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_RED;
+				values[:iconColor] = Graphics.COLOR_RED;
 				break;
 			case DATA_CALORIES:
 				var calories = getCalories();
@@ -76,8 +76,8 @@ class Data {
 				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
 				values[:dataMaxValue] = calories[1];
 				values[:iconText] = "C";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_ORANGE;
-				values[:barColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_ORANGE;
+				values[:iconColor] = Graphics.COLOR_ORANGE;
+				values[:barColor] = Graphics.COLOR_ORANGE;
 				break;
 			case DATA_FLOORS_CLIMBED:
 				var floorsClimbed = getFloorsClimbed();
@@ -85,8 +85,8 @@ class Data {
 				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
 				values[:dataMaxValue] = floorsClimbed[1];
 				values[:iconText] = "G";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_PURPLE;
-				values[:barColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_PURPLE;
+				values[:iconColor] = Graphics.COLOR_PURPLE;
+				values[:barColor] = Graphics.COLOR_PURPLE;
 				break;
 			case DATA_ACTIVE_MINUTES_WEEK:
 				var activeMinutesWeek = getActiveMinutesWeek();
@@ -94,33 +94,33 @@ class Data {
 				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
 				values[:dataMaxValue] = activeMinutesWeek[1];
 				values[:iconText] = "H";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_YELLOW;
-				values[:barColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_YELLOW;
+				values[:iconColor] = Graphics.COLOR_YELLOW;
+				values[:barColor] = Graphics.COLOR_YELLOW;
 				break;								
 			case DATA_DISTANCE:
 				var distance = getDistance();
 				values[:displayData] = distance[0] == -1 ? _errorDisplay : distance[0].toString() + distance[1];
 				values[:iconText] = "I";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_LT_GRAY;
+				values[:iconColor] = Graphics.COLOR_LT_GRAY;
 				break;	
 			case DATA_WEATHER:
 				var weather = getCurrentWeather();
 				values[:displayData] = weather[0] == -1 ? _errorDisplay : weather[0].toString() + "º";  //unicode 186, \u00BA : real degree icon: ° unicode 176;
 				values[:iconText] = weather[1];
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_BLUE;
+				values[:iconColor] = Graphics.COLOR_BLUE;
 				break;
 			case DATA_NOTIFICATION:
 				var notificationCount = getNotificationCount();
 				values[:displayData] = notificationCount == -1 ? _errorDisplay : notificationCount.toString();
 				values[:iconText] = "J";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_PINK;
+				values[:iconColor] = Graphics.COLOR_PINK;
 				break;				
 
 			case DATA_SUNRISE_SUNSET:
 				var nextSunriseSunset = getNextSunriseSunsetTime();
 				values[:displayData] = nextSunriseSunset[0] == -1 ? _errorDisplay : nextSunriseSunset[0];
 				values[:iconText] = nextSunriseSunset[1] ? "E" : "F";
-				values[:iconColor] = dataIconsThemeColor ? foregroundColor : Graphics.COLOR_ORANGE;
+				values[:iconColor] = Graphics.COLOR_ORANGE;
 				break;						
 		}
 		

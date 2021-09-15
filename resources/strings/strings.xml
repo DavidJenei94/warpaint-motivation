@@ -3,14 +3,72 @@
     <string id="AppName">Warpaint Motivation</string>
 
 	<string id="ThemeTitle">Color Theme</string>
-    <string id="ThemeDataIconsColorTitle">Colors for Data Icons and Bars are the same as the theme color or use default ones</string>
 
-    <string id="WhiteDark">White - Dark</string>
-    <string id="BlueDark">Blue - Dark</string>
-    <string id="RedDark">Red - Dark</string>
-    <string id="GreenDark">Green - Dark</string>
-    <string id="BlackLight">Black/White</string>
+    <!-- Basic color themes -->
+    <string id="WhiteDarkColorful">White (Dark) - Colorful</string>
+    <string id="WhiteDarkBicolor">White (Dark) - Bicolor</string>
+    <string id="WhiteDarkTricolor">White/Gray (Dark) - Tricolor</string>
+    <string id="BlackLightColorful">Black (Light) - Colorful</string>
+    <string id="BlackLightBicolor">Black (Light) - Bicolor</string>
+    <string id="BlackLightTricolor">Black/Gray (Light) - Tricolor</string>
+    <!-- Gray themes -->
+    <string id="GrayDarkColorful">Gray (Dark) - Colorful</string>
+    <string id="GrayDarkBicolor">Gray (Dark) - Bicolor</string>
+    <string id="GrayDarkTricolor">Gray/White (Dark) - Tricolor</string>
+    <string id="GrayLightColorful">Gray (Light) - Colorful</string>
+    <string id="GrayLightBicolor">Gray (Light) - Bicolor</string>
+    <string id="GrayLightTricolor">Gray/Black (Light) - Tricolor</string>
+    <!-- Red themes -->
+    <string id="RedDarkColorful">Red (Dark) - Colorful</string>
+    <string id="RedDarkBicolor">Red (Dark) - Bicolor</string>
+    <string id="RedDarkTricolor">Red/White (Dark) - Tricolor</string>
+    <string id="RedLightColorful">Red (Light) - Colorful</string>
+    <string id="RedLightBicolor">Red (Light) - Bicolor</string>
+    <string id="RedLightTricolor">Red/Black (Light) - Tricolor</string>
+    <!-- Blue themes -->
+    <string id="BlueDarkColorful">Blue (Dark) - Colorful</string>
+    <string id="BlueDarkBicolor">Blue (Dark) - Bicolor</string>
+    <string id="BlueDarkTricolor">Blue/White (Dark) - Tricolor</string>
+    <string id="BlueLightColorful">Blue (Light) - Colorful</string>
+    <string id="BlueLightBicolor">Blue (Light) - Bicolor</string>
+    <string id="BlueLightTricolor">Blue/Black (Light) - Tricolor</string>
+    <!-- Green themes -->
+    <string id="GreenDarkColorful">Green (Dark) - Colorful</string>
+    <string id="GreenDarkBicolor">Green (Dark) - Bicolor</string>
+    <string id="GreenDarkTricolor">Green/White (Dark) - Tricolor</string>
+    <string id="GreenLightColorful">Green (Light) - Colorful</string>
+    <string id="GreenLightBicolor">Green (Light) - Bicolor</string>
+    <string id="GreenLightTricolor">Green/Black (Light) - Tricolor</string>
+    <!-- Yellow themes -->
+    <string id="YellowDarkColorful">Yellow (Dark) - Colorful</string>
+    <string id="YellowDarkBicolor">Yellow (Dark) - Bicolor</string>
+    <string id="YellowDarkTricolor">Yellow/White (Dark) - Tricolor</string>
+    <string id="YellowLightColorful">Yellow (Light) - Colorful</string>
+    <string id="YellowLightBicolor">Yellow (Light) - Bicolor</string>
+    <string id="YellowLightTricolor">Yellow/Black (Light) - Tricolor</string>
+    <!-- Orange themes -->
+    <string id="OrangeDarkColorful">Orange (Dark) - Colorful</string>
+    <string id="OrangeDarkBicolor">Orange (Dark) - Bicolor</string>
+    <string id="OrangeDarkTricolor">Orange/White (Dark) - Tricolor</string>
+    <string id="OrangeLightColorful">Orange (Light) - Colorful</string>
+    <string id="OrangeLightBicolor">Orange (Light) - Bicolor</string>
+    <string id="OrangeLightTricolor">Orange/Black (Light) - Tricolor</string>
+    <!-- Purple themes -->
+    <string id="PurpleDarkColorful">Purple (Dark) - Colorful</string>
+    <string id="PurpleDarkBicolor">Purple (Dark) - Bicolor</string>
+    <string id="PurpleDarkTricolor">Purple/White (Dark) - Tricolor</string>
+    <string id="PurpleLightColorful">Purple (Light) - Colorful</string>
+    <string id="PurpleLightBicolor">Purple (Light) - Bicolor</string>
+    <string id="PurpleLightTricolor">Purple/Black (Light) - Tricolor</string>
+    <!-- Pink themes -->
+    <string id="PinkDarkColorful">Pink (Dark) - Colorful</string>
+    <string id="PinkDarkBicolor">Pink (Dark) - Bicolor</string>
+    <string id="PinkDarkTricolor">Pink/White (Dark) - Tricolor</string>
+    <string id="PinkLightColorful">Pink (Light) - Colorful</string>
+    <string id="PinkLightBicolor">Pink (Light) - Bicolor</string>
+    <string id="PinkLightTricolor">Pink/Black (Light) - Tricolor</string>
 
+    
     <string id="MilitaryFormatTitle">Military Format for 24 Hour Time</string>
     <string id="UpdateSecondInLowPowerModeTitle">Updating Second in Low Power Mode (consume more battery)</string>
 
