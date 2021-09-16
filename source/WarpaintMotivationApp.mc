@@ -38,7 +38,8 @@ var totalCaloriesGoal as Number;
 var motivationalQuote as String;
 var motivationalQuoteProperty as String;
 var motivationalQuoteChangeInterval as Number;
-var motivationalQuoteArray = [];
+var motivationalQuoteArray = [null];
+//var motivationalQuoteArray = new String[10];
 var firstLineWidthPercent as Number;
 var secondLineWidthPercent as Number;
 var thirdLineWidthPercent as Number;
@@ -211,6 +212,8 @@ class WarpaintMotivationApp extends Application.AppBase {
             thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
 
             motivationalQuote = Storage.getValue("MotivationalQuote");
+            Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
+            Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 		} else {
 		    theme = getApp().getProperty("Theme");
 
@@ -234,6 +237,8 @@ class WarpaintMotivationApp extends Application.AppBase {
             thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
 
             motivationalQuote = getApp().getProperty("MotivationalQuote");
+            getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
+            getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 		}
     }
 

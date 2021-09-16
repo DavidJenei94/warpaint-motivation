@@ -8,9 +8,9 @@ import Toybox.Math;
 class MotivationField extends WatchUi.Text {
 
 	static private var hardcodedMotivationalQuotes = [
-		"Go hard or go home! test1",
-		"Go hard or go home! test2",
-		"Go hard or go home! test3"
+		"Go hard or|go home!|test1test1test1",
+		"Go hard or|go home!|testest2test2t2",
+		"Go hard or|go home!|test3test3"
 	];
 	
 	//! Constructor
@@ -150,9 +150,9 @@ class MotivationField extends WatchUi.Text {
 			if (!(Toybox has :Background)) {
 				motivation = MotivationField.getRandomHardcodedMotivationalQuote();
 			} else {
-				if (motivationalQuoteArray.size() != 0) {
+				if (motivationalQuoteArray != null && motivationalQuoteArray.size() != 0) {
 					motivation = motivationalQuoteArray[motivationalQuoteArray.size() - 1];
-        			motivationalQuoteArray = motivationalQuoteArray.slice(0, motivationalQuoteArray.size() - 1);
+					motivationalQuoteArray = motivationalQuoteArray.slice(0, motivationalQuoteArray.size() - 1);
 					if (Toybox.Application has :Storage) {
 						Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
 						Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
@@ -160,7 +160,7 @@ class MotivationField extends WatchUi.Text {
 						getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
 						getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 					}
-				} 
+				}
 
 				if (motivation == null) {
 					motivation = MotivationField.getRandomHardcodedMotivationalQuote();
