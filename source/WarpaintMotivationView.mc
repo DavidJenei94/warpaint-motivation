@@ -226,394 +226,128 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
     //! Set forground and backgorund colors for themes
     function selectThemeColors() as Void {
-		var unfilledDataBarBaseColor = Graphics.COLOR_DK_GRAY;
     	switch (theme) {
     		case THEME_WHITE_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_WHITE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
-			case THEME_WHITE_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_WHITE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;			
+			case THEME_WHITE_DARK_BICOLOR:		
     		case THEME_WHITE_DARK_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_WHITE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_DK_GRAY;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
     			break;
     		case THEME_BLACK_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_BLACK;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_BLACK_LIGHT_BIICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_BLACK;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;	
 			case THEME_BLACK_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_BLACK;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_DK_GRAY;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
     			break;
     		case THEME_GRAY_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_LT_GRAY;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_GRAY_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_LT_GRAY;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_GRAY_DARK_TRICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_LT_GRAY;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_LT_GRAY;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
     		case THEME_GRAY_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_LT_GRAY;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_GRAY_LIGHT_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_LT_GRAY;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_GRAY_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_LT_GRAY;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_LT_GRAY;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
     			break;
     		case THEME_RED_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_RED;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
-			case THEME_RED_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_RED;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;				
+			case THEME_RED_DARK_BICOLOR:			
     		case THEME_RED_DARK_TRICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_RED;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_WHITE;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_WHITE);
-    			break;
     		case THEME_RED_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_RED;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_RED_LIGHT_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_RED;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_RED_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_RED;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_BLACK;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_BLACK);
     			break;
     		case THEME_BLUE_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_BLUE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_BLUE_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_BLUE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_BLUE_DARK_TRICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_BLUE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_WHITE;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_WHITE);
-    			break;
     		case THEME_BLUE_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_BLUE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_BLUE_LIGHT_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_BLUE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_BLUE_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_BLUE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_BLACK;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_BLACK);
     			break;
     		case THEME_GREEN_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_GREEN;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_GREEN_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_GREEN;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_GREEN_DARK_TRICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_GREEN;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_WHITE;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_WHITE);
-    			break;
     		case THEME_GREEN_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_GREEN;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_GREEN_LIGHT_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_GREEN;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_GREEN_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_GREEN;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_BLACK;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_BLACK);
     			break;
 			case THEME_YELLOW_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_YELLOW;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_YELLOW_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_YELLOW;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_YELLOW_DARK_TRICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_YELLOW;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_WHITE;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_WHITE);
-    			break;
     		case THEME_YELLOW_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_YELLOW;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_YELLOW_LIGHT_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_YELLOW;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_YELLOW_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_YELLOW;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_BLACK;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_BLACK);
     			break;
 			case THEME_ORANGE_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_ORANGE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_ORANGE_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_ORANGE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_ORANGE_DARK_TRICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_ORANGE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_WHITE;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_WHITE);
-    			break;
     		case THEME_ORANGE_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_ORANGE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_ORANGE_LIGHT_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_ORANGE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_ORANGE_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_ORANGE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_BLACK;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_BLACK);
     			break;
 			case THEME_PURPLE_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_PURPLE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_PURPLE_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_PURPLE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_PURPLE_DARK_TRICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_PURPLE;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_WHITE;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_WHITE);
-    			break;
     		case THEME_PURPLE_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_PURPLE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_PURPLE_LIGHT_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_PURPLE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_PURPLE_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_PURPLE;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_BLACK;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_BLACK);
     			break;
 			case THEME_PINK_DARK_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_PINK;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_PINK_DARK_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_PINK;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_PINK_DARK_TRICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_PINK;
-    			backgroundColor = Graphics.COLOR_BLACK;
-				foregroundTriColor = Graphics.COLOR_WHITE;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_WHITE);
-    			break;
     		case THEME_PINK_LIGHT_COLORFUL:
-				isColorful = true;
-    			foregroundColor = Graphics.COLOR_PINK;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(unfilledDataBarBaseColor);
-    			break;
 			case THEME_PINK_LIGHT_BICOLOR:
-				isColorful = false;
-    			foregroundColor = Graphics.COLOR_PINK;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = foregroundColor;
-				unfilledDataBarColor = selectUnfilledDataBarColor(backgroundColor);
-				break;
     		case THEME_PINK_LIGHT_TRICOLOR:
-				isColorful = false;
     			foregroundColor = Graphics.COLOR_PINK;
-    			backgroundColor = Graphics.COLOR_WHITE;
-				foregroundTriColor = Graphics.COLOR_BLACK;
-				unfilledDataBarColor = selectUnfilledDataBarColor(Graphics.COLOR_BLACK);
     			break;
     	}
+
+		// Themes have a tendency where there are 3 dark and 3 light themes
+		// Also A colorful is followed by a bicolor and a tricolor
+		// The white, black and gray themes a bit different
+		isColorful = theme % 3 == 0 ? true : false;
+		backgroundColor = theme % 6 >= 0 && theme % 6 <= 2 ? Graphics.COLOR_BLACK : Graphics.COLOR_WHITE;
+		unfilledDataBarColor = selectUnfilledDataBarColor();
+		foregroundTriColor = selectForegroundTriColor();
     }  
 
 	//! Select the unfilled data bar color according to the Settings
-	//! @param color the color of the unfilled data bar if not the background color
 	//! @return final color of the unfilled data bar
-	private function selectUnfilledDataBarColor(color as Number) as Number {
-		return unfilledDataBarAsBGColor ? backgroundColor : color;
+	private function selectUnfilledDataBarColor() as Number {
+		var dataBarColor = 0;
+		if (theme % 3 == 0 || theme == THEME_WHITE_DARK_TRICOLOR || theme == THEME_BLACK_LIGHT_TRICOLOR || 
+			theme == THEME_GRAY_DARK_TRICOLOR || theme == THEME_GRAY_LIGHT_TRICOLOR) {
+			dataBarColor = unfilledDataBarAsBGColor ? backgroundColor : Graphics.COLOR_DK_GRAY;
+		} else if (theme % 3 == 1) {
+			dataBarColor = backgroundColor;
+		} else if (theme % 3 == 2) {
+			if (unfilledDataBarAsBGColor) {
+				dataBarColor = backgroundColor;
+			} else {
+				dataBarColor = theme % 6 == 2 ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
+			}
+		}
+		return dataBarColor;
+	}
+
+	//! Select the tricolor (3rd color) for tricolor themes 
+	//! @return final tricolor
+	private function selectForegroundTriColor() as Number {
+		var triColor = 0;
+		if (theme % 3 == 0 || theme % 3 == 1) {
+			triColor = foregroundColor;
+		} else {
+			if (theme == THEME_WHITE_DARK_TRICOLOR || theme == THEME_BLACK_LIGHT_TRICOLOR) {
+				triColor = Graphics.COLOR_DK_GRAY;
+			} else if (theme == THEME_GRAY_DARK_TRICOLOR || theme == THEME_GRAY_LIGHT_TRICOLOR) {
+				triColor = Graphics.COLOR_LT_GRAY;
+			} else {
+				triColor = theme % 6 == 2 ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
+			}
+		}
+
+		return triColor;
 	}
 
 }
