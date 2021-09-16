@@ -47,6 +47,7 @@ var thirdLineWidthPercent as Number;
 var locationLat = null;
 var locationLng = null;
 
+// Themes enum
 enum { 
     THEME_WHITE_DARK_COLORFUL,
     THEME_WHITE_DARK_BICOLOR,
@@ -168,6 +169,14 @@ class WarpaintMotivationApp extends Application.AppBase {
 			motivationalQuoteArray.add(apiData);
 		}
 
+        if (Toybox.Application has :Storage) {
+            Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
+            Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
+        } else {
+            getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
+            getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
+        }
+
 		WatchUi.requestUpdate();
 	}
 	
@@ -201,10 +210,7 @@ class WarpaintMotivationApp extends Application.AppBase {
             secondLineWidthPercent = Properties.getValue("SecondMotivationLineWidthPercent");
             thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
 
-            //Does not work. Issue in Motivationfield.mc
             motivationalQuote = Storage.getValue("MotivationalQuote");
-
-            Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 		} else {
 		    theme = getApp().getProperty("Theme");
 
@@ -228,8 +234,6 @@ class WarpaintMotivationApp extends Application.AppBase {
             thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
 
             motivationalQuote = getApp().getProperty("MotivationalQuote");
-
-            getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 		}
     }
 

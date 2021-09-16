@@ -164,7 +164,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				_splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
 				_isMotivationalQuoteSet = true;
 			}
-			if (_isMotivationalQuoteSet && remainder == 1) {
+			if (_isMotivationalQuoteSet && remainder != 0) {
+				// Change back to false after the minute to prevent updating through every second (if not in low power mode)
 				_isMotivationalQuoteSet = false;
 			}
 			viewDrawables[:topMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[0]);

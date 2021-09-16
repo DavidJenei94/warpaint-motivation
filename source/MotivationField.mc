@@ -8,9 +8,9 @@ import Toybox.Math;
 class MotivationField extends WatchUi.Text {
 
 	static private var hardcodedMotivationalQuotes = [
-		"Go hard or go home!",
-		"Be the best you can be!",
-		"Yesterday you said tomorrow"
+		"Go hard or go home! test1",
+		"Go hard or go home! test2",
+		"Go hard or go home! test3"
 	];
 	
 	//! Constructor
@@ -139,6 +139,12 @@ class MotivationField extends WatchUi.Text {
 
 	//! Set the motivational Quote
 	static function setMotivationalQuote() as Void {
+		if (Toybox.Application has :Storage) {
+            motivationalQuoteArray = Storage.getValue("MotivationalQuoteArray");
+        } else {
+            motivationalQuoteArray = getApp().getProperty("MotivationalQuoteArray");
+        }
+		
 		var motivation = null;
 		if (motivationalQuoteProperty.equals("")) {
 			if (!(Toybox has :Background)) {
@@ -148,8 +154,10 @@ class MotivationField extends WatchUi.Text {
 					motivation = motivationalQuoteArray[motivationalQuoteArray.size() - 1];
         			motivationalQuoteArray = motivationalQuoteArray.slice(0, motivationalQuoteArray.size() - 1);
 					if (Toybox.Application has :Storage) {
+						Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
 						Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 					} else {
+						getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
 						getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
 					}
 				} 
@@ -164,14 +172,14 @@ class MotivationField extends WatchUi.Text {
 
 		motivationalQuote = motivation;
 
-		// Does not work:
+		// Did not work before for some reason??? :
 		// Same issue as https://forums.garmin.com/developer/connect-iq/i/bug-reports/strange-symbol-not-found-error
 		// Save last used motivational quote in case app is restarted
-		/*if (Toybox.Application has :Storage) {
+		if (Toybox.Application has :Storage) {
 			Storage.setValue("MotivationalQuote", motivation);
 		} else {
 			getApp().setProperty("MotivationalQuote", motivation);
-		}*/
+		}
 	}
 
 	//! Get a random user defined motivational quote

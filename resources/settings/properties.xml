@@ -1,6 +1,6 @@
 <properties>
 
-	<property id="Theme" type="number">0</property>
+	<property id="Theme" type="number">14</property>
 
     <property id="UseMilitaryFormat" type="boolean">false</property>
     <property id="UpdateSecondInLowPowerMode" type="boolean">false</property>
@@ -9,16 +9,16 @@
 
     <property id="DataBarWidth" type="number">6</property>
     
-    <property id="DataFieldMiddle" type="number">0</property>
+    <property id="DataFieldMiddle" type="number">4</property>
     <property id="DataFieldLeft" type="number">2</property>
-    <property id="DataFieldRight" type="number">5</property>
+    <property id="DataFieldRight" type="number">7</property>
 
-    <property id="UnfilledDataBar" type="boolean">false</property>
+    <property id="UnfilledDataBar" type="boolean">true</property>
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
 
     <property id="MotivationalQuoteProperty" type="string"></property>
-    <property id="MotivationalQuoteChangeInterval" type="number">30</property>
+    <property id="MotivationalQuoteChangeInterval" type="number">15</property>
     <property id="FirstMotivationLineWidthPercent" type="float">0.78</property>
     <property id="SecondMotivationLineWidthPercent" type="float">0.67</property>
     <property id="ThirdMotivationLineWidthPercent" type="float">0.47</property>
