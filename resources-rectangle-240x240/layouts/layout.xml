@@ -1,0 +1,73 @@
+<resources>
+	<layout id="WatchFace">
+		<drawable class="Background" />
+
+		<drawable class="Time" id="TimeLabel">
+			<param name="locX">center</param>
+			<param name="locY">center</param>
+			<param name="font">largeFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="Date" id="DateLabel">
+			<param name="locX">center</param>
+			<param name="locY">dc.getHeight() * 0.33</param>
+			<param name="font">smallFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+
+		<drawable class="DataField" id="DataFieldMiddle">
+			<param name="locX">dc.getWidth() * 0.5</param>
+			<param name="locY">dc.getHeight() * 0.12</param>
+			<param name="font">mediumFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="DataField" id="DataFieldLeft">
+			<param name="locX">dc.getWidth() * 0.30</param>
+			<param name="locY">dc.getHeight() * 0.24</param>
+			<param name="font">mediumFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="DataField" id="DataFieldRight">
+			<param name="locX">dc.getWidth() * 0.70</param>
+			<param name="locY">dc.getHeight() * 0.24</param>
+			<param name="font">mediumFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+
+		<drawable class="MotivationField" id="MotivationFieldTop">
+			<param name="locX">center</param>
+			<param name="locY">dc.getHeight() * 0.66</param>
+			<param name="font">smallFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>	
+		<drawable class="MotivationField" id="MotivationFieldMiddle">
+			<param name="locX">center</param>
+			<param name="locY">dc.getHeight() * 0.75</param>
+			<param name="font">smallFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="MotivationField" id="MotivationFieldBottom">
+			<param name="locX">center</param>
+			<param name="locY">dc.getHeight() * 0.84</param>
+			<param name="font">smallFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+	</layout>
+
+	<!-- Used for AMOLED watches when not awake -->
+	<layout id="AlwaysOn">
+		<drawable class="Time" id="AlwaysOnTimeLabelTopLabel">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.34</param>
+			<param name="font">largeFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+
+		<drawable class="Time" id="AlwaysOnTimeLabelBottomLabel">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.63</param>
+			<param name="font">largeFont</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+	</layout>
+</resources>

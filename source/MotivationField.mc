@@ -8,9 +8,9 @@ import Toybox.Math;
 class MotivationField extends WatchUi.Text {
 
 	static private var hardcodedMotivationalQuotes = [
-		"Go hard or|go home!|test1test1test1",
-		"Go hard or|go home!|testest2test2t2",
-		"Go hard or|go home!|test3test3"
+		"Go hard or|go home!|test1 test1",
+		"Go hard or|go home!|test2 test2",
+		"Go hard or|go home!|test3 test3"
 	];
 	
 	//! Constructor

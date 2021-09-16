@@ -35,18 +35,7 @@ class DataBar {
     	if (actualValue != 0) {
 			// Draw data bar and unfilled part
 			dc.setPenWidth(width);
-			if (side == DATABAR_INNER_RIGHT_BOTTOM && !isColorful) {
-				if (!unfilledDataBarAsBGColor) {
-					dc.setColor(foregroundColor, backgroundColor);
-				} else {
-					dc.setColor(foregroundTriColor, backgroundColor);
-				}
-				
-			} else if (side == DATABAR_OUTER_LEFT_TOP && !isColorful) {
-				dc.setColor(foregroundColor, backgroundColor);
-			} else {
-				dc.setColor(color, backgroundColor);
-			}
+			selectActualDataBarColor(dc, side, color);
 						
 			if (actualValue < maxValue) {
 				// draw actual value
@@ -141,6 +130,7 @@ class DataBar {
     	) {
 	    	// actual progress
 	        dc.setColor(color, backgroundColor);
+			selectActualDataBarColor(dc, side, color);
 	        dc.drawArc(
 	        	x, 
 	        	y, 
@@ -218,7 +208,7 @@ class DataBar {
     	if (screenHeight <= screenWidth) {
 	    	barWidth = dataBarWidth;
 			y = screenHeight - screenHeight * percentFilled;
-			barHeight = screenHeight - y;
+			barHeight = screenHeight - y + 1;
 	    		
 			if (side == DATABAR_INNER_RIGHT_BOTTOM) {
 	    		x = screenWidth - barWidth;
@@ -226,11 +216,11 @@ class DataBar {
 
 			unfilledBarX = x;
 			unfilledBarWidth = barWidth;
-			unfilledBarHeight = screenHeight - barHeight;
+			unfilledBarHeight = screenHeight - barHeight + 1;
     	} else {
     		// Currently at 2021.08.19 only the vivoactive HR
 	    	barHeight = dataBarWidth;
-			barWidth = screenWidth * percentFilled;
+			barWidth = screenWidth * percentFilled + 1;
 	    		
 			if (side == DATABAR_INNER_RIGHT_BOTTOM) {
 	    		y = screenHeight - barHeight;
@@ -238,12 +228,12 @@ class DataBar {
 
 			unfilledBarX = barWidth;
 			unfilledBarY = y;
-			unfilledBarWidth = screenWidth - barWidth;
+			unfilledBarWidth = screenWidth - barWidth + 1;
 			unfilledBarHeight = barHeight;
     	}
     	
 		// Fill data bar
-    	dc.setColor(color, backgroundColor);
+    	selectActualDataBarColor(dc, side, color);
     	dc.fillRectangle(x, y, barWidth, barHeight);
     	
 		// Fill the unfilled bar
@@ -252,4 +242,23 @@ class DataBar {
 			dc.fillRectangle(unfilledBarX, unfilledBarY, unfilledBarWidth, unfilledBarHeight);
 		}
     }
+
+	//! Select the databar color according to the theme and side
+	//! @param dc Device Content
+	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
+	//! @param color the color of the bar
+	private function selectActualDataBarColor(dc as DC, side as Integer, color as Number) as Void {
+		if (side == DATABAR_INNER_RIGHT_BOTTOM && !isColorful) {
+			if (!unfilledDataBarAsBGColor) {
+				dc.setColor(foregroundColor, backgroundColor);
+			} else {
+				dc.setColor(foregroundTriColor, backgroundColor);
+			}
+			
+		} else if (side == DATABAR_OUTER_LEFT_TOP && !isColorful) {
+			dc.setColor(foregroundColor, backgroundColor);
+		} else {
+			dc.setColor(color, backgroundColor);
+		}
+	}
 }
