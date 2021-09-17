@@ -190,7 +190,10 @@ class DataBar {
     		return;
     	}
 
-		var percentFilled = actualValue < maxValue ? (actualValue.toFloat() / maxValue) : 1; 
+		var percentFilled = actualValue < maxValue ? (actualValue.toFloat() / maxValue) : 1;
+
+		// An extra pixel is needed for some rectangle watches to prevent a pixel space
+		var extraPixel = actualValue.toDouble() == 0.0 ? 0 : 1;
     	
     	var x = 0;
     	var y = 0;
@@ -208,7 +211,7 @@ class DataBar {
     	if (screenHeight <= screenWidth) {
 	    	barWidth = dataBarWidth;
 			y = screenHeight - screenHeight * percentFilled;
-			barHeight = screenHeight - y + 1;
+			barHeight = screenHeight - y + extraPixel;
 	    		
 			if (side == DATABAR_INNER_RIGHT_BOTTOM) {
 	    		x = screenWidth - barWidth;
@@ -216,11 +219,11 @@ class DataBar {
 
 			unfilledBarX = x;
 			unfilledBarWidth = barWidth;
-			unfilledBarHeight = screenHeight - barHeight + 1;
+			unfilledBarHeight = screenHeight - barHeight + extraPixel;
     	} else {
     		// Currently at 2021.08.19 only the vivoactive HR
 	    	barHeight = dataBarWidth;
-			barWidth = screenWidth * percentFilled + 1;
+			barWidth = screenWidth * percentFilled + extraPixel;
 	    		
 			if (side == DATABAR_INNER_RIGHT_BOTTOM) {
 	    		y = screenHeight - barHeight;
@@ -228,7 +231,7 @@ class DataBar {
 
 			unfilledBarX = barWidth;
 			unfilledBarY = y;
-			unfilledBarWidth = screenWidth - barWidth + 1;
+			unfilledBarWidth = screenWidth - barWidth + extraPixel;
 			unfilledBarHeight = barHeight;
     	}
     	
