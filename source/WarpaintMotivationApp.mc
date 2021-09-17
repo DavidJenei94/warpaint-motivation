@@ -27,6 +27,7 @@ var unfilledDataBarAsBGColor as Boolean;
 var unfilledDataBarColor as Number;
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
+var sunriseSunsetDrawingEnabled as Boolean;
 
 var smallFont as Font;
 var mediumFont as Font;
@@ -39,7 +40,6 @@ var motivationalQuote as String;
 var motivationalQuoteProperty as String;
 var motivationalQuoteChangeInterval as Number;
 var motivationalQuoteArray = [];
-//var motivationalQuoteArray = new String[10];
 var firstLineWidthPercent as Number;
 var secondLineWidthPercent as Number;
 var thirdLineWidthPercent as Number;
@@ -193,56 +193,70 @@ class WarpaintMotivationApp extends Application.AppBase {
     //! Set global variables (fonts are in the View)
     private function setGlobalVariables() as Void {
     	if (Toybox.Application has :Storage) {
-		    theme = Properties.getValue("Theme");
-
-            updatingSecondsInLowPowerMode = Properties.getValue("UpdateSecondInLowPowerMode");
-            militaryFormat = Properties.getValue("UseMilitaryFormat");
-
-            dataBarWidth = Properties.getValue("DataBarWidth");
-            unfilledDataBarAsBGColor = Properties.getValue("UnfilledDataBar");
-            selectedValueForDataFieldMiddle = Properties.getValue("DataFieldMiddle");
-			selectedValueForDataFieldLeft = Properties.getValue("DataFieldLeft");
-			selectedValueForDataFieldRight = Properties.getValue("DataFieldRight");
-            selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
-			selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
-
-            totalCaloriesGoal = Properties.getValue("CaloriesGoal");
-
-            motivationalQuoteProperty = Properties.getValue("MotivationalQuoteProperty");
-            motivationalQuoteChangeInterval = Properties.getValue("MotivationalQuoteChangeInterval");
-            firstLineWidthPercent = Properties.getValue("FirstMotivationLineWidthPercent");
-            secondLineWidthPercent = Properties.getValue("SecondMotivationLineWidthPercent");
-            thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
-
-            motivationalQuote = Storage.getValue("MotivationalQuote");
-            Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
-            Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
+            setGlobalVariablesWithStorage();
 		} else {
-		    theme = getApp().getProperty("Theme");
-
-            updatingSecondsInLowPowerMode = getApp().getProperty("UpdateSecondInLowPowerMode");
-            militaryFormat = getApp().getProperty("UseMilitaryFormat");
-
-            dataBarWidth = getApp().getProperty("DataBarWidth");
-            unfilledDataBarAsBGColor = getApp().getProperty("UnfilledDataBar");
-		    selectedValueForDataFieldMiddle = getApp().getProperty("DataFieldMiddle");
-			selectedValueForDataFieldLeft = getApp().getProperty("DataFieldLeft");
-			selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");
-            selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
-			selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
-
-            totalCaloriesGoal = getApp().getProperty("CaloriesGoal");
-
-            motivationalQuoteProperty = getApp().getProperty("MotivationalQuoteProperty");
-            motivationalQuoteChangeInterval = getApp().getProperty("MotivationalQuoteChangeInterval");
-            firstLineWidthPercent = getApp().getProperty("FirstMotivationLineWidthPercent");
-            secondLineWidthPercent = getApp().getProperty("SecondMotivationLineWidthPercent");
-            thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
-
-            motivationalQuote = getApp().getProperty("MotivationalQuote");
-            getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
-            getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
+            setGlobalVariablesWithoutStorage();
 		}
+    }
+
+    //! Set global variables with storage enabled
+    (:has_storage)
+    private function setGlobalVariablesWithStorage() as void {
+        theme = Properties.getValue("Theme");
+
+        updatingSecondsInLowPowerMode = Properties.getValue("UpdateSecondInLowPowerMode");
+        militaryFormat = Properties.getValue("UseMilitaryFormat");
+
+        dataBarWidth = Properties.getValue("DataBarWidth");
+        unfilledDataBarAsBGColor = Properties.getValue("UnfilledDataBar");
+        selectedValueForDataFieldMiddle = Properties.getValue("DataFieldMiddle");
+        selectedValueForDataFieldLeft = Properties.getValue("DataFieldLeft");
+        selectedValueForDataFieldRight = Properties.getValue("DataFieldRight");
+        selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
+        selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
+        sunriseSunsetDrawingEnabled = Properties.getValue("SunriseSunsetDrawing");
+
+        totalCaloriesGoal = Properties.getValue("CaloriesGoal");
+
+        motivationalQuoteProperty = Properties.getValue("MotivationalQuoteProperty");
+        motivationalQuoteChangeInterval = Properties.getValue("MotivationalQuoteChangeInterval");
+        firstLineWidthPercent = Properties.getValue("FirstMotivationLineWidthPercent");
+        secondLineWidthPercent = Properties.getValue("SecondMotivationLineWidthPercent");
+        thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
+
+        motivationalQuote = Storage.getValue("MotivationalQuote");
+        Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
+        Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
+    }
+
+    //! Set global variables without storage enabled
+    (:has_no_storage)
+    private function setGlobalVariablesWithoutStorage() as void {
+        theme = getApp().getProperty("Theme");
+
+        updatingSecondsInLowPowerMode = getApp().getProperty("UpdateSecondInLowPowerMode");
+        militaryFormat = getApp().getProperty("UseMilitaryFormat");
+
+        dataBarWidth = getApp().getProperty("DataBarWidth");
+        unfilledDataBarAsBGColor = getApp().getProperty("UnfilledDataBar");
+        selectedValueForDataFieldMiddle = getApp().getProperty("DataFieldMiddle");
+        selectedValueForDataFieldLeft = getApp().getProperty("DataFieldLeft");
+        selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");
+        selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
+        selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
+        sunriseSunsetDrawingEnabled = getApp().getProperty("SunriseSunsetDrawing");
+
+        totalCaloriesGoal = getApp().getProperty("CaloriesGoal");
+
+        motivationalQuoteProperty = getApp().getProperty("MotivationalQuoteProperty");
+        motivationalQuoteChangeInterval = getApp().getProperty("MotivationalQuoteChangeInterval");
+        firstLineWidthPercent = getApp().getProperty("FirstMotivationLineWidthPercent");
+        secondLineWidthPercent = getApp().getProperty("SecondMotivationLineWidthPercent");
+        thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
+
+        motivationalQuote = getApp().getProperty("MotivationalQuote");
+        getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
+        getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
     }
 
 }
