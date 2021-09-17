@@ -38,7 +38,7 @@ var totalCaloriesGoal as Number;
 var motivationalQuote as String;
 var motivationalQuoteProperty as String;
 var motivationalQuoteChangeInterval as Number;
-var motivationalQuoteArray = [null];
+var motivationalQuoteArray = [];
 //var motivationalQuoteArray = new String[10];
 var firstLineWidthPercent as Number;
 var secondLineWidthPercent as Number;
