@@ -156,7 +156,12 @@ class WarpaintMotivationApp extends Application.AppBase {
     function onSettingsChanged() as Void {
         setGlobalVariables();
         myView.selectThemeColors();
-        myView.loadFonts();    
+        myView.loadFonts();
+        // Change motivational quote when settings are changed 
+        // with set the motivationalQuote to be null 
+        // and forcing to set new motivational quote in View
+        motivationalQuote = null;
+
         WatchUi.requestUpdate();
     }
 
