@@ -184,6 +184,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
     //! Handle the partial update event - Draw seconds every second
     //! @param dc Device context
+	(:partial_update)
     public function onPartialUpdate(dc as Dc) as Void {
 		if (updatingSecondsInLowPowerMode) {
 	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc);

@@ -8,17 +8,26 @@ round.excludeAnnotations = $(round.excludeAnnotations);semiroundShape;rectangleS
 semiround.excludeAnnotations = $(semiround.excludeAnnotations);roundShape;rectangleShape
 rectangle.excludeAnnotations = $(rectangle.excludeAnnotations);roundShape;semiroundShape
 
-# Exclude background annotation on devices CIQ 1.x (background_method) + weather + has_storage
+
+# Excluded watch faces right now:
+# epix - old product
+# fr45 - 8 colors, low memory (48 kb)
+# garminswim2 - 8 colors, low memory (48 kb)
+# fr55 - 8 colors (no gray or orange)
+
+
+# Exclude background annotation on devices CIQ 1.x (background_method) 
+# + weather + has_storage + partial_update
 # Exclude everything that does not necessary - for more optimization in memory
-d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather;has_storage
-d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather;has_storage
-fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather;has_storage
-fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather;has_storage
-fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather;has_storage
-fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather;has_storage
-fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather;has_storage
-fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage
-vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage
+d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather;has_storage;partial_update
+d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather;has_storage;partial_update
+fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather;has_storage;partial_update
+fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather;has_storage;partial_update
+fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather;has_storage;partial_update
+fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather;has_storage;partial_update
+fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather;has_storage;partial_update
+fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update
+vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update
 
 # Exclude weather annotation on devices lower than CIQ 3.2.0 too
 # 2.4.0
