@@ -16,7 +16,7 @@ class Data {
 
 	private var _sunriseSunset as SunriseSunset;
 	
-	private var _errorDisplay = "-";
+	private var _errorDisplay = "--";
 	
 	//! Constructor
     function initialize() {
