@@ -9,11 +9,13 @@ import Toybox.Communications;
 class BackgroundService extends System.ServiceDelegate {
 	
 	//! Constructor
+	(:background_method)
 	function initialize() {
 		System.ServiceDelegate.initialize();
 	}
 	
 	//! Get a motivational quote by temporal event
+	(:background_method)
 	function onTemporalEvent() as Void {
 		System.println("onTemporalEvent");
 
@@ -46,6 +48,9 @@ class BackgroundService extends System.ServiceDelegate {
 	}
 	
 	//! Called by temporal event which send the data to the app
+	//! @param responseCode the response code of the web request
+	//! @param data the data from the web request
+	(:background_method)
 	function recieveMotivationalQuote(responseCode, data) as Void {
 		// HTTP failure: return responseCode.
 		// Otherwise, return data response.

@@ -1,0 +1,6 @@
+<properties>
+
+    <!-- Calories instead of floors climbed -->
+    <property id="DataFieldRight" type="number">3</property>
+
+</properties>

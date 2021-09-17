@@ -161,6 +161,8 @@ class WarpaintMotivationApp extends Application.AppBase {
     }
 
     //! Set the motivational quote
+    //! @param data the data from the web request
+    (:background_method)
     function onBackgroundData(data) as Void {
 		var apiData = data["motivationalQuote"];
         if (apiData instanceof Array) {
@@ -183,6 +185,7 @@ class WarpaintMotivationApp extends Application.AppBase {
 	
     //! Get Service Delegate
     //! @return new ServiceDelegate for backkground service
+    (:background_method)
 	function getServiceDelegate() as Array<ServiceDelegate> {
 		return [new BackgroundService()];
 	}

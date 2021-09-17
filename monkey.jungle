@@ -7,3 +7,56 @@ base.sourcePath = source
 round.excludeAnnotations = $(round.excludeAnnotations);semiroundShape;rectangleShape
 semiround.excludeAnnotations = $(semiround.excludeAnnotations);roundShape;rectangleShape
 rectangle.excludeAnnotations = $(rectangle.excludeAnnotations);roundShape;semiroundShape
+
+# Exclude background annotation on devices CIQ 1.x (background_method) + weather
+d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather
+d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather
+fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather
+fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather
+fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather
+fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather
+fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather
+fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather
+vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather
+
+# Exclude weather annotation on devices lower than CIQ 3.2.0 too
+# 2.4.0
+approachs60.excludeAnnotations = $(approachs60.excludeAnnotations);weather
+fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);weather
+vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);weather
+# 3.0.0
+approachs62.excludeAnnotations = $(approachs62.excludeAnnotations);weather
+d2charlie.excludeAnnotations = $(d2charlie.excludeAnnotations);weather
+descentmk1.excludeAnnotations = $(descentmk1.excludeAnnotations);weather
+vivoactive3d.excludeAnnotations = $(vivoactive3d.excludeAnnotations);weather
+# 3.1.0
+d2delta.excludeAnnotations = $(d2delta.excludeAnnotations);weather
+d2deltapx.excludeAnnotations = $(d2deltapx.excludeAnnotations);weather
+d2deltas.excludeAnnotations = $(d2deltas.excludeAnnotations);weather
+fenix5.excludeAnnotations = $(fenix5.excludeAnnotations);weather
+fenix5s.excludeAnnotations = $(fenix5s.excludeAnnotations);weather
+fenix5x.excludeAnnotations = $(fenix5x.excludeAnnotations);weather
+fenixchronos.excludeAnnotations = $(fenixchronos.excludeAnnotations);weather
+fr645.excludeAnnotations = $(fr645.excludeAnnotations);weather
+fr935.excludeAnnotations = $(fr935.excludeAnnotations);weather
+vivoactive3.excludeAnnotations = $(vivoactive3.excludeAnnotations);weather
+vivoactive3mlte.excludeAnnotations = $(vivoactive3mlte.excludeAnnotations);weather
+
+
+# CIQ 1.x watches have No Floors or Active Minutes support
+# Some of them have no HR support either
+d2bravo.resourcePath = $(d2bravo.resourcePath);resources-ciq_1.x-no_hr
+d2bravo_titanium.resourcePath = $(d2bravo_titanium.resourcePath);resources-ciq_1.x
+fenix3.resourcePath = $(fenix3.resourcePath);resources-ciq_1.x-no_hr
+fenix3_hr.resourcePath = $(fenix3_hr.resourcePath);resources-ciq_1.x
+fr230.resourcePath = $(fr230.resourcePath);resources-ciq_1.x-no_hr
+fr235.resourcePath = $(fr235.resourcePath);resources-ciq_1.x
+fr630.resourcePath = $(fr630.resourcePath);resources-ciq_1.x-no_hr
+fr920xt.resourcePath = $(fr920xt.resourcePath);resources-ciq_1.x-no_hr
+vivoactive.resourcePath = $(vivoactive.resourcePath);resources-ciq_1.x-no_hr
+
+
+#NOT READY YET
+# #122: fr245/fr245m are CIQ 3.x, but do not support floors climbed.
+#fr245.resourcePath = $(fr245.resourcePath);resources-no_floors
+#fr245m.resourcePath = $(fr245m.resourcePath);resources-no_floors

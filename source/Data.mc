@@ -269,6 +269,7 @@ class Data {
     // API 3.2.0
 	//! get current temperature and condition
     //! @return array of temperature according to device settings and condition for icon
+	(:weather)
     private function getCurrentWeather() as Array<Number or String> {
     	if (Application has :Weather) {
     		var currentCondition = Weather.getCurrentConditions();
@@ -294,6 +295,7 @@ class Data {
 	//! Get weather icon
 	//! @param condition current weather condition
 	//! return icon Text (a letter) for current icon
+	(:weather)
 	private function getWeatherIcon(condition) {
     	var iconText = "";
     	switch (condition) {
