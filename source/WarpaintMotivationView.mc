@@ -339,10 +339,9 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		if (theme % 3 == 0 || theme % 3 == 1) {
 			triColor = foregroundColor;
 		} else {
-			if (theme == THEME_WHITE_DARK_TRICOLOR || theme == THEME_BLACK_LIGHT_TRICOLOR) {
+			if (theme == THEME_WHITE_DARK_TRICOLOR || theme == THEME_BLACK_LIGHT_TRICOLOR || 
+				theme == THEME_GRAY_DARK_TRICOLOR || theme == THEME_GRAY_LIGHT_TRICOLOR) {
 				triColor = Graphics.COLOR_DK_GRAY;
-			} else if (theme == THEME_GRAY_DARK_TRICOLOR || theme == THEME_GRAY_LIGHT_TRICOLOR) {
-				triColor = Graphics.COLOR_LT_GRAY;
 			} else {
 				triColor = theme % 6 == 2 ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
 			}

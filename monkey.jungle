@@ -53,7 +53,7 @@ vivoactive3.excludeAnnotations = $(vivoactive3.excludeAnnotations);weather
 vivoactive3mlte.excludeAnnotations = $(vivoactive3mlte.excludeAnnotations);weather
 
 
-# CIQ 1.x watches have No Floors or Active Minutes support
+# CIQ 1.x watches have No Floors, Active Minutes support and Weather
 # Some of them have no HR support either
 d2bravo.resourcePath = $(d2bravo.resourcePath);resources-ciq_1.x-no_hr
 d2bravo_titanium.resourcePath = $(d2bravo_titanium.resourcePath);resources-ciq_1.x
@@ -65,8 +65,30 @@ fr630.resourcePath = $(fr630.resourcePath);resources-ciq_1.x-no_hr
 fr920xt.resourcePath = $(fr920xt.resourcePath);resources-ciq_1.x-no_hr
 vivoactive.resourcePath = $(vivoactive.resourcePath);resources-ciq_1.x-no_hr
 
+# devices lower than CIQ 3.2.0 have no Weather
+# 2.4.0
+approachs60.resourcePath = $(approachs60.resourcePath);resources-no_weather
+fr735xt.resourcePath = $(fr735xt.resourcePath);resources-no_weather
+vivoactive_hr.resourcePath = $(vivoactive_hr.resourcePath);resources-no_weather
+# 3.0.0
+approachs62.resourcePath = $(approachs62.resourcePath);resources-no_weather
+d2charlie.resourcePath = $(d2charlie.resourcePath);resources-no_weather
+descentmk1.resourcePath = $(descentmk1.resourcePath);resources-no_weather
+vivoactive3d.resourcePath = $(vivoactive3d.resourcePath);resources-no_weather
+# 3.1.0
+d2delta.resourcePath = $(d2delta.resourcePath);resources-no_weather
+d2deltapx.resourcePath = $(d2deltapx.resourcePath);resources-no_weather
+d2deltas.resourcePath = $(d2deltas.resourcePath);resources-no_weather
+fenix5.resourcePath = $(fenix5.resourcePath);resources-no_weather
+fenix5s.resourcePath = $(fenix5s.resourcePath);resources-no_weather
+fenix5x.resourcePath = $(fenix5x.resourcePath);resources-no_weather
+fenixchronos.resourcePath = $(fenixchronos.resourcePath);resources-no_weather
+fr645.resourcePath = $(fr645.resourcePath);resources-no_weather
+fr935.resourcePath = $(fr935.resourcePath);resources-no_weather
+vivoactive3.resourcePath = $(vivoactive3.resourcePath);resources-no_weather
+vivoactive3mlte.resourcePath = $(vivoactive3mlte.resourcePath);resources-no_weather
 
-#NOT READY YET
-# #122: fr245/fr245m are CIQ 3.x, but do not support floors climbed.
-#fr245.resourcePath = $(fr245.resourcePath);resources-no_floors
-#fr245m.resourcePath = $(fr245m.resourcePath);resources-no_floors
+
+#  fr245/fr245m are CIQ 3.x, but do not support floors climbed.
+fr245.resourcePath = $(fr245.resourcePath);resources-fr245_m-no_floors
+fr245m.resourcePath = $(fr245m.resourcePath);resources-fr245_m-no_floors

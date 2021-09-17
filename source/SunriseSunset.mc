@@ -119,7 +119,7 @@ class SunriseSunset {
     	x = coordinates[0];
     	y = coordinates[1];
     	
-    	dc.fillCircle(x, y, dataBarWidth / 2 + 1);
+    	dc.fillCircle(x, y, (dataBarWidth + 1) / 2);
     }
     
 	//! Calculates sunrise and sunset values according to date/time and location

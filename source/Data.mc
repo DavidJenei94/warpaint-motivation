@@ -35,7 +35,7 @@ class Data {
 	//! Get the selected data in dataField or dataBar
 	//! @param selectedType selected data type
 	//! @return values dictionary with the data values and settings
-    function getDataForDataField(selectedType) {
+    function getDataForDataField(selectedType as Integer) {
 		var values = {
 			:currentData => 0,
 			:displayData => _errorDisplay,
@@ -45,85 +45,86 @@ class Data {
 			:barColor => foregroundColor
 		};
 
-		switch(selectedType) {
-			case DATA_STEPS:
-				var steps = getSteps();
-				values[:currentData] = steps[0];
-				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
-				values[:dataMaxValue] = steps[1];
-				values[:iconText] = "B";
-				values[:iconColor] = Graphics.COLOR_BLUE;
-				values[:barColor] = Graphics.COLOR_BLUE;
-				break;
-			case DATA_BATTERY:
-				var battery = getBatteryStat();
-				values[:currentData] = battery[0];
-				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toNumber().toString() + "%";
-				values[:dataMaxValue] = battery[1];
-				values[:iconText] = "D";
-				values[:iconColor] = Graphics.COLOR_YELLOW;
-				values[:barColor] = Graphics.COLOR_GREEN;
-				break;
-			case DATA_HEARTRATE:
-				var heartRate = getCurrentHeartRate();
-				values[:displayData] = heartRate == -1 ? _errorDisplay : heartRate.toString();				
-				values[:iconText] = "A";
-				values[:iconColor] = Graphics.COLOR_RED;
-				break;
-			case DATA_CALORIES:
-				var calories = getCalories();
-				values[:currentData] = calories[0];
-				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
-				values[:dataMaxValue] = calories[1];
-				values[:iconText] = "C";
-				values[:iconColor] = Graphics.COLOR_ORANGE;
-				values[:barColor] = Graphics.COLOR_ORANGE;
-				break;
-			case DATA_FLOORS_CLIMBED:
-				var floorsClimbed = getFloorsClimbed();
-				values[:currentData] = floorsClimbed[0];
-				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
-				values[:dataMaxValue] = floorsClimbed[1];
-				values[:iconText] = "G";
-				values[:iconColor] = Graphics.COLOR_PURPLE;
-				values[:barColor] = Graphics.COLOR_PURPLE;
-				break;
-			case DATA_ACTIVE_MINUTES_WEEK:
-				var activeMinutesWeek = getActiveMinutesWeek();
-				values[:currentData] = activeMinutesWeek[0];
-				values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
-				values[:dataMaxValue] = activeMinutesWeek[1];
-				values[:iconText] = "H";
-				values[:iconColor] = Graphics.COLOR_YELLOW;
-				values[:barColor] = Graphics.COLOR_YELLOW;
-				break;								
-			case DATA_DISTANCE:
-				var distance = getDistance();
-				values[:displayData] = distance[0] == -1 ? _errorDisplay : distance[0].toString() + distance[1];
-				values[:iconText] = "I";
-				values[:iconColor] = Graphics.COLOR_LT_GRAY;
-				break;	
-			case DATA_WEATHER:
-				var weather = getCurrentWeather();
-				values[:displayData] = weather[0] == -1 ? _errorDisplay : weather[0].toString() + "º";  //unicode 186, \u00BA : real degree icon: ° unicode 176;
-				values[:iconText] = weather[1];
-				values[:iconColor] = Graphics.COLOR_BLUE;
-				break;
-			case DATA_NOTIFICATION:
-				var notificationCount = getNotificationCount();
-				values[:displayData] = notificationCount == -1 ? _errorDisplay : notificationCount.toString();
-				values[:iconText] = "J";
-				values[:iconColor] = Graphics.COLOR_PINK;
-				break;				
-
-			case DATA_SUNRISE_SUNSET:
-				var nextSunriseSunset = getNextSunriseSunsetTime();
-				values[:displayData] = nextSunriseSunset[0] == -1 ? _errorDisplay : nextSunriseSunset[0];
-				values[:iconText] = nextSunriseSunset[1] ? "E" : "F";
-				values[:iconColor] = Graphics.COLOR_ORANGE;
-				break;						
+		if (selectedType != null) {
+			switch(selectedType) {
+				case DATA_STEPS:
+					var steps = getSteps();
+					values[:currentData] = steps[0];
+					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
+					values[:dataMaxValue] = steps[1];
+					values[:iconText] = "B";
+					values[:iconColor] = Graphics.COLOR_BLUE;
+					values[:barColor] = Graphics.COLOR_BLUE;
+					break;
+				case DATA_BATTERY:
+					var battery = getBatteryStat();
+					values[:currentData] = battery[0];
+					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toNumber().toString() + "%";
+					values[:dataMaxValue] = battery[1];
+					values[:iconText] = "D";
+					values[:iconColor] = Graphics.COLOR_YELLOW;
+					values[:barColor] = Graphics.COLOR_GREEN;
+					break;
+				case DATA_HEARTRATE:
+					var heartRate = getCurrentHeartRate();
+					values[:displayData] = heartRate == -1 ? _errorDisplay : heartRate.toString();				
+					values[:iconText] = "A";
+					values[:iconColor] = Graphics.COLOR_RED;
+					break;
+				case DATA_CALORIES:
+					var calories = getCalories();
+					values[:currentData] = calories[0];
+					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
+					values[:dataMaxValue] = calories[1];
+					values[:iconText] = "C";
+					values[:iconColor] = Graphics.COLOR_ORANGE;
+					values[:barColor] = Graphics.COLOR_ORANGE;
+					break;
+				case DATA_FLOORS_CLIMBED:
+					var floorsClimbed = getFloorsClimbed();
+					values[:currentData] = floorsClimbed[0];
+					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
+					values[:dataMaxValue] = floorsClimbed[1];
+					values[:iconText] = "G";
+					values[:iconColor] = Graphics.COLOR_PURPLE;
+					values[:barColor] = Graphics.COLOR_PURPLE;
+					break;
+				case DATA_ACTIVE_MINUTES_WEEK:
+					var activeMinutesWeek = getActiveMinutesWeek();
+					values[:currentData] = activeMinutesWeek[0];
+					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
+					values[:dataMaxValue] = activeMinutesWeek[1];
+					values[:iconText] = "H";
+					values[:iconColor] = Graphics.COLOR_YELLOW;
+					values[:barColor] = Graphics.COLOR_YELLOW;
+					break;								
+				case DATA_DISTANCE:
+					var distance = getDistance();
+					values[:displayData] = distance[0] == -1 ? _errorDisplay : distance[0].toString() + distance[1];
+					values[:iconText] = "I";
+					values[:iconColor] = Graphics.COLOR_LT_GRAY;
+					break;	
+				case DATA_WEATHER:
+					var weather = getCurrentWeather();
+					values[:displayData] = weather[0] == -1 ? _errorDisplay : weather[0].toString() + "º";  //unicode 186, \u00BA : real degree icon: ° unicode 176;
+					values[:iconText] = weather[1];
+					values[:iconColor] = Graphics.COLOR_BLUE;
+					break;
+				case DATA_NOTIFICATION:
+					var notificationCount = getNotificationCount();
+					values[:displayData] = notificationCount == -1 ? _errorDisplay : notificationCount.toString();
+					values[:iconText] = "J";
+					values[:iconColor] = Graphics.COLOR_PINK;
+					break;				
+				case DATA_SUNRISE_SUNSET:
+					var nextSunriseSunset = getNextSunriseSunsetTime();
+					values[:displayData] = nextSunriseSunset[0] == -1 ? _errorDisplay : nextSunriseSunset[0];
+					values[:iconText] = nextSunriseSunset[1] ? "E" : "F";
+					values[:iconColor] = Graphics.COLOR_ORANGE;
+					break;						
+			}
 		}
-		
+
 		return values;
 	}
     
