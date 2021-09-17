@@ -54,20 +54,4 @@
 		</drawable>
 	</layout>
 
-	<!-- Used for AMOLED watches when not awake -->
-	<layout id="AlwaysOn">
-		<drawable class="Time" id="AlwaysOnTimeLabelTopLabel">
-			<param name="locX">dc.getWidth() * 0.50</param>
-			<param name="locY">dc.getHeight() * 0.34</param>
-			<param name="font">largeFont</param>
-			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
-		</drawable>
-
-		<drawable class="Time" id="AlwaysOnTimeLabelBottomLabel">
-			<param name="locX">dc.getWidth() * 0.50</param>
-			<param name="locY">dc.getHeight() * 0.63</param>
-			<param name="font">largeFont</param>
-			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
-		</drawable>
-	</layout>
 </resources>

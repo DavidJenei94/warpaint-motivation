@@ -119,7 +119,7 @@ class SunriseSunset {
     	x = coordinates[0];
     	y = coordinates[1];
     	
-    	dc.fillCircle(x, y, dataBarWidth / 2);
+    	dc.fillCircle(x, y, dataBarWidth / 2 + 1);
     }
     
 	//! Calculates sunrise and sunset values according to date/time and location
@@ -193,7 +193,7 @@ class SunriseSunset {
     	
 		// Try out change in every dimension and select the one which is closest to the original distance
     	var c = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    	while (c < distance - 0.2 || c > distance + 0.2) {
+    	while (c < distance - 0.1 || c > distance + 0.1) {
     		changesDict = {
     			:noChangeEffect => (distance - c).abs(),
 			    :xPlusChangeEffect => (distance - Math.sqrt(Math.pow(x + 1, 2) + Math.pow(y, 2))).abs(),

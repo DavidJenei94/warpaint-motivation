@@ -15,6 +15,7 @@
     <property id="UnfilledDataBar" type="boolean">true</property>
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
+    <property id="SunriseSunsetDrawing" type="boolean">false</property>
 
     <property id="MotivationalQuoteProperty" type="string"></property>
     <property id="MotivationalQuoteChangeInterval" type="number">30</property>

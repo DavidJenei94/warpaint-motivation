@@ -54,7 +54,6 @@
 			<listEntry value="3">@Strings.Calories</listEntry>
 			<!--listEntry value="6">@Strings.FloorsClimbed</listEntry-->
 			<!--listEntry value="7">@Strings.ActiveMinutesWeek</listEntry-->
-			<listEntry value="4">@Strings.SunriseSunset</listEntry>
 		</settingConfig>
 	</setting>
 	<setting propertyKey="@Properties.DataBarInnerRightBottom" title="@Strings.DataBarInnerRightBottomTitle">

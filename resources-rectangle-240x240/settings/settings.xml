@@ -1,0 +1,7 @@
+<settings>
+
+	<setting propertyKey="@Properties.SunriseSunsetDrawing" title="@Strings.SunriseSunsetDrawingTitle">
+        <settingConfig type="boolean"  readonly="true"/>
+    </setting>
+	
+</settings>

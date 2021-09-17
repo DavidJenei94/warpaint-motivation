@@ -138,7 +138,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			
 			var screenShape = System.getDeviceSettings().screenShape;
 			if (screenShape == System.SCREEN_SHAPE_ROUND) {
-				if (selectedValueForDataBarOuterLeftTop == DATA_SUNRISE_SUNSET) {
+				if (sunriseSunsetDrawingEnabled) {
 					var sunsetSunrise = new SunriseSunset();
 					sunsetSunrise.drawSunriseSunsetArc(dc);
 				} else {
