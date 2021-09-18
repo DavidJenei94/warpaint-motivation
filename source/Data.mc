@@ -120,7 +120,7 @@ class Data {
 					var nextSunriseSunset = getNextSunriseSunsetTime();
 					values[:displayData] = nextSunriseSunset[0] == -1 ? _errorDisplay : nextSunriseSunset[0];
 					values[:iconText] = nextSunriseSunset[1] ? "E" : "F";
-					values[:iconColor] = Graphics.COLOR_ORANGE;
+					values[:iconColor] = Graphics.COLOR_YELLOW;
 					break;						
 			}
 		}
