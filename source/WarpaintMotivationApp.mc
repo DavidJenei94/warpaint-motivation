@@ -148,7 +148,10 @@ class WarpaintMotivationApp extends Application.AppBase {
     // Return the initial view of your application here
     function getInitialView() as Array<Views or InputDelegates>? {
     	myView = new WarpaintMotivationView();
-    	onSettingsChanged();
+        setGlobalVariables();
+        myView.selectThemeColors();
+        myView.loadFonts();
+        
         return [ myView ] as Array<Views or InputDelegates>;
     }
 
@@ -230,7 +233,12 @@ class WarpaintMotivationApp extends Application.AppBase {
         thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
 
         motivationalQuote = Storage.getValue("MotivationalQuote");
-        Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
+        var motivationalQuoteStoredArray = Storage.getValue("MotivationalQuoteArray");
+        if (motivationalQuoteStoredArray != null) {
+            Storage.setValue("MotivationalQuoteArray", motivationalQuoteStoredArray);
+        } else {
+            Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
+        }
         Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
     }
 
@@ -260,7 +268,12 @@ class WarpaintMotivationApp extends Application.AppBase {
         thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
 
         motivationalQuote = getApp().getProperty("MotivationalQuote");
-        getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
+        var motivationalQuoteStoredArray = Storage.getValue("MotivationalQuoteArray");
+        if (motivationalQuoteStoredArray != null) {
+            getApp().setProperty("MotivationalQuoteArray", motivationalQuoteStoredArray);
+        } else {
+            getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
+        }
         getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
     }
 
