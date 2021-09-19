@@ -8,9 +8,56 @@ import Toybox.Math;
 class MotivationField extends WatchUi.Text {
 
 	static private var hardcodedMotivationalQuotes = [
-		"Go hard or|go home!|test1 test1",
-		"Go hard or|go home!|test2 test2",
-		"Go hard or|go home!|test3 test3"
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST",
+		"GOHARDTESTGOHARDTESTGOHARDTEST"
 	];
 	
 	//! Constructor
@@ -106,8 +153,8 @@ class MotivationField extends WatchUi.Text {
 			    	motivationSecondPart = motivation.substring(firstMiddleSpaceIndex + 1, motivationLength);
 			    } else {
 					motivationFirstPart = motivation.substring(0, 10) + "...";
-					motivationSecondPart = "Too long word";
-					motivationThirdPart = "in text";
+					motivationSecondPart = "TOO LONG WORD";
+					motivationThirdPart = "IN TEXT";
 					break;
 			    }
 
@@ -121,8 +168,8 @@ class MotivationField extends WatchUi.Text {
 			secondSplitPart = (secondSplitPart * 100).toNumber();
 			if (firstSplitPart == secondSplitPart) {
 				motivationFirstPart = motivation.substring(0, 10) + "...";
-				motivationSecondPart = "Too long word";
-				motivationThirdPart = "in text";				
+				motivationSecondPart = "TOO LONG WORD";
+				motivationThirdPart = "IN TEXT";				
 			} else if (dc.getTextWidthInPixels(motivationThirdPart, smallFont) >= screenWidth * thirdLineWidthPercent) {
 				// too long motivational quote
 				motivationThirdPart = "...";
@@ -130,8 +177,8 @@ class MotivationField extends WatchUi.Text {
     	} else {
 			// too long motivational quote
 			motivationFirstPart = motivation.substring(0, 10) + "...";
-			motivationSecondPart = "Too long";
-			motivationThirdPart = "text";
+			motivationSecondPart = "TOO LONG";
+			motivationThirdPart = "TEXT";
   		}
     		
     	return [motivationFirstPart, motivationSecondPart, motivationThirdPart]; 

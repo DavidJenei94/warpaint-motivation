@@ -5,8 +5,8 @@ import Toybox.Time.Gregorian;
 // Extend text to set as drawable text
 class Date extends WatchUi.Text {
 	
-    private var _dayOfWeeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    private var _months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    private var _dayOfWeeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+    private var _months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 	
 	//! Constructor
 	//! @param params in the layout.xml the drawable object's param tags

@@ -84,7 +84,7 @@
     <string id="DataBarInnerRightBottomTitle">Inner/Right/Bottom DataBar</string>
     <string id="UnfilledDataBar">Unfilled databar color is the same as background</string>
 
-    <string id="MotivationalQuoteTitle">Motivational Quote (Leave empty for automatic)</string>
+    <string id="MotivationalQuoteTitle">Display your unique Motivational Quote (Letters only in UPPERCASE, leave empty for automatic selection)</string>
     <string id="MotivationalQuoteChangeIntervalTitle">Motivational Quote Change Interval</string>
     <string id="Min15">15 minutes</string>
     <string id="Min30">30 minutes</string>

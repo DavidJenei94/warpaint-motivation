@@ -22,7 +22,7 @@ In case of any issues please check the FAQ section below and the following sheet
 - Enable Military time format when the 24 hour option is selected.
 - Update every second also when in low power mode (does not work for AMOLED watches beacuse they require burn in protection).
 - Set a Calorie goal which will serve as the max value on the databar (If 0, an automated calculation will be done according to your activity level).
-- Set a uniqe motivational quote to display (use | character to indicate the row split, otherwise it is automatically splitted according the length and spaces).
+- Set a uniqe motivational quote to display (Characters need to be in UPPERCASE and beside letters and numbers the following characters are available: ' !"%&'()+,-./:;=?_º'. Use the | character to indicate the row split, otherwise it is automatically splitted according to length and spaces).
 - Set how frequent the motivational quote is changed (15 min/30 min/60 min/2 hours/3 hours/4 hours/8 hours/12 hours).
 - Data fields: Battery, Steps, Heart Rate, Calories, Sunrise/Sunset, Distance, Floors climbed, Active minutes, Weather, Notifications.
 - Databars: Battery, Steps, Calories, Floors climbed, Active minutes.

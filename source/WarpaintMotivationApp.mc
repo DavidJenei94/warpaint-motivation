@@ -268,7 +268,7 @@ class WarpaintMotivationApp extends Application.AppBase {
         thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
 
         motivationalQuote = getApp().getProperty("MotivationalQuote");
-        var motivationalQuoteStoredArray = Storage.getValue("MotivationalQuoteArray");
+        var motivationalQuoteStoredArray = getApp().getProperty("MotivationalQuoteArray");
         if (motivationalQuoteStoredArray != null) {
             getApp().setProperty("MotivationalQuoteArray", motivationalQuoteStoredArray);
         } else {

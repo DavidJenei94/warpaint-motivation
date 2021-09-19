@@ -92,3 +92,6 @@ vivoactive3mlte.resourcePath = $(vivoactive3mlte.resourcePath);resources-no_weat
 #  fr245/fr245m are CIQ 3.x, but do not support floors climbed.
 fr245.resourcePath = $(fr245.resourcePath);resources-fr245_m-no_floors
 fr245m.resourcePath = $(fr245m.resourcePath);resources-fr245_m-no_floors
+
+# fr735xt does not have enough memory, load the small font to the place of medium font
+fr735xt.resourcePath = $(fr735xt.resourcePath);resources-fr735xt
