@@ -227,82 +227,29 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
     //! Set forground and backgorund colors for themes
     function selectThemeColors() as Void {
-    	switch (theme) {
-    		case THEME_WHITE_DARK_COLORFUL:
-			case THEME_WHITE_DARK_BICOLOR:		
-    		case THEME_WHITE_DARK_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_WHITE;
-    			break;
-    		case THEME_BLACK_LIGHT_COLORFUL:
-			case THEME_BLACK_LIGHT_BIICOLOR:
-			case THEME_BLACK_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_BLACK;
-    			break;
-    		case THEME_GRAY_DARK_COLORFUL:
-			case THEME_GRAY_DARK_BICOLOR:
-    		case THEME_GRAY_DARK_TRICOLOR:
-    		case THEME_GRAY_LIGHT_COLORFUL:
-			case THEME_GRAY_LIGHT_BICOLOR:
-    		case THEME_GRAY_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_LT_GRAY;
-    			break;
-    		case THEME_RED_DARK_COLORFUL:
-			case THEME_RED_DARK_BICOLOR:			
-    		case THEME_RED_DARK_TRICOLOR:
-    		case THEME_RED_LIGHT_COLORFUL:
-			case THEME_RED_LIGHT_BICOLOR:
-    		case THEME_RED_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_RED;
-    			break;
-    		case THEME_BLUE_DARK_COLORFUL:
-			case THEME_BLUE_DARK_BICOLOR:
-    		case THEME_BLUE_DARK_TRICOLOR:
-    		case THEME_BLUE_LIGHT_COLORFUL:
-			case THEME_BLUE_LIGHT_BICOLOR:
-    		case THEME_BLUE_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_BLUE;
-    			break;
-    		case THEME_GREEN_DARK_COLORFUL:
-			case THEME_GREEN_DARK_BICOLOR:
-    		case THEME_GREEN_DARK_TRICOLOR:
-    		case THEME_GREEN_LIGHT_COLORFUL:
-			case THEME_GREEN_LIGHT_BICOLOR:
-    		case THEME_GREEN_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_GREEN;
-    			break;
-			case THEME_YELLOW_DARK_COLORFUL:
-			case THEME_YELLOW_DARK_BICOLOR:
-    		case THEME_YELLOW_DARK_TRICOLOR:
-    		case THEME_YELLOW_LIGHT_COLORFUL:
-			case THEME_YELLOW_LIGHT_BICOLOR:
-    		case THEME_YELLOW_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_YELLOW;
-    			break;
-			case THEME_ORANGE_DARK_COLORFUL:
-			case THEME_ORANGE_DARK_BICOLOR:
-    		case THEME_ORANGE_DARK_TRICOLOR:
-    		case THEME_ORANGE_LIGHT_COLORFUL:
-			case THEME_ORANGE_LIGHT_BICOLOR:
-    		case THEME_ORANGE_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_ORANGE;
-    			break;
-			case THEME_PURPLE_DARK_COLORFUL:
-			case THEME_PURPLE_DARK_BICOLOR:
-    		case THEME_PURPLE_DARK_TRICOLOR:
-    		case THEME_PURPLE_LIGHT_COLORFUL:
-			case THEME_PURPLE_LIGHT_BICOLOR:
-    		case THEME_PURPLE_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_PURPLE;
-    			break;
-			case THEME_PINK_DARK_COLORFUL:
-			case THEME_PINK_DARK_BICOLOR:
-    		case THEME_PINK_DARK_TRICOLOR:
-    		case THEME_PINK_LIGHT_COLORFUL:
-			case THEME_PINK_LIGHT_BICOLOR:
-    		case THEME_PINK_LIGHT_TRICOLOR:
-    			foregroundColor = Graphics.COLOR_PINK;
-    			break;
-    	}
+
+		// Instead of enum themes ans switch cases only integers were used to save memory
+		if (theme >= 0 && theme <= 2) {
+			foregroundColor = Graphics.COLOR_WHITE;
+		} else if (theme >= 3 && theme <= 5) {
+			foregroundColor = Graphics.COLOR_BLACK;
+		} else if (theme >= 6 && theme <= 11) {
+			foregroundColor = Graphics.COLOR_LT_GRAY;
+		} else if (theme >= 12 && theme <= 17) {
+			foregroundColor = Graphics.COLOR_RED;
+		} else if (theme >= 18 && theme <= 23) {
+			foregroundColor = Graphics.COLOR_BLUE;
+		} else if (theme >= 24 && theme <= 29) {
+			foregroundColor = Graphics.COLOR_GREEN;
+		} else if (theme >= 30 && theme <= 35) {
+			foregroundColor = Graphics.COLOR_YELLOW;
+		} else if (theme >= 36 && theme <= 41) {
+			foregroundColor = Graphics.COLOR_ORANGE;
+		} else if (theme >= 42 && theme <= 47) {
+			foregroundColor = Graphics.COLOR_PURPLE;
+		} else if (theme >= 48 && theme <= 53) {
+			foregroundColor = Graphics.COLOR_PINK;
+		}
 
 		// Themes have a tendency where there are 3 dark and 3 light themes
 		// Also A colorful is followed by a bicolor and a tricolor
@@ -317,8 +264,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	//! @return final color of the unfilled data bar
 	private function selectUnfilledDataBarColor() as Number {
 		var dataBarColor = 0;
-		if (theme % 3 == 0 || theme == THEME_WHITE_DARK_TRICOLOR || theme == THEME_BLACK_LIGHT_TRICOLOR || 
-			theme == THEME_GRAY_DARK_TRICOLOR || theme == THEME_GRAY_LIGHT_TRICOLOR) {
+		if (theme % 3 == 0 || theme == 2 || theme == 5 || 
+			theme == 8 || theme == 11) {
 			dataBarColor = unfilledDataBarAsBGColor ? backgroundColor : Graphics.COLOR_DK_GRAY;
 		} else if (theme % 3 == 1) {
 			dataBarColor = backgroundColor;
@@ -339,8 +286,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		if (theme % 3 == 0 || theme % 3 == 1) {
 			triColor = foregroundColor;
 		} else {
-			if (theme == THEME_WHITE_DARK_TRICOLOR || theme == THEME_BLACK_LIGHT_TRICOLOR || 
-				theme == THEME_GRAY_DARK_TRICOLOR || theme == THEME_GRAY_LIGHT_TRICOLOR) {
+			if (theme == 2 || theme == 5 || 
+				theme == 8 || theme == 11) {
 				triColor = Graphics.COLOR_DK_GRAY;
 			} else {
 				triColor = theme % 6 == 2 ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
