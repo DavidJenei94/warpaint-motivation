@@ -1,18 +1,22 @@
 import Toybox.Graphics;
 
 class DataBar {
+
+	private var _side as Integer;
 	
 	//! Constructor
-    function initialize() {}
+	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
+    function initialize(side as Integer) {
+		_side = side;
+	}
     
 	//! Draw the data bar for the round watchfaces
 	//! @param dc Device Content
 	//! @param actualValue the current value of the data
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
-	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
     (:roundShape)    
-    function drawRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number, side as Integer) as Void {
+    function drawRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) as Void {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {
     		return;
@@ -25,17 +29,17 @@ class DataBar {
     	var radius = 0;
     	
 		// The outer circle has to be wider because the middle x, y coordinates are not exactly in the middle of the screen
-    	if (side == DATABAR_OUTER_LEFT_TOP) {
+    	if (_side == DATABAR_OUTER_LEFT_TOP) {
     		width += 4;
     		radius =  x - dataBarWidth / 2 + 2;
-    	} else if (side == DATABAR_INNER_RIGHT_BOTTOM) {
+    	} else if (_side == DATABAR_INNER_RIGHT_BOTTOM) {
     		radius =  x - width / 2 - width - 2;
     	}
     	
     	if (actualValue != 0) {
 			// Draw data bar and unfilled part
 			dc.setPenWidth(width);
-			selectActualDataBarColor(dc, side, color);
+			selectActualDataBarColor(dc, color);
 						
 			if (actualValue < maxValue) {
 				// draw actual value
@@ -99,9 +103,8 @@ class DataBar {
 	//! @param actualValue the current value of the data
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
-	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
     (:semiroundShape)   
-    function drawSemiRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number, side as Integer) as Void {
+    function drawSemiRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) as Void {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {
     		return;
@@ -118,19 +121,19 @@ class DataBar {
     	
 		// Currently at 2021.08.19 all semi-round watches have the 215 x 180 screen size
 		// Angles calculated for that
-    	var startAngle = side == DATABAR_OUTER_LEFT_TOP ? 236 + angleCorrection : 305 - angleCorrection;
-    	var endAngle = side == DATABAR_OUTER_LEFT_TOP ? 124 - angleCorrection : 57 + angleCorrection;
-    	var actualAngle = getDegreeForActualValueSemi(actualValue, maxValue, startAngle, endAngle, angleCorrection, side);
-    	var arcRotation = side == DATABAR_OUTER_LEFT_TOP ? Graphics.ARC_CLOCKWISE : Graphics.ARC_COUNTER_CLOCKWISE;
+    	var startAngle = _side == DATABAR_OUTER_LEFT_TOP ? 236 + angleCorrection : 305 - angleCorrection;
+    	var endAngle = _side == DATABAR_OUTER_LEFT_TOP ? 124 - angleCorrection : 57 + angleCorrection;
+    	var actualAngle = getDegreeForActualValueSemi(actualValue, maxValue, startAngle, endAngle, angleCorrection);
+    	var arcRotation = _side == DATABAR_OUTER_LEFT_TOP ? Graphics.ARC_CLOCKWISE : Graphics.ARC_COUNTER_CLOCKWISE;
     	
     	dc.setPenWidth(width);
     	// draw dataBar progress only if the start and actual angles are not the same
-    	if ((side == DATABAR_OUTER_LEFT_TOP && actualAngle < startAngle) || 
-    		(side == DATABAR_INNER_RIGHT_BOTTOM && ((actualAngle >= 0 && actualAngle < 90) || actualAngle > startAngle))
+    	if ((_side == DATABAR_OUTER_LEFT_TOP && actualAngle < startAngle) || 
+    		(_side == DATABAR_INNER_RIGHT_BOTTOM && ((actualAngle >= 0 && actualAngle < 90) || actualAngle > startAngle))
     	) {
 	    	// actual progress
 	        dc.setColor(color, backgroundColor);
-			selectActualDataBarColor(dc, side, color);
+			selectActualDataBarColor(dc, color);
 	        dc.drawArc(
 	        	x, 
 	        	y, 
@@ -161,10 +164,9 @@ class DataBar {
 	//! @param startAngle the start angle of data bar
 	//! @param endAngle the end angle of data bar
 	//! @param angleCorrection plus degree needed because with semiround shape only the corner of arc touches the top/bottom side
-	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
 	//! @return the degree according to the current value
     (:semiroundShape)
-	private function getDegreeForActualValueSemi(actual, max, startAngle, endAngle, angleCorrection, side) {
+	private function getDegreeForActualValueSemi(actual, max, startAngle, endAngle, angleCorrection) {
     	if (actual >= max) {
     		return endAngle;
     	}
@@ -172,8 +174,8 @@ class DataBar {
 		// Currently at 2021.08.19 all semi-round watches have the 215 x 180 screen size
 		// Angles calculated for that (eg. the 112.0)
     	var unitMeasure = (112.0 + angleCorrection * 2) / max;
-    	var plusAngle = side == DATABAR_OUTER_LEFT_TOP ? startAngle : (-endAngle);
-    	var arcDirection = side == DATABAR_OUTER_LEFT_TOP ? (-1) : 1;
+    	var plusAngle = _side == DATABAR_OUTER_LEFT_TOP ? startAngle : (-endAngle);
+    	var arcDirection = _side == DATABAR_OUTER_LEFT_TOP ? (-1) : 1;
     	return (((arcDirection * unitMeasure * actual) + plusAngle).toNumber() + 360) % 360;
     }
     
@@ -182,9 +184,8 @@ class DataBar {
 	//! @param actualValue the current value of the data
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
-	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
     (:rectangleShape)
-    function drawRectangleDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number, side as Integer) {
+    function drawRectangleDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {
     		return;
@@ -213,7 +214,7 @@ class DataBar {
 			y = screenHeight - screenHeight * percentFilled;
 			barHeight = screenHeight - y + extraPixel;
 	    		
-			if (side == DATABAR_INNER_RIGHT_BOTTOM) {
+			if (_side == DATABAR_INNER_RIGHT_BOTTOM) {
 	    		x = screenWidth - barWidth;
 	    	}
 
@@ -225,7 +226,7 @@ class DataBar {
 	    	barHeight = dataBarWidth;
 			barWidth = screenWidth * percentFilled + extraPixel;
 	    		
-			if (side == DATABAR_INNER_RIGHT_BOTTOM) {
+			if (_side == DATABAR_INNER_RIGHT_BOTTOM) {
 	    		y = screenHeight - barHeight;
 	    	}
 
@@ -236,7 +237,7 @@ class DataBar {
     	}
     	
 		// Fill data bar
-    	selectActualDataBarColor(dc, side, color);
+    	selectActualDataBarColor(dc, color);
     	dc.fillRectangle(x, y, barWidth, barHeight);
     	
 		// Fill the unfilled bar
@@ -248,17 +249,16 @@ class DataBar {
 
 	//! Select the databar color according to the theme and side
 	//! @param dc Device Content
-	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
 	//! @param color the color of the bar
-	private function selectActualDataBarColor(dc as DC, side as Integer, color as Number) as Void {
-		if (side == DATABAR_INNER_RIGHT_BOTTOM && !isColorful) {
+	private function selectActualDataBarColor(dc as DC, color as Number) as Void {
+		if (_side == DATABAR_INNER_RIGHT_BOTTOM && !isColorful) {
 			if (!unfilledDataBarAsBGColor) {
 				dc.setColor(foregroundColor, backgroundColor);
 			} else {
 				dc.setColor(foregroundTriColor, backgroundColor);
 			}
 			
-		} else if (side == DATABAR_OUTER_LEFT_TOP && !isColorful) {
+		} else if (_side == DATABAR_OUTER_LEFT_TOP && !isColorful) {
 			dc.setColor(foregroundColor, backgroundColor);
 		} else {
 			dc.setColor(color, backgroundColor);

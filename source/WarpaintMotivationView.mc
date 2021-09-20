@@ -25,8 +25,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		_isMotivationalQuoteSet = false;
         _partialUpdatesAllowed = (WatchUi.WatchFace has :onPartialUpdate);
         _data = new Data();
-        _outerLeftTopDataBar = new DataBar();
-    	_innerRightBottomDataBar = new DataBar();
+        _outerLeftTopDataBar = new DataBar(DATABAR_OUTER_LEFT_TOP);
+    	_innerRightBottomDataBar = new DataBar(DATABAR_INNER_RIGHT_BOTTOM);
 
         // check Burn in Protect requirement
 		var settings = System.getDeviceSettings();
@@ -142,16 +142,16 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 					var sunsetSunrise = new SunriseSunset();
 					sunsetSunrise.drawSunriseSunsetArc(dc);
 				} else {
-					_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor], DATABAR_OUTER_LEFT_TOP);
+					_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
 				}
 				
-				_innerRightBottomDataBar.drawRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor], DATABAR_INNER_RIGHT_BOTTOM);			
+				_innerRightBottomDataBar.drawRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);			
 			} else if (screenShape == System.SCREEN_SHAPE_SEMI_ROUND) {
-				_outerLeftTopDataBar.drawSemiRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor], DATABAR_OUTER_LEFT_TOP);
-				_innerRightBottomDataBar.drawSemiRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor], DATABAR_INNER_RIGHT_BOTTOM);
+				_outerLeftTopDataBar.drawSemiRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+				_innerRightBottomDataBar.drawSemiRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
 			} else if (screenShape == System.SCREEN_SHAPE_RECTANGLE) {
-				_outerLeftTopDataBar.drawRectangleDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor], DATABAR_OUTER_LEFT_TOP);
-				_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor], DATABAR_INNER_RIGHT_BOTTOM);
+				_outerLeftTopDataBar.drawRectangleDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+				_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
 			}
 
 			// Set motivational quote
