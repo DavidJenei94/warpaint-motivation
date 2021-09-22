@@ -74,7 +74,7 @@ class SunriseSunset {
     	var width = dataBarWidth + 4; // the outer circle has to be greater because the center of the circle is not at the center of the screen
     	var radius = arcX - dataBarWidth / 2 + 2;
     	
-    	var color = isColorful ? Graphics.COLOR_YELLOW : themeColors[:foregroundPrimaryColor]; //day color
+    	var color = themeColors[:isColorful] ? Graphics.COLOR_YELLOW : themeColors[:foregroundPrimaryColor]; //day color
 	    var startAngle = (90.0 - (_sunrise * (360.0 / 24.0)));
 	    var endAngle = (90.0 - (_sunset * (360.0 / 24.0)));
 	    dc.setPenWidth(width);
@@ -88,7 +88,7 @@ class SunriseSunset {
 	    	endAngle
 	    );
 	    
-	    color = isColorful ? Graphics.COLOR_DK_GRAY : themeColors[:backgroundColor]; //night color
+	    color = themeColors[:isColorful] ? Graphics.COLOR_DK_GRAY : themeColors[:backgroundColor]; //night color
 	    dc.setColor(color, themeColors[:backgroundColor]);    	
     	dc.drawArc(
     		arcX, 
@@ -100,8 +100,8 @@ class SunriseSunset {
     	);
     	
 		// On Bicolor themes the suncolor should change according to the daytime
-		if (theme % 3 != 1) {
-			color = isColorful ? Graphics.COLOR_RED : themeColors[:foregroundSecondaryColor]; //sun color
+		if (theme % 5 != 2) {
+			color = themeColors[:isColorful] ? Graphics.COLOR_RED : themeColors[:foregroundSecondaryColor]; //sun color
 		} else {
 			color = getNextSunriseSunset()[1] ? themeColors[:foregroundPrimaryColor] : themeColors[:backgroundColor]; //sun color
 		}

@@ -97,7 +97,7 @@ class WarpaintMotivationApp extends Application.AppBase {
     function getInitialView() as Array<Views or InputDelegates>? {
     	myView = new WarpaintMotivationView();
         setGlobalVariables();
-        myView.selectThemeColors();
+        Theme.selectThemeColors();
         myView.loadFonts();
         
         return [ myView ] as Array<Views or InputDelegates>;
@@ -106,7 +106,7 @@ class WarpaintMotivationApp extends Application.AppBase {
     // New app settings have been received so trigger a UI update
     function onSettingsChanged() as Void {
         setGlobalVariables();
-        myView.selectThemeColors();
+        Theme.selectThemeColors();
         myView.loadFonts();
         // Change motivational quote when settings are changed 
         // with set the motivationalQuote to be null 

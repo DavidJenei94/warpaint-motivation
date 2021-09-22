@@ -18,16 +18,20 @@ rectangle.excludeAnnotations = $(rectangle.excludeAnnotations);roundShape;semiro
 
 # Exclude background annotation on devices CIQ 1.x (background_method) 
 # + weather + has_storage + partial_update
+# + standard and extra colored themes (can't display all color or does not have enough memory)
 # Exclude everything that does not necessary - for more optimization in memory
-d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather;has_storage;partial_update
-d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather;has_storage;partial_update
-fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather;has_storage;partial_update
-fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather;has_storage;partial_update
-fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather;has_storage;partial_update
-fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather;has_storage;partial_update
-fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather;has_storage;partial_update
-fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update
-vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update
+d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+# Following devices do not have enough memory for all themes + not necessary methods
+fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes
+vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes
 
 # Exclude weather annotation on devices lower than CIQ 3.2.0 too
 # 2.4.0
@@ -51,6 +55,12 @@ fr645.excludeAnnotations = $(fr645.excludeAnnotations);weather
 fr935.excludeAnnotations = $(fr935.excludeAnnotations);weather
 vivoactive3.excludeAnnotations = $(vivoactive3.excludeAnnotations);weather
 vivoactive3mlte.excludeAnnotations = $(vivoactive3mlte.excludeAnnotations);weather
+
+# Exclude partial update annotation where it is not available
+fenixchronos.excludeAnnotations = $(fenixchronos.excludeAnnotations);partial_update
+venusq.excludeAnnotations = $(venusq.excludeAnnotations);partial_update
+venusqm.excludeAnnotations = $(venusqm.excludeAnnotations);partial_update
+vivolife.excludeAnnotations = $(vivolife.excludeAnnotations);partial_update
 
 
 # CIQ 1.x watches have No Floors, Active Minutes support and Weather
@@ -87,6 +97,12 @@ fr645.resourcePath = $(fr645.resourcePath);resources-no_weather
 fr935.resourcePath = $(fr935.resourcePath);resources-no_weather
 vivoactive3.resourcePath = $(vivoactive3.resourcePath);resources-no_weather
 vivoactive3mlte.resourcePath = $(vivoactive3mlte.resourcePath);resources-no_weather
+
+# Devices with no partial update and was not set before eg. in CIQ 1.x
+fenixchronos.resourcePath = $(fenixchronos.resourcePath);resources-no_partial_update
+venusq.resourcePath = $(venusq.resourcePath);resources-no_partial_update
+venusqm.resourcePath = $(venusqm.resourcePath);resources-no_partial_update
+vivolife.resourcePath = $(vivolife.resourcePath);resources-no_partial_update
 
 
 #  fr245/fr245m are CIQ 3.x, but do not support floors climbed.

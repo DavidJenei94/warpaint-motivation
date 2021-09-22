@@ -119,7 +119,7 @@
     <string id="Tropical">Tropical</string>
 
     
-    <string id="MilitaryFormatTitle">Military Format for 24 Hour Time</string>
+    <string id="MilitaryFormatTitle">Military Format (only for 24 Hour Time)</string>
     <string id="UpdateSecondInLowPowerModeTitle">Updating Second in Low Power Mode (consume more battery)</string>
 
     <string id="CaloriesGoalTitle">Burned Calories Goal for the day (kCal)</string>

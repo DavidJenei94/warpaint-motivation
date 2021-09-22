@@ -1,0 +1,7 @@
+<settings>
+	
+    <setting propertyKey="@Properties.UpdateSecondInLowPowerMode" title="@Strings.UpdateSecondInLowPowerModeTitle">
+        <settingConfig type="boolean" readonly="true"/>
+    </setting>
+
+</settings>
