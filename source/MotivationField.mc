@@ -70,7 +70,7 @@ class MotivationField extends WatchUi.Text {
 	//! @param dc Device Content
 	//! @param motivationPartText the part of the splitted motivational quote
 	function drawMotivationText(dc as Dc, motivationPartText as String) as Void {		
-        self.setColor(foregroundColor);
+        self.setColor(themeColors[:foregroundPrimaryColor]);
         self.setText(motivationPartText);
 		Text.draw(dc);
 	}

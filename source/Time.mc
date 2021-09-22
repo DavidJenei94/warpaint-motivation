@@ -42,7 +42,7 @@ class Time extends WatchUi.Text {
 	//! @param dc Device Content
 	function drawTime(dc as Dc) as Void {
 		refreshTimeData();
-		self.setColor(foregroundTriColor);	
+		self.setColor(themeColors[:foregroundSecondaryColor]);	
         self.setText(_time);
 		Text.draw(dc);
 	}
@@ -54,7 +54,7 @@ class Time extends WatchUi.Text {
 			_AmPm = getAmPm();
 			var x = dc.getWidth() / 2 - getTimeWidth(dc) - (dc.getTextWidthInPixels(_AmPm, smallFont) / 2 + 3); // 3 pixels from time
 			var y = dc.getHeight() / 2;
-			dc.setColor(foregroundColor, backgroundColor);
+			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 			dc.drawText(
 				x, 
 				y, 
@@ -71,7 +71,7 @@ class Time extends WatchUi.Text {
 		refreshTimeData();
 		var x = dc.getWidth() / 2 + getTimeWidth(dc) + (dc.getTextWidthInPixels(_seconds, smallFont) / 2 + 3); // 3 pixels from time
 		var y = dc.getHeight() / 2;
-		dc.setColor(foregroundColor, backgroundColor);
+		dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 		dc.drawText(
 			x, 
 			y, 

@@ -14,6 +14,12 @@ var foregroundColor as Number;
 var backgroundColor as Number;
 var foregroundTriColor as Number;
 var isColorful as Boolean;
+var themeColors = {
+    :foregroundPrimaryColor => 0xFFFFFF,
+    :foregroundSecondaryColor => 0xFFFFFF,
+    :backgroundColor => 0x000000,
+    :isColorful => false
+};
 
 var updatingSecondsInLowPowerMode as Boolean;
 var militaryFormat as Boolean;

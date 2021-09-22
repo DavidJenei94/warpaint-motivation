@@ -41,8 +41,8 @@ class Data {
 			:displayData => _errorDisplay,
 			:dataMaxValue => 0,
 			:iconText => " ",
-			:iconColor => foregroundColor,
-			:barColor => foregroundColor
+			:iconColor => themeColors[:foregroundPrimaryColor],
+			:barColor => themeColors[:foregroundPrimaryColor]
 		};
 
 		if (selectedType != null) {

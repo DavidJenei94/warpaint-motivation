@@ -27,7 +27,7 @@ class DataField extends WatchUi.Text {
 		drawIcon(dc, iconText, iconColor, dataText);
 		
 		self.setLocation(calculateNewXForData(dc, dataText, iconText) + _pixelsBetweenIconAndData / 2, _y);
-		self.setColor(foregroundColor);		
+		self.setColor(themeColors[:foregroundPrimaryColor]);		
         self.setText(dataText);
 		Text.draw(dc);
 	}
@@ -38,8 +38,8 @@ class DataField extends WatchUi.Text {
 	//! @param color color of the icon
 	//! @param dataText Data in string format
 	function drawIcon(dc as Dc, iconText as String, color as Number, dataText as String) as Void {
-		if (!isColorful) {
-			dc.setColor(foregroundTriColor, Graphics.COLOR_TRANSPARENT);
+		if (!themeColors[:isColorful]) {
+			dc.setColor(themeColors[:foregroundSecondaryColor], Graphics.COLOR_TRANSPARENT);
 		} else {
 			dc.setColor(color, Graphics.COLOR_TRANSPARENT);
 		}

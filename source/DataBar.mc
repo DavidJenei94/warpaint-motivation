@@ -51,20 +51,6 @@ class DataBar {
 					90, 
 					actualDegree
 				);
-
-				// draw unfilled part of the bar
-				if (unfilledDataBarColor != backgroundColor) {
-					dc.setColor(unfilledDataBarColor, backgroundColor);
-					dc.drawArc(
-						x, 
-						y, 
-						radius, 
-						Graphics.ARC_CLOCKWISE, 
-						actualDegree, 
-						90
-					);
-				}
-
 			} else {
 				dc.drawCircle(
 					x,
@@ -72,16 +58,7 @@ class DataBar {
 					radius
 				);
 			}
-        } else if (unfilledDataBarColor != backgroundColor) {
-			// Draw the whole unfilled part if actual value is 0
-			dc.setPenWidth(width);
-			dc.setColor(unfilledDataBarColor, backgroundColor);
-			dc.drawCircle(
-				x,
-				y,
-				radius
-			);
-		}				
+        } 			
     }
    
    	//! Get degree for actual value on a round watchface
@@ -132,7 +109,6 @@ class DataBar {
     		(_side == DATABAR_INNER_RIGHT_BOTTOM && ((actualAngle >= 0 && actualAngle < 90) || actualAngle > startAngle))
     	) {
 	    	// actual progress
-	        dc.setColor(color, backgroundColor);
 			selectActualDataBarColor(dc, color);
 	        dc.drawArc(
 	        	x, 
@@ -141,19 +117,6 @@ class DataBar {
 	        	arcRotation, 
 	        	startAngle, 
 	        	actualAngle
-	        );
-        }
-        
-        // Draw the unfilled part if actual value is not max
-        if (actualAngle != endAngle && unfilledDataBarColor != backgroundColor) { 
-	        dc.setColor(unfilledDataBarColor, backgroundColor);
-	        dc.drawArc(
-	        	x, 
-	        	y, 
-	        	radius, 
-	        	arcRotation, 
-	        	actualAngle, 
-	        	endAngle
 	        );
         } 
     }
@@ -203,11 +166,6 @@ class DataBar {
 		var screenWidth = dc.getWidth();
     	var screenHeight = dc.getHeight();
 
-		var unfilledBarX = 0;
-		var unfilledBarY = 0;
-		var unfilledBarWidth = 0;
-    	var unfilledBarHeight = 0;
-
     	// calculate x, y, width, height for fillRectangle
     	if (screenHeight <= screenWidth) {
 	    	barWidth = dataBarWidth;
@@ -218,9 +176,6 @@ class DataBar {
 	    		x = screenWidth - barWidth;
 	    	}
 
-			unfilledBarX = x;
-			unfilledBarWidth = barWidth;
-			unfilledBarHeight = screenHeight - barHeight + extraPixel;
     	} else {
     		// Currently at 2021.08.19 only the vivoactive HR
 	    	barHeight = dataBarWidth;
@@ -229,39 +184,28 @@ class DataBar {
 			if (_side == DATABAR_INNER_RIGHT_BOTTOM) {
 	    		y = screenHeight - barHeight;
 	    	}
-
-			unfilledBarX = barWidth;
-			unfilledBarY = y;
-			unfilledBarWidth = screenWidth - barWidth + extraPixel;
-			unfilledBarHeight = barHeight;
     	}
     	
 		// Fill data bar
     	selectActualDataBarColor(dc, color);
     	dc.fillRectangle(x, y, barWidth, barHeight);
-    	
-		// Fill the unfilled bar
-		if (unfilledDataBarColor != backgroundColor) {
-			dc.setColor(unfilledDataBarColor, backgroundColor);
-			dc.fillRectangle(unfilledBarX, unfilledBarY, unfilledBarWidth, unfilledBarHeight);
-		}
     }
 
 	//! Select the databar color according to the theme and side
 	//! @param dc Device Content
 	//! @param color the color of the bar
 	private function selectActualDataBarColor(dc as DC, color as Number) as Void {
-		if (_side == DATABAR_INNER_RIGHT_BOTTOM && !isColorful) {
+		if (_side == DATABAR_INNER_RIGHT_BOTTOM && !themeColors[:isColorful]) {
 			if (!unfilledDataBarAsBGColor) {
-				dc.setColor(foregroundColor, backgroundColor);
+				dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 			} else {
-				dc.setColor(foregroundTriColor, backgroundColor);
+				dc.setColor(themeColors[:foregroundSecondaryColor], themeColors[:backgroundColor]);
 			}
 			
-		} else if (_side == DATABAR_OUTER_LEFT_TOP && !isColorful) {
-			dc.setColor(foregroundColor, backgroundColor);
+		} else if (_side == DATABAR_OUTER_LEFT_TOP && !themeColors[:isColorful]) {
+			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 		} else {
-			dc.setColor(color, backgroundColor);
+			dc.setColor(color, themeColors[:backgroundColor]);
 		}
 	}
 }
