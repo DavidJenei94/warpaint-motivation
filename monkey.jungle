@@ -60,7 +60,6 @@ vivoactive3mlte.excludeAnnotations = $(vivoactive3mlte.excludeAnnotations);weath
 fenixchronos.excludeAnnotations = $(fenixchronos.excludeAnnotations);partial_update
 venusq.excludeAnnotations = $(venusq.excludeAnnotations);partial_update
 venusqm.excludeAnnotations = $(venusqm.excludeAnnotations);partial_update
-vivolife.excludeAnnotations = $(vivolife.excludeAnnotations);partial_update
 
 
 # CIQ 1.x watches have No Floors, Active Minutes support and Weather
@@ -102,8 +101,9 @@ vivoactive3mlte.resourcePath = $(vivoactive3mlte.resourcePath);resources-no_weat
 fenixchronos.resourcePath = $(fenixchronos.resourcePath);resources-no_partial_update
 venusq.resourcePath = $(venusq.resourcePath);resources-no_partial_update
 venusqm.resourcePath = $(venusqm.resourcePath);resources-no_partial_update
-vivolife.resourcePath = $(vivolife.resourcePath);resources-no_partial_update
 
+# Devices with no HR sensors
+approachs60.resourcePath = $(approachs60.resourcePath);
 
 #  fr245/fr245m are CIQ 3.x, but do not support floors climbed.
 fr245.resourcePath = $(fr245.resourcePath);resources-fr245_m-no_floors
