@@ -102,8 +102,8 @@ fenixchronos.resourcePath = $(fenixchronos.resourcePath);resources-no_partial_up
 venusq.resourcePath = $(venusq.resourcePath);resources-no_partial_update
 venusqm.resourcePath = $(venusqm.resourcePath);resources-no_partial_update
 
-# Devices with no HR sensors
-approachs60.resourcePath = $(approachs60.resourcePath);
+
+
 
 #  fr245/fr245m are CIQ 3.x, but do not support floors climbed.
 fr245.resourcePath = $(fr245.resourcePath);resources-fr245_m-no_floors
@@ -111,3 +111,5 @@ fr245m.resourcePath = $(fr245m.resourcePath);resources-fr245_m-no_floors
 
 # fr735xt does not have enough memory, load the small font to the place of medium font (Does not necessary if the name is the device name)
 # fr735xt.resourcePath = $(fr735xt.resourcePath);resources-fr735xt
+# Devices with no HR sensors
+# approachs60.resourcePath = $(approachs60.resourcePath);resources-approachs60

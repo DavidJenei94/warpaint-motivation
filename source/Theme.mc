@@ -151,16 +151,16 @@ class Theme {
 				themeColors[:backgroundColor] = 0x55FFFF;
 				break;
 			case 60: // Bubblegum (Dark)
-				themeColors[:foregroundPrimaryColor] = 0xAAFFAA;
+				themeColors[:foregroundPrimaryColor] = 0x55FF55;
 				themeColors[:foregroundSecondaryColor] = 0xFF55AA;
 				break;
 			case 61: // Bubblegum (Light)
 				themeColors[:foregroundPrimaryColor] = 0xFF55AA;
-				themeColors[:foregroundSecondaryColor] = 0xAAFFAA;
+				themeColors[:foregroundSecondaryColor] = 0x55FF55;
 				break;
 			case 62: // Bubblegum
 				themeColors[:foregroundPrimaryColor] = 0xFF55AA;
-				themeColors[:backgroundColor] = 0xAAFFAA;
+				themeColors[:backgroundColor] = 0x55FF55;
 				break;
 			case 65: // Savage (Dark)
 				themeColors[:foregroundPrimaryColor] = 0x0055AA;
@@ -235,12 +235,12 @@ class Theme {
 				themeColors[:backgroundColor] = 0x0055AA;
 				break;
 			case 100: // Luxury (Dark)
-				themeColors[:foregroundPrimaryColor] = 0xFFAAFF;
-				themeColors[:foregroundSecondaryColor] = 0xFFFF55;
+				themeColors[:foregroundPrimaryColor] = 0xFF55AA;
+				themeColors[:foregroundSecondaryColor] = 0xFFFF00;
 				break;
 			case 102: // Luxury
-				themeColors[:foregroundPrimaryColor] = 0xFFAAFF;
-				themeColors[:backgroundColor] = 0xFFFF55;
+				themeColors[:foregroundPrimaryColor] = 0xFF55AA;
+				themeColors[:backgroundColor] = 0xFFFF00;
 				break;
 			case 105: // Captivating (Dark)
 				themeColors[:foregroundPrimaryColor] = 0xFF5500;
@@ -308,7 +308,7 @@ class Theme {
 				break;
 			case 132: // Nebula
 				themeColors[:foregroundPrimaryColor] = 0xAA55AA;
-				themeColors[:backgroundColor] = 0x555555;
+				themeColors[:backgroundColor] = 0xAAAAAA;
 				break;
 		}
 
@@ -345,7 +345,7 @@ class Theme {
 				break;
 			case 207: // Breeze
 				themeColors[:foregroundPrimaryColor] = 0x55FFFF;
-				themeColors[:backgroundColor] = 0xAAAAAA;
+				themeColors[:backgroundColor] = 0x555555;
 				break;						
 			case 210: // Adventure (Dark)
 				themeColors[:foregroundPrimaryColor] = 0x00AAAA;
@@ -369,7 +369,7 @@ class Theme {
 				break;
 			case 222: // Illumination
 				themeColors[:foregroundPrimaryColor] = 0xFFFF55;
-				themeColors[:backgroundColor] = 0xAAAAAA;
+				themeColors[:backgroundColor] = 0x555555;
 				break;
 			case 225: // Coast (Dark)
 				themeColors[:foregroundPrimaryColor] = 0xFF5555;
@@ -405,7 +405,7 @@ class Theme {
 				break;
 			case 237: // Grace
 				themeColors[:foregroundPrimaryColor] = 0xFFAA55;
-				themeColors[:backgroundColor] = 0xAAAAAA;
+				themeColors[:backgroundColor] = 0x555555;
 				break;						
 			case 240: // Exuberance (Dark)
 				themeColors[:foregroundPrimaryColor] = 0xFF5500;
