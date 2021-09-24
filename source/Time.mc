@@ -40,9 +40,13 @@ class Time extends WatchUi.Text {
 	
 	//! Draw the time according to the settings, eg. 12:34
 	//! @param dc Device Content
-	function drawTime(dc as Dc) as Void {
+	function drawTime(dc as Dc, burnInProtectionActive as Boolean) as Void {
 		refreshTimeData();
-		self.setColor(themeColors[:foregroundSecondaryColor]);	
+		if (burnInProtectionActive) {
+			self.setColor(Graphics.COLOR_WHITE);
+		} else {
+			self.setColor(themeColors[:foregroundSecondaryColor]);
+		}	
         self.setText(_time);
 		Text.draw(dc);
 	}

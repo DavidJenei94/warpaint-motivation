@@ -74,10 +74,6 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     //! Update the view
     //! @param dc Device context
     function onUpdate(dc as Dc) as Void {
-		
-        // Clear dc with backgroundcolor
-        dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
-    	dc.clear();
 
 		// Set anti-aliasing if possible
 		if (dc has :setAntiAlias) {
@@ -86,6 +82,10 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     
 		// If AMOLED watch is in low power mode it shows different layout
 		if (_burnInProtection && !_isAwake) {
+			// Clear dc with backgroundcolor
+			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+			dc.clear();
+
 			if (!_burnInTimeDisplayed) {
 				// Free memory of other drawables (reload later when awake)
 				setLayout(Rez.Layouts.AlwaysOn(dc));
@@ -94,20 +94,23 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				_burnInTimeDisplayed = true;
 			}
 
-			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 			dc.setPenWidth(1);
 			var height = dc.getHeight();
 			var width = dc.getWidth();
 			_burnInTimeChanged = !_burnInTimeChanged;
 			if (_burnInTimeChanged) {
-				viewDrawables[:timeTextTop].drawTime(dc);
+				viewDrawables[:timeTextTop].drawTime(dc, _burnInTimeDisplayed);
 				dc.drawLine(width * 0.1, height * 0.5, width * 0.9, height * 0.5);
 			} else {
-				viewDrawables[:timeTextBottom].drawTime(dc);
+				viewDrawables[:timeTextBottom].drawTime(dc, _burnInTimeDisplayed);
 				dc.drawLine(width * 0.1, height * 0.5 - 1, width * 0.9, height * 0.5 - 1);
 			}
 
 		} else {
+			// Clear dc with backgroundcolor
+			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
+			dc.clear();
+
 			// Reload drawables if changed from low power mode in case of AMOLED
 			if (_burnInProtection && _burnInTimeDisplayed) {
 				setLayout(Rez.Layouts.WatchFace(dc));
@@ -117,7 +120,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			}
 
 			// Set and draw time, AM/PM
-			viewDrawables[:timeText].drawTime(dc);
+			viewDrawables[:timeText].drawTime(dc, _burnInTimeDisplayed);
 			viewDrawables[:timeText].drawAmPm(dc);
 
 			// Set and draw date

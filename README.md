@@ -39,12 +39,14 @@ In case of any issues please check the FAQ section below and the following sheet
 - Warpaint Motivation does not collect and forward any data.
 
 ### Credits
-Thanks for the whole garmin developer community and the help they provided me on the forums.
-Thanks for the motivational quotes for the following youtube channels:
+Thanks for:
+The whole garmin developer community and the help they provided me on the forums.
+The motivational quotes for the following youtube channels:
 - Ben Lionel Scott (https://www.youtube.com/channel/UCgkKA7xEOoBQNpC5TJxPLiw)
 - Team Fearless (https://www.youtube.com/c/TeamFearless)
 - Motiversity (https://www.youtube.com/c/motiversity)
 - Eddie Pinero (https://www.youtube.com/channel/UCZSFzP3302RUCqPNXFGlVFw)
+The unique font for Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
