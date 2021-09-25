@@ -11,6 +11,8 @@ class Theme {
 		} else if (theme >= 200) {
 			selectExtraTheme();
 		}
+
+		setFixedColors();
     }  
 
 	//! Set the fixed colors like the background of the dark and light themes
@@ -117,9 +119,31 @@ class Theme {
 				themeColors[:foregroundPrimaryColor] = 0xFF0000;
 				themeColors[:backgroundColor] = 0x0000FF;
 				break;
+			case 35: // Sensation (Dark)
+				themeColors[:foregroundPrimaryColor] = 0xFF00FF;
+				themeColors[:foregroundSecondaryColor] = 0x00FF00;
+				break;
+			case 36: // Sensation (Light)
+				themeColors[:foregroundPrimaryColor] = 0xFF00FF;
+				themeColors[:foregroundSecondaryColor] = 0x00FF00;
+				break;
+			case 37: // Sensation
+				themeColors[:foregroundPrimaryColor] = 0x00FF00;
+				themeColors[:backgroundColor] = 0xFF00FF;
+				break;
+			case 40: // Freezing (Dark)
+				themeColors[:foregroundPrimaryColor] = 0x00FFFF;
+				themeColors[:foregroundSecondaryColor] = 0x0000FF;
+				break;
+			case 41: // Freezing (Light)
+				themeColors[:foregroundPrimaryColor] = 0x00FFFF;
+				themeColors[:foregroundSecondaryColor] = 0x0000FF;
+				break;
+			case 42: // Freezing
+				themeColors[:foregroundPrimaryColor] = 0x00FFFF;
+				themeColors[:backgroundColor] = 0x0000FF;
+				break;
 		}
-
-		setFixedColors();
 	}
 
 	//! Set forground and backgorund colors for standard themes
@@ -311,8 +335,6 @@ class Theme {
 				themeColors[:backgroundColor] = 0xAAAAAA;
 				break;
 		}
-
-		setFixedColors();
 	}
 
 	//! Set forground and backgorund colors for extra themes
@@ -496,8 +518,6 @@ class Theme {
 				themeColors[:backgroundColor] = 0x55AA00;
 				break;					
 		}
-
-		setFixedColors();
 	}
 
 }

@@ -27,6 +27,12 @@
     <string id="RuleDark">Rule (Dark)</string>
     <string id="RuleLight">Rule (Light)</string>
     <string id="Rule">Rule</string>
+    <string id="SensationDark">Sensation (Dark)</string>
+    <string id="SensationLight">Sensation (Light)</string>
+    <string id="Sensation">Sensation</string>
+    <string id="FreezingDark">Freezing (Dark)</string>
+    <string id="FreezingLight">Freezing (Light)</string>
+    <string id="Freezing">Freezing</string>
     <!-- Extra themes 1 (45) -->    
     <string id="BloomingDark">Blooming (Dark)</string>
     <string id="BloomingLight">Blooming (Light)</string>
