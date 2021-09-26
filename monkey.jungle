@@ -76,11 +76,11 @@ vivoactive.resourcePath = $(vivoactive.resourcePath);resources-ciq_1.x-no_hr
 
 # devices lower than CIQ 3.2.0 have no Weather
 # 2.4.0
-approachs60.resourcePath = $(approachs60.resourcePath);resources-no_weather
-fr735xt.resourcePath = $(fr735xt.resourcePath);resources-no_weather
+# has own resourcepath - approachs60.resourcePath = $(approachs60.resourcePath);resources-no_weather
+# has own resourcepath - fr735xt.resourcePath = $(fr735xt.resourcePath);resources-no_weather
 vivoactive_hr.resourcePath = $(vivoactive_hr.resourcePath);resources-no_weather
 # 3.0.0
-approachs62.resourcePath = $(approachs62.resourcePath);resources-no_weather
+# has own resourcepath - approachs62.resourcePath = $(approachs62.resourcePath);resources-no_weather
 d2charlie.resourcePath = $(d2charlie.resourcePath);resources-no_weather
 descentmk1.resourcePath = $(descentmk1.resourcePath);resources-no_weather
 vivoactive3d.resourcePath = $(vivoactive3d.resourcePath);resources-no_weather
@@ -97,6 +97,8 @@ fr935.resourcePath = $(fr935.resourcePath);resources-no_weather
 vivoactive3.resourcePath = $(vivoactive3.resourcePath);resources-no_weather
 vivoactive3mlte.resourcePath = $(vivoactive3mlte.resourcePath);resources-no_weather
 
+
+
 # Devices with no partial update and was not set before eg. in CIQ 1.x
 fenixchronos.resourcePath = $(fenixchronos.resourcePath);resources-no_partial_update
 venusq.resourcePath = $(venusq.resourcePath);resources-no_partial_update
@@ -104,10 +106,11 @@ venusqm.resourcePath = $(venusqm.resourcePath);resources-no_partial_update
 
 
 
-
-#  fr245/fr245m are CIQ 3.x, but do not support floors climbed.
-fr245.resourcePath = $(fr245.resourcePath);resources-fr245_m-no_floors
-fr245m.resourcePath = $(fr245m.resourcePath);resources-fr245_m-no_floors
+#  fr245/fr245m and venusq/venusqm are CIQ 3.x, but do not support floors climbed.
+fr245.resourcePath = $(fr245.resourcePath);resources-no_floors
+fr245m.resourcePath = $(fr245m.resourcePath);resources-no_floors
+venusq.resourcePath = $(venusq.resourcePath);resources-no_floors
+venusqm.resourcePath = $(venusqm.resourcePath);resources-no_floors
 
 # fr735xt does not have enough memory, load the small font to the place of medium font (Does not necessary if the name is the device name)
 # fr735xt.resourcePath = $(fr735xt.resourcePath);resources-fr735xt

@@ -25,6 +25,12 @@
 			<listEntry value="30">@Strings.RuleDark</listEntry>
             <listEntry value="31">@Strings.RuleLight</listEntry>
             <listEntry value="32">@Strings.Rule</listEntry>
+			<listEntry value="35">@Strings.SensationDark</listEntry>
+            <listEntry value="36">@Strings.SensationLight</listEntry>
+            <listEntry value="37">@Strings.Sensation</listEntry>
+			<listEntry value="40">@Strings.FreezingDark</listEntry>
+            <listEntry value="41">@Strings.FreezingLight</listEntry>
+            <listEntry value="42">@Strings.Freezing</listEntry>
         </settingConfig>
     </setting>
 
