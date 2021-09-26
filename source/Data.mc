@@ -393,28 +393,10 @@ class Data {
 		
 		// interval in minutes
 		var intervalToRefreshSunriseSunset = 15;
-		if (currentSunriseSunsetIsDisplayed() || System.getClockTime().min % intervalToRefreshSunriseSunset == 1) {
+		if (System.getClockTime().min % intervalToRefreshSunriseSunset == 1) {
 			_sunriseSunset.refreshSunsetSunrise();
 		}
     	  
     	return _sunriseSunset.getNextSunriseSunset();
-	}
-
-	//! Check if the current time is the time of the next sunrise/sunset
-	//! If it is the same, it should update on screen
-	//! @return true if time equals the next sunrise/sunset
-	private function currentSunriseSunsetIsDisplayed() as Boolean {
-		var nextSunriseSunset = _sunriseSunset.getNextSunriseSunset()[0];
-		
-		var clockTime = System.getClockTime();
-		var hours = clockTime.hour;
-        if (!System.getDeviceSettings().is24Hour) {
-            if (hours > 12) {
-                hours = hours - 12;
-            }
-        }
-        var currentTime = Lang.format("$1$:$2$", [hours.format("%02d"), clockTime.min.format("%02d")]);
-
-		return nextSunriseSunset.equals(currentTime);
 	}
 }

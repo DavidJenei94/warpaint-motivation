@@ -123,7 +123,6 @@ class WarpaintMotivationApp extends Application.AppBase {
 		var apiData = data["motivationalQuote"];
         if (apiData instanceof Array) {
             motivationalQuoteArray.addAll(apiData);
-            System.println("No of Motivational quotes downloaded: " + apiData.size());
         } else if (apiData instanceof String) {
 			motivationalQuoteArray.add(apiData);
 		}

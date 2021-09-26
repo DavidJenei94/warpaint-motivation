@@ -8,7 +8,7 @@ The Warpaint Motivation is a unique watch face which inspires you with powerful 
 The Warpaint Motivation is fully free, however if you enjoy using it you can support my work with a small donation on the following link: https://paypal.me/WarpaintVision (Please mention the name of the app: "Warpaint Motivation" and choose the option "donate to a friend" for less paypal fees).
 
 Please leave a review if you like the watch face!
-In case of any issues please check the FAQ section below and the following 'Garmin devices support' sheet: https://docs.google.com/spreadsheets/d/1j0OmzTjzIc9nzAGclR-g87UA_Xr875As2goZkQ10z9s/edit?usp=sharing. If your issue is not described in any of these places, feel free to send me a message via 'Contact Developer' option.
+In case of any issues please check the FAQ section below and the following 'Garmin devices support' sheet about the compatible features: https://docs.google.com/spreadsheets/d/1j0OmzTjzIc9nzAGclR-g87UA_Xr875As2goZkQ10z9s/edit?usp=sharing. If your issue is not described in any of these places, feel free to send me a message via 'Contact Developer' option.
 
 ### Features:
 - Time, Date, Seconds and AM/PM indicator in the center
@@ -35,6 +35,7 @@ In case of any issues please check the FAQ section below and the following 'Garm
 - If Next Sunrise/Sunset data field shows '--' or the Sunrise/Sunset databar is empty, start any activities until you are located (GPS turns to green). Now the Sunrise/Sunset data will be updated in maximum of 30 minutes on the watch face.
 - If other data field shows '--', check the device support sheet mentioned before. If it should be available please contact me becasue maybe I made a mistake in the sheet.
 - Seconds normally hide after entering low power mode (usually after 10 seconds). You can enable to always show the seconds on some devices (it can consume the battery more). The available devices for this option are in the device support sheet in the 'Update seconds in low power mode' column.
+- To uninstall Warpaint Motivation, first you need to change to any other watchface then you can proceed.
 - Warpaint Motivation does not collect and forward any data.
 
 ### Credits

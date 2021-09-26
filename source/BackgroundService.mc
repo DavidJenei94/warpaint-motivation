@@ -17,8 +17,6 @@ class BackgroundService extends System.ServiceDelegate {
 	//! Get a motivational quote by temporal event
 	(:background_method)
 	function onTemporalEvent() as Void {
-		System.println("onTemporalEvent");
-
 		var motivationalQuoteArraySize = null;
 		if (Toybox.Application has :Storage) {
             motivationalQuoteArraySize = Storage.getValue("MotivationalQuoteArraySize");
@@ -44,7 +42,6 @@ class BackgroundService extends System.ServiceDelegate {
 				method(:recieveMotivationalQuote)
 			);
 		}
-	
 	}
 	
 	//! Called by temporal event which send the data to the app
@@ -56,7 +53,6 @@ class BackgroundService extends System.ServiceDelegate {
 		// Otherwise, return data response.
 		if (responseCode != 200) {
 			data = responseCode;
-			System.println("HTTP error: " + responseCode);
 		}
 
 		Background.exit({
