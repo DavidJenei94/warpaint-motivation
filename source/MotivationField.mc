@@ -133,6 +133,8 @@ class MotivationField extends WatchUi.Text {
 					motivationFirstPart = motivation.substring(0, firstMiddleSpaceIndex);
 				}
 
+				System.println("firstSplitPart: " + firstSplitPart);
+
 		    	firstSplitPart -= 0.03;
 				if (firstSplitPart < 0) {
 					break;
@@ -157,6 +159,8 @@ class MotivationField extends WatchUi.Text {
 					motivationThirdPart = "IN TEXT";
 					break;
 			    }
+
+				System.println("secondSplitPart: " + secondSplitPart);
 
 			    secondSplitPart -= 0.03;
 				if (secondSplitPart < 0) {

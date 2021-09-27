@@ -74,6 +74,12 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     //! Update the view
     //! @param dc Device context
     function onUpdate(dc as Dc) as Void {
+		var time =  System.getClockTime();
+		System.println("");
+		System.println("onUpdate start time: " + time.hour + ":" + time.min + ":" + time.sec);
+		var startTime = null;
+		var currentTime = null;
+		startTime = System.getTimer();
 
 		// Set anti-aliasing if possible
 		if (dc has :setAntiAlias) {
@@ -119,21 +125,47 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				_burnInTimeDisplayed = false;
 			}
 
+			currentTime = System.getTimer();
+			System.println("antialiesSet Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			// Set and draw time, AM/PM
 			viewDrawables[:timeText].drawTime(dc, _burnInTimeDisplayed);
+
+			currentTime = System.getTimer();
+			System.println("drawTime Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			viewDrawables[:timeText].drawAmPm(dc);
+
+			currentTime = System.getTimer();
+			System.println("drawAmPm Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
 
 			// Set and draw date
 			viewDrawables[:dateText].drawDate(dc);
 
+			currentTime = System.getTimer();
+			System.println("drawDate Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			// set data fields and icons
 			_data.refreshData();
+
+			currentTime = System.getTimer();
+			System.println("refreshData Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			var middleValues = _data.getDataForDataField(selectedValueForDataFieldMiddle);
 			var leftValues = _data.getDataForDataField(selectedValueForDataFieldLeft);
 			var rightValues = _data.getDataForDataField(selectedValueForDataFieldRight);
 			viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor]);
 			viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor]);
 			viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
+
+			currentTime = System.getTimer();
+			System.println("drawData Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
 
 			// Set data bars
 			var outerLeftTopValues = _data.getDataForDataField(selectedValueForDataBarOuterLeftTop);
@@ -157,6 +189,11 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
 			}
 
+
+			currentTime = System.getTimer();
+			System.println("drawDataBar Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			// Set motivational quote
 			// Interval is to change motivational quote
 			// If motivational quote is null or the minute is the selected one, refresh quote
@@ -171,9 +208,20 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				// Change back to false after the minute to prevent updating through every second (if not in low power mode)
 				_isMotivationalQuoteSet = false;
 			}
+
+
+			currentTime = System.getTimer();
+			System.println("splitMotivationalQuote Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			viewDrawables[:topMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[0]);
 			viewDrawables[:middleMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[1]);
 			viewDrawables[:bottomMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[2]);
+
+
+			currentTime = System.getTimer();
+			System.println("drawMotivationText Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
 
 			// Draw seconds
 			if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
@@ -182,6 +230,11 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			} else if (_isAwake) {
 				viewDrawables[:timeText].drawSeconds(dc);
 			}
+
+			currentTime = System.getTimer();
+			System.println("drawSeconds Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 		}
     }
 
