@@ -42,24 +42,5 @@
 			<listEntry value="9">@Strings.NotificationCount</listEntry>
 		</settingConfig>
 	</setting>
-
-	<setting propertyKey="@Properties.DataBarOuterLeftTop" title="@Strings.DataBarOuterLeftTopTitle">
-		<settingConfig type="list">
-			<listEntry value="0">@Strings.Battery</listEntry>
-			<listEntry value="1">@Strings.Steps</listEntry>
-			<listEntry value="3">@Strings.Calories</listEntry>
-			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
-			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
-		</settingConfig>
-	</setting>
-	<setting propertyKey="@Properties.DataBarInnerRightBottom" title="@Strings.DataBarInnerRightBottomTitle">
-		<settingConfig type="list">
-			<listEntry value="0">@Strings.Battery</listEntry>
-			<listEntry value="1">@Strings.Steps</listEntry>
-			<listEntry value="3">@Strings.Calories</listEntry>
-			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
-			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
-		</settingConfig>
-	</setting>   
 	
 </settings>

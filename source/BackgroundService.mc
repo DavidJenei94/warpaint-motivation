@@ -36,7 +36,7 @@ class BackgroundService extends System.ServiceDelegate {
 			};
 			var motivationalQuoteNo = motivationalQuoteArrayMaxSize - motivationalQuoteArraySize;
 			Communications.makeWebRequest(
-				"https://script.google.com/macros/s/AKfycbxsyX-_TLgm9GKgUueu6z9vGrOOSRCLlxd3ITx6ptYRcNv8Mgq_PTYmsWatKfHlWMEO/exec", 
+				"https://script.google.com/macros/s/AKfycby3NapVmT0r9l-Qoe2RugxtDiKXj_7ZR6gnrxFZyzvQsqiP4U05hp0jBZG_Ng14eKcp/exec", 
 				{"motivationalQuoteNo" => motivationalQuoteNo}, 
 				options, 
 				method(:recieveMotivationalQuote)

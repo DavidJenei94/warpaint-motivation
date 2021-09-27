@@ -9,8 +9,6 @@ import Toybox.Graphics;
 class Data {
 
 	private var _info as ActivityMonitor.Info;
-	private var _activityInfo as Activity.Info;
-	private var _systemStats as System.Stats;
 	private var _userProfile as UserProfile.Profile;
 	private var _deviceSettings as System.DeviceSettings;
 
@@ -26,8 +24,6 @@ class Data {
 	// Refresh the actual data
 	function refreshData() as Void {
         _info = ActivityMonitor.getInfo();
-        _activityInfo = Activity.getActivityInfo();
-        _systemStats = System.getSystemStats();
         _userProfile = UserProfile.getProfile();
         _deviceSettings = System.getDeviceSettings();
 	}
@@ -194,7 +190,8 @@ class Data {
 	//! get the current HR
 	//! @return current heart rate, or from last reasonable sample, or resting HR
     private function getCurrentHeartRate() as Number {
-    	var heartRate = _activityInfo.currentHeartRate;
+		var activityInfo = Activity.getActivityInfo();
+    	var heartRate = activityInfo.currentHeartRate;
 		
 		if (heartRate == null) {
 	    	var sample = null;
@@ -230,7 +227,8 @@ class Data {
 	//! get battery status
     //! @return array of current battery status and maximum battery status
     private function getBatteryStat() as Array<Number> {
-    	return [_systemStats.battery, 100];
+		var systemStats = System.getSystemStats();
+    	return [systemStats.battery, 100];
     }
 
 	//! get current steps for current day

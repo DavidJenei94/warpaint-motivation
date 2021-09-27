@@ -23,6 +23,7 @@ class Time extends WatchUi.Text {
 	//! @param dc Device context
 	//! @return Array of x, y, width, height of bounding box 
 	function getSecondsBoundingBox(dc as Dc) as Array<Number> {
+		refreshTimeData();
 		// get the wider region in pixels of the current or the previous second
 		var previousSecond = (_seconds.toNumber() - 1) % 60;
 		var maxTextDimensions = dc.getTextDimensions(previousSecond.toString(), smallFont)[0] > dc.getTextDimensions(_seconds, smallFont)[0] ? 

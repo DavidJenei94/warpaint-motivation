@@ -42,10 +42,8 @@ class SunriseSunset {
 
     	var currentTime = _hour + _min / 60.0;
     	if (currentTime < _sunrise || currentTime > _sunset) {
-			System.println("sunrise");
     		return [formatHoursToTimeString(_sunrise), true];
     	} else {
-			System.println("sunset");
     		return [formatHoursToTimeString(_sunset), false];
     	}
     }
