@@ -17,6 +17,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	private var _burnInTimeChanged as Boolean;
 	private var _burnInTimeDisplayed as Boolean;
 	private var _checkerboardArray = new [2];
+	private var _settings as DeviceSettings;
 
     //! Constructor
     function initialize() {
@@ -29,8 +30,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     	_innerRightBottomDataBar = new DataBar(DATABAR_INNER_RIGHT_BOTTOM);
 
         // check Burn in Protect requirement
-		var settings = System.getDeviceSettings();
-		_burnInProtection = (settings has :requiresBurnInProtection) ? settings.requiresBurnInProtection : false;
+		_settings = System.getDeviceSettings();
+		_burnInProtection = (_settings has :requiresBurnInProtection) ? _settings.requiresBurnInProtection : false;
 		if (_burnInProtection) {
 			_burnInTimeChanged = true;
 			_burnInTimeDisplayed = false;
@@ -126,60 +127,108 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			}
 
 			currentTime = System.getTimer();
-			System.println("antialiesSet Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("antialiesSet Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
+			_settings = System.getDeviceSettings();
+			settingsGlobal = _settings;
+
+			currentTime = System.getTimer();
+			//System.println("getDeviceSettings Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
 			// Set and draw time, AM/PM
-			viewDrawables[:timeText].drawTime(dc, _burnInTimeDisplayed);
+			viewDrawables[:timeText].drawTime(dc, _burnInTimeDisplayed, _settings);
 
 			currentTime = System.getTimer();
-			System.println("drawTime Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("drawTime Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
-			viewDrawables[:timeText].drawAmPm(dc);
+			viewDrawables[:timeText].drawAmPm(dc, _settings);
 
 			currentTime = System.getTimer();
-			System.println("drawAmPm Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("drawAmPm Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
+
+
+			var clockTime = System.getClockTime();
+
+			currentTime = System.getTimer();
+			//System.println("getClockTime Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 
 			// Set and draw date
 			viewDrawables[:dateText].drawDate(dc);
 
 			currentTime = System.getTimer();
-			System.println("drawDate Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("drawDate Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
 			// set data fields and icons
 			_data.refreshData();
 
 			currentTime = System.getTimer();
-			System.println("refreshData Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("refreshData Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
 			var middleValues = _data.getDataForDataField(selectedValueForDataFieldMiddle);
+			
+			currentTime = System.getTimer();
+			//System.println("getDataForDataFieldMiddle Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			var leftValues = _data.getDataForDataField(selectedValueForDataFieldLeft);
+			
+			currentTime = System.getTimer();
+			//System.println("getDataForDataFieldLeft Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			var rightValues = _data.getDataForDataField(selectedValueForDataFieldRight);
-			viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor]);
-			viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor]);
-			viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
+			
+			currentTime = System.getTimer();
+			//System.println("getDataForDataFieldRight Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+			
+			viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor], themeColors);
+			viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor], themeColors);
+			viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor], themeColors);
 
 			currentTime = System.getTimer();
-			System.println("drawData Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("drawData Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
 			// Set data bars
 			var outerLeftTopValues = _data.getDataForDataField(selectedValueForDataBarOuterLeftTop);
+
+			currentTime = System.getTimer();
+			//System.println("getDataForDataBarOuter Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
 			var innerRightBottomValues = _data.getDataForDataField(selectedValueForDataBarInnerRightBottom);
-			
-			var screenShape = System.getDeviceSettings().screenShape;
+
+			currentTime = System.getTimer();
+			//System.println("getDataForDataBarInner Ellapsed time: " + (currentTime - startTime) + " ms");
+			startTime = System.getTimer();
+
+			var screenShape = _settings.screenShape;
 			if (screenShape == System.SCREEN_SHAPE_ROUND) {
 				if (sunriseSunsetDrawingEnabled) {
 					var sunsetSunrise = new SunriseSunset();
+
+					currentTime = System.getTimer();
+					//System.println("newSunriseSunset Ellapsed time: " + (currentTime - startTime) + " ms");
+					startTime = System.getTimer();
+
 					sunsetSunrise.drawSunriseSunsetArc(dc);
 				} else {
 					_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
 				}
-				
+
+				currentTime = System.getTimer();
+				//System.println("drawDataBarOuter Ellapsed time: " + (currentTime - startTime) + " ms");
+				startTime = System.getTimer();
+
 				_innerRightBottomDataBar.drawRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);			
 			} else if (screenShape == System.SCREEN_SHAPE_SEMI_ROUND) {
 				_outerLeftTopDataBar.drawSemiRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
@@ -191,7 +240,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
 
 			currentTime = System.getTimer();
-			System.println("drawDataBar Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("drawDataBarInner Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
 			// Set motivational quote
@@ -211,7 +260,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
 
 			currentTime = System.getTimer();
-			System.println("splitMotivationalQuote Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("splitMotivationalQuote Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
 			viewDrawables[:topMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[0]);
@@ -220,7 +269,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
 
 			currentTime = System.getTimer();
-			System.println("drawMotivationText Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("drawMotivationText Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
 			// Draw seconds
@@ -228,11 +277,11 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				// If this device supports partial updates
 				onPartialUpdate(dc);
 			} else if (_isAwake) {
-				viewDrawables[:timeText].drawSeconds(dc);
+				viewDrawables[:timeText].drawSeconds(dc, _settings);
 			}
 
 			currentTime = System.getTimer();
-			System.println("drawSeconds Ellapsed time: " + (currentTime - startTime) + " ms");
+			//System.println("drawSeconds Ellapsed time: " + (currentTime - startTime) + " ms");
 			startTime = System.getTimer();
 
 		}
@@ -243,13 +292,13 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	(:partial_update)
     public function onPartialUpdate(dc as Dc) as Void {
 		if (updatingSecondsInLowPowerMode) {
-	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc);
+	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc, _settings);
 	  
             // Set clip to the region of bounding box and which only updates that
 	        dc.setClip(_SecondsBoundingBox[0], _SecondsBoundingBox[1], _SecondsBoundingBox[2], _SecondsBoundingBox[3]);
 	        dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 	    	dc.clear();
-	        viewDrawables[:timeText].drawSeconds(dc);
+	        viewDrawables[:timeText].drawSeconds(dc, _settings);
 	        
 	        dc.clearClip();
 		}

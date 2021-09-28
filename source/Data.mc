@@ -395,6 +395,6 @@ class Data {
 			_sunriseSunset.refreshSunsetSunrise();
 		}
     	  
-    	return _sunriseSunset.getNextSunriseSunset();
+    	return _sunriseSunset.getNextSunriseSunset(_deviceSettings);
 	}
 }

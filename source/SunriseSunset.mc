@@ -31,7 +31,7 @@ class SunriseSunset {
 	//! Get next sunrise/sunset time
 	//! @return array of the next sunrise or sunset (according to current time) in string 
 	//! and a bool value if it is sunrise or not
-    function getNextSunriseSunset() as Array<Number or String or Boolean> {
+    function getNextSunriseSunset(settings) as Array<Number or String or Boolean> {
 		if (!_successfulCalculation) {
 			return [-1, true];
 		}
@@ -42,19 +42,19 @@ class SunriseSunset {
 
     	var currentTime = _hour + _min / 60.0;
     	if (currentTime < _sunrise || currentTime > _sunset) {
-    		return [formatHoursToTimeString(_sunrise), true];
+    		return [formatHoursToTimeString(_sunrise, settings), true];
     	} else {
-    		return [formatHoursToTimeString(_sunset), false];
+    		return [formatHoursToTimeString(_sunset, settings), false];
     	}
     }
     
 	//! Format sunrise/sunset time
 	//! @param time the hour in Float
 	//! @return formatted sunrise or sunset in string
-    private function formatHoursToTimeString(time as Number) as String {
+    private function formatHoursToTimeString(time as Number, settings) as String {
     	var hour = Math.floor(time);
     	var min = (time - hour) * 100 * 0.6;
-    	if (!System.getDeviceSettings().is24Hour) {
+    	if (!settings.is24Hour) {
             if (hour > 12) {
                 hour -= 12;
             }
@@ -107,7 +107,7 @@ class SunriseSunset {
 		if (theme % 5 != 2) {
 			color = themeColors[:isColorful] ? Graphics.COLOR_RED : themeColors[:foregroundSecondaryColor]; //sun color
 		} else {
-			color = getNextSunriseSunset()[1] ? themeColors[:foregroundPrimaryColor] : themeColors[:backgroundColor]; //sun color
+			color = getNextSunriseSunset(settingsGlobal)[1] ? themeColors[:foregroundPrimaryColor] : themeColors[:backgroundColor]; //sun color
 		}
     	
     	dc.setColor(color, themeColors[:backgroundColor]);
