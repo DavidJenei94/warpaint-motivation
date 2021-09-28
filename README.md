@@ -19,7 +19,7 @@ In case of any issues please check the FAQ section below and the following 'Garm
 ### Settings you can change (it dependeds on what the watch supports):
 - Select a theme from more than 100 (some devices support less color and they have a limited number of available themes). You can find all the themes on the following 'Available themes' sheet: https://docs.google.com/spreadsheets/d/1j0OmzTjzIc9nzAGclR-g87UA_Xr875As2goZkQ10z9s/edit?usp=sharing.
 - Enable Military time format when the 24 hour option is selected.
-- Update every second also when in low power mode (does not work for AMOLED watches beacuse they require burn in protection).
+- Update every second also when in low power mode (It consumes the battery more and can cause lags in some devices. It does not work for AMOLED watches beacuse they require burn in protection).
 - Set a Calorie goal which will serve as the max value on the databar (If 0, an automated calculation will be done according to your activity level).
 - Set a uniqe motivational quote to display (Characters need to be in UPPERCASE and besides letters and numbers the following characters are available: ' !"%&'()+,-./:;=?_º'. Use the | character to indicate the row split, otherwise it is automatically splitted according to length and spaces).
 - Set how frequent the motivational quote is changed (15 min/30 min/60 min/2 hours/3 hours/4 hours/8 hours/12 hours).
