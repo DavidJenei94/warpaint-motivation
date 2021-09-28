@@ -176,11 +176,13 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			viewDrawables[:bottomMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[2]);
 
 			// Draw seconds
-			if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
-				// If this device supports partial updates
-				onPartialUpdate(dc);
-			} else if (_isAwake) {
-				viewDrawables[:timeText].drawSeconds(dc);
+			if (System.getClockTime().sec != 0) {
+				if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
+					// If this device supports partial updates
+					onPartialUpdate(dc);
+				} else if (_isAwake) {
+					viewDrawables[:timeText].drawSeconds(dc);
+				}
 			}
 		}
     }
