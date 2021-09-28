@@ -281,4 +281,18 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		iconFont = WatchUi.loadResource(Rez.Fonts.IconFont);
     }
 
+
+}
+
+class WarpaintMotivationDelegate extends WatchUi.WatchFaceDelegate
+{
+
+	function initialize() {
+		WatchFaceDelegate.initialize();	
+	}
+
+	function onPowerBudgetExceeded(powerInfo) {
+		System.println( "Average execution time: " + powerInfo.executionTimeAverage );
+		System.println( "Allowed execution time: " + powerInfo.executionTimeLimit );
+	}
 }
