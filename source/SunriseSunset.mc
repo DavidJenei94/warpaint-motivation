@@ -29,9 +29,10 @@ class SunriseSunset {
 	}
     
 	//! Get next sunrise/sunset time
+	//! @param settings DeviceSettings
 	//! @return array of the next sunrise or sunset (according to current time) in string 
 	//! and a bool value if it is sunrise or not
-    function getNextSunriseSunset(settings) as Array<Number or String or Boolean> {
+    function getNextSunriseSunset(settings as DeviceSettings) as Array<Number or String or Boolean> {
 		if (!_successfulCalculation) {
 			return [-1, true];
 		}
@@ -50,8 +51,9 @@ class SunriseSunset {
     
 	//! Format sunrise/sunset time
 	//! @param time the hour in Float
+	//! @param settings DeviceSettings
 	//! @return formatted sunrise or sunset in string
-    private function formatHoursToTimeString(time as Number, settings) as String {
+    private function formatHoursToTimeString(time as Number, settings as DeviceSettings) as String {
     	var hour = Math.floor(time);
     	var min = (time - hour) * 100 * 0.6;
     	if (!settings.is24Hour) {
@@ -66,8 +68,9 @@ class SunriseSunset {
 	//! Draw arcs for day and night and also the sun's current position
 	//! only for round screens and only for outer circle
 	//! @param dc as Device Content
+	//! @param settings DeviceSettings
 	(:roundShape)
-    function drawSunriseSunsetArc(dc as Dc) as Void {
+    function drawSunriseSunsetArc(dc as Dc, settings as DeviceSettings) as Void {
 		if (!_successfulCalculation) {
 			return;
 		}
@@ -107,7 +110,7 @@ class SunriseSunset {
 		if (theme % 5 != 2) {
 			color = themeColors[:isColorful] ? Graphics.COLOR_RED : themeColors[:foregroundSecondaryColor]; //sun color
 		} else {
-			color = getNextSunriseSunset(settingsGlobal)[1] ? themeColors[:foregroundPrimaryColor] : themeColors[:backgroundColor]; //sun color
+			color = getNextSunriseSunset(settings)[1] ? themeColors[:foregroundPrimaryColor] : themeColors[:backgroundColor]; //sun color
 		}
     	
     	dc.setColor(color, themeColors[:backgroundColor]);
@@ -261,27 +264,29 @@ class SunriseSunset {
                 getApp().setProperty("LastLocationLng", locationLng);
             }
         } else {
-            if (Toybox.Application has :Storage) {
-                var lat = Storage.getValue("LastLocationLat");
-                if (lat != null) {
-                    locationLat = lat;
-                }
+			if (locationLat == null || locationLng == null) {
+				if (Toybox.Application has :Storage) {
+					var lat = Storage.getValue("LastLocationLat");
+					if (lat != null) {
+						locationLat = lat;
+					}
 
-                var lng = Storage.getValue("LastLocationLng");
-                if (lng != null) {
-                    locationLng = lng;
-                }
-            } else {
-                var lat = getApp().getProperty("LastLocationLat");
-                if (lat != null) {
-                    locationLat = lat;
-                }
+					var lng = Storage.getValue("LastLocationLng");
+					if (lng != null) {
+						locationLng = lng;
+					}
+				} else {
+					var lat = getApp().getProperty("LastLocationLat");
+					if (lat != null) {
+						locationLat = lat;
+					}
 
-                var lng = getApp().getProperty("LastLocationLng");
-                if (lng != null) {
-                    locationLng = lng;
-                }
-            }
+					var lng = getApp().getProperty("LastLocationLng");
+					if (lng != null) {
+						locationLng = lng;
+					}
+				}
+			}
         }
     }
     

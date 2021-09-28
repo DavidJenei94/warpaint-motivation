@@ -19,10 +19,11 @@ class Time extends WatchUi.Text {
 	//! Gets the bounding box of the seconds to be able to use in 
 	//! onPartialUpdate to update only the seconds region every seconds
 	//! @param dc Device context
+	//! @param settings DeviceSettings
 	//! @return Array of x, y, width, height of bounding box 
 	(:partial_update)
 	function getSecondsBoundingBox(dc as Dc, settings as DeviceSettings) as Array<Number> {
-		refreshTimeData(settings);
+		refreshTimeData(settings);	
 		// get the wider region in pixels of the current or the previous second
 		var previousSecond = (_seconds.toNumber() - 1) % 60;
 		var maxTextDimensions = dc.getTextDimensions(previousSecond.toString(), smallFont)[0] > dc.getTextDimensions(_seconds, smallFont)[0] ? 
@@ -40,7 +41,9 @@ class Time extends WatchUi.Text {
 	
 	//! Draw the time according to the settings, eg. 12:34
 	//! @param dc Device Content
-	function drawTime(dc as Dc, burnInProtectionActive as Boolean, settings as DeviceSettings) as Void {
+	//! @param settings DeviceSettings
+	//! @param burnInProtectionActive true if amoled is in low power mode
+	function drawTime(dc as Dc, settings as DeviceSettings, burnInProtectionActive as Boolean) as Void {
 		refreshTimeData(settings);
 		if (burnInProtectionActive) {
 			self.setColor(Graphics.COLOR_WHITE);
@@ -53,6 +56,7 @@ class Time extends WatchUi.Text {
 	
 	//! Draw AM or PM in front of time if 12 hour format is set
 	//! @param dc Device Content
+	//! @param settings DeviceSettings
 	function drawAmPm(dc as Dc, settings as DeviceSettings) as Void {
 		if (!settings.is24Hour) {
 			_AmPm = _clockTime.hour >= 12 ? "PM" : "AM";
@@ -70,6 +74,7 @@ class Time extends WatchUi.Text {
 	}
 	
 	//! Draw the seconds after the time
+	//! @param settings DeviceSettings
 	//! @param dc Device Content
 	function drawSeconds(dc as Dc, settings as DeviceSettings) as Void {	
 		refreshTimeData(settings);
@@ -86,13 +91,15 @@ class Time extends WatchUi.Text {
 	}
 	
 	//! Refresh time data
+	//! @param settings DeviceSettings
 	private function refreshTimeData(settings as DeviceSettings) as Void {
 		_clockTime = System.getClockTime();
 		_time = calculateTime(settings);
 		_seconds = _clockTime.sec.toString();			
 	}
 	
-	// Get current time according to settings
+	//! Get current time according to settings
+	//! @param settings DeviceSettings
 	//! @return formatted current time as string 
 	private function calculateTime(settings as DeviceSettings) as String {
         var timeFormat = "$1$:$2$";
@@ -106,9 +113,8 @@ class Time extends WatchUi.Text {
                 timeFormat = "$1$$2$";
             }
         }
-        
-        hours = hours.format("%02d");
-        return Lang.format(timeFormat, [hours, _clockTime.min.format("%02d")]);
+
+        return Lang.format(timeFormat, [hours.format("%02d"), _clockTime.min.format("%02d")]);
 	}
 	
 	//! Gets the half of the width of the time text to postion AM/PM and seconds

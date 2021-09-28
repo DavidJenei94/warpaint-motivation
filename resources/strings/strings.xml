@@ -126,7 +126,7 @@
 
     
     <string id="MilitaryFormatTitle">Military Format (only for 24 Hour Time)</string>
-    <string id="UpdateSecondInLowPowerModeTitle">Updating Second in Low Power Mode (consume more battery)</string>
+    <string id="UpdateSecondInLowPowerModeTitle">Updating Second in Low Power Mode (consumes more battery and can cause lags in some devices)</string>
 
     <string id="CaloriesGoalTitle">Burned Calories Goal for the day (kCal)</string>
 	<string id="CaloriesGoalPrompt">Outside 1000-10000 will trigger automatic average calculation</string>

@@ -34,6 +34,7 @@ var unfilledDataBarColor as Number;
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
 var sunriseSunsetDrawingEnabled as Boolean;
+var sunriseSunset as SunriseSunset;
 
 var smallFont as Font;
 var mediumFont as Font;
@@ -108,6 +109,7 @@ class WarpaintMotivationApp extends Application.AppBase {
         setGlobalVariables();
         Theme.selectThemeColors();
         myView.loadFonts();
+        myView.onSettingsChanged();
         // Change motivational quote when settings are changed 
         // with set the motivationalQuote to be null 
         // and forcing to set new motivational quote in View
