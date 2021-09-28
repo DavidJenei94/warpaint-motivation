@@ -17,15 +17,17 @@ class Data {
 	private var _errorDisplay = "--";
 	
 	//! Constructor
-    function initialize() {
-		refreshData();
+	//! @param settings DeviceSettings
+    function initialize(settings as DeviceSettings) {
+		refreshData(settings);
     }
 
 	// Refresh the actual data
-	function refreshData() as Void {
+	//! @param settings DeviceSettings
+	function refreshData(settings as DeviceSettings) as Void {
         _info = ActivityMonitor.getInfo();
         _userProfile = UserProfile.getProfile();
-        _deviceSettings = System.getDeviceSettings();
+        _deviceSettings = settings;
 	}
     
 	//! Get the selected data in dataField or dataBar
@@ -385,16 +387,6 @@ class Data {
 	//! Get the next sunrise or sunset
 	//! @return the next sunrise or sunset according to which is the next	
     private function getNextSunriseSunsetTime() as String {
-		if (_sunriseSunset == null) {
-			_sunriseSunset = new SunriseSunset();
-		}
-		
-		// interval in minutes
-		var intervalToRefreshSunriseSunset = 15;
-		if (System.getClockTime().min % intervalToRefreshSunriseSunset == 1) {
-			_sunriseSunset.refreshSunsetSunrise();
-		}
-    	  
-    	return _sunriseSunset.getNextSunriseSunset();
+    	return sunriseSunset.getNextSunriseSunset(_deviceSettings);
 	}
 }

@@ -10,27 +10,32 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	private var _splittedMotivationalQuote = new String[3];
 	private var _partialUpdatesAllowed as Boolean;
 	private var _SecondsBoundingBox = new Number[4];
+
     private var _data as Data;
     private var _outerLeftTopDataBar as DataBar;
     private var _innerRightBottomDataBar as DataBar;
+	private var _isSunriseSunsetSet as Boolean;
+
 	private var _burnInProtection as Boolean;
 	private var _burnInTimeChanged as Boolean;
 	private var _burnInTimeDisplayed as Boolean;
-	private var _checkerboardArray = new [2];
+
+	private var _deviceSettings as System.DeviceSettings;
 
     //! Constructor
     function initialize() {
         WatchFace.initialize();
+		_deviceSettings = System.getDeviceSettings();
         _isAwake = true;
 		_isMotivationalQuoteSet = false;
+		_isSunriseSunsetSet = false;
         _partialUpdatesAllowed = (WatchUi.WatchFace has :onPartialUpdate);
-        _data = new Data();
+        _data = new Data(_deviceSettings);
         _outerLeftTopDataBar = new DataBar(DATABAR_OUTER_LEFT_TOP);
     	_innerRightBottomDataBar = new DataBar(DATABAR_INNER_RIGHT_BOTTOM);
 
         // check Burn in Protect requirement
-		var settings = System.getDeviceSettings();
-		_burnInProtection = (settings has :requiresBurnInProtection) ? settings.requiresBurnInProtection : false;
+		_burnInProtection = (_deviceSettings has :requiresBurnInProtection) ? _deviceSettings.requiresBurnInProtection : false;
 		if (_burnInProtection) {
 			_burnInTimeChanged = true;
 			_burnInTimeDisplayed = false;
@@ -99,10 +104,10 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			var width = dc.getWidth();
 			_burnInTimeChanged = !_burnInTimeChanged;
 			if (_burnInTimeChanged) {
-				viewDrawables[:timeTextTop].drawTime(dc, _burnInTimeDisplayed);
+				viewDrawables[:timeTextTop].drawTime(dc, _deviceSettings, _burnInTimeDisplayed);
 				dc.drawLine(width * 0.1, height * 0.5, width * 0.9, height * 0.5);
 			} else {
-				viewDrawables[:timeTextBottom].drawTime(dc, _burnInTimeDisplayed);
+				viewDrawables[:timeTextBottom].drawTime(dc, _deviceSettings, _burnInTimeDisplayed);
 				dc.drawLine(width * 0.1, height * 0.5 - 1, width * 0.9, height * 0.5 - 1);
 			}
 
@@ -110,6 +115,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			// Clear dc with backgroundcolor
 			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 			dc.clear();
+
+			var clockTime = System.getClockTime();
 
 			// Reload drawables if changed from low power mode in case of AMOLED
 			if (_burnInProtection && _burnInTimeDisplayed) {
@@ -120,14 +127,36 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			}
 
 			// Set and draw time, AM/PM
-			viewDrawables[:timeText].drawTime(dc, _burnInTimeDisplayed);
-			viewDrawables[:timeText].drawAmPm(dc);
+			viewDrawables[:timeText].drawTime(dc, _deviceSettings, _burnInTimeDisplayed);
+			viewDrawables[:timeText].drawAmPm(dc, _deviceSettings);
 
 			// Set and draw date
 			viewDrawables[:dateText].drawDate(dc);
 
-			// set data fields and icons
-			_data.refreshData();
+			// set data fields and icons + Set sunriseSunset if necessary
+			_data.refreshData(_deviceSettings);
+			
+			if (sunriseSunsetDrawingEnabled || selectedValueForDataFieldMiddle == DATA_SUNRISE_SUNSET || 
+				selectedValueForDataFieldLeft == DATA_SUNRISE_SUNSET || selectedValueForDataFieldRight == DATA_SUNRISE_SUNSET) {
+
+				if (sunriseSunset == null) {
+					sunriseSunset = new SunriseSunset();
+				}
+
+				// interval in minutes
+				var intervalToRefreshSunriseSunset = 15;
+				var minRemainder = clockTime.min % intervalToRefreshSunriseSunset;
+				if (!_isSunriseSunsetSet && minRemainder == 1) {
+					sunriseSunset.refreshSunsetSunrise();
+					_isSunriseSunsetSet = true;
+				}
+				
+				if (_isSunriseSunsetSet && minRemainder != 1) {
+					// Change back to false after the minute to prevent updating through every second (if not in low power mode)
+					_isSunriseSunsetSet = false;
+				}				
+			}
+			
 			var middleValues = _data.getDataForDataField(selectedValueForDataFieldMiddle);
 			var leftValues = _data.getDataForDataField(selectedValueForDataFieldLeft);
 			var rightValues = _data.getDataForDataField(selectedValueForDataFieldRight);
@@ -136,14 +165,13 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
 
 			// Set data bars
-			var outerLeftTopValues = _data.getDataForDataField(selectedValueForDataBarOuterLeftTop);
+			var outerLeftTopValues = !sunriseSunsetDrawingEnabled ? _data.getDataForDataField(selectedValueForDataBarOuterLeftTop) : null;
 			var innerRightBottomValues = _data.getDataForDataField(selectedValueForDataBarInnerRightBottom);
 			
-			var screenShape = System.getDeviceSettings().screenShape;
+			var screenShape = _deviceSettings.screenShape;
 			if (screenShape == System.SCREEN_SHAPE_ROUND) {
 				if (sunriseSunsetDrawingEnabled) {
-					var sunsetSunrise = new SunriseSunset();
-					sunsetSunrise.drawSunriseSunsetArc(dc);
+					sunriseSunset.drawSunriseSunsetArc(dc, _deviceSettings);
 				} else {
 					_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
 				}
@@ -161,7 +189,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			// Interval is to change motivational quote
 			// If motivational quote is null or the minute is the selected one, refresh quote
 			var intervalToChangeQuote = motivationalQuoteChangeInterval > 60 ? (motivationalQuoteChangeInterval / 60) : motivationalQuoteChangeInterval;
-			var remainder = motivationalQuoteChangeInterval > 60 ? System.getClockTime().hour % intervalToChangeQuote : System.getClockTime().min % intervalToChangeQuote;
+			var remainder = motivationalQuoteChangeInterval > 60 ? clockTime.hour % intervalToChangeQuote : clockTime.min % intervalToChangeQuote;
 			if (motivationalQuote == null || (!_isMotivationalQuoteSet && remainder == 0)) {
 				MotivationField.setMotivationalQuote();
 				_splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
@@ -176,12 +204,12 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			viewDrawables[:bottomMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[2]);
 
 			// Draw seconds
-			if (System.getClockTime().sec != 0) {
+			if (clockTime.sec != 0) {
 				if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
 					// If this device supports partial updates
 					onPartialUpdate(dc);
 				} else if (_isAwake) {
-					viewDrawables[:timeText].drawSeconds(dc);
+					viewDrawables[:timeText].drawSeconds(dc, _deviceSettings);
 				}
 			}
 		}
@@ -192,13 +220,13 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	(:partial_update)
     public function onPartialUpdate(dc as Dc) as Void {
 		if (updatingSecondsInLowPowerMode) {
-	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc);
+	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc, _deviceSettings);
 	  
             // Set clip to the region of bounding box and which only updates that
 	        dc.setClip(_SecondsBoundingBox[0], _SecondsBoundingBox[1], _SecondsBoundingBox[2], _SecondsBoundingBox[3]);
 	        dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 	    	dc.clear();
-	        viewDrawables[:timeText].drawSeconds(dc);
+	        viewDrawables[:timeText].drawSeconds(dc, _deviceSettings);
 	        
 	        dc.clearClip();
 		}
@@ -230,4 +258,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		iconFont = WatchUi.loadResource(Rez.Fonts.IconFont);
     }
 
+	//! Reload DeviceSettings when settings are changed
+    function onSettingsChanged() as Void {
+		_deviceSettings = System.getDeviceSettings();
+	}
 }
