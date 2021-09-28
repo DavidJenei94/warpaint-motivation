@@ -22,6 +22,7 @@ class Time extends WatchUi.Text {
 	//! onPartialUpdate to update only the seconds region every seconds
 	//! @param dc Device context
 	//! @return Array of x, y, width, height of bounding box 
+	(:partial_update)
 	function getSecondsBoundingBox(dc as Dc) as Array<Number> {
 		refreshTimeData();
 		// get the wider region in pixels of the current or the previous second
@@ -56,7 +57,7 @@ class Time extends WatchUi.Text {
 	//! @param dc Device Content
 	function drawAmPm(dc as Dc) as Void {
 		if (!System.getDeviceSettings().is24Hour) {
-			_AmPm = getAmPm();
+			_AmPm = _clockTime.hour >= 12 ? "PM" : "AM";
 			var x = dc.getWidth() / 2 - getTimeWidth(dc) - (dc.getTextWidthInPixels(_AmPm, smallFont) / 2 + 3); // 3 pixels from time
 			var y = dc.getHeight() / 2;
 			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
@@ -90,7 +91,7 @@ class Time extends WatchUi.Text {
 	private function refreshTimeData() as Void {
 		_clockTime = System.getClockTime();
 		_time = calculateTime();
-		_seconds = getSeconds();			
+		_seconds = _clockTime.sec.toString();			
 	}
 	
 	// Get current time according to settings
@@ -110,18 +111,6 @@ class Time extends WatchUi.Text {
         
         hours = hours.format("%02d");
         return Lang.format(timeFormat, [hours, _clockTime.min.format("%02d")]);
-	}
-	
-	//! Gets back AM or PM according to settings
-	//! @return AM or PM as string 
-	private function getAmPm() as String {
-		return _clockTime.hour >= 12 ? "PM" : "AM";
-	}
-	
-	//! Gets the current second
-	//! @return seconds as string 
-	private function getSeconds() as String {
-		return _clockTime.sec.toString();
 	}
 	
 	//! Gets the half of the width of the time text to postion AM/PM and seconds
