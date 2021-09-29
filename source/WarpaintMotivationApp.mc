@@ -10,10 +10,6 @@ import Toybox.System;
 var myView as View;
 
 var theme as Number;
-var foregroundColor as Number;
-var backgroundColor as Number;
-var foregroundTriColor as Number;
-var isColorful as Boolean;
 var themeColors = {
     :foregroundPrimaryColor => 0xFFFFFF,
     :foregroundSecondaryColor => 0xFFFFFF,
@@ -29,8 +25,6 @@ var selectedValueForDataFieldLeft as Integer;
 var selectedValueForDataFieldRight as Integer;
 
 var dataBarWidth as Integer;
-var unfilledDataBarAsBGColor as Boolean;
-var unfilledDataBarColor as Number;
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
 var sunriseSunsetDrawingEnabled as Boolean;
@@ -165,7 +159,6 @@ class WarpaintMotivationApp extends Application.AppBase {
         militaryFormat = Properties.getValue("UseMilitaryFormat");
 
         dataBarWidth = Properties.getValue("DataBarWidth");
-        unfilledDataBarAsBGColor = Properties.getValue("UnfilledDataBar");
         selectedValueForDataFieldMiddle = Properties.getValue("DataFieldMiddle");
         selectedValueForDataFieldLeft = Properties.getValue("DataFieldLeft");
         selectedValueForDataFieldRight = Properties.getValue("DataFieldRight");
@@ -200,7 +193,6 @@ class WarpaintMotivationApp extends Application.AppBase {
         militaryFormat = getApp().getProperty("UseMilitaryFormat");
 
         dataBarWidth = getApp().getProperty("DataBarWidth");
-        unfilledDataBarAsBGColor = getApp().getProperty("UnfilledDataBar");
         selectedValueForDataFieldMiddle = getApp().getProperty("DataFieldMiddle");
         selectedValueForDataFieldLeft = getApp().getProperty("DataFieldLeft");
         selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");

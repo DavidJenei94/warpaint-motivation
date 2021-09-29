@@ -134,11 +134,11 @@
     </setting>
 
     <setting propertyKey="@Properties.CaloriesGoal" title="@Strings.CaloriesGoalTitle" prompt="@Strings.CaloriesGoalPrompt">
-        <settingConfig type="numeric" errorMessage="@Strings.CaloriesGoalError" />
+        <settingConfig type="numeric" />
     </setting>
 
     <setting propertyKey="@Properties.MotivationalQuoteProperty" title="@Strings.MotivationalQuoteTitle">
-        <settingConfig type="alphaNumeric" />
+        <settingConfig type="alphaNumeric" maxLength="60"/>
     </setting>
 
 	<setting propertyKey="@Properties.MotivationalQuoteChangeInterval" title="@Strings.MotivationalQuoteChangeIntervalTitle">
