@@ -196,12 +196,7 @@ class DataBar {
 	//! @param color the color of the bar
 	private function selectActualDataBarColor(dc as DC, color as Number) as Void {
 		if (_side == DATABAR_INNER_RIGHT_BOTTOM && !themeColors[:isColorful]) {
-			if (!unfilledDataBarAsBGColor) {
-				dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
-			} else {
-				dc.setColor(themeColors[:foregroundSecondaryColor], themeColors[:backgroundColor]);
-			}
-			
+			dc.setColor(themeColors[:foregroundSecondaryColor], themeColors[:backgroundColor]);			
 		} else if (_side == DATABAR_OUTER_LEFT_TOP && !themeColors[:isColorful]) {
 			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 		} else {

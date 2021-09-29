@@ -12,10 +12,9 @@
     <property id="DataFieldRight" type="number">6</property>
 
     <property id="DataBarWidth" type="number">6</property> <!-- Watch screen shape and size dependent-->
-    <property id="UnfilledDataBar" type="boolean">true</property>
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
-    <property id="SunriseSunsetDrawing" type="boolean">false</property>
+    <property id="SunriseSunsetDrawing" type="boolean">false</property>  <!-- Watch screen shape dependent-->
 
     <property id="MotivationalQuoteProperty" type="string"></property>
     <property id="MotivationalQuoteChangeInterval" type="number">60</property>

@@ -126,11 +126,10 @@
 
     
     <string id="MilitaryFormatTitle">Military Format (only for 24 Hour Time)</string>
-    <string id="UpdateSecondInLowPowerModeTitle">Updating Second in Low Power Mode (consumes more battery and can cause lags in some devices)</string>
+    <string id="UpdateSecondInLowPowerModeTitle">Updating Second in Low Power Mode (drains the battery faster)</string>
 
     <string id="CaloriesGoalTitle">Burned Calories Goal for the day (kCal)</string>
 	<string id="CaloriesGoalPrompt">Outside 1000-10000 will trigger automatic average calculation</string>
-	<string id="CaloriesGoalError">Only numbers between 1000 and 10000 is accepted as manual</string>
 
     <string id="DataFieldMiddleTitle">Middle Data Field</string>
     <string id="DataFieldLeftTitle">Left Data Field</string>
@@ -139,7 +138,7 @@
     <string id="DataBarOuterLeftTopTitle">Outer/Left/Top DataBar</string>
     <string id="DataBarInnerRightBottomTitle">Inner/Right/Bottom DataBar</string>
 
-    <string id="MotivationalQuoteTitle">Display your unique Motivational Quote (Letters only in UPPERCASE, leave empty for automatic selection)</string>
+    <string id="MotivationalQuoteTitle">Display your unique Motivational Quote (Less than 50 characters, letters only in UPPERCASE, leave empty for automatic selection)</string>
     <string id="MotivationalQuoteChangeIntervalTitle">Motivational Quote Change Interval</string>
     <string id="Min15">15 minutes</string>
     <string id="Min30">30 minutes</string>

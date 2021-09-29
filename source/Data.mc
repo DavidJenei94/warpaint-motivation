@@ -280,7 +280,7 @@ class Data {
 				
 				if (temperature != -1) {
 					if (_deviceSettings.temperatureUnits == System.UNIT_STATUTE) {
-						temperature = ((temperature * (9.0 / 5)) + 32).format("%.1f");
+						temperature = ((temperature * (9.0 / 5)) + 32).toNumber();
 					}
 					
 					condition = getWeatherIcon(currentCondition.condition);
@@ -290,7 +290,7 @@ class Data {
 			}
     	}
 
-    	return [-1, "O"];
+    	return [-1, "R"];
     }
 
 	//! Get weather icon
@@ -371,7 +371,7 @@ class Data {
     			break;
 			case Weather.CONDITION_UNKNOWN:
 			default:
-    			iconText = " ";
+    			iconText = "R";
     			break;
     	}
     	
