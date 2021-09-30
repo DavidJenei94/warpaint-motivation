@@ -80,6 +80,10 @@ class MotivationField extends WatchUi.Text {
 	//! @param motivation the motivational quote in string
 	//! @return Array of the splitted part of motivational quote
 	static function splitMotivationalQuote(dc as Dc, motivation as String) as Array<String> {
+		
+		// Manual value for display purposes
+		motivation = "POWERFUL|MOTIVATIONAL|QUOTE";
+
 		// When starting the app (until storage problem is solved)
 		if (motivation == null) {
 			motivation = getRandomHardcodedMotivationalQuote();

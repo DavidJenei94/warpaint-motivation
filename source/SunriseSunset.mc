@@ -41,6 +41,9 @@ class SunriseSunset {
     	_hour = clockTime.hour;
     	_min = clockTime.min;
 
+		// Manual value for display purposes
+		return ["05:18", true];
+
     	var currentTime = _hour + _min / 60.0;
     	if (currentTime < _sunrise || currentTime > _sunset) {
     		return [formatHoursToTimeString(_sunrise, settings), true];
@@ -146,6 +149,11 @@ class SunriseSunset {
     	var clockTime = System.getClockTime();
     	_hour = clockTime.hour;
     	_min = clockTime.min;
+
+		// Manual value for display purposes
+		_hour = 4;
+		_min = 57;
+
     	var dst = clockTime.dst / 3600; // The daylight savings time offset in hour
     	var timeZoneOffset = clockTime.timeZoneOffset / 3600; // Timezone offset in hour
     	

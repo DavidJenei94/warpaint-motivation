@@ -60,6 +60,10 @@ class Time extends WatchUi.Text {
 	function drawAmPm(dc as Dc, settings as DeviceSettings) as Void {
 		if (!settings.is24Hour) {
 			_AmPm = _clockTime.hour >= 12 ? "PM" : "AM";
+
+			// Manual value for display purposes
+			_AmPm = "AM";
+
 			var x = dc.getWidth() / 2 - getTimeWidth(dc) - (dc.getTextWidthInPixels(_AmPm, smallFont) / 2 + 3); // 3 pixels from time
 			var y = dc.getHeight() / 2;
 			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
@@ -95,7 +99,11 @@ class Time extends WatchUi.Text {
 	private function refreshTimeData(settings as DeviceSettings) as Void {
 		_clockTime = System.getClockTime();
 		_time = calculateTime(settings);
-		_seconds = _clockTime.sec.toString();			
+		_seconds = _clockTime.sec.toString();	
+
+		// Manual value for display purposes
+		_time = "04:57";
+		_seconds = "38";
 	}
 	
 	//! Get current time according to settings
