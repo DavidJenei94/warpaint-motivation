@@ -77,6 +77,10 @@ class SunriseSunset {
 		if (!_successfulCalculation) {
 			return;
 		}
+
+		// Manual value for display purposes
+		_sunrise = 5.3;
+		_sunset = 18.3;
 		
 		// center of arcs = center of round screen
     	var arcX = dc.getWidth() / 2;
@@ -119,6 +123,10 @@ class SunriseSunset {
     	dc.setColor(color, themeColors[:backgroundColor]);
     	
     	var currentTime = _hour + _min / 60.0;
+		
+		// Manual value for display purposes
+		currentTime = 4.95;
+
     	var degree = 180 - (currentTime * (360.0 / 24.0));
     	var radians = Math.toRadians(degree);
     	var distance = arcX - (dataBarWidth / 2) + 1; // distance of the center of the sun from the center of screen

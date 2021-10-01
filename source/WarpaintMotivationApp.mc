@@ -95,7 +95,8 @@ class WarpaintMotivationApp extends Application.AppBase {
         Theme.selectThemeColors();
         myView.loadFonts();
         
-        return [ myView, new WarpaintMotivationDelegate() ] as Array<Views or InputDelegates>;
+        //return [ myView, new WarpaintMotivationDelegate() ] as Array<Views or InputDelegates>;
+        return [ myView ] as Array<Views or InputDelegates>;
     }
 
     // New app settings have been received so trigger a UI update

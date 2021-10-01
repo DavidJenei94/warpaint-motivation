@@ -52,7 +52,7 @@ class Data {
 					values[:dataMaxValue] = steps[1];
 
 					// Manual value for display purposes
-					values[:displayData] = "5555";
+					values[:displayData] = "5456";
 					values[:currentData] = 4555;
 					values[:dataMaxValue] = 8000;
 
@@ -66,7 +66,7 @@ class Data {
 					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toNumber().toString() + "%";
 
 					// Manual value for display purposes
-					values[:displayData] = "72";
+					values[:displayData] = "72%";
 					values[:currentData] = 72.0;
 
 					values[:dataMaxValue] = battery[1];
@@ -105,8 +105,8 @@ class Data {
 					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
 
 					// Manual value for display purposes
-					values[:displayData] = "23";
-					values[:currentData] = 23;
+					values[:displayData] = "8";
+					values[:currentData] = 8;
 
 					values[:dataMaxValue] = floorsClimbed[1];
 					values[:iconText] = "G";
@@ -135,7 +135,7 @@ class Data {
 					values[:displayData] = "5.86K";
 
 					values[:iconText] = "I";
-					values[:iconColor] = Graphics.COLOR_LT_GRAY;
+					values[:iconColor] = Graphics.COLOR_GREEN;
 					break;	
 				case DATA_WEATHER:
 					var weather = getCurrentWeather();
@@ -144,7 +144,7 @@ class Data {
 
 					// Manual value for display purposes
 					values[:displayData] = "17º";
-					values[:iconText] = "L";
+					values[:iconText] = "O";
 
 					values[:iconColor] = Graphics.COLOR_BLUE;
 					break;
