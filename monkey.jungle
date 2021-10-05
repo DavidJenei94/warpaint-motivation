@@ -14,6 +14,7 @@ rectangle.excludeAnnotations = $(rectangle.excludeAnnotations);roundShape;semiro
 # fr45 - 8 colors, low memory (48 kb)
 # garminswim2 - 8 colors, low memory (48 kb)
 # fr55 - 8 colors (no gray or orange)
+# vívolife - Low number of features
 
 
 # Exclude background annotation on devices CIQ 1.x (background_method) 
