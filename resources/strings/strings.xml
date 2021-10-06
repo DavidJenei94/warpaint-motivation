@@ -135,10 +135,11 @@
     <string id="DataFieldLeftTitle">Left Data Field</string>
     <string id="DataFieldRightTitle">Right Data Field</string>
 
-    <string id="DataBarOuterLeftTopTitle">Outer/Left/Top DataBar</string>
-    <string id="DataBarInnerRightBottomTitle">Inner/Right/Bottom DataBar</string>
+    <string id="DataBarOuterLeftTopTitle">Outer DataBar</string>
+    <string id="DataBarInnerRightBottomTitle">Inner DataBar</string>
 
-    <string id="MotivationalQuoteTitle">Display your unique Motivational Quote (Less than 50 characters, letters only in UPPERCASE, leave empty for automatic selection)</string>
+    <string id="MotivationalQuoteTitle">Display your unique Motivational Quote</string>
+    <string id="MotivationalQuotePrompt">Less than 50 characters, letters only in UPPERCASE, leave empty for automatic selection</string>
     <string id="MotivationalQuoteChangeIntervalTitle">Motivational Quote Change Interval</string>
     <string id="Min15">15 minutes</string>
     <string id="Min30">30 minutes</string>

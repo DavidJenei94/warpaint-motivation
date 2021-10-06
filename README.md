@@ -50,6 +50,9 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.0.1
+- Correct unique Motivational Quote prompt in Settings.
+- Correct databar titles in Settings.
 ### 1.0.0
 - Public release.
 
@@ -59,5 +62,4 @@ This app requires access to:
 - Run in the background when it is not active (potentially affecting battery life)
 - Send/receive information to/from the Internet
 - GPS location
-- Heart rate, barometer, temperature, and altitude history
 - Your Garmin Connect™ fitness profile

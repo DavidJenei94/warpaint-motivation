@@ -137,7 +137,7 @@
         <settingConfig type="numeric" />
     </setting>
 
-    <setting propertyKey="@Properties.MotivationalQuoteProperty" title="@Strings.MotivationalQuoteTitle">
+    <setting propertyKey="@Properties.MotivationalQuoteProperty" title="@Strings.MotivationalQuoteTitle" prompt="@Strings.MotivationalQuotePrompt">
         <settingConfig type="alphaNumeric" maxLength="60"/>
     </setting>
 
