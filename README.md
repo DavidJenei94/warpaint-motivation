@@ -50,6 +50,9 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.0.1
+- Correct unique Motivational Quote prompt in Settings.
+- Correct databar titles in Settings.
 ### 1.0.0
 - Public release.
 
