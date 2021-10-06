@@ -59,5 +59,4 @@ This app requires access to:
 - Run in the background when it is not active (potentially affecting battery life)
 - Send/receive information to/from the Internet
 - GPS location
-- Heart rate, barometer, temperature, and altitude history
 - Your Garmin Connect™ fitness profile
