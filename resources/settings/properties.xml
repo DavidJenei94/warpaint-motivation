@@ -17,7 +17,7 @@
     <property id="SunriseSunsetDrawing" type="boolean">false</property>  <!-- Watch screen shape dependent-->
 
     <property id="MotivationalQuoteProperty" type="string"></property>
-    <property id="MotivationalQuoteChangeInterval" type="number">60</property>
+    <property id="MotivationalQuoteChangeInterval" type="number">180</property>
     <property id="FirstMotivationLineWidthPercent" type="float">0.78</property> <!-- Watch screen shape and size dependent-->
     <property id="SecondMotivationLineWidthPercent" type="float">0.67</property> <!-- Watch screen shape and size dependent-->
     <property id="ThirdMotivationLineWidthPercent" type="float">0.47</property> <!-- Watch screen shape and size dependent-->
