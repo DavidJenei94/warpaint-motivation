@@ -27,7 +27,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
         WatchFace.initialize();
 		_deviceSettings = System.getDeviceSettings();
         _isAwake = true;
-		_isMotivationalQuoteSet = false;
+		_isMotivationalQuoteSet = true;
 		_isSunriseSunsetSet = false;
         _partialUpdatesAllowed = (WatchUi.WatchFace has :onPartialUpdate);
         _data = new Data(_deviceSettings);

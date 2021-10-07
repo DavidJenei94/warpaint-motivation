@@ -50,6 +50,10 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.0.3
+- Remove Vivolife support because of low number of features.
+### 1.0.2
+- Correct motivational quote change interval issue.
 ### 1.0.1
 - Correct unique Motivational Quote prompt in Settings.
 - Correct databar titles in Settings.
