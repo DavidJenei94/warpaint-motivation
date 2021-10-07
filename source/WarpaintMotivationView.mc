@@ -236,9 +236,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			// If motivational quote is null or the minute is the selected one, refresh quote
 			var intervalToChangeQuote = motivationalQuoteChangeInterval > 60 ? (motivationalQuoteChangeInterval / 60) : motivationalQuoteChangeInterval;
 			var remainder = motivationalQuoteChangeInterval > 60 ? clockTime.hour % intervalToChangeQuote : clockTime.min % intervalToChangeQuote;
-			System.println("motivationalQuote before setMotivationalQuote in View: " + motivationalQuote);
 			if (motivationalQuote == null || (!_isMotivationalQuoteSet && remainder == 0)) {
-				System.println("motivationalQuote in setMotivationalQuote in View: " + motivationalQuote);
 				MotivationField.setMotivationalQuote();
 				_splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
 				_isMotivationalQuoteSet = true;
@@ -247,7 +245,6 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				// Change back to false after the minute to prevent updating through every second (if not in low power mode)
 				_isMotivationalQuoteSet = false;
 			}
-			System.println("motivationalQuote after setMotivationalQuote in View: " + motivationalQuote);
 
 			// currentTime = System.getTimer();
 			// System.println("splitMotivationalQuote Ellapsed time: " + (currentTime - startTime) + " ms");

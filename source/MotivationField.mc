@@ -180,14 +180,11 @@ class MotivationField extends WatchUi.Text {
 
 	//! Set the motivational Quote
 	static function setMotivationalQuote() as Void {
-		System.println("motivationalQuote in setMotivationalQuote: " + motivationalQuote);
 		if (Toybox.Application has :Storage) {
             motivationalQuoteArray = Storage.getValue("MotivationalQuoteArray");
         } else {
             motivationalQuoteArray = getApp().getProperty("MotivationalQuoteArray");
         }
-
-		System.println("motivationalQuoteArray.size in setMotivationalQuote: " + motivationalQuoteArray.size());
 		
 		var motivation = null;
 		if (motivationalQuoteProperty.equals("")) {
@@ -206,21 +203,15 @@ class MotivationField extends WatchUi.Text {
 					}
 				}
 
-				System.println("motivationalQuote in setMotivationalQuote after array check: " + motivationalQuote);
-				System.println("motivation in setMotivationalQuote after array check: " + motivation);
-
 				if (motivation == null) {
 					motivation = MotivationField.getRandomHardcodedMotivationalQuote();
 				}
-				System.println("motivationalQuote in setMotivationalQuote after null check: " + motivationalQuote);
-				System.println("motivation in setMotivationalQuote after null check: " + motivation);
 			}
 		} else {
 			motivation = getUserMotivationalQuote(motivationalQuoteProperty);
 		}
 
 		motivationalQuote = motivation;
-		System.println("motivationalQuote in after setMotivationalQuote: " + motivationalQuote);
 
 		// Did not work before for some reason??? :
 		// Same issue as https://forums.garmin.com/developer/connect-iq/i/bug-reports/strange-symbol-not-found-error

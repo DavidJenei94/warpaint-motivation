@@ -108,9 +108,7 @@ class WarpaintMotivationApp extends Application.AppBase {
         // Change motivational quote when settings are changed 
         // with set the motivationalQuote to be null 
         // and forcing to set new motivational quote in View
-        System.println("motivationalQuote before onSettingsChanged: " + motivationalQuote);
         motivationalQuote = null;
-        System.println("motivationalQuote after onSettingsChanged null: " + motivationalQuote);
 
         WatchUi.requestUpdate();
     }
