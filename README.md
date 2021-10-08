@@ -19,19 +19,20 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 ### Settings you can change (it depends on what the watch supports):
 - Select a theme from more than 100 (some devices support less color and they have a limited number of available themes). You can find all the themes on the 'Available themes' sheet on the 'Warpaint Motivation (WpM) - Garmin watch face help' spreadsheet.
 - Enable Military time format when the 24 hour option is selected.
-- Update every second also when in low power mode (It drains the battery faster and does not work for AMOLED watches beacuse they require burn in protection).
+- Seconds display options: No display / Display only in active mode / Display seconds also when in low power mode (It drains the battery faster and does not work for AMOLED watches beacuse they require burn in protection).
 - Set a Calorie goal which will serve as the max value on the databar (If 0, an automated calculation will be done according to your activity level).
 - Set a uniqe motivational quote to display (It is advised to use less than 50 characters, which are needed to written in UPPERCASE and besides English letters and numbers the following characters are available: ' !"%&'()+,-./:;=?_º'. Use the | character to indicate the row split, otherwise it is automatically splitted according to length and spaces).
-- Set how frequent the motivational quote is changed (15 min/30 min/60 min/2 hours/3 hours/4 hours/8 hours/12 hours).
-- Data fields: Battery, Steps, Heart Rate, Calories, Sunrise/Sunset, Distance, Floors climbed, Active minutes, Weather, Notifications.
-- Databars: Battery, Steps, Calories, Floors climbed, Active minutes.
+- Set how frequent the motivational quote is changed (15 min/30 min/60 min/2 hours/3 hours (default)/4 hours/8 hours/12 hours).
+- Data fields: Battery, Steps, Heart Rate, Calories, Sunrise/Sunset, Distance, Floors climbed, Active minutes, Weather, Notifications, Alarms, Remaining Days, Move Bar, Meters climbed, Off.
+- You can set a date for the 'Remaining days to selected date' data field.
+- Databars: Battery, Steps, Calories, Floors climbed, Active minutes, Move Bar, Off.
 - On round shape watches on the place of the outer databar you can set the Sunset/Sunrise position in a 24-hour splitted circle and the position of the sun.
 
 ### Notes/FAQ:
 - All possibilities to change the settings and customize the watch face are present on the following page: https://apps.garmin.com/settingsHelp. 
 - The 12/24 hour mode and Statute/metric units can be changed directly on the device in Settings > System.
 - Motivational quotes are collected via an internet connected mobile phone through bluetooth connection from a continuously growing collection of currently more than 120 quotes every hour (collects more than one quote, which are put in a queue to use in case of temporary connection errors). If no connection is available and the queue is empty, or the device CIQ level is 1.4.x or below, the motivational quote is selected from a pool of 40 defaults.
-- You can change the motivational quote manually by changing the settings.
+- You can change the currently displayed motivational quote manually by changing any of the settings.
 - If Next Sunrise/Sunset data field shows '--' or the Sunrise/Sunset databar is empty, start any activities until you are located (GPS turns to green). Now the Sunrise/Sunset data will be updated in maximum of 30 minutes on the watch face.
 - If other data field shows '--', check the device support sheet mentioned before. If it should be available please contact me because I might made a mistake in the sheet.
 - Seconds normally hide after entering low power mode (usually after 10 seconds). You can enable to always show the seconds on some devices (it can consume the battery more). The available devices for this option are in the device support sheet in the 'Update seconds in low power mode' column.
@@ -50,6 +51,14 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.1.0
+- New data field options: Meters climbed, Alarms count, Remaining days to a selected date, Move bar, Off (Display nothing)
+- New databar options: Move bar, Off
+- New option to never show seconds
+- Battery databar will now turn red under 20%
+- Calories Goal error message and min max are adjusted
+- Solve notifications does not refresh issue
+- Correct approach60, approach62 and fr735xt first time launch issues
 ### 1.0.3
 - Remove Vivolife support because of low number of features.
 ### 1.0.2
