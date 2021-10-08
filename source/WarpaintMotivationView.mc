@@ -237,7 +237,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     //! @param dc Device context
 	(:partial_update)
     public function onPartialUpdate(dc as Dc) as Void {
-		if (displaySecond == 2) {
+		if (displaySecond == 2 && System.getClockTime().sec != 0) {
 	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc, _deviceSettings);
 	  
             // Set clip to the region of bounding box and which only updates that

@@ -17,7 +17,6 @@ var themeColors = {
     :isColorful => false
 };
 
-//var updatingSecondsInLowPowerMode as Boolean;
 var displaySecond as Integer;
 var militaryFormat as Boolean;
 
