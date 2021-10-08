@@ -49,7 +49,12 @@
 			<!--listEntry value="6">@Strings.FloorsClimbed</listEntry-->
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<!--listEntry value="8">@Strings.Weather</listEntry-->
-			<listEntry value="9">@Strings.NotificationCount</listEntry>
+			<!--listEntry value="9">@Strings.NotificationCount</listEntry-->
+			<!--listEntry value="10">@Strings.AlarmCount</listEntry-->
+			<!--listEntry value="11">@Strings.MoveBar</listEntry-->
+			<!--listEntry value="12">@Strings.RemainingTime</listEntry-->
+			<!--listEntry value="13">@Strings.MetersClimbed</listEntry-->
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>	
 	<setting propertyKey="@Properties.DataFieldLeft" title="@Strings.DataFieldLeftTitle">
@@ -63,7 +68,12 @@
 			<!--listEntry value="6">@Strings.FloorsClimbed</listEntry-->
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<!--listEntry value="8">@Strings.Weather</listEntry-->
-			<listEntry value="9">@Strings.NotificationCount</listEntry>	
+			<!--listEntry value="9">@Strings.NotificationCount</listEntry-->
+			<!--listEntry value="10">@Strings.AlarmCount</listEntry-->
+			<!--listEntry value="11">@Strings.MoveBar</listEntry-->
+			<!--listEntry value="12">@Strings.RemainingTime</listEntry-->
+			<!--listEntry value="13">@Strings.MetersClimbed</listEntry-->
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>	
 	<setting propertyKey="@Properties.DataFieldRight" title="@Strings.DataFieldRightTitle">
@@ -77,7 +87,12 @@
 			<!--listEntry value="6">@Strings.FloorsClimbed</listEntry-->
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<!--listEntry value="8">@Strings.Weather</listEntry-->
-			<listEntry value="9">@Strings.NotificationCount</listEntry>
+			<!--listEntry value="9">@Strings.NotificationCount</listEntry-->
+			<!--listEntry value="10">@Strings.AlarmCount</listEntry-->
+			<!--listEntry value="11">@Strings.MoveBar</listEntry-->
+			<!--listEntry value="12">@Strings.RemainingTime</listEntry-->
+			<!--listEntry value="13">@Strings.MetersClimbed</listEntry-->
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>
 
@@ -88,6 +103,8 @@
 			<listEntry value="3">@Strings.Calories</listEntry>
 			<!--listEntry value="6">@Strings.FloorsClimbed</listEntry-->
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
+			<!--listEntry value="11">@Strings.MoveBar</listEntry-->
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>
 	<setting propertyKey="@Properties.DataBarInnerRightBottom" title="@Strings.DataBarInnerRightBottomTitle">
@@ -97,6 +114,8 @@
 			<listEntry value="3">@Strings.Calories</listEntry>
 			<!--listEntry value="6">@Strings.FloorsClimbed</listEntry-->
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
+			<!--listEntry value="11">@Strings.MoveBar</listEntry-->
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>
 	

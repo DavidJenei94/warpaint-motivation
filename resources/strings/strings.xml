@@ -129,11 +129,16 @@
     <string id="UpdateSecondInLowPowerModeTitle">Updating Second in Low Power Mode (drains the battery faster)</string>
 
     <string id="CaloriesGoalTitle">Burned Calories Goal for the day (kCal)</string>
-	<string id="CaloriesGoalPrompt">Outside 1000-10000 will trigger automatic average calculation</string>
+	<string id="CaloriesGoalPrompt">Valid value between 0 and 10000. 0 will trigger automatic average calculation</string>
+	<string id="CaloriesGoalError">Values accepted only between 0 and 10000</string>
 
     <string id="DataFieldMiddleTitle">Middle Data Field</string>
     <string id="DataFieldLeftTitle">Left Data Field</string>
     <string id="DataFieldRightTitle">Right Data Field</string>
+
+    <string id="RemainingTimeToDateTitle">Select the date to calculate the remaining days</string>
+    <string id="RemainingTimeToDatePrompt">Only works with the 'Remaining days to selected date' data field</string>
+    <string id="RemainingTimeToDateError">Date between 10.10.2021 and 01.01.2038</string>
 
     <string id="DataBarOuterLeftTopTitle">Outer DataBar</string>
     <string id="DataBarInnerRightBottomTitle">Inner DataBar</string>
@@ -160,6 +165,11 @@
 	<string id="ActiveMinutesWeek">Active minutes of the week</string>
 	<string id="Weather">Current Weather</string>
 	<string id="NotificationCount">Notifications Count</string>
+	<string id="AlarmCount">Alarm Count</string>
+	<string id="MoveBar">Move Bar</string>
+	<string id="RemainingTime">Remaining days to selected date</string>
+	<string id="MetersClimbed">Meters Climbed</string>
+	<string id="Off">Off</string>
 
     <string id="SunriseSunsetDrawingTitle">Sunrise and Sunset around watchface</string>
 

@@ -24,6 +24,8 @@ var selectedValueForDataFieldMiddle as Integer;
 var selectedValueForDataFieldLeft as Integer;
 var selectedValueForDataFieldRight as Integer;
 
+var selectedToDate as Number;
+
 var dataBarWidth as Integer;
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
@@ -171,6 +173,8 @@ class WarpaintMotivationApp extends Application.AppBase {
         selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
         sunriseSunsetDrawingEnabled = Properties.getValue("SunriseSunsetDrawing");
 
+        selectedToDate = Properties.getValue("RemainingTimeToDate");
+
         totalCaloriesGoal = Properties.getValue("CaloriesGoal");
 
         motivationalQuoteProperty = Properties.getValue("MotivationalQuoteProperty");
@@ -204,6 +208,8 @@ class WarpaintMotivationApp extends Application.AppBase {
         selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
         selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
         sunriseSunsetDrawingEnabled = getApp().getProperty("SunriseSunsetDrawing");
+
+        selectedToDate = getApp().getProperty("RemainingTimeToDate");
 
         totalCaloriesGoal = getApp().getProperty("CaloriesGoal");
 

@@ -10,6 +10,7 @@
     <property id="DataFieldMiddle" type="number">4</property>
     <property id="DataFieldLeft" type="number">2</property>
     <property id="DataFieldRight" type="number">6</property>
+    <property id="RemainingTimeToDate" type="number">1640995200</property>
 
     <property id="DataBarWidth" type="number">6</property> <!-- Watch screen shape and size dependent-->
     <property id="DataBarOuterLeftTop" type="number">0</property>

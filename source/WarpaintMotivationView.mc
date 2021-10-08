@@ -171,7 +171,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			}
 
 			// Set data bars
-			var outerLeftTopValues = !sunriseSunsetDrawingEnabled ? _data.getDataForDataField(selectedValueForDataBarOuterLeftTop) : null;
+			var outerLeftTopValues = !sunriseSunsetDrawingEnabled ? _data.getDataForDataField(selectedValueForDataBarOuterLeftTop) : {:valid => true};
 			var innerRightBottomValues = _data.getDataForDataField(selectedValueForDataBarInnerRightBottom);
 			
 			var screenShape = _deviceSettings.screenShape;

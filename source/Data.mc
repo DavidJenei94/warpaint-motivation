@@ -123,9 +123,9 @@ class Data {
 					break;					
 				case DATA_MOVEBAR:
 					var moveBarLevel = getMoveBarLevel();
-					values[:currentData] = moveBarLevel[0] == 0 ? 0 : moveBarLevel[0] + 4;
+					values[:currentData] = moveBarLevel[0] == 0 ? 0 : moveBarLevel[0] + 3;
 					values[:displayData] = moveBarLevel[0] == -1 ? _errorDisplay : "";
-					values[:dataMaxValue] = ActivityMonitor.MOVE_BAR_LEVEL_MAX + 4;
+					values[:dataMaxValue] = ActivityMonitor.MOVE_BAR_LEVEL_MAX + 3;
 					values[:iconText] = moveBarLevel[1];
 					values[:iconColor] = Graphics.COLOR_GREEN;
 					values[:barColor] = Graphics.COLOR_GREEN;
@@ -164,7 +164,7 @@ class Data {
     	var caloriesGoal = totalCaloriesGoal;
 
     	// Caloriesgoal calculation has no meaning if no calorie data was collected or user selected a reasonable range
-    	if (calories != -1 && (caloriesGoal == null || caloriesGoal < 1000 || caloriesGoal > 10000)) {
+    	if (calories != -1 && (caloriesGoal == null || caloriesGoal < 1 || caloriesGoal > 10000)) {
 	    	var weight = _userProfile.weight; // g
 	    	var height = _userProfile.height; // cm
 	    	var birthYear = _userProfile.birthYear; // year
@@ -287,7 +287,8 @@ class Data {
     
     //API 2.1.0
 	//! get floors climbed for current day
-    //! @return array of floors climbed and floors climbed goal 
+    //! @return array of floors climbed and floors climbed goal
+	(:floorsClimbed)
     private function getFloorsClimbed () as Array<Number or String> {
     	if (_info has :floorsClimbed) {
 	    	var floorsClimbed  = _info.floorsClimbed  != null ? _info.floorsClimbed  : -1;
@@ -412,6 +413,7 @@ class Data {
 	//! Get the notification count
 	//! It should refresh the settings to show new notifications (other fields are changed outside of watch face so reloaded automatically)
 	//! @return notification count
+	(:notification)
     private function getNotificationCount() as Number {
 		_deviceSettings = System.getDeviceSettings();
     	return _deviceSettings.notificationCount  != null ? _deviceSettings.notificationCount  : -1;
@@ -419,12 +421,14 @@ class Data {
 
 	//! Get the alarm count
 	//! @return alarm count
+	(:alarm)
     private function getAlarmCount() as Number {
     	return _deviceSettings.alarmCount  != null ? _deviceSettings.alarmCount  : -1;
     }
 
 	//! Get the moveBar level
 	//! @return moveBar level and icon
+	(:moveBar)
     private function getMoveBarLevel() as Array<Number or String> {
     	var moveBarLevel = _info.moveBarLevel  != null ? _info.moveBarLevel  : -1;
 		var moveBarIcon = "U";
@@ -443,18 +447,9 @@ class Data {
 
 	//! Get the remaining day to a date
 	//! @return remaining day
+	(:remainingTime)
     private function getRemainingTime() as Number {
-		var selectedDateString = "10.10.2021"; // max: "19.01.2038", selectedDate.value() = 2147472000
-		var day = selectedDateString.substring(0, 2).toNumber();
-		var month = selectedDateString.substring(3, 5).toNumber();
-		var year = selectedDateString.substring(6, 10).toNumber();
-		var options = {
-			:year   => year,
-			:month  => month,
-			:day    => day
-		};
-		var selectedDate = Gregorian.moment(options);
-
+		var selectedDate = new Time.Moment(selectedToDate);
 		var today = new Time.Moment(Time.today().value());
 
 		if (selectedDate.value() < today.value()) {
@@ -470,6 +465,7 @@ class Data {
     //API 2.1.0
 	//! get meters climbed for current day
     //! @return meters climbed
+	(:floorsClimbed)
     private function getMetersClimbed () as Array<Number or String> {
 		return _info.metersClimbed != null ? _info.metersClimbed.toNumber()  : -1;
     }
