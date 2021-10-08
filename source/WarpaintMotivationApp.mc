@@ -17,7 +17,8 @@ var themeColors = {
     :isColorful => false
 };
 
-var updatingSecondsInLowPowerMode as Boolean;
+//var updatingSecondsInLowPowerMode as Boolean;
+var displaySecond as Integer;
 var militaryFormat as Boolean;
 
 var selectedValueForDataFieldMiddle as Integer;
@@ -162,7 +163,7 @@ class WarpaintMotivationApp extends Application.AppBase {
     private function setGlobalVariablesWithStorage() as void {
         theme = Properties.getValue("Theme");
 
-        updatingSecondsInLowPowerMode = Properties.getValue("UpdateSecondInLowPowerMode");
+        displaySecond = Properties.getValue("DisplaySecond");
         militaryFormat = Properties.getValue("UseMilitaryFormat");
 
         dataBarWidth = Properties.getValue("DataBarWidth");
@@ -198,7 +199,7 @@ class WarpaintMotivationApp extends Application.AppBase {
     private function setGlobalVariablesWithoutStorage() as void {
         theme = getApp().getProperty("Theme");
 
-        updatingSecondsInLowPowerMode = getApp().getProperty("UpdateSecondInLowPowerMode");
+        displaySecond = getApp().getProperty("DisplaySecond");
         militaryFormat = getApp().getProperty("UseMilitaryFormat");
 
         dataBarWidth = getApp().getProperty("DataBarWidth");

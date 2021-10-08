@@ -223,10 +223,10 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
 			// Draw seconds
 			if (clockTime.sec != 0) {
-				if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
+				if (_partialUpdatesAllowed && displaySecond == 2) {
 					// If this device supports partial updates
 					onPartialUpdate(dc);
-				} else if (_isAwake) {
+				} else if (_isAwake && displaySecond != 0) {
 					viewDrawables[:timeText].drawSeconds(dc, _deviceSettings);
 				}
 			}
@@ -237,7 +237,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     //! @param dc Device context
 	(:partial_update)
     public function onPartialUpdate(dc as Dc) as Void {
-		if (updatingSecondsInLowPowerMode) {
+		if (displaySecond == 2) {
 	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc, _deviceSettings);
 	  
             // Set clip to the region of bounding box and which only updates that

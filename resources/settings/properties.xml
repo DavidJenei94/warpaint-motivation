@@ -3,7 +3,7 @@
 	<property id="Theme" type="number">3</property>
 
     <property id="UseMilitaryFormat" type="boolean">false</property>
-    <property id="UpdateSecondInLowPowerMode" type="boolean">false</property> <!-- API dependent-->
+    <property id="DisplaySecond" type="number">1</property> <!-- API dependent-->
 
     <property id="CaloriesGoal" type="number">0</property>
     

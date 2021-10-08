@@ -126,7 +126,11 @@
 
     
     <string id="MilitaryFormatTitle">Military Format (only for 24 Hour Time)</string>
-    <string id="UpdateSecondInLowPowerModeTitle">Updating Second in Low Power Mode (drains the battery faster)</string>
+
+    <string id="DisplaySecondTitle">Show Seconds options</string>
+    <string id="DisplaySecondOff">Do not show seconds</string>
+    <string id="DisplaySecondActive">Show seconds when watch is active</string>
+    <string id="DisplaySecondAlways">Always show seconds (drains the battery faster)</string>
 
     <string id="CaloriesGoalTitle">Burned Calories Goal for the day (kCal)</string>
 	<string id="CaloriesGoalPrompt">Valid value between 0 and 10000. 0 will trigger automatic average calculation</string>
