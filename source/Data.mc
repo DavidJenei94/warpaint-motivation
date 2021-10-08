@@ -136,7 +136,6 @@ class Data {
 					values[:iconText] = "T";
 					values[:iconColor] = Graphics.COLOR_BLUE;
 					break;
-				case DATA_SUNRISE_SUNSET:
 				case DATA_METERS_CLIMBED:
 					var metersClimbed = getMetersClimbed();
 					values[:displayData] = metersClimbed == -1 ? _errorDisplay : metersClimbed.toString();
