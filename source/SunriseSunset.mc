@@ -24,6 +24,7 @@ class SunriseSunset {
     }
 
 	//! Refresh the sunrise and sunset data
+	(:sunriseSunset)
 	function refreshSunsetSunrise() as Void {
 		 _successfulCalculation = calculateSunriseSunset();
 	}
@@ -32,6 +33,7 @@ class SunriseSunset {
 	//! @param settings DeviceSettings
 	//! @return array of the next sunrise or sunset (according to current time) in string 
 	//! and a bool value if it is sunrise or not
+	(:sunriseSunset)
     function getNextSunriseSunset(settings as DeviceSettings) as Array<Number or String or Boolean> {
 		if (!_successfulCalculation) {
 			return [-1, true];
@@ -53,6 +55,7 @@ class SunriseSunset {
 	//! @param time the hour in Float
 	//! @param settings DeviceSettings
 	//! @return formatted sunrise or sunset in string
+	(:sunriseSunset)
     private function formatHoursToTimeString(time as Number, settings as DeviceSettings) as String {
     	var hour = Math.floor(time);
     	var min = (time - hour) * 100 * 0.6;
@@ -132,6 +135,7 @@ class SunriseSunset {
 	//! Calculates sunrise and sunset values according to date/time and location
 	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
 	//! @return boolean value if the calculation is successful or not
+	(:sunriseSunset)
     private function calculateSunriseSunset() as Boolean {  
 		setCoordinates();
 		var latitude = 0.0;
@@ -250,6 +254,7 @@ class SunriseSunset {
     }
 
     //! Set coordinates for sunrise sunset calculation and store it in Storage or Appbase properties
+	(:sunriseSunset)
     private function setCoordinates() as Void {
         var location = Activity.getActivityInfo().currentLocation;
         if (location) {

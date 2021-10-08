@@ -471,7 +471,8 @@ class Data {
     }
 
 	//! Get the next sunrise or sunset
-	//! @return the next sunrise or sunset according to which is the next	
+	//! @return the next sunrise or sunset according to which is the next
+	(:sunriseSunset)	
     private function getNextSunriseSunsetTime() as String {
     	return sunriseSunset.getNextSunriseSunset(_deviceSettings);
 	}
