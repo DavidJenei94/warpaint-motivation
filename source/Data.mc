@@ -40,7 +40,8 @@ class Data {
 			:dataMaxValue => 0,
 			:iconText => " ",
 			:iconColor => themeColors[:foregroundPrimaryColor],
-			:barColor => themeColors[:foregroundPrimaryColor]
+			:barColor => themeColors[:foregroundPrimaryColor],
+			:valid => true
 		};
 
 		if (selectedType != null) {
@@ -61,7 +62,7 @@ class Data {
 					values[:dataMaxValue] = battery[1];
 					values[:iconText] = "D";
 					values[:iconColor] = Graphics.COLOR_YELLOW;
-					values[:barColor] = Graphics.COLOR_GREEN;
+					values[:barColor] = values[:currentData] > 20.0 ? Graphics.COLOR_GREEN : Graphics.COLOR_RED;
 					break;
 				case DATA_HEARTRATE:
 					var heartRate = getCurrentHeartRate();
@@ -114,11 +115,42 @@ class Data {
 					values[:iconText] = "J";
 					values[:iconColor] = Graphics.COLOR_PINK;
 					break;				
+				case DATA_ALARM:
+					var alarmCount = getAlarmCount();
+					values[:displayData] = alarmCount == -1 ? _errorDisplay : alarmCount.toString();
+					values[:iconText] = "S";
+					values[:iconColor] = Graphics.COLOR_PINK;
+					break;					
+				case DATA_MOVEBAR:
+					var moveBarLevel = getMoveBarLevel();
+					values[:currentData] = moveBarLevel[0] == 0 ? 0 : moveBarLevel[0] + 4;
+					values[:displayData] = moveBarLevel[0] == -1 ? _errorDisplay : "";
+					values[:dataMaxValue] = ActivityMonitor.MOVE_BAR_LEVEL_MAX + 4;
+					values[:iconText] = moveBarLevel[1];
+					values[:iconColor] = Graphics.COLOR_GREEN;
+					values[:barColor] = Graphics.COLOR_GREEN;
+					break;
+				case DATA_REMAINING_TIME:
+					var remainingTime = getRemainingTime();
+					values[:displayData] = remainingTime == -1 ? _errorDisplay : remainingTime.toString();
+					values[:iconText] = "T";
+					values[:iconColor] = Graphics.COLOR_BLUE;
+					break;
+				case DATA_SUNRISE_SUNSET:
+				case DATA_METERS_CLIMBED:
+					var metersClimbed = getMetersClimbed();
+					values[:displayData] = metersClimbed == -1 ? _errorDisplay : metersClimbed.toString();
+					values[:iconText] = "X";
+					values[:iconColor] = Graphics.COLOR_LT_GRAY;
+					break;
 				case DATA_SUNRISE_SUNSET:
 					var nextSunriseSunset = getNextSunriseSunsetTime();
 					values[:displayData] = nextSunriseSunset[0] == -1 ? _errorDisplay : nextSunriseSunset[0];
 					values[:iconText] = nextSunriseSunset[1] ? "E" : "F";
 					values[:iconColor] = Graphics.COLOR_YELLOW;
+					break;						
+				case DATA_OFF:
+					values[:valid] = false;
 					break;						
 			}
 		}
@@ -379,9 +411,68 @@ class Data {
     }
     
 	//! Get the notification count
+	//! It should refresh the settings to show new notifications (other fields are changed outside of watch face so reloaded automatically)
 	//! @return notification count
     private function getNotificationCount() as Number {
+		_deviceSettings = System.getDeviceSettings();
     	return _deviceSettings.notificationCount  != null ? _deviceSettings.notificationCount  : -1;
+    }
+
+	//! Get the alarm count
+	//! @return alarm count
+    private function getAlarmCount() as Number {
+    	return _deviceSettings.alarmCount  != null ? _deviceSettings.alarmCount  : -1;
+    }
+
+	//! Get the moveBar level
+	//! @return moveBar level and icon
+    private function getMoveBarLevel() as Array<Number or String> {
+    	var moveBarLevel = _info.moveBarLevel  != null ? _info.moveBarLevel  : -1;
+		var moveBarIcon = "U";
+		if (moveBarLevel > ActivityMonitor.MOVE_BAR_LEVEL_MIN) {
+			var extraLevels = moveBarLevel - 1;
+			moveBarIcon = "V";
+			if (extraLevels > 0) {
+				for (var i = 0; i < extraLevels; i++) {
+					moveBarIcon += "W";
+				}
+			}
+		}
+
+		return [moveBarLevel, moveBarIcon];
+    }
+
+	//! Get the remaining day to a date
+	//! @return remaining day
+    private function getRemainingTime() as Number {
+		var selectedDateString = "10.10.2021"; // max: "19.01.2038", selectedDate.value() = 2147472000
+		var day = selectedDateString.substring(0, 2).toNumber();
+		var month = selectedDateString.substring(3, 5).toNumber();
+		var year = selectedDateString.substring(6, 10).toNumber();
+		var options = {
+			:year   => year,
+			:month  => month,
+			:day    => day
+		};
+		var selectedDate = Gregorian.moment(options);
+
+		var today = new Time.Moment(Time.today().value());
+
+		if (selectedDate.value() < today.value()) {
+			return -1;
+		}
+
+		var timeDifference = selectedDate.subtract(today).value(); // in seconds
+		timeDifference = timeDifference / 60 / 60 / 24;
+
+		return timeDifference.toNumber();
+    }
+
+    //API 2.1.0
+	//! get meters climbed for current day
+    //! @return meters climbed
+    private function getMetersClimbed () as Array<Number or String> {
+		return _info.metersClimbed != null ? _info.metersClimbed.toNumber()  : -1;
     }
 
 	//! Get the next sunrise or sunset

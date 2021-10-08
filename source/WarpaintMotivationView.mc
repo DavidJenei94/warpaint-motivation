@@ -160,9 +160,15 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			var middleValues = _data.getDataForDataField(selectedValueForDataFieldMiddle);
 			var leftValues = _data.getDataForDataField(selectedValueForDataFieldLeft);
 			var rightValues = _data.getDataForDataField(selectedValueForDataFieldRight);
-			viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor]);
-			viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor]);
-			viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
+			if (middleValues[:valid]){
+				viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor]);
+			}
+			if (leftValues[:valid]){
+				viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor]);
+			}
+			if (rightValues[:valid]){
+				viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
+			}
 
 			// Set data bars
 			var outerLeftTopValues = !sunriseSunsetDrawingEnabled ? _data.getDataForDataField(selectedValueForDataBarOuterLeftTop) : null;
@@ -170,19 +176,31 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			
 			var screenShape = _deviceSettings.screenShape;
 			if (screenShape == System.SCREEN_SHAPE_ROUND) {
-				if (sunriseSunsetDrawingEnabled) {
-					sunriseSunset.drawSunriseSunsetArc(dc, _deviceSettings);
-				} else {
-					_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+				if (outerLeftTopValues[:valid]){
+					if (sunriseSunsetDrawingEnabled) {
+						sunriseSunset.drawSunriseSunsetArc(dc, _deviceSettings);
+					} else {
+						_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+					}
 				}
 				
-				_innerRightBottomDataBar.drawRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);			
+				if (innerRightBottomValues[:valid]){
+					_innerRightBottomDataBar.drawRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				}			
 			} else if (screenShape == System.SCREEN_SHAPE_SEMI_ROUND) {
-				_outerLeftTopDataBar.drawSemiRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
-				_innerRightBottomDataBar.drawSemiRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				if (outerLeftTopValues[:valid]){
+					_outerLeftTopDataBar.drawSemiRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+				}
+				if (innerRightBottomValues[:valid]){
+					_innerRightBottomDataBar.drawSemiRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				}
 			} else if (screenShape == System.SCREEN_SHAPE_RECTANGLE) {
-				_outerLeftTopDataBar.drawRectangleDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
-				_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				if (outerLeftTopValues[:valid]){
+					_outerLeftTopDataBar.drawRectangleDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+				}
+				if (innerRightBottomValues[:valid]){
+					_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				}
 			}
 
 			// Set motivational quote
