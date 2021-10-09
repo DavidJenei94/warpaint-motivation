@@ -169,8 +169,7 @@
 			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<listEntry value="8">@Strings.Weather</listEntry>
-			<listEntry value="9">@Strings.NotificationCount</listEntry>
-			<listEntry value="10">@Strings.AlarmCount</listEntry>
+			<listEntry value="9">@Strings.SystemIndicators</listEntry>
 			<listEntry value="11">@Strings.MoveBar</listEntry>
 			<listEntry value="12">@Strings.RemainingTime</listEntry>
 			<listEntry value="13">@Strings.MetersClimbed</listEntry>
@@ -188,8 +187,7 @@
 			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<listEntry value="8">@Strings.Weather</listEntry>
-			<listEntry value="9">@Strings.NotificationCount</listEntry>	
-			<listEntry value="10">@Strings.AlarmCount</listEntry>
+			<listEntry value="9">@Strings.SystemIndicators</listEntry>	
 			<listEntry value="11">@Strings.MoveBar</listEntry>
 			<listEntry value="12">@Strings.RemainingTime</listEntry>
 			<listEntry value="13">@Strings.MetersClimbed</listEntry>
@@ -207,8 +205,7 @@
 			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<listEntry value="8">@Strings.Weather</listEntry>
-			<listEntry value="9">@Strings.NotificationCount</listEntry>
-			<listEntry value="10">@Strings.AlarmCount</listEntry>
+			<listEntry value="9">@Strings.SystemIndicators</listEntry>
 			<listEntry value="11">@Strings.MoveBar</listEntry>
 			<listEntry value="12">@Strings.RemainingTime</listEntry>
 			<listEntry value="13">@Strings.MetersClimbed</listEntry>

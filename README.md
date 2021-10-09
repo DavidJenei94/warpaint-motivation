@@ -23,7 +23,7 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 - Set a Calorie goal which will serve as the max value on the databar (If 0, an automated calculation will be done according to your activity level).
 - Set a uniqe motivational quote to display (It is advised to use less than 50 characters, which are needed to written in UPPERCASE and besides English letters and numbers the following characters are available: ' !"%&'()+,-./:;=?_º'. Use the | character to indicate the row split, otherwise it is automatically splitted according to length and spaces).
 - Set how frequent the motivational quote is changed (15 min/30 min/60 min/2 hours/3 hours (default)/4 hours/8 hours/12 hours).
-- Data fields: Battery, Steps, Heart Rate, Calories, Sunrise/Sunset, Distance, Floors climbed, Active minutes, Weather, Notifications, Alarms, Remaining Days, Move Bar, Meters climbed, Off.
+- Data fields: Battery, Steps, Heart Rate, Calories, Sunrise/Sunset, Distance, Floors climbed, Active minutes, Weather, Device indicators (Notifications, Alarms, Do Not Disturb, Bluetooth), Remaining Days, Move Bar, Meters climbed, Off.
 - You can set a date for the 'Remaining days to selected date' data field.
 - Databars: Battery, Steps, Calories, Floors climbed, Active minutes, Move Bar, Off.
 - On round shape watches on the place of the outer databar you can set the Sunset/Sunrise position in a 24-hour splitted circle and the position of the sun.
@@ -35,7 +35,8 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 - You can change the currently displayed motivational quote manually by changing any of the settings.
 - If Next Sunrise/Sunset data field shows '--' or the Sunrise/Sunset databar is empty, start any activities until you are located (GPS turns to green). Now the Sunrise/Sunset data will be updated in maximum of 30 minutes on the watch face.
 - If other data field shows '--', check the device support sheet mentioned before. If it should be available please contact me because I might made a mistake in the sheet.
-- Seconds normally hide after entering low power mode (usually after 10 seconds). You can enable to always show the seconds on some devices (it can consume the battery more). The available devices for this option are in the device support sheet in the 'Update seconds in low power mode' column.
+- Seconds normally hide after entering low power mode (usually after 10 seconds). You can enable to always show the seconds on some devices (it can drain the battery faster). The available devices for this option are in the device support sheet in the 'Update seconds in low power mode' column.
+- In 'Device Indicators' data field the notifications and alarms icons are shown when there is at least 1 in that category.
 - To uninstall Warpaint Motivation, first you need to change to any other watchface then you can proceed.
 - Warpaint Motivation does not collect and forward any data.
 
@@ -51,6 +52,8 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.1.1
+- Merge notifications and alarms to the 'Device indicators' data field, which also contains Do Not Disturb and Bluetooth
 ### 1.1.0
 - Add support for Forerunner® 55
 - New data field options: Meters climbed, Alarms count, Remaining days to a selected date, Move bar, Off (Display nothing)

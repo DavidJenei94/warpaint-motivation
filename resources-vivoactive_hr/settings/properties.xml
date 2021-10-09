@@ -1,0 +1,6 @@
+<properties>
+
+    <!-- Distance instead of Next SunriseSunset -->
+    <property id="DataFieldMiddle" type="number">5</property>
+    
+</properties>

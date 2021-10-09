@@ -109,18 +109,12 @@ class Data {
 					values[:iconText] = weather[1];
 					values[:iconColor] = Graphics.COLOR_BLUE;
 					break;
-				case DATA_NOTIFICATION:
-					var notificationCount = getNotificationCount();
-					values[:displayData] = notificationCount == -1 ? _errorDisplay : notificationCount.toString();
-					values[:iconText] = "J";
+				case DATA_DEVICE_INDICATORS:
+					var deviceIndicators = getDeviceIndicators();
+					values[:displayData] = deviceIndicators.equals("") ? _errorDisplay : "";
+					values[:iconText] = deviceIndicators;
 					values[:iconColor] = Graphics.COLOR_PINK;
-					break;				
-				case DATA_ALARM:
-					var alarmCount = getAlarmCount();
-					values[:displayData] = alarmCount == -1 ? _errorDisplay : alarmCount.toString();
-					values[:iconText] = "S";
-					values[:iconColor] = Graphics.COLOR_PINK;
-					break;					
+					break;								
 				case DATA_MOVEBAR:
 					var moveBarLevel = getMoveBarLevel();
 					values[:currentData] = moveBarLevel[0] == 0 ? 0 : moveBarLevel[0] + 3;
@@ -409,22 +403,32 @@ class Data {
     	
     	return iconText;		
     }
-    
-	//! Get the notification count
-	//! It should refresh the settings to show new notifications (other fields are changed outside of watch face so reloaded automatically)
-	//! @return notification count
-	(:notification)
-    private function getNotificationCount() as Number {
-		_deviceSettings = System.getDeviceSettings();
-    	return _deviceSettings.notificationCount  != null ? _deviceSettings.notificationCount  : -1;
-    }
 
-	//! Get the alarm count
-	//! @return alarm count
-	(:alarm)
-    private function getAlarmCount() as Number {
-    	return _deviceSettings.alarmCount  != null ? _deviceSettings.alarmCount  : -1;
-    }
+   	//! Get the device indicators
+	//! @return string for icons
+	(:deviceIndicators)
+    private function getDeviceIndicators() as String {
+		_deviceSettings = System.getDeviceSettings();
+
+		var deviceIndicators = "";
+		if (_deviceSettings.notificationCount != null && _deviceSettings.notificationCount >= 1) {
+			deviceIndicators = deviceIndicators + "J";
+		}
+
+		if (_deviceSettings.alarmCount != null && _deviceSettings.alarmCount >= 1) {
+			deviceIndicators = deviceIndicators + "S";
+		}
+
+		if (_deviceSettings has :doNotDisturb && _deviceSettings.doNotDisturb) {
+			deviceIndicators = deviceIndicators + "Y";
+		}
+
+		if (_deviceSettings.phoneConnected != null && _deviceSettings.phoneConnected) {
+			deviceIndicators = deviceIndicators + "Z";
+		}
+
+		return deviceIndicators;
+	}
 
 	//! Get the moveBar level
 	//! @return moveBar level and icon

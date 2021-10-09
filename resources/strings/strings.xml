@@ -168,8 +168,7 @@
 	<string id="FloorsClimbed">Floors Climbed</string>
 	<string id="ActiveMinutesWeek">Active minutes of the week</string>
 	<string id="Weather">Current Weather</string>
-	<string id="NotificationCount">Notifications Count</string>
-	<string id="AlarmCount">Alarm Count</string>
+	<string id="SystemIndicators">System Indicators (notifications, alarms, DND, bluetooth)</string>
 	<string id="MoveBar">Move Bar</string>
 	<string id="RemainingTime">Remaining days to selected date</string>
 	<string id="MetersClimbed">Meters Climbed</string>

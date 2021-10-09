@@ -32,7 +32,7 @@ fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;wea
 vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
 # Following devices do not have enough memory for all themes + not necessary methods
 fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;floorsClimbed;sunriseSunset
-vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes
+vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;sunriseSunset
 
 # Exclude weather annotation on devices lower than CIQ 3.2.0 too
 # 2.4.0
@@ -121,7 +121,6 @@ venusqm.resourcePath = $(venusqm.resourcePath);resources-no_floors
 # fr55 has 8 colors, only the basic themes are available
 fr55.resourcePath = $(fr55.resourcePath);resources-no_floors;resources-basic_themes
 
-# fr735xt does not have enough memory, load the small font to the place of medium font (Does not necessary if the name is the device name)
-# fr735xt.resourcePath = $(fr735xt.resourcePath);resources-fr735xt
-# Devices with no HR sensors
-# approachs60.resourcePath = $(approachs60.resourcePath);resources-approachs60
+# fr735xt and vivoactive_hr does not have enough memory, load the small font to the place of medium font (Does not necessary the resources-fr735xt if the name is the device name)
+fr735xt.resourcePath = $(fr735xt.resourcePath);resources-basic_themes;resources-no_partial_update
+vivoactive_hr.resourcePath = $(vivoactive_hr.resourcePath);resources-basic_themes;resources-no_partial_update
