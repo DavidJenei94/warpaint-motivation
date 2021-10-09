@@ -52,6 +52,7 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 ## What's New
 
 ### 1.1.0
+- Add support for Forerunner® 55
 - New data field options: Meters climbed, Alarms count, Remaining days to a selected date, Move bar, Off (Display nothing)
 - New databar options: Move bar, Off
 - New option to never show seconds

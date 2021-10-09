@@ -1,0 +1,37 @@
+<settings>
+
+	<setting propertyKey="@Properties.Theme" title="@Strings.ThemeTitle">
+        <settingConfig type="list">
+			<!-- Basic themes (22) -->
+            <listEntry value="0">@Strings.ClassDark</listEntry>
+            <listEntry value="1">@Strings.ClassLight</listEntry>
+            <listEntry value="3">@Strings.ClassDarkColorful</listEntry>
+            <listEntry value="4">@Strings.ClassLightColorful</listEntry>
+			<listEntry value="5">@Strings.ConquestDark</listEntry>
+            <listEntry value="6">@Strings.ConquestLight</listEntry>
+            <listEntry value="7">@Strings.Conquest</listEntry>
+			<listEntry value="10">@Strings.EssenceDark</listEntry>
+            <listEntry value="11">@Strings.EssenceLight</listEntry>
+            <listEntry value="12">@Strings.Essence</listEntry>
+			<listEntry value="15">@Strings.PassionDark</listEntry>
+            <listEntry value="16">@Strings.PassionLight</listEntry>
+            <listEntry value="17">@Strings.Passion</listEntry>
+			<listEntry value="20">@Strings.LibertyDark</listEntry>
+            <listEntry value="21">@Strings.LibertyLight</listEntry>
+            <listEntry value="22">@Strings.Liberty</listEntry>
+			<listEntry value="25">@Strings.PrincessDark</listEntry>
+            <listEntry value="26">@Strings.PrincessLight</listEntry>
+            <listEntry value="27">@Strings.Princess</listEntry>
+			<listEntry value="30">@Strings.RuleDark</listEntry>
+            <listEntry value="31">@Strings.RuleLight</listEntry>
+            <listEntry value="32">@Strings.Rule</listEntry>
+			<listEntry value="35">@Strings.SensationDark</listEntry>
+            <listEntry value="36">@Strings.SensationLight</listEntry>
+            <listEntry value="37">@Strings.Sensation</listEntry>
+			<listEntry value="40">@Strings.FreezingDark</listEntry>
+            <listEntry value="41">@Strings.FreezingLight</listEntry>
+            <listEntry value="42">@Strings.Freezing</listEntry>
+        </settingConfig>
+    </setting>
+	
+</settings>

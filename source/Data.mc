@@ -466,8 +466,12 @@ class Data {
 	//! get meters climbed for current day
     //! @return meters climbed
 	(:floorsClimbed)
-    private function getMetersClimbed () as Array<Number or String> {
-		return _info.metersClimbed != null ? _info.metersClimbed.toNumber()  : -1;
+    private function getMetersClimbed () as Number {
+		if (_info has :floorsClimbed) {
+			return _info.metersClimbed != null ? _info.metersClimbed.toNumber()  : -1;
+		} else {
+			return -1;
+		}
     }
 
 	//! Get the next sunrise or sunset
