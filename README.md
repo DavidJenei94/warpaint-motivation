@@ -27,6 +27,7 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 - You can set a date for the 'Remaining days to selected date' data field.
 - Databars: Battery, Steps, Calories, Floors climbed, Active minutes, Move Bar, Off.
 - On round shape watches on the place of the outer databar you can set the Sunset/Sunrise position in a 24-hour splitted circle and the position of the sun.
+- You can split the databars to equal parts (10 parts on round and 5 parts on semi round and 4 parts on rectangle watches). You can also split the Sunset/Sunrise position circle's day part around the round watches into 24 parts.
 
 ### Notes/FAQ:
 - All possibilities to change the settings and customize the watch face are present on the following page: https://apps.garmin.com/settingsHelp. 
@@ -38,7 +39,7 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 - Seconds normally hide after entering low power mode (usually after 10 seconds). You can enable to always show the seconds on some devices (it can drain the battery faster). The available devices for this option are in the device support sheet in the 'Update seconds in low power mode' column.
 - In 'Device Indicators' data field the notifications and alarms icons are shown when there is at least 1 in that category.
 - To uninstall Warpaint Motivation, first you need to change to any other watchface then you can proceed.
-- Warpaint Motivation does not collect and forward any data.
+- Warpaint Motivation does not collect or forward any data.
 
 ### Credits
 Thanks for:
@@ -52,6 +53,9 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.2.0
+- Add splitted databar option
+- Remove fr645m weather data field (not supported by device)
 ### 1.1.1
 - Merge notifications and alarms to the 'Device indicators' data field, which also contains Do Not Disturb and Bluetooth
 ### 1.1.0
@@ -60,16 +64,16 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 - New databar options: Move bar, Off
 - New option to never show seconds
 - Battery databar will now turn red under 20%
-- Calories Goal error message and min max are adjusted
-- Solve notifications does not refresh issue
-- Correct approach60, approach62 and fr735xt first time launch issues
+- Adjust Calories Goal error message and min max
+- Fix notifications does not refresh issue
+- Fix approach60, approach62 and fr735xt first time launch issues
 ### 1.0.3
 - Remove Vivolife support because of low number of features.
 ### 1.0.2
-- Correct motivational quote change interval issue.
+- Fix motivational quote change interval issue.
 ### 1.0.1
-- Correct unique Motivational Quote prompt in Settings.
-- Correct databar titles in Settings.
+- Fix unique Motivational Quote prompt in Settings.
+- Fix databar titles in Settings.
 ### 1.0.0
 - Public release.
 

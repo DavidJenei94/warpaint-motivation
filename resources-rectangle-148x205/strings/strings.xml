@@ -3,4 +3,6 @@
     <string id="DataBarOuterLeftTopTitle">Top DataBar</string>
     <string id="DataBarInnerRightBottomTitle">Bottom DataBar</string>
 
+    <string id="DataBarSplitDatabar">Split databars</string>
+
 </strings>

@@ -56,6 +56,8 @@ fr645.excludeAnnotations = $(fr645.excludeAnnotations);weather
 fr935.excludeAnnotations = $(fr935.excludeAnnotations);weather
 vivoactive3.excludeAnnotations = $(vivoactive3.excludeAnnotations);weather
 vivoactive3mlte.excludeAnnotations = $(vivoactive3mlte.excludeAnnotations);weather
+# 3.2.0
+fr645m.excludeAnnotations = $(fr645m.excludeAnnotations);weather
 
 # Exclude partial update annotation where it is not available
 fenixchronos.excludeAnnotations = $(fenixchronos.excludeAnnotations);partial_update
@@ -97,7 +99,8 @@ fr645.resourcePath = $(fr645.resourcePath);resources-no_weather
 fr935.resourcePath = $(fr935.resourcePath);resources-no_weather
 vivoactive3.resourcePath = $(vivoactive3.resourcePath);resources-no_weather
 vivoactive3mlte.resourcePath = $(vivoactive3mlte.resourcePath);resources-no_weather
-
+# 3.2.0
+fr645m.resourcePath = $(fr645m.resourcePath);resources-no_weather
 
 
 # Devices with no partial update and was not set before eg. in CIQ 1.x

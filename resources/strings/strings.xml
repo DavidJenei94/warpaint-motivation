@@ -176,4 +176,10 @@
 
     <string id="SunriseSunsetDrawingTitle">Sunrise and Sunset around watchface</string>
 
+    <string id="DataBarSplitTitle">Split databars</string>
+    <string id="DataBarSplitOff">Do not split</string>
+    <string id="DataBarSplitSunriseSunset">Split only the Sunrise Sunset around watchface</string>
+    <string id="DataBarSplitDatabar">Split only the databars</string>
+    <string id="DataBarSplitAll">Split All</string>
+
 </strings>

@@ -16,6 +16,7 @@
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
     <property id="SunriseSunsetDrawing" type="boolean">false</property>  <!-- Watch screen shape dependent-->
+    <property id="DataBarSplit" type="number">0</property>
 
     <property id="MotivationalQuoteProperty" type="string"></property>
     <property id="MotivationalQuoteChangeInterval" type="number">180</property>

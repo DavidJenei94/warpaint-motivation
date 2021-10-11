@@ -29,6 +29,7 @@ var selectedToDate as Number;
 var dataBarWidth as Integer;
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
+var dataBarSplit as Integer;
 var sunriseSunsetDrawingEnabled as Boolean;
 var sunriseSunset as SunriseSunset;
 
@@ -72,6 +73,13 @@ enum {
 enum { 
     DATABAR_OUTER_LEFT_TOP,
     DATABAR_INNER_RIGHT_BOTTOM
+}
+
+enum { 
+    DATABAR_SPLIT_OFF,
+    DATABAR_SPLIT_SUNRISE_SUNSET,
+    DATABAR_SPLIT_DATABAR,
+    DATABAR_SPLIT_ALL
 }
 
 (:background)
@@ -172,6 +180,7 @@ class WarpaintMotivationApp extends Application.AppBase {
         selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
         selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
         sunriseSunsetDrawingEnabled = Properties.getValue("SunriseSunsetDrawing");
+        dataBarSplit = Properties.getValue("DataBarSplit");
 
         selectedToDate = Properties.getValue("RemainingTimeToDate");
 
@@ -208,6 +217,7 @@ class WarpaintMotivationApp extends Application.AppBase {
         selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
         selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
         sunriseSunsetDrawingEnabled = getApp().getProperty("SunriseSunsetDrawing");
+        dataBarSplit = getApp().getProperty("DataBarSplit");
 
         selectedToDate = getApp().getProperty("RemainingTimeToDate");
 
