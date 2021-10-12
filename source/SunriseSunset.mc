@@ -24,6 +24,7 @@ class SunriseSunset {
     }
 
 	//! Refresh the sunrise and sunset data
+	(:sunriseSunset)
 	function refreshSunsetSunrise() as Void {
 		 _successfulCalculation = calculateSunriseSunset();
 	}
@@ -32,6 +33,7 @@ class SunriseSunset {
 	//! @param settings DeviceSettings
 	//! @return array of the next sunrise or sunset (according to current time) in string 
 	//! and a bool value if it is sunrise or not
+	(:sunriseSunset)
     function getNextSunriseSunset(settings as DeviceSettings) as Array<Number or String or Boolean> {
 		if (!_successfulCalculation) {
 			return [-1, true];
@@ -51,12 +53,29 @@ class SunriseSunset {
     		return [formatHoursToTimeString(_sunset, settings), false];
     	}
     }
+
+	//! Get next sunrise time
+	//! @param settings DeviceSettings
+	//! @return array of the next sunrise in string and true (as it is sunrise)
+	(:sunriseSunset)
+    function getNextSunrise(settings as DeviceSettings) as Array<Number or String or Boolean> {
+    	return [formatHoursToTimeString(_sunrise, settings), true];
+    }
+
+	//! Get next sunset time
+	//! @param settings DeviceSettings
+	//! @return array of the next sunset in string and false (as it is not sunrise)
+	(:sunriseSunset)
+    function getNextSunset(settings as DeviceSettings) as Array<Number or String or Boolean> {
+    	return [formatHoursToTimeString(_sunset, settings), false];
+    }
     
 	//! Format sunrise/sunset time
 	//! @param time the hour in Float
 	//! @param settings DeviceSettings
 	//! @return formatted sunrise or sunset in string
-    private function formatHoursToTimeString(time as Number, settings as DeviceSettings) as String {
+	(:sunriseSunset)
+    private function formatHoursToTimeString(time as Float, settings as DeviceSettings) as String {
     	var hour = Math.floor(time);
     	var min = (time - hour) * 100 * 0.6;
     	if (!settings.is24Hour) {
@@ -112,6 +131,22 @@ class SunriseSunset {
     		endAngle, 
     		startAngle
     	);
+
+		// Split the Sunrise Sunset round drawing to 24 parts
+		if (dataBarSplit == DATABAR_SPLIT_ALL || dataBarSplit == DATABAR_SPLIT_OUTER_LEFT_TOP) {
+			dc.setPenWidth(width + 1);
+			dc.setColor(themeColors[:backgroundColor], themeColors[:backgroundColor]);
+			for (var i = 360; i > 0; i -= 15) {
+				dc.drawArc(
+					arcX, 
+					arcY, 
+					radius, 
+					Graphics.ARC_CLOCKWISE, 
+					i+1, 
+					i
+				);
+			}
+		}
     	
 		// On Bicolor themes the suncolor should change according to the daytime
 		if (theme % 5 != 2) {
@@ -143,6 +178,7 @@ class SunriseSunset {
 	//! Calculates sunrise and sunset values according to date/time and location
 	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
 	//! @return boolean value if the calculation is successful or not
+	(:sunriseSunset)
     private function calculateSunriseSunset() as Boolean {  
 		setCoordinates();
 		var latitude = 0.0;
@@ -266,6 +302,7 @@ class SunriseSunset {
     }
 
     //! Set coordinates for sunrise sunset calculation and store it in Storage or Appbase properties
+	(:sunriseSunset)
     private function setCoordinates() as Void {
         var location = Activity.getActivityInfo().currentLocation;
         if (location) {

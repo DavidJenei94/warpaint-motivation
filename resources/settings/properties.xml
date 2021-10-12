@@ -3,18 +3,20 @@
 	<property id="Theme" type="number">3</property>
 
     <property id="UseMilitaryFormat" type="boolean">false</property>
-    <property id="UpdateSecondInLowPowerMode" type="boolean">false</property> <!-- API dependent-->
+    <property id="DisplaySecond" type="number">1</property> <!-- API dependent-->
 
     <property id="CaloriesGoal" type="number">0</property>
     
     <property id="DataFieldMiddle" type="number">4</property>
     <property id="DataFieldLeft" type="number">2</property>
     <property id="DataFieldRight" type="number">6</property>
+    <property id="RemainingTimeToDate" type="number">1640995200</property>
 
     <property id="DataBarWidth" type="number">6</property> <!-- Watch screen shape and size dependent-->
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
     <property id="SunriseSunsetDrawing" type="boolean">false</property>  <!-- Watch screen shape dependent-->
+    <property id="DataBarSplit" type="number">0</property>
 
     <property id="MotivationalQuoteProperty" type="string"></property>
     <property id="MotivationalQuoteChangeInterval" type="number">180</property>

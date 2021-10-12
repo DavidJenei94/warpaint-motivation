@@ -31,8 +31,8 @@ fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather
 fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
 vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
 # Following devices do not have enough memory for all themes + not necessary methods
-fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes
-vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes
+fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;floorsClimbed;sunriseSunset
+vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;sunriseSunset
 
 # Exclude weather annotation on devices lower than CIQ 3.2.0 too
 # 2.4.0
@@ -56,6 +56,8 @@ fr645.excludeAnnotations = $(fr645.excludeAnnotations);weather
 fr935.excludeAnnotations = $(fr935.excludeAnnotations);weather
 vivoactive3.excludeAnnotations = $(vivoactive3.excludeAnnotations);weather
 vivoactive3mlte.excludeAnnotations = $(vivoactive3mlte.excludeAnnotations);weather
+# 3.2.0
+fr645m.excludeAnnotations = $(fr645m.excludeAnnotations);weather
 
 # Exclude partial update annotation where it is not available
 fenixchronos.excludeAnnotations = $(fenixchronos.excludeAnnotations);partial_update
@@ -65,15 +67,15 @@ venusqm.excludeAnnotations = $(venusqm.excludeAnnotations);partial_update
 
 # CIQ 1.x watches have No Floors, Active Minutes support and Weather
 # Some of them have no HR support either
-d2bravo.resourcePath = $(d2bravo.resourcePath);resources-ciq_1.x-no_hr
-d2bravo_titanium.resourcePath = $(d2bravo_titanium.resourcePath);resources-ciq_1.x
-fenix3.resourcePath = $(fenix3.resourcePath);resources-ciq_1.x-no_hr
-fenix3_hr.resourcePath = $(fenix3_hr.resourcePath);resources-ciq_1.x
-fr230.resourcePath = $(fr230.resourcePath);resources-ciq_1.x-no_hr
-fr235.resourcePath = $(fr235.resourcePath);resources-ciq_1.x
-fr630.resourcePath = $(fr630.resourcePath);resources-ciq_1.x-no_hr
-fr920xt.resourcePath = $(fr920xt.resourcePath);resources-ciq_1.x-no_hr
-vivoactive.resourcePath = $(vivoactive.resourcePath);resources-ciq_1.x-no_hr
+d2bravo.resourcePath = $(d2bravo.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
+d2bravo_titanium.resourcePath = $(d2bravo_titanium.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x
+fenix3.resourcePath = $(fenix3.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
+fenix3_hr.resourcePath = $(fenix3_hr.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x
+fr230.resourcePath = $(fr230.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
+fr235.resourcePath = $(fr235.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x
+fr630.resourcePath = $(fr630.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
+fr920xt.resourcePath = $(fr920xt.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
+vivoactive.resourcePath = $(vivoactive.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
 
 # devices lower than CIQ 3.2.0 have no Weather
 # 2.4.0
@@ -97,7 +99,8 @@ fr645.resourcePath = $(fr645.resourcePath);resources-no_weather
 fr935.resourcePath = $(fr935.resourcePath);resources-no_weather
 vivoactive3.resourcePath = $(vivoactive3.resourcePath);resources-no_weather
 vivoactive3mlte.resourcePath = $(vivoactive3mlte.resourcePath);resources-no_weather
-
+# 3.2.0
+fr645m.resourcePath = $(fr645m.resourcePath);resources-no_weather
 
 
 # Devices with no partial update and was not set before eg. in CIQ 1.x
@@ -113,13 +116,14 @@ venu2s.resourcePath = $(venu2s.resourcePath);resources-no_partial_update
 venud.resourcePath = $(venud.resourcePath);resources-no_partial_update
 
 
-#  fr245/fr245m and venusq/venusqm are CIQ 3.x, but do not support floors climbed.
+#  fr245/fr245m, venusq/venusqm, fr55 are CIQ 3.x, but do not support floors climbed.
 fr245.resourcePath = $(fr245.resourcePath);resources-no_floors
 fr245m.resourcePath = $(fr245m.resourcePath);resources-no_floors
 venusq.resourcePath = $(venusq.resourcePath);resources-no_floors
 venusqm.resourcePath = $(venusqm.resourcePath);resources-no_floors
+# fr55 has 8 colors, only the basic themes are available
+fr55.resourcePath = $(fr55.resourcePath);resources-no_floors;resources-basic_themes
 
-# fr735xt does not have enough memory, load the small font to the place of medium font (Does not necessary if the name is the device name)
-# fr735xt.resourcePath = $(fr735xt.resourcePath);resources-fr735xt
-# Devices with no HR sensors
-# approachs60.resourcePath = $(approachs60.resourcePath);resources-approachs60
+# fr735xt and vivoactive_hr does not have enough memory, load the small font to the place of medium font (Does not necessary the resources-fr735xt if the name is the device name)
+fr735xt.resourcePath = $(fr735xt.resourcePath);resources-basic_themes;resources-no_partial_update
+vivoactive_hr.resourcePath = $(vivoactive_hr.resourcePath);resources-basic_themes;resources-no_partial_update

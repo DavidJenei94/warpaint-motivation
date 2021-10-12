@@ -1,0 +1,8 @@
+<properties>
+
+    <!-- Distance instead of Next SunriseSunset -->
+    <!-- Calories instead of floors climbed -->
+    <property id="DataFieldMiddle" type="number">5</property>
+    <property id="DataFieldRight" type="number">3</property>
+    
+</properties>

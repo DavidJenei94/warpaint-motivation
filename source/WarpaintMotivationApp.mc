@@ -17,16 +17,19 @@ var themeColors = {
     :isColorful => false
 };
 
-var updatingSecondsInLowPowerMode as Boolean;
+var displaySecond as Integer;
 var militaryFormat as Boolean;
 
 var selectedValueForDataFieldMiddle as Integer;
 var selectedValueForDataFieldLeft as Integer;
 var selectedValueForDataFieldRight as Integer;
 
+var selectedToDate as Number;
+
 var dataBarWidth as Integer;
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
+var dataBarSplit as Integer;
 var sunriseSunsetDrawingEnabled as Boolean;
 var sunriseSunset as SunriseSunset;
 
@@ -50,21 +53,33 @@ var locationLat = null;
 var locationLng = null;
 
 enum { 
-    DATA_BATTERY,   
+    DATA_BATTERY,  //0 
     DATA_STEPS,
     DATA_HEARTRATE,
     DATA_CALORIES,
     DATA_SUNRISE_SUNSET,
-    DATA_DISTANCE,
+    DATA_DISTANCE, //5
     DATA_FLOORS_CLIMBED,
     DATA_ACTIVE_MINUTES_WEEK,
     DATA_WEATHER,
-    DATA_NOTIFICATION
+    DATA_DEVICE_INDICATORS,
+    // Deleted data field //10
+    DATA_MOVEBAR = 11,
+    DATA_REMAINING_TIME,
+    DATA_METERS_CLIMBED,
+    DATA_OFF = -1
 }
 
 enum { 
     DATABAR_OUTER_LEFT_TOP,
     DATABAR_INNER_RIGHT_BOTTOM
+}
+
+enum { 
+    DATABAR_SPLIT_OFF,
+    DATABAR_SPLIT_OUTER_LEFT_TOP,
+    DATABAR_SPLIT_INNER_RIGHT_BOTTOM,
+    DATABAR_SPLIT_ALL
 }
 
 (:background)
@@ -156,7 +171,7 @@ class WarpaintMotivationApp extends Application.AppBase {
     private function setGlobalVariablesWithStorage() as void {
         theme = Properties.getValue("Theme");
 
-        updatingSecondsInLowPowerMode = Properties.getValue("UpdateSecondInLowPowerMode");
+        displaySecond = Properties.getValue("DisplaySecond");
         militaryFormat = Properties.getValue("UseMilitaryFormat");
 
         dataBarWidth = Properties.getValue("DataBarWidth");
@@ -166,6 +181,9 @@ class WarpaintMotivationApp extends Application.AppBase {
         selectedValueForDataBarOuterLeftTop = Properties.getValue("DataBarOuterLeftTop");
         selectedValueForDataBarInnerRightBottom = Properties.getValue("DataBarInnerRightBottom");
         sunriseSunsetDrawingEnabled = Properties.getValue("SunriseSunsetDrawing");
+        dataBarSplit = Properties.getValue("DataBarSplit");
+
+        selectedToDate = Properties.getValue("RemainingTimeToDate");
 
         totalCaloriesGoal = Properties.getValue("CaloriesGoal");
 
@@ -190,7 +208,7 @@ class WarpaintMotivationApp extends Application.AppBase {
     private function setGlobalVariablesWithoutStorage() as void {
         theme = getApp().getProperty("Theme");
 
-        updatingSecondsInLowPowerMode = getApp().getProperty("UpdateSecondInLowPowerMode");
+        displaySecond = getApp().getProperty("DisplaySecond");
         militaryFormat = getApp().getProperty("UseMilitaryFormat");
 
         dataBarWidth = getApp().getProperty("DataBarWidth");
@@ -200,6 +218,9 @@ class WarpaintMotivationApp extends Application.AppBase {
         selectedValueForDataBarOuterLeftTop = getApp().getProperty("DataBarOuterLeftTop");
         selectedValueForDataBarInnerRightBottom = getApp().getProperty("DataBarInnerRightBottom");
         sunriseSunsetDrawingEnabled = getApp().getProperty("SunriseSunsetDrawing");
+        dataBarSplit = getApp().getProperty("DataBarSplit");
+
+        selectedToDate = getApp().getProperty("RemainingTimeToDate");
 
         totalCaloriesGoal = getApp().getProperty("CaloriesGoal");
 

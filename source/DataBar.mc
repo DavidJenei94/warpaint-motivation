@@ -58,6 +58,23 @@ class DataBar {
 					radius
 				);
 			}
+
+			// Split the Round databar to 10 parts
+			if (dataBarSplit == DATABAR_SPLIT_ALL || (dataBarSplit == DATABAR_SPLIT_OUTER_LEFT_TOP && _side == DATABAR_OUTER_LEFT_TOP) ||
+				(dataBarSplit == DATABAR_SPLIT_INNER_RIGHT_BOTTOM && _side == DATABAR_INNER_RIGHT_BOTTOM)) {
+				dc.setPenWidth(width + 1);
+				dc.setColor(themeColors[:backgroundColor], themeColors[:backgroundColor]);
+				for (var i = 342; i > 0; i -= 36) {
+					dc.drawArc(
+						x, 
+						y, 
+						radius, 
+						Graphics.ARC_CLOCKWISE, 
+						i+1, 
+						i
+					);
+				}
+			}
         } 			
     }
    
@@ -118,7 +135,37 @@ class DataBar {
 	        	startAngle, 
 	        	actualAngle
 	        );
-        } 
+        }
+
+		// Split the semi round databar to 5 parts
+		if (dataBarSplit == DATABAR_SPLIT_ALL || (dataBarSplit == DATABAR_SPLIT_OUTER_LEFT_TOP && _side == DATABAR_OUTER_LEFT_TOP) ||
+			(dataBarSplit == DATABAR_SPLIT_INNER_RIGHT_BOTTOM && _side == DATABAR_INNER_RIGHT_BOTTOM)) {
+			dc.setColor(themeColors[:backgroundColor], themeColors[:backgroundColor]);
+			if (_side == DATABAR_OUTER_LEFT_TOP) {
+				for (var i = 236 + angleCorrection; i > 124 - angleCorrection; i -= (22 + angleCorrection / 2)) {
+					dc.drawArc(
+						x, 
+						y, 
+						radius, 
+						Graphics.ARC_CLOCKWISE, 
+						i, 
+						i-1
+					);
+				}
+			} else {
+				for (var i = 56 + angleCorrection; i > -55 - angleCorrection; i -= (22 + angleCorrection / 2)) {
+					var imod = i % 360;
+					dc.drawArc(
+						x, 
+						y, 
+						radius, 
+						Graphics.ARC_CLOCKWISE, 
+						imod, 
+						imod-1
+					);
+				}
+			}
+		}
     }
     
 	//! Get degree for actual value on a semiround watchface
@@ -189,6 +236,21 @@ class DataBar {
 		// Fill data bar
     	selectActualDataBarColor(dc, color);
     	dc.fillRectangle(x, y, barWidth, barHeight);
+
+		// Split the rectangle databar to 4 parts
+		if (dataBarSplit == DATABAR_SPLIT_ALL || (dataBarSplit == DATABAR_SPLIT_OUTER_LEFT_TOP && _side == DATABAR_OUTER_LEFT_TOP) ||
+			(dataBarSplit == DATABAR_SPLIT_INNER_RIGHT_BOTTOM && _side == DATABAR_INNER_RIGHT_BOTTOM)) {
+			dc.setColor(themeColors[:backgroundColor], themeColors[:backgroundColor]);
+			if (screenHeight <= screenWidth) {
+				for (var i = screenHeight - screenHeight / 4; i > 0; i -= screenHeight / 4) {
+					dc.fillRectangle(x, i, barWidth, 2);
+				}
+			} else {
+				for (var i = screenWidth - screenWidth / 4; i > 0; i -= screenWidth / 4) {
+					dc.fillRectangle(i, y, 2, barHeight);
+				}				
+			}
+		}
     }
 
 	//! Select the databar color according to the theme and side

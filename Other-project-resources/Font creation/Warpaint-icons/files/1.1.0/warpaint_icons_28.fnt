@@ -1,0 +1,28 @@
+info face="Warpaintmotivationicons" size=28 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1 outline=0
+common lineHeight=28 base=25 scaleW=256 scaleH=256 pages=1 packed=0 alphaChnl=0 redChnl=0 greenChnl=0 blueChnl=0
+page id=0 file="warpaint_icons_28_0.png"
+chars count=24
+char id=65   x=78    y=27    width=23    height=21    xoffset=1     yoffset=4     xadvance=25    page=0  chnl=15
+char id=66   x=214   y=0     width=20    height=24    xoffset=1     yoffset=2     xadvance=23    page=0  chnl=15
+char id=67   x=133   y=0     width=22    height=25    xoffset=1     yoffset=1     xadvance=25    page=0  chnl=15
+char id=68   x=30    y=0     width=18    height=27    xoffset=1     yoffset=0     xadvance=21    page=0  chnl=15
+char id=69   x=183   y=25    width=29    height=19    xoffset=1     yoffset=4     xadvance=32    page=0  chnl=15
+char id=70   x=156   y=0     width=29    height=24    xoffset=1     yoffset=2     xadvance=32    page=0  chnl=15
+char id=71   x=131   y=26    width=25    height=20    xoffset=1     yoffset=4     xadvance=27    page=0  chnl=15
+char id=72   x=0     y=29    width=26    height=22    xoffset=1     yoffset=3     xadvance=29    page=0  chnl=15
+char id=73   x=49    y=0     width=27    height=26    xoffset=1     yoffset=1     xadvance=29    page=0  chnl=15
+char id=74   x=0     y=52    width=19    height=19    xoffset=1     yoffset=5     xadvance=22    page=0  chnl=15
+char id=75   x=0     y=0     width=29    height=28    xoffset=1     yoffset=0     xadvance=32    page=0  chnl=15
+char id=76   x=213   y=25    width=27    height=19    xoffset=1     yoffset=4     xadvance=30    page=0  chnl=15
+char id=77   x=20    y=52    width=27    height=14    xoffset=1     yoffset=7     xadvance=30    page=0  chnl=15
+char id=78   x=50    y=27    width=27    height=21    xoffset=1     yoffset=2     xadvance=30    page=0  chnl=15
+char id=79   x=105   y=0     width=27    height=25    xoffset=1     yoffset=1     xadvance=30    page=0  chnl=15
+char id=80   x=77    y=0     width=27    height=26    xoffset=1     yoffset=1     xadvance=30    page=0  chnl=15
+char id=81   x=186   y=0     width=27    height=24    xoffset=1     yoffset=2     xadvance=30    page=0  chnl=15
+char id=82   x=102   y=27    width=28    height=20    xoffset=1     yoffset=4     xadvance=30    page=0  chnl=15
+char id=83   x=235   y=0     width=20    height=23    xoffset=1     yoffset=2     xadvance=23    page=0  chnl=15
+char id=84   x=27    y=29    width=22    height=22    xoffset=1     yoffset=4     xadvance=24    page=0  chnl=15
+char id=85   x=48    y=52    width=19    height=12    xoffset=1     yoffset=8     xadvance=22    page=0  chnl=15
+char id=86   x=68    y=49    width=19    height=12    xoffset=1     yoffset=8     xadvance=22    page=0  chnl=15
+char id=87   x=241   y=24    width=10    height=12    xoffset=1     yoffset=8     xadvance=13    page=0  chnl=15
+char id=88   x=157   y=25    width=25    height=20    xoffset=1     yoffset=4     xadvance=27    page=0  chnl=15

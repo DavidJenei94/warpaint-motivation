@@ -191,15 +191,22 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			// currentTime = System.getTimer();
 			// System.println("getDataForDataFieldRight Ellapsed time: " + (currentTime - startTime) + " ms");
 			// startTime = System.getTimer();
-			viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor]);
-			viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor]);
-			viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
+
+			if (middleValues[:valid]){
+				viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor]);
+			}
+			if (leftValues[:valid]){
+				viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor]);
+			}
+			if (rightValues[:valid]){
+				viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
+			}
 			// currentTime = System.getTimer();
 			// System.println("drawData Ellapsed time: " + (currentTime - startTime) + " ms");
 			// startTime = System.getTimer();
-			
+
 			// Set data bars
-			var outerLeftTopValues = !sunriseSunsetDrawingEnabled ? _data.getDataForDataField(selectedValueForDataBarOuterLeftTop) : null;
+			var outerLeftTopValues = !sunriseSunsetDrawingEnabled ? _data.getDataForDataField(selectedValueForDataBarOuterLeftTop) : {:valid => true};
 			// currentTime = System.getTimer();
 			// System.println("getDataForDataBarOuter Ellapsed time: " + (currentTime - startTime) + " ms");
 			// startTime = System.getTimer();
@@ -210,22 +217,33 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			
 			var screenShape = _deviceSettings.screenShape;
 			if (screenShape == System.SCREEN_SHAPE_ROUND) {
-				if (sunriseSunsetDrawingEnabled) {
-					sunriseSunset.drawSunriseSunsetArc(dc, _deviceSettings);
-				} else {
-					_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+				if (outerLeftTopValues[:valid]){
+					if (sunriseSunsetDrawingEnabled) {
+						sunriseSunset.drawSunriseSunsetArc(dc, _deviceSettings);
+					} else {
+						_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+					}
 				}
 				// currentTime = System.getTimer();
 				// System.println("drawDataBarOuter Ellapsed time: " + (currentTime - startTime) + " ms");
 				// startTime = System.getTimer();
-
-				_innerRightBottomDataBar.drawRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);			
+				if (innerRightBottomValues[:valid]){
+					_innerRightBottomDataBar.drawRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				}			
 			} else if (screenShape == System.SCREEN_SHAPE_SEMI_ROUND) {
-				_outerLeftTopDataBar.drawSemiRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
-				_innerRightBottomDataBar.drawSemiRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				if (outerLeftTopValues[:valid]){
+					_outerLeftTopDataBar.drawSemiRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+				}
+				if (innerRightBottomValues[:valid]){
+					_innerRightBottomDataBar.drawSemiRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				}
 			} else if (screenShape == System.SCREEN_SHAPE_RECTANGLE) {
-				_outerLeftTopDataBar.drawRectangleDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
-				_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				if (outerLeftTopValues[:valid]){
+					_outerLeftTopDataBar.drawRectangleDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
+				}
+				if (innerRightBottomValues[:valid]){
+					_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
+				}
 			}
 			// currentTime = System.getTimer();
 			// System.println("drawDataBarInner Ellapsed time: " + (currentTime - startTime) + " ms");
@@ -258,10 +276,10 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
 			// Draw seconds
 			if (clockTime.sec != 0) {
-				if (_partialUpdatesAllowed && updatingSecondsInLowPowerMode) {
+				if (_partialUpdatesAllowed && displaySecond == 2) {
 					// If this device supports partial updates
 					onPartialUpdate(dc);
-				} else if (_isAwake) {
+				} else if (_isAwake && displaySecond != 0) {
 					viewDrawables[:timeText].drawSeconds(dc, _deviceSettings);
 				}
 			}
@@ -277,7 +295,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
     //! @param dc Device context
 	(:partial_update)
     public function onPartialUpdate(dc as Dc) as Void {
-		if (updatingSecondsInLowPowerMode) {
+		if (displaySecond == 2 && System.getClockTime().sec != 0) {
 	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc, _deviceSettings);
 	  
             // Set clip to the region of bounding box and which only updates that

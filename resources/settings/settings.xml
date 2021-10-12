@@ -129,12 +129,16 @@
         <settingConfig type="boolean" />
     </setting>
 
-    <setting propertyKey="@Properties.UpdateSecondInLowPowerMode" title="@Strings.UpdateSecondInLowPowerModeTitle">
-        <settingConfig type="boolean" />
-    </setting>
+	<setting propertyKey="@Properties.DisplaySecond" title="@Strings.DisplaySecondTitle">
+        <settingConfig type="list">
+			<listEntry value="0">@Strings.DisplaySecondOff</listEntry>
+            <listEntry value="1">@Strings.DisplaySecondActive</listEntry>
+            <listEntry value="2">@Strings.DisplaySecondAlways</listEntry>
+		</settingConfig>
+	</setting>
 
     <setting propertyKey="@Properties.CaloriesGoal" title="@Strings.CaloriesGoalTitle" prompt="@Strings.CaloriesGoalPrompt">
-        <settingConfig type="numeric" />
+        <settingConfig type="numeric" min="0" max="10000" errorMessage="@Strings.CaloriesGoalError"/>
     </setting>
 
     <setting propertyKey="@Properties.MotivationalQuoteProperty" title="@Strings.MotivationalQuoteTitle" prompt="@Strings.MotivationalQuotePrompt">
@@ -165,7 +169,11 @@
 			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<listEntry value="8">@Strings.Weather</listEntry>
-			<listEntry value="9">@Strings.NotificationCount</listEntry>
+			<listEntry value="9">@Strings.SystemIndicators</listEntry>
+			<listEntry value="11">@Strings.MoveBar</listEntry>
+			<listEntry value="12">@Strings.RemainingTime</listEntry>
+			<listEntry value="13">@Strings.MetersClimbed</listEntry>
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>	
 	<setting propertyKey="@Properties.DataFieldLeft" title="@Strings.DataFieldLeftTitle">
@@ -179,7 +187,11 @@
 			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<listEntry value="8">@Strings.Weather</listEntry>
-			<listEntry value="9">@Strings.NotificationCount</listEntry>	
+			<listEntry value="9">@Strings.SystemIndicators</listEntry>	
+			<listEntry value="11">@Strings.MoveBar</listEntry>
+			<listEntry value="12">@Strings.RemainingTime</listEntry>
+			<listEntry value="13">@Strings.MetersClimbed</listEntry>
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>	
 	<setting propertyKey="@Properties.DataFieldRight" title="@Strings.DataFieldRightTitle">
@@ -193,8 +205,16 @@
 			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
 			<listEntry value="8">@Strings.Weather</listEntry>
-			<listEntry value="9">@Strings.NotificationCount</listEntry>
+			<listEntry value="9">@Strings.SystemIndicators</listEntry>
+			<listEntry value="11">@Strings.MoveBar</listEntry>
+			<listEntry value="12">@Strings.RemainingTime</listEntry>
+			<listEntry value="13">@Strings.MetersClimbed</listEntry>
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
+	</setting>
+
+	<setting propertyKey="@Properties.RemainingTimeToDate" title="@Strings.RemainingTimeToDateTitle" prompt="@Strings.RemainingTimeToDatePrompt">
+		<settingConfig type="date" min="1633824000" max="2145916800" errorMessage="@Strings.RemainingTimeToDateError"/>
 	</setting>
 
 	<setting propertyKey="@Properties.DataBarOuterLeftTop" title="@Strings.DataBarOuterLeftTopTitle">
@@ -204,6 +224,8 @@
 			<listEntry value="3">@Strings.Calories</listEntry>
 			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
 			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
+			<listEntry value="11">@Strings.MoveBar</listEntry>
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>
 	<setting propertyKey="@Properties.DataBarInnerRightBottom" title="@Strings.DataBarInnerRightBottomTitle">
@@ -212,12 +234,23 @@
 			<listEntry value="1">@Strings.Steps</listEntry>
 			<listEntry value="3">@Strings.Calories</listEntry>
 			<listEntry value="6">@Strings.FloorsClimbed</listEntry>
-			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>	
+			<listEntry value="7">@Strings.ActiveMinutesWeek</listEntry>
+			<listEntry value="11">@Strings.MoveBar</listEntry>
+			<listEntry value="-1">@Strings.Off</listEntry>
 		</settingConfig>
 	</setting>
 
 	<setting propertyKey="@Properties.SunriseSunsetDrawing" title="@Strings.SunriseSunsetDrawingTitle">
         <settingConfig type="boolean" />
     </setting>
-	
+
+	<setting propertyKey="@Properties.DataBarSplit" title="@Strings.DataBarSplitTitle">
+        <settingConfig type="list">
+			<listEntry value="0">@Strings.DataBarSplitOff</listEntry>
+            <listEntry value="1">@Strings.DataBarSplitOuterLeftTop</listEntry>
+            <listEntry value="2">@Strings.DataBarSplitInnerRightBottom</listEntry>
+            <listEntry value="3">@Strings.DataBarSplitAll</listEntry>
+		</settingConfig>
+	</setting>
+
 </settings>

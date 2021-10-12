@@ -1,0 +1,11 @@
+<settings>
+	
+	<setting propertyKey="@Properties.DisplaySecond" title="@Strings.DisplaySecondTitle">
+        <settingConfig type="list">
+			<listEntry value="0">@Strings.DisplaySecondOff</listEntry>
+            <listEntry value="1">@Strings.DisplaySecondActive</listEntry>
+            <!-- <listEntry value="2">@Strings.DisplaySecondAlways</listEntry> -->
+		</settingConfig>
+	</setting>
+
+</settings>

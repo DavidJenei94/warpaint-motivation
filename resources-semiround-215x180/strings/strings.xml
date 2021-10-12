@@ -3,4 +3,7 @@
     <string id="DataBarOuterLeftTopTitle">Left DataBar</string>
     <string id="DataBarInnerRightBottomTitle">Right DataBar</string>
 
+    <string id="DataBarSplitOuterLeftTop">Left databar</string>
+    <string id="DataBarSplitInnerRightBottom">Right databar</string>
+
 </strings>

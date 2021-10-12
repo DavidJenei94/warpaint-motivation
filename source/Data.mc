@@ -40,7 +40,8 @@ class Data {
 			:dataMaxValue => 0,
 			:iconText => " ",
 			:iconColor => themeColors[:foregroundPrimaryColor],
-			:barColor => themeColors[:foregroundPrimaryColor]
+			:barColor => themeColors[:foregroundPrimaryColor],
+			:valid => true
 		};
 
 		if (selectedType != null) {
@@ -72,7 +73,7 @@ class Data {
 					values[:dataMaxValue] = battery[1];
 					values[:iconText] = "D";
 					values[:iconColor] = Graphics.COLOR_YELLOW;
-					values[:barColor] = Graphics.COLOR_GREEN;
+					values[:barColor] = values[:currentData] > 20.0 ? Graphics.COLOR_GREEN : Graphics.COLOR_RED;
 					break;
 				case DATA_HEARTRATE:
 					var heartRate = getCurrentHeartRate();
@@ -148,16 +149,38 @@ class Data {
 
 					values[:iconColor] = Graphics.COLOR_BLUE;
 					break;
-				case DATA_NOTIFICATION:
-					var notificationCount = getNotificationCount();
-					values[:displayData] = notificationCount == -1 ? _errorDisplay : notificationCount.toString();
+				case DATA_DEVICE_INDICATORS:
+					var deviceIndicators = getDeviceIndicators();
+					values[:displayData] = deviceIndicators.equals("") ? _errorDisplay : "";
+					values[:iconText] = deviceIndicators;
 
 					// Manual value for display purposes
-					values[:displayData] = "3";
+					values[:displayData] = "";
+					values[:iconText] = "JSYZ";
 
-					values[:iconText] = "J";
 					values[:iconColor] = Graphics.COLOR_PINK;
-					break;				
+					break;								
+				case DATA_MOVEBAR:
+					var moveBarLevel = getMoveBarLevel();
+					values[:currentData] = moveBarLevel[0] == 0 ? 0 : moveBarLevel[0] + 3;
+					values[:displayData] = moveBarLevel[0] == -1 ? _errorDisplay : "";
+					values[:dataMaxValue] = ActivityMonitor.MOVE_BAR_LEVEL_MAX + 3;
+					values[:iconText] = moveBarLevel[1];
+					values[:iconColor] = Graphics.COLOR_GREEN;
+					values[:barColor] = Graphics.COLOR_GREEN;
+					break;
+				case DATA_REMAINING_TIME:
+					var remainingTime = getRemainingTime();
+					values[:displayData] = remainingTime == -1 ? _errorDisplay : remainingTime.toString();
+					values[:iconText] = "T";
+					values[:iconColor] = Graphics.COLOR_BLUE;
+					break;
+				case DATA_METERS_CLIMBED:
+					var metersClimbed = getMetersClimbed();
+					values[:displayData] = metersClimbed == -1 ? _errorDisplay : metersClimbed.toString();
+					values[:iconText] = "X";
+					values[:iconColor] = Graphics.COLOR_LT_GRAY;
+					break;
 				case DATA_SUNRISE_SUNSET:
 					var nextSunriseSunset = getNextSunriseSunsetTime();
 					values[:displayData] = nextSunriseSunset[0] == -1 ? _errorDisplay : nextSunriseSunset[0];
@@ -168,6 +191,9 @@ class Data {
 					values[:iconText] = "E";
 					
 					values[:iconColor] = Graphics.COLOR_YELLOW;
+					break;						
+				case DATA_OFF:
+					values[:valid] = false;
 					break;						
 			}
 		}
@@ -182,7 +208,7 @@ class Data {
     	var caloriesGoal = totalCaloriesGoal;
 
     	// Caloriesgoal calculation has no meaning if no calorie data was collected or user selected a reasonable range
-    	if (calories != -1 && (caloriesGoal == null || caloriesGoal < 1000 || caloriesGoal > 10000)) {
+    	if (calories != -1 && (caloriesGoal == null || caloriesGoal < 1 || caloriesGoal > 10000)) {
 	    	var weight = _userProfile.weight; // g
 	    	var height = _userProfile.height; // cm
 	    	var birthYear = _userProfile.birthYear; // year
@@ -305,7 +331,8 @@ class Data {
     
     //API 2.1.0
 	//! get floors climbed for current day
-    //! @return array of floors climbed and floors climbed goal 
+    //! @return array of floors climbed and floors climbed goal
+	(:floorsClimbed)
     private function getFloorsClimbed () as Array<Number or String> {
     	if (_info has :floorsClimbed) {
 	    	var floorsClimbed  = _info.floorsClimbed  != null ? _info.floorsClimbed  : -1;
@@ -426,15 +453,84 @@ class Data {
     	
     	return iconText;		
     }
-    
-	//! Get the notification count
-	//! @return notification count
-    private function getNotificationCount() as Number {
-    	return _deviceSettings.notificationCount  != null ? _deviceSettings.notificationCount  : -1;
+
+   	//! Get the device indicators
+	//! @return string for icons
+	(:deviceIndicators)
+    private function getDeviceIndicators() as String {
+		_deviceSettings = System.getDeviceSettings();
+
+		var deviceIndicators = "";
+		if (_deviceSettings.notificationCount != null && _deviceSettings.notificationCount >= 1) {
+			deviceIndicators = deviceIndicators + "J";
+		}
+
+		if (_deviceSettings.alarmCount != null && _deviceSettings.alarmCount >= 1) {
+			deviceIndicators = deviceIndicators + "S";
+		}
+
+		if (_deviceSettings has :doNotDisturb && _deviceSettings.doNotDisturb) {
+			deviceIndicators = deviceIndicators + "Y";
+		}
+
+		if (_deviceSettings.phoneConnected != null && _deviceSettings.phoneConnected) {
+			deviceIndicators = deviceIndicators + "Z";
+		}
+
+		return deviceIndicators;
+	}
+
+	//! Get the moveBar level
+	//! @return moveBar level and icon
+	(:moveBar)
+    private function getMoveBarLevel() as Array<Number or String> {
+    	var moveBarLevel = _info.moveBarLevel  != null ? _info.moveBarLevel  : -1;
+		var moveBarIcon = "U";
+		if (moveBarLevel > ActivityMonitor.MOVE_BAR_LEVEL_MIN) {
+			var extraLevels = moveBarLevel - 1;
+			moveBarIcon = "V";
+			if (extraLevels > 0) {
+				for (var i = 0; i < extraLevels; i++) {
+					moveBarIcon += "W";
+				}
+			}
+		}
+
+		return [moveBarLevel, moveBarIcon];
+    }
+
+	//! Get the remaining day to a date
+	//! @return remaining day
+	(:remainingTime)
+    private function getRemainingTime() as Number {
+		var selectedDate = new Time.Moment(selectedToDate);
+		var today = new Time.Moment(Time.today().value());
+
+		if (selectedDate.value() < today.value()) {
+			return -1;
+		}
+
+		var timeDifference = selectedDate.subtract(today).value(); // in seconds
+		timeDifference = timeDifference / 60 / 60 / 24;
+
+		return timeDifference.toNumber();
+    }
+
+    //API 2.1.0
+	//! get meters climbed for current day
+    //! @return meters climbed
+	(:floorsClimbed)
+    private function getMetersClimbed () as Number {
+		if (_info has :floorsClimbed) {
+			return _info.metersClimbed != null ? _info.metersClimbed.toNumber()  : -1;
+		} else {
+			return -1;
+		}
     }
 
 	//! Get the next sunrise or sunset
-	//! @return the next sunrise or sunset according to which is the next	
+	//! @return the next sunrise or sunset according to which is the next
+	(:sunriseSunset)	
     private function getNextSunriseSunsetTime() as String {
     	return sunriseSunset.getNextSunriseSunset(_deviceSettings);
 	}
