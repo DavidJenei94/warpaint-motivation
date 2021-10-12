@@ -15,7 +15,7 @@
     <property id="DataBarWidth" type="number">6</property> <!-- Watch screen shape and size dependent-->
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
-    <property id="SunriseSunsetDrawing" type="boolean">false</property>  <!-- Watch screen shape dependent-->
+    <property id="SunriseSunsetDrawing" type="boolean">true</property>  <!-- Watch screen shape dependent-->
     <property id="DataBarSplit" type="number">0</property>
 
     <property id="MotivationalQuoteProperty" type="string"></property>

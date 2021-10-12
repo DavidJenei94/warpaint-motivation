@@ -53,9 +53,11 @@ class Data {
 					values[:dataMaxValue] = steps[1];
 
 					// Manual value for display purposes
-					values[:displayData] = "5456";
-					values[:currentData] = 4555;
-					values[:dataMaxValue] = 8000;
+					if (uatDisplayData) {
+						values[:displayData] = "5456";
+						values[:currentData] = 4555;
+						values[:dataMaxValue] = 8000;
+					}
 
 					values[:iconText] = "B";
 					values[:iconColor] = Graphics.COLOR_BLUE;
@@ -67,8 +69,10 @@ class Data {
 					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toNumber().toString() + "%";
 
 					// Manual value for display purposes
-					values[:displayData] = "72%";
-					values[:currentData] = 72.0;
+					if (uatDisplayData) {
+						values[:displayData] = "72%";
+						values[:currentData] = 72.0;
+					}
 
 					values[:dataMaxValue] = battery[1];
 					values[:iconText] = "D";
@@ -80,8 +84,10 @@ class Data {
 					values[:displayData] = heartRate == -1 ? _errorDisplay : heartRate.toString();	
 
 					// Manual value for display purposes
-					values[:displayData] = "45";
-					values[:currentData] = 45;
+					if (uatDisplayData) {
+						values[:displayData] = "45";
+						values[:currentData] = 45;
+					}
 
 					values[:iconText] = "A";
 					values[:iconColor] = Graphics.COLOR_RED;
@@ -92,8 +98,10 @@ class Data {
 					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
 
 					// Manual value for display purposes
-					values[:displayData] = "1250";
-					values[:currentData] = 1250;
+					if (uatDisplayData) {
+						values[:displayData] = "1250";
+						values[:currentData] = 1250;
+					}
 
 					values[:dataMaxValue] = calories[1];
 					values[:iconText] = "C";
@@ -106,8 +114,10 @@ class Data {
 					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
 
 					// Manual value for display purposes
-					values[:displayData] = "8";
-					values[:currentData] = 8;
+					if (uatDisplayData) {
+						values[:displayData] = "8";
+						values[:currentData] = 8;
+					}
 
 					values[:dataMaxValue] = floorsClimbed[1];
 					values[:iconText] = "G";
@@ -120,8 +130,10 @@ class Data {
 					values[:displayData] = values[:currentData] == -1 ? _errorDisplay : values[:currentData].toString();
 
 					// Manual value for display purposes
-					values[:displayData] = "124";
-					values[:currentData] = 124;
+					if (uatDisplayData) {
+						values[:displayData] = "124";
+						values[:currentData] = 124;
+					}
 
 					values[:dataMaxValue] = activeMinutesWeek[1];
 					values[:iconText] = "H";
@@ -133,7 +145,9 @@ class Data {
 					values[:displayData] = distance[0] == -1 ? _errorDisplay : distance[0].toString() + distance[1];
 
 					// Manual value for display purposes
-					values[:displayData] = "5.86K";
+					if (uatDisplayData) {
+						values[:displayData] = "5.86K";
+					}
 
 					values[:iconText] = "I";
 					values[:iconColor] = Graphics.COLOR_GREEN;
@@ -144,8 +158,10 @@ class Data {
 					values[:iconText] = weather[1];
 
 					// Manual value for display purposes
-					values[:displayData] = "17º";
-					values[:iconText] = "O";
+					if (uatDisplayData) {
+						values[:displayData] = "17º";
+						values[:iconText] = "O";
+					}
 
 					values[:iconColor] = Graphics.COLOR_BLUE;
 					break;
@@ -155,8 +171,10 @@ class Data {
 					values[:iconText] = deviceIndicators;
 
 					// Manual value for display purposes
-					values[:displayData] = "";
-					values[:iconText] = "JSYZ";
+					if (uatDisplayData) {
+						values[:displayData] = "";
+						values[:iconText] = "JSYZ";
+					}
 
 					values[:iconColor] = Graphics.COLOR_PINK;
 					break;								
@@ -166,6 +184,13 @@ class Data {
 					values[:displayData] = moveBarLevel[0] == -1 ? _errorDisplay : "";
 					values[:dataMaxValue] = ActivityMonitor.MOVE_BAR_LEVEL_MAX + 3;
 					values[:iconText] = moveBarLevel[1];
+
+					// Manual value for display purposes
+					if (uatDisplayData) {
+						values[:displayData] = "";
+						values[:iconText] = "VWWW";
+					}
+
 					values[:iconColor] = Graphics.COLOR_GREEN;
 					values[:barColor] = Graphics.COLOR_GREEN;
 					break;
@@ -173,12 +198,24 @@ class Data {
 					var remainingTime = getRemainingTime();
 					values[:displayData] = remainingTime == -1 ? _errorDisplay : remainingTime.toString();
 					values[:iconText] = "T";
+
+					// Manual value for display purposes
+					if (uatDisplayData) {
+						values[:displayData] = "21";
+					}
+
 					values[:iconColor] = Graphics.COLOR_BLUE;
 					break;
 				case DATA_METERS_CLIMBED:
 					var metersClimbed = getMetersClimbed();
 					values[:displayData] = metersClimbed == -1 ? _errorDisplay : metersClimbed.toString();
 					values[:iconText] = "X";
+
+					// Manual value for display purposes
+					if (uatDisplayData) {
+						values[:displayData] = "566";
+					}
+
 					values[:iconColor] = Graphics.COLOR_LT_GRAY;
 					break;
 				case DATA_SUNRISE_SUNSET:
@@ -187,8 +224,10 @@ class Data {
 					values[:iconText] = nextSunriseSunset[1] ? "E" : "F";
 
 					// Manual value for display purposes
-					values[:displayData] = "05:18";
-					values[:iconText] = "E";
+					if (uatDisplayData) {
+						values[:displayData] = "05:18";
+						values[:iconText] = "E";
+					}
 					
 					values[:iconColor] = Graphics.COLOR_YELLOW;
 					break;						

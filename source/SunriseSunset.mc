@@ -20,12 +20,14 @@ class SunriseSunset {
 	
 	//! Constructor
     function initialize() {
+        _successfulCalculation = calculateSunriseSunsetOld();
         _successfulCalculation = calculateSunriseSunset();
     }
 
 	//! Refresh the sunrise and sunset data
 	(:sunriseSunset)
 	function refreshSunsetSunrise() as Void {
+		 _successfulCalculation = calculateSunriseSunsetOld();
 		 _successfulCalculation = calculateSunriseSunset();
 	}
     
@@ -44,7 +46,9 @@ class SunriseSunset {
     	_min = clockTime.min;
 
 		// Manual value for display purposes
-		return ["05:18", true];
+		if (uatDisplayData) {
+			return ["05:18", true];
+		}
 
     	var currentTime = _hour + _min / 60.0;
     	if (currentTime < _sunrise || currentTime > _sunset) {
@@ -98,8 +102,10 @@ class SunriseSunset {
 		}
 
 		// Manual value for display purposes
-		_sunrise = 5.3;
-		_sunset = 18.3;
+		if (uatDisplayData) {
+			_sunrise = 5.3;
+			_sunset = 18.3;
+		}
 		
 		// center of arcs = center of round screen
     	var arcX = dc.getWidth() / 2;
@@ -160,7 +166,9 @@ class SunriseSunset {
     	var currentTime = _hour + _min / 60.0;
 		
 		// Manual value for display purposes
-		currentTime = 4.95;
+		if (uatDisplayData) {
+			currentTime = 4.95;
+		}
 
     	var degree = 180 - (currentTime * (360.0 / 24.0));
     	var radians = Math.toRadians(degree);
@@ -179,7 +187,12 @@ class SunriseSunset {
 	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
 	//! @return boolean value if the calculation is successful or not
 	(:sunriseSunset)
-    private function calculateSunriseSunset() as Boolean {  
+    private function calculateSunriseSunset() as Boolean {
+		// Log ellapsed time
+		var startTime = null;
+		var currentTime = null;
+		if (uatLogSunriseSunsetEllapsedTime) { startTime = System.getTimer(); }
+
 		setCoordinates();
 		var latitude = 0.0;
 	    var longitude = 0.0;
@@ -195,8 +208,117 @@ class SunriseSunset {
     	_min = clockTime.min;
 
 		// Manual value for display purposes
-		_hour = 4;
-		_min = 57;
+		if (uatDisplayData) {
+			_hour = 4;
+			_min = 57;
+		}
+
+		// Manual value for display purposes
+		if (uatManualLocationSunriseSunset) {
+			latitude = 46.265;
+			longitude = 20.15;
+		}
+
+    	var dst = clockTime.dst / 3600; // The daylight savings time offset in hour
+    	var timeZoneOffset = clockTime.timeZoneOffset / 3600; // Timezone offset in hour
+    	
+		var today = new Time.Moment(Time.today().value());
+		var todayFrom1900 = 25571 + today.value() / 86400; // in days: 60 / 60 / 24
+		var julianDay = 2415018.5 + todayFrom1900 - dst / 24; // in days
+		var julianCentury = (julianDay - 2451545) / 36525;
+		
+		var geomMeanLongSun = (280.46646 + julianCentury * (36000.76983 + julianCentury * 0.0003032));
+		var geomMeanLongSunDecimal = geomMeanLongSun - Math.floor(geomMeanLongSun);
+		geomMeanLongSun = (geomMeanLongSun.toNumber() % 360) + geomMeanLongSunDecimal; // degree
+		var geomMeanAnomSun = 357.52911 + julianCentury * (35999.05029 - 0.0001537 * julianCentury); // degree
+		var eccentEarthOrbit = 0.016708634 - julianCentury * (0.000042037 + 0.0000001267 * julianCentury);
+		
+		var sunEqOfCtr = Math.sin(Math.toRadians(geomMeanAnomSun)) * (1.914602 - julianCentury * (0.004817 + 0.000014 * julianCentury)) +
+			Math.sin(Math.toRadians(2 * geomMeanAnomSun)) * (0.019993 - 0.000101 * julianCentury) + 
+			Math.sin(Math.toRadians(3 * geomMeanAnomSun)) * 0.000289;
+		var sunTrueLong = geomMeanLongSun + sunEqOfCtr; // degree
+
+		var sunAppLong = sunTrueLong - 0.00569 - 0.00478 * Math.sin(Math.toRadians(125.04 - 1934.136 * julianCentury)); // degree
+		var meanObliqEcliptic = 23 + (26 + ((21.448 - julianCentury * (46.815 + julianCentury * (0.00059 - julianCentury * 0.001813)))) / 60) / 60; // degree
+		var obliqCorr = meanObliqEcliptic + 0.00256 * Math.cos(Math.toRadians(125.04 - 1934.136 * julianCentury)); // degree
+
+		var sunDeclin = Math.toDegrees(Math.asin(Math.sin(Math.toRadians(obliqCorr)) * Math.sin(Math.toRadians(sunAppLong)))); // degree
+		var varY = Math.tan(Math.toRadians(obliqCorr / 2)) * Math.tan(Math.toRadians(obliqCorr / 2));
+		var eqOfTime = 4 * Math.toDegrees(varY * Math.sin(2 * Math.toRadians(geomMeanLongSun)) - 2 * eccentEarthOrbit * Math.sin(Math.toRadians(geomMeanAnomSun)) +
+			4 * eccentEarthOrbit * varY * Math.sin(Math.toRadians(geomMeanAnomSun)) * Math.cos(2 * Math.toRadians(geomMeanLongSun)) -
+			0.5 * varY * varY * Math.sin(4 * Math.toRadians(geomMeanLongSun)) - 1.25 * eccentEarthOrbit * eccentEarthOrbit * Math.sin(2 * Math.toRadians(geomMeanAnomSun))); // minutes
+
+		var haSunrise = Math.toDegrees(Math.acos(Math.cos(Math.toRadians(90.833)) / (Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(sunDeclin))) - 
+    		Math.tan(Math.toRadians(latitude)) * Math.tan(Math.toRadians(sunDeclin)))); // degree
+		var solarNoon = (720 - 4 * longitude - eqOfTime + timeZoneOffset * 60) / 1440; // LST
+
+		_sunrise = (solarNoon - haSunrise * 4 / 1440) * 24; // LST
+		_sunset = (solarNoon + haSunrise * 4 / 1440) * 24; // LST
+
+		if (uatLogSunriseSunsetDetails) {
+			System.println("julianDay: " + julianDay);
+			System.println("julianCentury: " + julianCentury);
+			System.println("geomMeanLongSun: " + geomMeanLongSun);
+			System.println("geomMeanAnomSun: " + geomMeanAnomSun);
+			System.println("eccentEarthOrbit: " + eccentEarthOrbit);
+			System.println("sunEqOfCtr: " + sunEqOfCtr);
+			System.println("sunTrueLong: " + sunTrueLong);
+			System.println("sunAppLong: " + sunAppLong);
+			System.println("meanObliqEcliptic: " + meanObliqEcliptic);
+			System.println("obliqCorr: " + obliqCorr);
+			System.println("sunDeclin: " + sunDeclin);
+			System.println("varY: " + varY);
+			System.println("eqOfTime: " + eqOfTime);
+			System.println("haSunrise: " + haSunrise);
+			System.println("solarNoon: " + solarNoon);
+			System.println("sunrise: " + _sunrise);
+			System.println("sunset: " + _sunset);
+			System.println("_________________");
+		}
+
+		if (uatLogSunriseSunsetEllapsedTime) {
+			currentTime = System.getTimer();
+			System.println("SunriseSunsetNew Ellapsed time: " + (currentTime - startTime) + " ms\n");
+		}
+
+		return true;
+    }
+    
+	//! Calculates sunrise and sunset values according to date/time and location
+	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
+	//! @return boolean value if the calculation is successful or not
+	(:sunriseSunset)
+    private function calculateSunriseSunsetOld() as Boolean {  
+		// Log ellapsed time
+		var startTime = null;
+		var currentTime = null;
+		if (uatLogSunriseSunsetEllapsedTime) { startTime = System.getTimer(); }
+
+		setCoordinates();
+		var latitude = 0.0;
+	    var longitude = 0.0;
+		if (locationLat != null && locationLng != null) {
+			latitude = locationLat;
+	    	longitude = locationLng;
+		} else {
+			return false;
+		}
+
+    	var clockTime = System.getClockTime();
+    	_hour = clockTime.hour;
+    	_min = clockTime.min;
+
+		// Manual value for display purposes
+		if (uatDisplayData) {
+			_hour = 4;
+			_min = 57;
+		}
+
+		// Manual value for display purposes
+		if (uatManualLocationSunriseSunset) {
+			latitude = 46.265;
+			longitude = 20.15;
+		}
 
     	var dst = clockTime.dst / 3600; // The daylight savings time offset in hour
     	var timeZoneOffset = clockTime.timeZoneOffset / 3600; // Timezone offset in hour
@@ -226,8 +348,23 @@ class SunriseSunset {
     	var hourAngle = Math.acos(Math.cos(Math.toRadians(90.833)) / (Math.cos(latitude) * Math.cos(decl))) - 
     		(Math.tan(latitude) * Math.tan(decl));
     		
+		
     	_sunrise = ((720 - 4 * (longitude + Math.toDegrees(hourAngle)) - eqtime) / 60) + timeZoneOffset + dst; // in hour
     	_sunset = ((720 - 4 * (longitude - Math.toDegrees(hourAngle)) - eqtime) / 60) + timeZoneOffset + dst; // in hour
+
+		if (uatLogSunriseSunsetDetails) {
+			System.println("eqtime: " + eqtime);
+			System.println("decl: " + decl);
+			System.println("hourAngle: " + hourAngle);
+			System.println("_sunrise: " + _sunrise);
+			System.println("_sunset: " + _sunset);
+			System.println("_________________");
+		}
+
+		if (uatLogSunriseSunsetEllapsedTime) {
+			currentTime = System.getTimer();
+			System.println("SunriseSunsetOld Ellapsed time: " + (currentTime - startTime) + " ms\n");
+		}
 
 		return true;
     }

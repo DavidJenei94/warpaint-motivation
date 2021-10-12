@@ -62,7 +62,9 @@ class Time extends WatchUi.Text {
 			_AmPm = _clockTime.hour >= 12 ? "PM" : "AM";
 
 			// Manual value for display purposes
-			_AmPm = "AM";
+			if (uatDisplayData) {
+				_AmPm = "AM";
+			}	
 
 			var x = dc.getWidth() / 2 - getTimeWidth(dc) - (dc.getTextWidthInPixels(_AmPm, smallFont) / 2 + 3); // 3 pixels from time
 			var y = dc.getHeight() / 2;
@@ -102,8 +104,10 @@ class Time extends WatchUi.Text {
 		_seconds = _clockTime.sec.toString();	
 
 		// Manual value for display purposes
-		_time = "04:57";
-		_seconds = "38";
+		if (uatDisplayData) {
+			_time = "04:57";
+			_seconds = "38";
+		}
 	}
 	
 	//! Get current time according to settings
