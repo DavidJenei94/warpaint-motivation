@@ -126,7 +126,7 @@ class SunriseSunset {
     	);
 
 		// Split the Sunrise Sunset round drawing to 24 parts
-		if (dataBarSplit == DATABAR_SPLIT_ALL || dataBarSplit == DATABAR_SPLIT_SUNRISE_SUNSET) {
+		if (dataBarSplit == DATABAR_SPLIT_ALL || dataBarSplit == DATABAR_SPLIT_OUTER_LEFT_TOP) {
 			dc.setPenWidth(width + 1);
 			dc.setColor(themeColors[:backgroundColor], themeColors[:backgroundColor]);
 			for (var i = 360; i > 0; i -= 15) {

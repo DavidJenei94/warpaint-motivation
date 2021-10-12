@@ -3,14 +3,5 @@
 	<setting propertyKey="@Properties.SunriseSunsetDrawing" title="@Strings.SunriseSunsetDrawingTitle">
         <settingConfig type="boolean"  readonly="true"/>
     </setting>
-
-    <setting propertyKey="@Properties.DataBarSplit" title="@Strings.DataBarSplitTitle">
-        <settingConfig type="list">
-			<listEntry value="0">@Strings.DataBarSplitOff</listEntry>
-            <!-- <listEntry value="1">@Strings.DataBarSplitSunriseSunset</listEntry> -->
-            <listEntry value="2">@Strings.DataBarSplitDatabar</listEntry>
-            <!-- <listEntry value="3">@Strings.DataBarSplitAll</listEntry> -->
-		</settingConfig>
-	</setting>
 	
 </settings>

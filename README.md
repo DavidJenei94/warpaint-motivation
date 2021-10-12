@@ -27,7 +27,7 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 - You can set a date for the 'Remaining days to selected date' data field.
 - Databars: Battery, Steps, Calories, Floors climbed, Active minutes, Move Bar, Off.
 - On round shape watches on the place of the outer databar you can set the Sunset/Sunrise position in a 24-hour splitted circle and the position of the sun.
-- You can split the databars to equal parts (10 parts on round and 5 parts on semi round and 4 parts on rectangle watches). You can also split the Sunset/Sunrise position circle's day part around the round watches into 24 parts.
+- You can split the databars to equal parts (10 parts on round and 5 parts on semi round and 4 parts on rectangle watches). The Sunset/Sunrise position circle around the round watches splitted into 24 parts.
 
 ### Notes/FAQ:
 - All possibilities to change the settings and customize the watch face are present on the following page: https://apps.garmin.com/settingsHelp. 
@@ -53,6 +53,8 @@ The unique font for Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.2.1
+- Restructure splitted databar option
 ### 1.2.0
 - Add splitted databar option
 - Remove fr645m weather data field (not supported by device)

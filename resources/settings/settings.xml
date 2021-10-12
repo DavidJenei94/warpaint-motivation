@@ -247,10 +247,10 @@
 	<setting propertyKey="@Properties.DataBarSplit" title="@Strings.DataBarSplitTitle">
         <settingConfig type="list">
 			<listEntry value="0">@Strings.DataBarSplitOff</listEntry>
-            <listEntry value="1">@Strings.DataBarSplitSunriseSunset</listEntry>
-            <listEntry value="2">@Strings.DataBarSplitDatabar</listEntry>
+            <listEntry value="1">@Strings.DataBarSplitOuterLeftTop</listEntry>
+            <listEntry value="2">@Strings.DataBarSplitInnerRightBottom</listEntry>
             <listEntry value="3">@Strings.DataBarSplitAll</listEntry>
 		</settingConfig>
 	</setting>
-	
+
 </settings>
