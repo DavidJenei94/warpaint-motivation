@@ -10,7 +10,8 @@ import Toybox.System;
 var uatLogOnUpdateEllapsedTime = false;
 var uatDisplayData = false;
 var uatLogSunriseSunsetDetails = false;
-var uatLogSunriseSunsetEllapsedTime = true;
+var uatLogSunriseSunsetEllapsedTime = false;
+var uatManualLocationSunriseSunset = false;
 
 // global variables
 var myView as View;
