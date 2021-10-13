@@ -53,7 +53,7 @@ The unique font is from Vic Fieger (https://www.vicfieger.com)
 ## What's New
 
 ### 1.2.2
-- Modify Sunrise/Sunset calculation
+- Modify Sunrise/Sunset calculation to be more accurate
 ### 1.2.1
 - Restructure splitted databar option
 ### 1.2.0
