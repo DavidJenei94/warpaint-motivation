@@ -150,6 +150,9 @@ class SunriseSunset {
     	
     	dc.setColor(color, themeColors[:backgroundColor]);
     	
+		var clockTime = System.getClockTime();
+    	_hour = clockTime.hour;
+    	_min = clockTime.min;
     	var currentTime = _hour + _min / 60.0;
     	var degree = 180 - (currentTime * (360.0 / 24.0));
     	var radians = Math.toRadians(degree);
@@ -165,10 +168,11 @@ class SunriseSunset {
     }
     
 	//! Calculates sunrise and sunset values according to date/time and location
-	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
+	//! https://gml.noaa.gov/grad/solcalc/calcdetails.html
+	//! Astronomical Algorithms by Jean Meeus - http://www.agopax.it/Libri_astronomia/pdf/Astronomical%20Algorithms.pdf
 	//! @return boolean value if the calculation is successful or not
 	(:sunriseSunset)
-    private function calculateSunriseSunset() as Boolean {  
+    private function calculateSunriseSunset() as Boolean {
 		setCoordinates();
 		var latitude = 0.0;
 	    var longitude = 0.0;
@@ -180,38 +184,41 @@ class SunriseSunset {
 		}
 
     	var clockTime = System.getClockTime();
-    	_hour = clockTime.hour;
-    	_min = clockTime.min;
-    	var dst = clockTime.dst / 3600; // The daylight savings time offset in hour
     	var timeZoneOffset = clockTime.timeZoneOffset / 3600; // Timezone offset in hour
     	
 		var today = new Time.Moment(Time.today().value());
-		var todayInfo = Gregorian.info(today, Time.FORMAT_SHORT);
-		var options = {
-		    :year   => todayInfo.year,
-		    :month  => 01,
-		    :day    => 01,
-		    :hour   => 00,
-		    :minute => 00
-		};
-		var firstDayOfYear = Gregorian.moment(options);
-    	var dayOfYear = Math.ceil(today.subtract(firstDayOfYear).value() / 60.0 / 60.0 / 24.0) + 1;
-    	var totalDaysInYear = todayInfo.year % 4 == 0 ? 366 : 365;
-    	var fractionalYear = ((2 * Math.PI) / totalDaysInYear) * (dayOfYear - 1 + ((_hour - 12) / 24));
-    	
-		// equation of time in minutes
-    	var eqtime = 229.18 * (0.000075 + 0.001868 * Math.cos(fractionalYear) - 0.032077 * Math.sin(fractionalYear) - 
-    		0.014615 * Math.cos(2 * fractionalYear) - 0.040849 * Math.sin(2 * fractionalYear));
-    	// declination angle in radians
-		var decl = 0.006918 - 0.399912 * Math.cos(fractionalYear) + 0.070257 * Math.sin(fractionalYear) - 0.006758 * Math.cos(2 * fractionalYear) + 
-    		0.000907 * Math.sin(2 * fractionalYear) - 0.002697 * Math.cos(3 * fractionalYear) + 0.00148 * Math.sin(3 * fractionalYear);
-	    
-		// hour angle in radians
-    	var hourAngle = Math.acos(Math.cos(Math.toRadians(90.833)) / (Math.cos(latitude) * Math.cos(decl))) - 
-    		(Math.tan(latitude) * Math.tan(decl));
-    		
-    	_sunrise = ((720 - 4 * (longitude + Math.toDegrees(hourAngle)) - eqtime) / 60) + timeZoneOffset + dst; // in hour
-    	_sunset = ((720 - 4 * (longitude - Math.toDegrees(hourAngle)) - eqtime) / 60) + timeZoneOffset + dst; // in hour
+		var todayFrom1900 = 25571 + today.value() / 86400; // in days: (60 / 60 / 24) = 86400
+		var julianDay = 2415018.5 + todayFrom1900 - timeZoneOffset / 24; // in days
+		var julianCentury = (julianDay - 2451545) / 36525;
+		
+		var geomMeanLongSun = (280.46646 + julianCentury * (36000.76983 + julianCentury * 0.0003032));
+		var geomMeanLongSunDecimal = geomMeanLongSun - Math.floor(geomMeanLongSun);
+		geomMeanLongSun = (geomMeanLongSun.toNumber() % 360) + geomMeanLongSunDecimal; // degree
+		var geomMeanAnomSun = 357.52911 + julianCentury * (35999.05029 - 0.0001537 * julianCentury); // degree
+		var eccentEarthOrbit = 0.016708634 - julianCentury * (0.000042037 + 0.0000001267 * julianCentury);
+		
+		var sunEqOfCtr = Math.sin(Math.toRadians(geomMeanAnomSun)) * (1.914602 - julianCentury * (0.004817 + 0.000014 * julianCentury)) +
+			Math.sin(Math.toRadians(2 * geomMeanAnomSun)) * (0.019993 - 0.000101 * julianCentury) + 
+			Math.sin(Math.toRadians(3 * geomMeanAnomSun)) * 0.000289;
+		var sunTrueLong = geomMeanLongSun + sunEqOfCtr; // degree
+
+		var sunAppLong = sunTrueLong - 0.00569 - 0.00478 * Math.sin(Math.toRadians(125.04 - 1934.136 * julianCentury)); // degree
+		var meanObliqEcliptic = 23 + (26 + ((21.448 - julianCentury * (46.815 + julianCentury * (0.00059 - julianCentury * 0.001813)))) / 60) / 60; // degree
+		var obliqCorr = meanObliqEcliptic + 0.00256 * Math.cos(Math.toRadians(125.04 - 1934.136 * julianCentury)); // degree
+
+		var sunDeclin = Math.toDegrees(Math.asin(Math.sin(Math.toRadians(obliqCorr)) * Math.sin(Math.toRadians(sunAppLong)))); // degree
+		var varY = Math.tan(Math.toRadians(obliqCorr / 2)) * Math.tan(Math.toRadians(obliqCorr / 2));
+		var eqOfTime = 4 * Math.toDegrees(varY * Math.sin(2 * Math.toRadians(geomMeanLongSun)) - 2 * eccentEarthOrbit * Math.sin(Math.toRadians(geomMeanAnomSun)) +
+			4 * eccentEarthOrbit * varY * Math.sin(Math.toRadians(geomMeanAnomSun)) * Math.cos(2 * Math.toRadians(geomMeanLongSun)) -
+			0.5 * varY * varY * Math.sin(4 * Math.toRadians(geomMeanLongSun)) - 1.25 * eccentEarthOrbit * eccentEarthOrbit * Math.sin(2 * Math.toRadians(geomMeanAnomSun))); // minutes
+
+		var haSunrise = Math.toDegrees(Math.acos(Math.cos(Math.toRadians(90.833)) / (Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(sunDeclin))) - 
+    		Math.tan(Math.toRadians(latitude)) * Math.tan(Math.toRadians(sunDeclin)))); // degree
+		var solarNoon = (720 - 4 * longitude - eqOfTime + timeZoneOffset * 60) / 1440; // LST = Local Sidereal Time
+		// The daylight savings time (dst) not needed, timeZoneOffset is correct w/out dst
+
+		_sunrise = (solarNoon - haSunrise * 4 / 1440) * 24; // hour
+		_sunset = (solarNoon + haSunrise * 4 / 1440) * 24; // hour
 
 		return true;
     }

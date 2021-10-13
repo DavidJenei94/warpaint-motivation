@@ -42,17 +42,18 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 - Warpaint Motivation does not collect or forward any data.
 
 ### Credits
-Thanks for:
-The garmin developer community and the help they provided me on the forums and in the official documentations.
-The motivational quotes for the following youtube channels:
+Thanks for the garmin developer community and the help they provided me on the forums and in the official documentations.
+The motivational quotes are from the following youtube channels:
 - Ben Lionel Scott (https://www.youtube.com/channel/UCgkKA7xEOoBQNpC5TJxPLiw)
 - Team Fearless (https://www.youtube.com/c/TeamFearless)
 - Motiversity (https://www.youtube.com/c/motiversity)
 - Eddie Pinero (https://www.youtube.com/channel/UCZSFzP3302RUCqPNXFGlVFw)
-The unique font for Vic Fieger (https://www.vicfieger.com)
+The unique font is from Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.2.2
+- Modify Sunrise/Sunset calculation
 ### 1.2.1
 - Restructure splitted databar option
 ### 1.2.0

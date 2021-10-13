@@ -144,7 +144,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				}
 
 				// interval in minutes
-				var intervalToRefreshSunriseSunset = 15;
+				var intervalToRefreshSunriseSunset = 30;
 				var minRemainder = clockTime.min % intervalToRefreshSunriseSunset;
 				if (!_isSunriseSunsetSet && minRemainder == 1) {
 					sunriseSunset.refreshSunsetSunrise();
