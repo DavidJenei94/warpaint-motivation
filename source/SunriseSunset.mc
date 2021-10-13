@@ -192,7 +192,8 @@ class SunriseSunset {
     }
     
 	//! Calculates sunrise and sunset values according to date/time and location
-	//! https://gml.noaa.gov/grad/solcalc/solareqns.PDF
+	//! https://gml.noaa.gov/grad/solcalc/calcdetails.html
+	//! Astronomical Algorithms by Jean Meeus - http://www.agopax.it/Libri_astronomia/pdf/Astronomical%20Algorithms.pdf
 	//! @return boolean value if the calculation is successful or not
 	(:sunriseSunset)
     private function calculateSunriseSunset() as Boolean {
@@ -220,12 +221,11 @@ class SunriseSunset {
 		}
 
     	var clockTime = System.getClockTime();
-    	var dst = clockTime.dst / 3600; // The daylight savings time offset in hour
     	var timeZoneOffset = clockTime.timeZoneOffset / 3600; // Timezone offset in hour
     	
 		var today = new Time.Moment(Time.today().value());
 		var todayFrom1900 = 25571 + today.value() / 86400; // in days: (60 / 60 / 24) = 86400
-		var julianDay = 2415018.5 + todayFrom1900 - dst / 24; // in days
+		var julianDay = 2415018.5 + todayFrom1900 - timeZoneOffset / 24; // in days
 		var julianCentury = (julianDay - 2451545) / 36525;
 		
 		var geomMeanLongSun = (280.46646 + julianCentury * (36000.76983 + julianCentury * 0.0003032));
@@ -252,9 +252,10 @@ class SunriseSunset {
 		var haSunrise = Math.toDegrees(Math.acos(Math.cos(Math.toRadians(90.833)) / (Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(sunDeclin))) - 
     		Math.tan(Math.toRadians(latitude)) * Math.tan(Math.toRadians(sunDeclin)))); // degree
 		var solarNoon = (720 - 4 * longitude - eqOfTime + timeZoneOffset * 60) / 1440; // LST = Local Sidereal Time
+		// The daylight savings time (dst) not needed, timeZoneOffset is correct w/out dst
 
-		_sunrise = (solarNoon - haSunrise * 4 / 1440) * 24; // - dst; // hour
-		_sunset = (solarNoon + haSunrise * 4 / 1440) * 24; // - dst; // hour
+		_sunrise = (solarNoon - haSunrise * 4 / 1440) * 24; // hour
+		_sunset = (solarNoon + haSunrise * 4 / 1440) * 24; // hour
 
 		if (uatLogSunriseSunsetDetails) {
 			System.println("dst: " + dst);
@@ -283,7 +284,7 @@ class SunriseSunset {
 			currentTime = System.getTimer();
 			System.println("SunriseSunsetNew Ellapsed time: " + (currentTime - startTime) + " ms\n");
 		}
-
+		
 		return true;
     }
     
