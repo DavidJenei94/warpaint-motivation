@@ -214,14 +214,14 @@ class SunriseSunset {
 
 		// Manual value for display purposes
 		if (uatManualLocationSunriseSunset) {
-			latitude = 46.265; // Szeged
-			longitude = 20.15;
 			latitude = 47.373878; // Zürich
 			longitude = 8.545094;
+			latitude = 46.265; // Szeged
+			longitude = 20.15;
 		}
 
     	var clockTime = System.getClockTime();
-    	var timeZoneOffset = clockTime.timeZoneOffset / 3600; // Timezone offset in hour
+    	var timeZoneOffset = clockTime.timeZoneOffset / 3600.0; // Timezone offset in hour
     	
 		var today = new Time.Moment(Time.today().value());
 		var todayFrom1900 = 25571 + today.value() / 86400; // in days: (60 / 60 / 24) = 86400
@@ -258,7 +258,6 @@ class SunriseSunset {
 		_sunset = (solarNoon + haSunrise * 4 / 1440) * 24; // hour
 
 		if (uatLogSunriseSunsetDetails) {
-			System.println("dst: " + dst);
 			System.println("timeZoneOffset: " + timeZoneOffset);
 			System.println("julianDay: " + julianDay);
 			System.println("julianCentury: " + julianCentury);
