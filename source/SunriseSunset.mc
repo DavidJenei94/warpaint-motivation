@@ -214,10 +214,14 @@ class SunriseSunset {
 
 		// Manual value for display purposes
 		if (uatManualLocationSunriseSunset) {
-			latitude = 47.373878; // Zürich
-			longitude = 8.545094;
 			latitude = 46.265; // Szeged
 			longitude = 20.15;
+			latitude = 51.478; // UTC - Greenwich
+			longitude = 0;
+			latitude = 0; // UTC
+			longitude = 0;
+			latitude = 47.373878; // Zürich
+			longitude = 8.545094;
 		}
 
     	var clockTime = System.getClockTime();
@@ -276,6 +280,9 @@ class SunriseSunset {
 			System.println("solarNoon: " + solarNoon);
 			System.println("sunrise: " + _sunrise);
 			System.println("sunset: " + _sunset);
+			var settings = System.getDeviceSettings();
+			System.println("sunrise: " + formatHoursToTimeString(_sunrise, settings));
+			System.println("sunset: " + formatHoursToTimeString(_sunset, settings));
 			System.println("_________________");
 		}
 
