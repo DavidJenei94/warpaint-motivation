@@ -174,12 +174,9 @@ class SunriseSunset {
 	(:sunriseSunset)
     private function calculateSunriseSunset() as Boolean {
 		setCoordinates();
-		var latitude = 0.0;
-	    var longitude = 0.0;
-		if (locationLat != null && locationLng != null) {
-			latitude = locationLat;
-	    	longitude = locationLng;
-		} else {
+		var latitude = locationLat;
+	    var longitude = locationLng;
+		if (latitude == null || longitude == null) {
 			return false;
 		}
 
@@ -308,30 +305,13 @@ class SunriseSunset {
                 getApp().setProperty("LastLocationLng", locationLng);
             }
         } else {
-			if (locationLat == null || locationLng == null) {
-				if (Toybox.Application has :Storage) {
-					var lat = Storage.getValue("LastLocationLat");
-					if (lat != null) {
-						locationLat = lat;
-					}
-
-					var lng = Storage.getValue("LastLocationLng");
-					if (lng != null) {
-						locationLng = lng;
-					}
-				} else {
-					var lat = getApp().getProperty("LastLocationLat");
-					if (lat != null) {
-						locationLat = lat;
-					}
-
-					var lng = getApp().getProperty("LastLocationLng");
-					if (lng != null) {
-						locationLng = lng;
-					}
-				}
+			if (Toybox.Application has :Storage) {
+				locationLat = Storage.getValue("LastLocationLat");
+				locationLng = Storage.getValue("LastLocationLng");
+			} else {
+				locationLat = getApp().getProperty("LastLocationLat");
+				locationLng = getApp().getProperty("LastLocationLng");
 			}
         }
     }
-    
 }

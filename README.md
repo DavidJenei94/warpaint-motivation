@@ -52,6 +52,8 @@ The unique font is from Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.2.3
+- Fix Sunrise/Sunset issue
 ### 1.2.2
 - Modify Sunrise/Sunset calculation to be more accurate
 ### 1.2.1

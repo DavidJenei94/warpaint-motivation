@@ -49,8 +49,8 @@ var secondLineWidthPercent as Number;
 var thirdLineWidthPercent as Number;
 
 // Store in storage/property
-var locationLat = null;
-var locationLng = null;
+var locationLat as Float;
+var locationLng as Float;
 
 enum { 
     DATA_BATTERY,  //0 
@@ -200,6 +200,9 @@ class WarpaintMotivationApp extends Application.AppBase {
             Storage.setValue("MotivationalQuoteArray", motivationalQuoteArray);
         }
         Storage.setValue("MotivationalQuoteArraySize", motivationalQuoteArray.size());
+
+        locationLat = Storage.getValue("LastLocationLat");
+        locationLng = Storage.getValue("LastLocationLng");
     }
 
     //! Set global variables without storage enabled
@@ -237,8 +240,10 @@ class WarpaintMotivationApp extends Application.AppBase {
             getApp().setProperty("MotivationalQuoteArray", motivationalQuoteArray);
         }
         getApp().setProperty("MotivationalQuoteArraySize", motivationalQuoteArray.size());
-    }
 
+        locationLat = getApp().getProperty("LastLocationLat");
+        locationLng = getApp().getProperty("LastLocationLng");
+    }
 }
 
 //! Give back App
