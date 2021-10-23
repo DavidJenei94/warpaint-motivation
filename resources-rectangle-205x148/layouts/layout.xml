@@ -34,22 +34,34 @@
 			<param name="justification">Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER</param>
 		</drawable>
 
+		<drawable class="DataBar" id="OuterLeftTopDataBar">
+			<param name="side">DATABAR_OUTER_LEFT_TOP</param>
+			<param name="barWidth">8</param>
+		</drawable>
+		<drawable class="DataBar" id="InnerRightBottomDataBar">
+			<param name="side">DATABAR_INNER_RIGHT_BOTTOM</param>
+			<param name="barWidth">8</param>
+		</drawable>	
+
 		<drawable class="MotivationField" id="MotivationFieldTop">
 			<param name="locX">center</param>
 			<param name="locY">dc.getHeight() * 0.67</param>
 			<param name="font">smallFont</param>
+			<param name="lineWidth">0.80</param>
 			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
 		</drawable>	
 		<drawable class="MotivationField" id="MotivationFieldMiddle">
 			<param name="locX">center</param>
 			<param name="locY">dc.getHeight() * 0.77</param>
 			<param name="font">smallFont</param>
+			<param name="lineWidth">0.80</param>
 			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
 		</drawable>
 		<drawable class="MotivationField" id="MotivationFieldBottom">
 			<param name="locX">center</param>
 			<param name="locY">dc.getHeight() * 0.87</param>
 			<param name="font">smallFont</param>
+			<param name="lineWidth">0.80</param>
 			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
 		</drawable>
 	</layout>

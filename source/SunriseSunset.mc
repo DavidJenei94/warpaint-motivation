@@ -11,6 +11,10 @@ import Toybox.Graphics;
 
 class SunriseSunset {
 
+	static private var _isSunriseSunsetSet = false;
+
+	private var _databarWidth as Integer;
+
 	private var _sunrise as Number; // in hour, eg. 8.23
 	private var _sunset as Number;
 	private var _hour as Number;
@@ -108,8 +112,8 @@ class SunriseSunset {
 		// center of arcs = center of round screen
     	var arcX = dc.getWidth() / 2;
     	var arcY = dc.getHeight() / 2;
-    	var width = dataBarWidth + 4; // the outer circle has to be greater because the center of the circle is not at the center of the screen
-    	var radius = arcX - dataBarWidth / 2 + 2;
+    	var width = _databarWidth + 4; // the outer circle has to be greater because the center of the circle is not at the center of the screen
+    	var radius = arcX - _databarWidth / 2 + 2;
     	
     	var color = themeColors[:isColorful] ? Graphics.COLOR_YELLOW : themeColors[:foregroundPrimaryColor]; //day color
 	    var startAngle = (90.0 - (_sunrise * (360.0 / 24.0)));
@@ -180,7 +184,7 @@ class SunriseSunset {
 
     	var degree = 180 - (currentTime * (360.0 / 24.0));
     	var radians = Math.toRadians(degree);
-    	var distance = arcX - (dataBarWidth / 2) + 1; // distance of the center of the sun from the center of screen
+    	var distance = arcX - (_databarWidth / 2) + 1; // distance of the center of the sun from the center of screen
     	var x = distance + distance * Math.sin(radians);
     	var y = distance + distance * Math.cos(radians);
     	
@@ -188,7 +192,7 @@ class SunriseSunset {
     	x = coordinates[0];
     	y = coordinates[1];
     	
-    	dc.fillCircle(x, y, (dataBarWidth + 1) / 2);
+    	dc.fillCircle(x, y, (_databarWidth + 1) / 2);
     }
     
 	//! Calculates sunrise and sunset values according to date/time and location
@@ -203,12 +207,9 @@ class SunriseSunset {
 		if (uatLogSunriseSunsetEllapsedTime) { startTime = System.getTimer(); }
 
 		setCoordinates();
-		var latitude = 0.0;
-	    var longitude = 0.0;
-		if (locationLat != null && locationLng != null) {
-			latitude = locationLat;
-	    	longitude = locationLng;
-		} else {
+		var latitude = locationLat;
+	    var longitude = locationLng;
+		if (latitude == null || longitude == null) {
 			return false;
 		}
 
@@ -379,30 +380,44 @@ class SunriseSunset {
                 getApp().setProperty("LastLocationLng", locationLng);
             }
         } else {
-			if (locationLat == null || locationLng == null) {
-				if (Toybox.Application has :Storage) {
-					var lat = Storage.getValue("LastLocationLat");
-					if (lat != null) {
-						locationLat = lat;
-					}
-
-					var lng = Storage.getValue("LastLocationLng");
-					if (lng != null) {
-						locationLng = lng;
-					}
-				} else {
-					var lat = getApp().getProperty("LastLocationLat");
-					if (lat != null) {
-						locationLat = lat;
-					}
-
-					var lng = getApp().getProperty("LastLocationLng");
-					if (lng != null) {
-						locationLng = lng;
-					}
-				}
+			if (Toybox.Application has :Storage) {
+				locationLat = Storage.getValue("LastLocationLat");
+				locationLng = Storage.getValue("LastLocationLng");
+			} else {
+				locationLat = getApp().getProperty("LastLocationLat");
+				locationLng = getApp().getProperty("LastLocationLng");
 			}
         }
     }
-    
+
+	//! Check if sunrise sunset needs refresh
+	static function checkSunriseSunsetRefresh() as Void {
+		if (sunriseSunsetDrawingEnabled || selectedValueForDataFieldMiddle == DATA_SUNRISE_SUNSET || 
+			selectedValueForDataFieldLeft == DATA_SUNRISE_SUNSET || selectedValueForDataFieldRight == DATA_SUNRISE_SUNSET) {
+
+			if (sunriseSunset == null) {
+				sunriseSunset = new SunriseSunset();
+			}
+
+			// interval in minutes
+			var intervalToRefreshSunriseSunset = 30;
+			var minRemainder = System.getClockTime().min % intervalToRefreshSunriseSunset;
+			if (!_isSunriseSunsetSet && minRemainder == 1) {
+				sunriseSunset.refreshSunsetSunrise();
+				_isSunriseSunsetSet = true;
+			}
+			
+			if (_isSunriseSunsetSet && minRemainder != 1) {
+				// Change back to false after the minute to prevent updating through every second (if not in low power mode)
+				_isSunriseSunsetSet = false;
+			}				
+		}
+	}
+
+	//! Set databarWidth for sunriseSunset databar
+	//! @param databar width
+	(:sunriseSunset)
+	function setDatabarWidth(databarWidth as Integer) as Void {
+		_databarWidth = databarWidth;
+	}
 }
