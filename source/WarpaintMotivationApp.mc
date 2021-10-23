@@ -26,7 +26,7 @@ var selectedValueForDataFieldRight as Integer;
 
 var selectedToDate as Number;
 
-var dataBarWidth as Integer;
+var dataBarWidth as Integer; //DELETE/REPLACE to layout
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
 var dataBarSplit as Integer;
@@ -44,9 +44,6 @@ var motivationalQuote as String;
 var motivationalQuoteProperty as String;
 var motivationalQuoteChangeInterval as Number;
 var motivationalQuoteArray = [];
-var firstLineWidthPercent as Number;
-var secondLineWidthPercent as Number;
-var thirdLineWidthPercent as Number;
 
 // Store in storage/property
 var locationLat as Float;
@@ -173,7 +170,6 @@ class WarpaintMotivationApp extends Application.AppBase {
         displaySecond = Properties.getValue("DisplaySecond");
         militaryFormat = Properties.getValue("UseMilitaryFormat");
 
-        dataBarWidth = Properties.getValue("DataBarWidth");
         selectedValueForDataFieldMiddle = Properties.getValue("DataFieldMiddle");
         selectedValueForDataFieldLeft = Properties.getValue("DataFieldLeft");
         selectedValueForDataFieldRight = Properties.getValue("DataFieldRight");
@@ -188,9 +184,6 @@ class WarpaintMotivationApp extends Application.AppBase {
 
         motivationalQuoteProperty = Properties.getValue("MotivationalQuoteProperty");
         motivationalQuoteChangeInterval = Properties.getValue("MotivationalQuoteChangeInterval");
-        firstLineWidthPercent = Properties.getValue("FirstMotivationLineWidthPercent");
-        secondLineWidthPercent = Properties.getValue("SecondMotivationLineWidthPercent");
-        thirdLineWidthPercent = Properties.getValue("ThirdMotivationLineWidthPercent");
 
         motivationalQuote = Storage.getValue("MotivationalQuote");
         var motivationalQuoteStoredArray = Storage.getValue("MotivationalQuoteArray");
@@ -213,7 +206,6 @@ class WarpaintMotivationApp extends Application.AppBase {
         displaySecond = getApp().getProperty("DisplaySecond");
         militaryFormat = getApp().getProperty("UseMilitaryFormat");
 
-        dataBarWidth = getApp().getProperty("DataBarWidth");
         selectedValueForDataFieldMiddle = getApp().getProperty("DataFieldMiddle");
         selectedValueForDataFieldLeft = getApp().getProperty("DataFieldLeft");
         selectedValueForDataFieldRight = getApp().getProperty("DataFieldRight");
@@ -228,9 +220,6 @@ class WarpaintMotivationApp extends Application.AppBase {
 
         motivationalQuoteProperty = getApp().getProperty("MotivationalQuoteProperty");
         motivationalQuoteChangeInterval = getApp().getProperty("MotivationalQuoteChangeInterval");
-        firstLineWidthPercent = getApp().getProperty("FirstMotivationLineWidthPercent");
-        secondLineWidthPercent = getApp().getProperty("SecondMotivationLineWidthPercent");
-        thirdLineWidthPercent = getApp().getProperty("ThirdMotivationLineWidthPercent");
 
         motivationalQuote = getApp().getProperty("MotivationalQuote");
         var motivationalQuoteStoredArray = getApp().getProperty("MotivationalQuoteArray");

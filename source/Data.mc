@@ -11,8 +11,6 @@ class Data {
 	private var _info as ActivityMonitor.Info;
 	private var _userProfile as UserProfile.Profile;
 	private var _deviceSettings as System.DeviceSettings;
-
-	private var _sunriseSunset as SunriseSunset;
 	
 	private var _errorDisplay = "--";
 	

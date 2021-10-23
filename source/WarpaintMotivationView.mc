@@ -6,15 +6,12 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
     private var viewDrawables = {};
 	private var _isAwake as Boolean;
-	private var _isMotivationalQuoteSet as Boolean;
 	private var _splittedMotivationalQuote = new String[3];
 	private var _partialUpdatesAllowed as Boolean;
 	private var _SecondsBoundingBox = new Number[4];
 
     private var _data as Data;
-    private var _outerLeftTopDataBar as DataBar;
-    private var _innerRightBottomDataBar as DataBar;
-	private var _isSunriseSunsetSet as Boolean;
+    private var _motivation as Motivation;
 
 	private var _burnInProtection as Boolean;
 	private var _burnInTimeChanged as Boolean;
@@ -27,12 +24,8 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
         WatchFace.initialize();
 		_deviceSettings = System.getDeviceSettings();
         _isAwake = true;
-		_isMotivationalQuoteSet = true;
-		_isSunriseSunsetSet = false;
         _partialUpdatesAllowed = (WatchUi.WatchFace has :onPartialUpdate);
         _data = new Data(_deviceSettings);
-        _outerLeftTopDataBar = new DataBar(DATABAR_OUTER_LEFT_TOP);
-    	_innerRightBottomDataBar = new DataBar(DATABAR_INNER_RIGHT_BOTTOM);
 
         // check Burn in Protect requirement
 		_burnInProtection = (_deviceSettings has :requiresBurnInProtection) ? _deviceSettings.requiresBurnInProtection : false;
@@ -49,7 +42,11 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
         setLayout(Rez.Layouts.WatchFace(dc));
         loadDrawables();
 
-		_splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
+		var firstLineWidth = viewDrawables[:topMotivationText].getLineWidth();
+		var secondLineWidth = viewDrawables[:middleMotivationText].getLineWidth();
+		var thirdLineWidth = viewDrawables[:bottomMotivationText].getLineWidth();
+		_motivation = new Motivation(dc, firstLineWidth, secondLineWidth, thirdLineWidth);
+		_splittedMotivationalQuote = _motivation.getSplittedMotivationalQuote(dc);
     }
 
     //! Load drawables
@@ -64,6 +61,9 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
         viewDrawables[:middleDataText] = View.findDrawableById("DataFieldMiddle");
 		viewDrawables[:leftDataText] = View.findDrawableById("DataFieldLeft");
 		viewDrawables[:rightDataText] = View.findDrawableById("DataFieldRight");
+
+		viewDrawables[:leftDataBar] = View.findDrawableById("OuterLeftTopDataBar");
+		viewDrawables[:rightDataBar] = View.findDrawableById("InnerRightBottomDataBar");
 
         viewDrawables[:topMotivationText] = View.findDrawableById("MotivationFieldTop");
 		viewDrawables[:middleMotivationText] = View.findDrawableById("MotivationFieldMiddle");
@@ -99,24 +99,16 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				_burnInTimeDisplayed = true;
 			}
 
-			dc.setPenWidth(1);
-			var height = dc.getHeight();
-			var width = dc.getWidth();
-			_burnInTimeChanged = !_burnInTimeChanged;
-			if (_burnInTimeChanged) {
-				viewDrawables[:timeTextTop].drawTime(dc, _deviceSettings, _burnInTimeDisplayed);
-				dc.drawLine(width * 0.1, height * 0.5, width * 0.9, height * 0.5);
-			} else {
-				viewDrawables[:timeTextBottom].drawTime(dc, _deviceSettings, _burnInTimeDisplayed);
-				dc.drawLine(width * 0.1, height * 0.5 - 1, width * 0.9, height * 0.5 - 1);
-			}
+			// Draw To AlwaysOnLayout
+			drawAlwaysOn(dc);
 
+			// Set motivational quote
+			_motivation.checkMotivationRefresh(dc);
+			_splittedMotivationalQuote = _motivation.getSplittedMotivationalQuote(dc);
 		} else {
 			// Clear dc with backgroundcolor
 			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 			dc.clear();
-
-			var clockTime = System.getClockTime();
 
 			// Reload drawables if changed from low power mode in case of AMOLED
 			if (_burnInProtection && _burnInTimeDisplayed) {
@@ -126,108 +118,49 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 				_burnInTimeDisplayed = false;
 			}
 
-			// Set and draw time, AM/PM
-			viewDrawables[:timeText].drawTime(dc, _deviceSettings, _burnInTimeDisplayed);
-			viewDrawables[:timeText].drawAmPm(dc, _deviceSettings);
+			// Set settings to the Time and databars
+			viewDrawables[:timeText].setSettings(_deviceSettings);
+			viewDrawables[:leftDataBar].setSettings(_deviceSettings);
+			viewDrawables[:rightDataBar].setSettings(_deviceSettings);
+			// Set BurnInProtection for Time layout
+			viewDrawables[:timeText].setBurnInProtection(_burnInTimeDisplayed);
 
-			// Set and draw date
-			viewDrawables[:dateText].drawDate(dc);
-
-			// set data fields and icons + Set sunriseSunset if necessary
+			// Refresh data 
 			_data.refreshData(_deviceSettings);
-			
-			if (sunriseSunsetDrawingEnabled || selectedValueForDataFieldMiddle == DATA_SUNRISE_SUNSET || 
-				selectedValueForDataFieldLeft == DATA_SUNRISE_SUNSET || selectedValueForDataFieldRight == DATA_SUNRISE_SUNSET) {
 
-				if (sunriseSunset == null) {
-					sunriseSunset = new SunriseSunset();
-				}
+			// Check if refresh sunriseSunset is necessary
+			SunriseSunset.checkSunriseSunsetRefresh();
 
-				// interval in minutes
-				var intervalToRefreshSunriseSunset = 30;
-				var minRemainder = clockTime.min % intervalToRefreshSunriseSunset;
-				if (!_isSunriseSunsetSet && minRemainder == 1) {
-					sunriseSunset.refreshSunsetSunrise();
-					_isSunriseSunsetSet = true;
-				}
-				
-				if (_isSunriseSunsetSet && minRemainder != 1) {
-					// Change back to false after the minute to prevent updating through every second (if not in low power mode)
-					_isSunriseSunsetSet = false;
-				}				
-			}
+			// Set data for data fields
+			viewDrawables[:middleDataText].setSelectedData(_data.getDataForDataField(selectedValueForDataFieldMiddle));
+			viewDrawables[:leftDataText].setSelectedData(_data.getDataForDataField(selectedValueForDataFieldLeft));
+			viewDrawables[:rightDataText].setSelectedData(_data.getDataForDataField(selectedValueForDataFieldRight));
 			
-			var middleValues = _data.getDataForDataField(selectedValueForDataFieldMiddle);
-			var leftValues = _data.getDataForDataField(selectedValueForDataFieldLeft);
-			var rightValues = _data.getDataForDataField(selectedValueForDataFieldRight);
-			if (middleValues[:valid]){
-				viewDrawables[:middleDataText].drawData(dc, middleValues[:displayData], middleValues[:iconText], middleValues[:iconColor]);
+			// Set data for databars
+			if (!sunriseSunsetDrawingEnabled) {
+				viewDrawables[:leftDataBar].setSelectedData(_data.getDataForDataField(selectedValueForDataBarOuterLeftTop));
 			}
-			if (leftValues[:valid]){
-				viewDrawables[:leftDataText].drawData(dc, leftValues[:displayData], leftValues[:iconText], leftValues[:iconColor]);
-			}
-			if (rightValues[:valid]){
-				viewDrawables[:rightDataText].drawData(dc, rightValues[:displayData], rightValues[:iconText], rightValues[:iconColor]);
-			}
-
-			// Set data bars
-			var outerLeftTopValues = !sunriseSunsetDrawingEnabled ? _data.getDataForDataField(selectedValueForDataBarOuterLeftTop) : {:valid => true};
-			var innerRightBottomValues = _data.getDataForDataField(selectedValueForDataBarInnerRightBottom);
-			
-			var screenShape = _deviceSettings.screenShape;
-			if (screenShape == System.SCREEN_SHAPE_ROUND) {
-				if (outerLeftTopValues[:valid]){
-					if (sunriseSunsetDrawingEnabled) {
-						sunriseSunset.drawSunriseSunsetArc(dc, _deviceSettings);
-					} else {
-						_outerLeftTopDataBar.drawRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
-					}
-				}
-				
-				if (innerRightBottomValues[:valid]){
-					_innerRightBottomDataBar.drawRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
-				}			
-			} else if (screenShape == System.SCREEN_SHAPE_SEMI_ROUND) {
-				if (outerLeftTopValues[:valid]){
-					_outerLeftTopDataBar.drawSemiRoundDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
-				}
-				if (innerRightBottomValues[:valid]){
-					_innerRightBottomDataBar.drawSemiRoundDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
-				}
-			} else if (screenShape == System.SCREEN_SHAPE_RECTANGLE) {
-				if (outerLeftTopValues[:valid]){
-					_outerLeftTopDataBar.drawRectangleDataBar(dc, outerLeftTopValues[:currentData], outerLeftTopValues[:dataMaxValue], outerLeftTopValues[:barColor]);
-				}
-				if (innerRightBottomValues[:valid]){
-					_innerRightBottomDataBar.drawRectangleDataBar(dc, innerRightBottomValues[:currentData], innerRightBottomValues[:dataMaxValue], innerRightBottomValues[:barColor]);
-				}
-			}
+			viewDrawables[:rightDataBar].setSelectedData(_data.getDataForDataField(selectedValueForDataBarInnerRightBottom));
 
 			// Set motivational quote
-			// Interval is to change motivational quote
-			// If motivational quote is null or the minute is the selected one, refresh quote
-			var intervalToChangeQuote = motivationalQuoteChangeInterval > 60 ? (motivationalQuoteChangeInterval / 60) : motivationalQuoteChangeInterval;
-			var remainder = motivationalQuoteChangeInterval > 60 ? clockTime.hour % intervalToChangeQuote : clockTime.min % intervalToChangeQuote;
-			if (motivationalQuote == null || (!_isMotivationalQuoteSet && remainder == 0)) {
-				MotivationField.setMotivationalQuote();
-				_splittedMotivationalQuote = MotivationField.splitMotivationalQuote(dc, motivationalQuote);
-				_isMotivationalQuoteSet = true;
-			}
-			if (_isMotivationalQuoteSet && remainder != 0) {
-				// Change back to false after the minute to prevent updating through every second (if not in low power mode)
-				_isMotivationalQuoteSet = false;
-			}
-			viewDrawables[:topMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[0]);
-			viewDrawables[:middleMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[1]);
-			viewDrawables[:bottomMotivationText].drawMotivationText(dc, _splittedMotivationalQuote[2]);
+			_motivation.checkMotivationRefresh(dc);
+			_splittedMotivationalQuote = _motivation.getSplittedMotivationalQuote(dc);
+			viewDrawables[:topMotivationText].setMotivationPartText(_splittedMotivationalQuote[0]);
+			viewDrawables[:middleMotivationText].setMotivationPartText(_splittedMotivationalQuote[1]);
+			viewDrawables[:bottomMotivationText].setMotivationPartText(_splittedMotivationalQuote[2]);
+
+			// Call the parent onUpdate function to redraw the layout
+			// Call the Drawables' draw function
+			// Draw Time (+AM/PM), date, data fields, databars, Motivational quote
+			View.onUpdate(dc);
 
 			// Draw seconds
-			if (clockTime.sec != 0) {
+			if (System.getClockTime().sec != 0) {
 				if (_partialUpdatesAllowed && displaySecond == 2) {
 					// If this device supports partial updates
 					onPartialUpdate(dc);
 				} else if (_isAwake && displaySecond != 0) {
-					viewDrawables[:timeText].drawSeconds(dc, _deviceSettings);
+					viewDrawables[:timeText].drawSeconds(dc);
 				}
 			}
 		}
@@ -238,13 +171,13 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	(:partial_update)
     public function onPartialUpdate(dc as Dc) as Void {
 		if (displaySecond == 2 && System.getClockTime().sec != 0) {
-	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc, _deviceSettings);
+	        _SecondsBoundingBox = viewDrawables[:timeText].getSecondsBoundingBox(dc);
 	  
             // Set clip to the region of bounding box and which only updates that
 	        dc.setClip(_SecondsBoundingBox[0], _SecondsBoundingBox[1], _SecondsBoundingBox[2], _SecondsBoundingBox[3]);
 	        dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
 	    	dc.clear();
-	        viewDrawables[:timeText].drawSeconds(dc, _deviceSettings);
+	        viewDrawables[:timeText].drawSeconds(dc);
 	        
 	        dc.clearClip();
 		}
@@ -279,5 +212,27 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	//! Reload DeviceSettings when settings are changed
     function onSettingsChanged() as Void {
 		_deviceSettings = System.getDeviceSettings();
+	}
+
+	//! Draw To AlwaysOnLayout
+	//! @param dc Device context
+	function drawAlwaysOn(dc as Dc) as Void {
+		dc.setPenWidth(1);
+		var height = dc.getHeight();
+		var width = dc.getWidth();
+		_burnInTimeChanged = !_burnInTimeChanged;
+		if (_burnInTimeChanged) {
+			// Set settings and BurnInProtection for Time layout
+			viewDrawables[:timeTextTop].setSettings(_deviceSettings);
+			viewDrawables[:timeTextTop].setBurnInProtection(_burnInTimeDisplayed);
+			viewDrawables[:timeTextTop].drawTime(dc);
+			dc.drawLine(width * 0.1, height * 0.5, width * 0.9, height * 0.5);
+		} else {
+			// Set settings and BurnInProtection for Time layout
+			viewDrawables[:timeTextBottom].setSettings(_deviceSettings);
+			viewDrawables[:timeTextBottom].setBurnInProtection(_burnInTimeDisplayed);
+			viewDrawables[:timeTextBottom].drawTime(dc);
+			dc.drawLine(width * 0.1, height * 0.5 - 1, width * 0.9, height * 0.5 - 1);
+		}
 	}
 }

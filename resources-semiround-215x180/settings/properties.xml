@@ -1,9 +1,0 @@
-<properties>
-
-    <property id="DataBarWidth" type="number">6</property> <!-- Watch screen shape and size dependent-->
-
-    <property id="FirstMotivationLineWidthPercent" type="float">0.78</property> <!-- Watch screen shape and size dependent-->
-    <property id="SecondMotivationLineWidthPercent" type="float">0.67</property> <!-- Watch screen shape and size dependent-->
-    <property id="ThirdMotivationLineWidthPercent" type="float">0.47</property> <!-- Watch screen shape and size dependent-->
-    
-</properties>

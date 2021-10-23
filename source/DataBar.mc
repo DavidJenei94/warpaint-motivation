@@ -1,13 +1,55 @@
 import Toybox.Graphics;
+import Toybox.WatchUi;
 
-class DataBar {
+class DataBar extends WatchUi.Drawable {
 
 	private var _side as Integer;
+	private var _dataBarWidth as Integer;
+	private var _selectedValue as Number;
+	private var _settings as System.DeviceSettings;
 	
 	//! Constructor
 	//! @param side the side of the bar (outer-left-top or inner-right-bottom)
-    function initialize(side as Integer) {
-		_side = side;
+    function initialize(params) {
+		Drawable.initialize(params);
+		_side = params[:side];
+		_dataBarWidth = params[:barWidth];
+	}
+
+	//! Set Selected Data
+	//! @param selectedValue the selected datavalue
+	function setSelectedData(selectedValue as Number) as Void {
+		_selectedValue = selectedValue;
+	}
+
+	//! Set settings
+	//! @param settings DeviceSettings
+	function setSettings(settings as DeviceSettings) as Void {
+		_settings = settings;
+	}
+
+	//! Draw the dataBar
+	//! @param dc Device Content
+	function draw(dc as Dc) as Void {
+		var screenShape = _settings.screenShape;
+		if (screenShape == System.SCREEN_SHAPE_ROUND) {
+			if (sunriseSunsetDrawingEnabled && _side == DATABAR_OUTER_LEFT_TOP) {
+				sunriseSunset.setDatabarWidth(_dataBarWidth);
+				sunriseSunset.drawSunriseSunsetArc(dc, _settings);
+			} else {
+				if (_selectedValue != null && _selectedValue[:valid]){
+					drawRoundDataBar(dc, _selectedValue[:currentData], _selectedValue[:dataMaxValue], _selectedValue[:barColor]);
+				}
+			}
+		} else if (screenShape == System.SCREEN_SHAPE_SEMI_ROUND) {
+			if (_selectedValue != null && _selectedValue[:valid]){
+				drawSemiRoundDataBar(dc, _selectedValue[:currentData], _selectedValue[:dataMaxValue], _selectedValue[:barColor]);
+			}
+		} else if (screenShape == System.SCREEN_SHAPE_RECTANGLE) {
+			if (_selectedValue != null && _selectedValue[:valid]){
+				drawRectangleDataBar(dc, _selectedValue[:currentData], _selectedValue[:dataMaxValue], _selectedValue[:barColor]);
+			}
+		}
 	}
     
 	//! Draw the data bar for the round watchfaces
@@ -16,7 +58,7 @@ class DataBar {
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
     (:roundShape)    
-    function drawRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) as Void {
+    private function drawRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) as Void {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {
     		return;
@@ -25,13 +67,13 @@ class DataBar {
     	var x = dc.getWidth() / 2;
     	var y = dc.getHeight() / 2;
     	var actualDegree = getDegreeForActualValue(actualValue, maxValue);
-    	var width = dataBarWidth;
+    	var width = _dataBarWidth;
     	var radius = 0;
     	
 		// The outer circle has to be wider because the middle x, y coordinates are not exactly in the middle of the screen
     	if (_side == DATABAR_OUTER_LEFT_TOP) {
     		width += 4;
-    		radius =  x - dataBarWidth / 2 + 2;
+    		radius =  x - _dataBarWidth / 2 + 2;
     	} else if (_side == DATABAR_INNER_RIGHT_BOTTOM) {
     		radius =  x - width / 2 - width - 2;
     	}
@@ -98,7 +140,7 @@ class DataBar {
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
     (:semiroundShape)   
-    function drawSemiRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) as Void {
+    private function drawSemiRoundDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) as Void {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {
     		return;
@@ -106,7 +148,7 @@ class DataBar {
     	
     	var x = dc.getWidth() / 2;
     	var y = dc.getHeight() / 2;
-    	var width = dataBarWidth + 2;
+    	var width = _dataBarWidth + 2;
     	var radius =  x - width / 4;
     	
     	// angleCorrection needed because with semiround shape only the corner of arc touches the top/bottom side
@@ -195,7 +237,7 @@ class DataBar {
 	//! @param maxValue the maximum value of the data
 	//! @param color the color of the bar
     (:rectangleShape)
-    function drawRectangleDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) {
+    private function drawRectangleDataBar(dc as DC, actualValue as Number, maxValue as Number, color as Number) {
     	// Do not draw if error occurs in the data
 		if (actualValue == -1) {
     		return;
@@ -215,7 +257,7 @@ class DataBar {
 
     	// calculate x, y, width, height for fillRectangle
     	if (screenHeight <= screenWidth) {
-	    	barWidth = dataBarWidth;
+	    	barWidth = _dataBarWidth;
 			y = screenHeight - screenHeight * percentFilled;
 			barHeight = screenHeight - y + extraPixel;
 	    		
@@ -225,7 +267,7 @@ class DataBar {
 
     	} else {
     		// Currently at 2021.08.19 only the vivoactive HR
-	    	barHeight = dataBarWidth;
+	    	barHeight = _dataBarWidth;
 			barWidth = screenWidth * percentFilled + extraPixel;
 	    		
 			if (_side == DATABAR_INNER_RIGHT_BOTTOM) {
