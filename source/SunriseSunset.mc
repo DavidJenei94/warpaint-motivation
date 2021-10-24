@@ -323,24 +323,29 @@ class SunriseSunset {
 	static function checkSunriseSunsetRefresh() as Void {
 		if (sunriseSunsetDrawingEnabled || selectedValueForDataFieldMiddle == DATA_SUNRISE_SUNSET || 
 			selectedValueForDataFieldLeft == DATA_SUNRISE_SUNSET || selectedValueForDataFieldRight == DATA_SUNRISE_SUNSET) {
-
-			if (sunriseSunset == null) {
-				sunriseSunset = new SunriseSunset();
-			}
-
-			// interval in minutes
-			var intervalToRefreshSunriseSunset = 30;
-			var minRemainder = System.getClockTime().min % intervalToRefreshSunriseSunset;
-			if (!_isSunriseSunsetSet && minRemainder == 1) {
-				sunriseSunset.refreshSunsetSunrise();
-				_isSunriseSunsetSet = true;
-			}
-			
-			if (_isSunriseSunsetSet && minRemainder != 1) {
-				// Change back to false after the minute to prevent updating through every second (if not in low power mode)
-				_isSunriseSunsetSet = false;
-			}				
+			checkSunriseSunsetRefreshNeed();
 		}
+	}
+
+	//! Check if sunrise sunset needs refresh
+	(:sunriseSunset)
+	static function checkSunriseSunsetRefreshNeed() as Void {
+		if (sunriseSunset == null) {
+			sunriseSunset = new SunriseSunset();
+		}
+
+		// interval in minutes
+		var intervalToRefreshSunriseSunset = 30;
+		var minRemainder = System.getClockTime().min % intervalToRefreshSunriseSunset;
+		if (!_isSunriseSunsetSet && minRemainder == 1) {
+			sunriseSunset.refreshSunsetSunrise();
+			_isSunriseSunsetSet = true;
+		}
+		
+		if (_isSunriseSunsetSet && minRemainder != 1) {
+			// Change back to false after the minute to prevent updating through every second (if not in low power mode)
+			_isSunriseSunsetSet = false;
+		}				
 	}
 
 	//! Set databarWidth for sunriseSunset databar

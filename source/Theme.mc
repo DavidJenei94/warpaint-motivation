@@ -519,5 +519,4 @@ class Theme {
 				break;					
 		}
 	}
-
 }

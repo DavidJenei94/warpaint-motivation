@@ -182,6 +182,37 @@ class Motivation {
 
 	//! Set the motivational Quote
 	private function setMotivationalQuote() as Void {
+		if (Toybox has :Background) {
+			setMotivationalQuoteWithBackground();
+		} else {
+			setMotivationalQuoteWithoutBackground();
+		}
+	}
+
+	//! Set the motivational Quote
+	private function setMotivationalQuoteWithoutBackground() as Void {
+		var motivation = null;
+		if (motivationalQuoteProperty.equals("") || motivationalQuoteProperty.equals("auto")) {
+			motivation = getRandomHardcodedMotivationalQuote();
+		} else {
+			motivation = getUserMotivationalQuote(motivationalQuoteProperty);
+		}
+
+		motivationalQuote = motivation;
+
+		// Did not work before for some reason??? :
+		// Same issue as https://forums.garmin.com/developer/connect-iq/i/bug-reports/strange-symbol-not-found-error
+		// Save last used motivational quote in case app is restarted
+		if (Toybox.Application has :Storage) {
+			Storage.setValue("MotivationalQuote", motivation);
+		} else {
+			getApp().setProperty("MotivationalQuote", motivation);
+		}
+	}
+
+	//! Set the motivational Quote
+	(:background_method)
+	private function setMotivationalQuoteWithBackground() as Void {
 		if (Toybox.Application has :Storage) {
             motivationalQuoteArray = Storage.getValue("MotivationalQuoteArray");
         } else {

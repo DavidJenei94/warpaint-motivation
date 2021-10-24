@@ -21,18 +21,18 @@ rectangle.excludeAnnotations = $(rectangle.excludeAnnotations);roundShape;semiro
 # + weather + has_storage + partial_update
 # + standard and extra colored themes (can't display all color or does not have enough memory)
 # Exclude everything that does not necessary - for more optimization in memory
-d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
-d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
-fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
-fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
-fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
-fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
-fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
-fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
-vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes
+d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
 # Following devices do not have enough memory for all themes + not necessary methods
-fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;floorsClimbed;sunriseSunset
-vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;sunriseSunset
+fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;floorsClimbed;sunriseSunset;has_no_storage;burn_in_protection
+vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;sunriseSunset;has_no_storage;burn_in_protection
 
 # Exclude weather annotation on devices lower than CIQ 3.2.0 too
 # 2.4.0
@@ -56,7 +56,7 @@ fr645.excludeAnnotations = $(fr645.excludeAnnotations);weather
 fr935.excludeAnnotations = $(fr935.excludeAnnotations);weather
 vivoactive3.excludeAnnotations = $(vivoactive3.excludeAnnotations);weather
 vivoactive3mlte.excludeAnnotations = $(vivoactive3mlte.excludeAnnotations);weather
-# 3.2.0
+# 3.2.0 and has no weather
 fr645m.excludeAnnotations = $(fr645m.excludeAnnotations);weather
 
 # Exclude partial update annotation where it is not available

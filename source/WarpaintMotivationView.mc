@@ -216,6 +216,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 
 	//! Draw To AlwaysOnLayout
 	//! @param dc Device context
+	(:burn_in_protection)
 	function drawAlwaysOn(dc as Dc) as Void {
 		dc.setPenWidth(1);
 		var height = dc.getHeight();

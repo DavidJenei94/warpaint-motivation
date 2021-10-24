@@ -73,6 +73,5 @@ class DataField extends WatchUi.Text {
 		var iconWidth = dc.getTextWidthInPixels(iconText, iconFont);
 		
 		return (_x - (dataWidth - ((dataWidth + iconWidth + _pixelsBetweenIconAndData) / 2)));
-	}
-	
+	}	
 }

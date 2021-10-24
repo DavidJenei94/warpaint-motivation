@@ -35,5 +35,4 @@ class Date extends WatchUi.Text {
 		var actualDate = Gregorian.info(Gregorian.now(), Time.FORMAT_SHORT);
         return _dayOfWeeks[(actualDate.day_of_week - 1) % 7] + ", " + _months[actualDate.month - 1] + " " + actualDate.day;
 	}
-	
 }
