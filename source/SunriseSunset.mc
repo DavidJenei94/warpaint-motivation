@@ -1,28 +1,26 @@
 import Toybox.Math;
 import Toybox.System;
-import Toybox.Time.Gregorian;
 import Toybox.Time;
 import Toybox.Activity;
 import Toybox.Application;
-import Toybox.Application.Properties;
 import Toybox.Application.Storage;
-import Toybox.Position;
 import Toybox.Graphics;
 
 class SunriseSunset {
 
 	static private var _isSunriseSunsetSet = false;
 
-	private var _databarWidth as Integer;
+	(:sunriseSunset) private var _databarWidth as Integer;
 
-	private var _sunrise as Number; // in hour, eg. 8.23
-	private var _sunset as Number;
-	private var _hour as Number;
-	private var _min as Number;
+	(:sunriseSunset) private var _sunrise as Number; // in hour, eg. 8.23
+	(:sunriseSunset) private var _sunset as Number;
+	(:sunriseSunset) private var _hour as Number;
+	(:sunriseSunset) private var _min as Number;
 
-	private var _successfulCalculation as Boolean;
+	(:sunriseSunset) private var _successfulCalculation as Boolean;
 	
 	//! Constructor
+	(:sunriseSunset)
     function initialize() {
         _successfulCalculation = calculateSunriseSunset();
     }
@@ -394,24 +392,29 @@ class SunriseSunset {
 	static function checkSunriseSunsetRefresh() as Void {
 		if (sunriseSunsetDrawingEnabled || selectedValueForDataFieldMiddle == DATA_SUNRISE_SUNSET || 
 			selectedValueForDataFieldLeft == DATA_SUNRISE_SUNSET || selectedValueForDataFieldRight == DATA_SUNRISE_SUNSET) {
-
-			if (sunriseSunset == null) {
-				sunriseSunset = new SunriseSunset();
-			}
-
-			// interval in minutes
-			var intervalToRefreshSunriseSunset = 30;
-			var minRemainder = System.getClockTime().min % intervalToRefreshSunriseSunset;
-			if (!_isSunriseSunsetSet && minRemainder == 1) {
-				sunriseSunset.refreshSunsetSunrise();
-				_isSunriseSunsetSet = true;
-			}
-			
-			if (_isSunriseSunsetSet && minRemainder != 1) {
-				// Change back to false after the minute to prevent updating through every second (if not in low power mode)
-				_isSunriseSunsetSet = false;
-			}				
+			checkSunriseSunsetRefreshNeed();
 		}
+	}
+
+	//! Check if sunrise sunset needs refresh
+	(:sunriseSunset)
+	static function checkSunriseSunsetRefreshNeed() as Void {
+		if (sunriseSunset == null) {
+			sunriseSunset = new SunriseSunset();
+		}
+
+		// interval in minutes
+		var intervalToRefreshSunriseSunset = 30;
+		var minRemainder = System.getClockTime().min % intervalToRefreshSunriseSunset;
+		if (!_isSunriseSunsetSet && minRemainder == 1) {
+			sunriseSunset.refreshSunsetSunrise();
+			_isSunriseSunsetSet = true;
+		}
+		
+		if (_isSunriseSunsetSet && minRemainder != 1) {
+			// Change back to false after the minute to prevent updating through every second (if not in low power mode)
+			_isSunriseSunsetSet = false;
+		}				
 	}
 
 	//! Set databarWidth for sunriseSunset databar

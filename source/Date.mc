@@ -39,5 +39,4 @@ class Date extends WatchUi.Text {
         
 		return _dayOfWeeks[(actualDate.day_of_week - 1) % 7] + ", " + _months[actualDate.month - 1] + " " + actualDate.day;
 	}
-	
 }

@@ -55,6 +55,7 @@ The unique font is from Vic Fieger (https://www.vicfieger.com)
 ### 1.3.0
 - Restructure and optimize code
 - Fix AMOLED watches not updating motivational quote when in low power mode
+- Fix fr735xt false data field issue
 ### 1.2.3
 - Fix Sunrise/Sunset issue
 ### 1.2.2
