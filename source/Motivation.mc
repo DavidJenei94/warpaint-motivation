@@ -1,5 +1,6 @@
 import Toybox.Application;
 import Toybox.Application.Storage;
+import Toybox.Application.Properties;
 import Toybox.WatchUi;
 import Toybox.System;
 import Toybox.Math;
@@ -12,7 +13,7 @@ class Motivation {
     private var _secondLineWidthPercent as Number;
     private var _thirdLineWidthPercent as Number;
 
-    private var hardcodedMotivationalQuotes = [
+    private var hardcodedMotivationalQuotesBasic = [
 		"I DIDN'T COME THIS FAR TO ONLY COME THIS FAR",
 		"PAIN IS TEMPORARY, BUT GREATNESS LASTS FOREVER",
 		"IF IT WAS EASY EVERYBODY WOULD DO IT",
@@ -37,7 +38,10 @@ class Motivation {
 		"BETTER THAN YESTERDAY",
 		"STAY FOCUSED ON YOUR GOAL",
 		"EVERY SINGLE DAY MATTERS",
-		"YOU WERE CREATED TO DO GREAT THINGS",
+		"YOU WERE CREATED TO DO GREAT THINGS"
+	];
+
+	(:low_memory_motivation) private var hardcodedMotivationalQuotesExtra = [
 		"CHAMPIONSHIP IS WON IN THE TRAINING ROOM",
 		"DON'T BE AFRAID TO BE DIFFERENT",
 		"TURN ON BEAST MODE",
@@ -100,7 +104,9 @@ class Motivation {
 				motivationSecondPart = motivation.substring(firstVerticalLineIndex + 1, secondVerticalLineIndex + 1);
 				motivationThirdPart = motivation.substring(secondVerticalLineIndex + 2, motivationLength); //+2 because there are 2 vertical lines before
 			}
+
 			_splittedMotivationalQuote = [motivationFirstPart, motivationSecondPart, motivationThirdPart];
+			return;
 		}
     	
 		// Split automatically with spaces and length
@@ -211,7 +217,7 @@ class Motivation {
 	}
 
 	//! Set the motivational Quote
-	(:background_method)
+	(:background_method_motivation)
 	private function setMotivationalQuoteWithBackground() as Void {
 		if (Toybox.Application has :Storage) {
             motivationalQuoteArray = Storage.getValue("MotivationalQuoteArray");
@@ -281,8 +287,23 @@ class Motivation {
 	//! Get a random motivational quote 
 	//! @return a random quote from the list hard coded
 	private function getRandomHardcodedMotivationalQuote() as String {
-		var randomIndex = Math.rand() % hardcodedMotivationalQuotes.size();
-		return hardcodedMotivationalQuotes[randomIndex];
+		var lowMemory = false;
+		if (Toybox.Application has :Storage) {
+			lowMemory = Properties.getValue("LowMemoryForMotivationalQuotes");
+		} else {
+			lowMemory = getApp().getProperty("LowMemoryForMotivationalQuotes");
+		}
+
+		if (lowMemory) {
+			var randomIndex = Math.rand() % hardcodedMotivationalQuotesBasic.size();
+			return hardcodedMotivationalQuotesBasic[randomIndex];
+		} else {
+			var randomIndex = Math.rand() % (hardcodedMotivationalQuotesBasic.size() + hardcodedMotivationalQuotesExtra.size());
+			var hardcodedMotivationalQuotesAll = [];
+			hardcodedMotivationalQuotesAll.addAll(hardcodedMotivationalQuotesBasic);
+			hardcodedMotivationalQuotesAll.addAll(hardcodedMotivationalQuotesExtra);
+			return hardcodedMotivationalQuotesAll[randomIndex];
+		}
 	}
 
     //! Check if Motivation needs refresh

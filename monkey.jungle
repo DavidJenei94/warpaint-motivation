@@ -13,7 +13,6 @@ rectangle.excludeAnnotations = $(rectangle.excludeAnnotations);roundShape;semiro
 # epix - old product
 # fr45 - 8 colors, low memory (48 kb)
 # garminswim2 - 8 colors, low memory (48 kb)
-# fr55 - 8 colors (no gray or orange)
 # vívolife - Low number of features
 
 
@@ -21,17 +20,18 @@ rectangle.excludeAnnotations = $(rectangle.excludeAnnotations);roundShape;semiro
 # + weather + has_storage + partial_update
 # + standard and extra colored themes (can't display all color or does not have enough memory)
 # Exclude everything that does not necessary - for more optimization in memory
-d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
-d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
-fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
-fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
-fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
-fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
-fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
-fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
-vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection
+# Low memory devices exclude some hardcoded motivational quotes to save memory (mainly 1.4.0 round watches because they have sunrise sunset)
+d2bravo.excludeAnnotations = $(d2bravo.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation;low_memory_motivation
+d2bravo_titanium.excludeAnnotations = $(d2bravo_titanium.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation;low_memory_motivation
+fenix3.excludeAnnotations = $(fenix3.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation;low_memory_motivation
+fenix3_hr.excludeAnnotations = $(fenix3_hr.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation;low_memory_motivation
+fr230.excludeAnnotations = $(fr230.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation
+fr235.excludeAnnotations = $(fr235.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation
+fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation
+fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation
+vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation
 # Following devices do not have enough memory for all themes + not necessary methods
-fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;floorsClimbed;sunriseSunset;has_no_storage;burn_in_protection
+fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;floorsClimbed;sunriseSunset;has_no_storage;burn_in_protection;low_memory_motivation
 vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;sunriseSunset;has_no_storage;burn_in_protection
 
 # Exclude weather annotation on devices lower than CIQ 3.2.0 too
@@ -67,10 +67,11 @@ venusqm.excludeAnnotations = $(venusqm.excludeAnnotations);partial_update
 
 # CIQ 1.x watches have No Floors, Active Minutes support and Weather
 # Some of them have no HR support either
-d2bravo.resourcePath = $(d2bravo.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
-d2bravo_titanium.resourcePath = $(d2bravo_titanium.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x
-fenix3.resourcePath = $(fenix3.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
-fenix3_hr.resourcePath = $(fenix3_hr.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x
+# Low memory devices exclude some hardcoded motivational quotes to save memory (mainly 1.4.0 round watches because they have sunrise sunset)
+d2bravo.resourcePath = $(d2bravo.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr;resources-low_memory
+d2bravo_titanium.resourcePath = $(d2bravo_titanium.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x;resources-low_memory
+fenix3.resourcePath = $(fenix3.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr;resources-low_memory
+fenix3_hr.resourcePath = $(fenix3_hr.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x;resources-low_memory
 fr230.resourcePath = $(fr230.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr
 fr235.resourcePath = $(fr235.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x
 fr630.resourcePath = $(fr630.resourcePath);resources-basic_themes;resources-no_partial_update;resources-ciq_1.x-no_hr

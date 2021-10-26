@@ -1,28 +1,26 @@
 import Toybox.Math;
 import Toybox.System;
-import Toybox.Time.Gregorian;
 import Toybox.Time;
 import Toybox.Activity;
 import Toybox.Application;
-import Toybox.Application.Properties;
 import Toybox.Application.Storage;
-import Toybox.Position;
 import Toybox.Graphics;
 
 class SunriseSunset {
 
 	static private var _isSunriseSunsetSet = false;
 
-	private var _databarWidth as Integer;
+	(:sunriseSunset) private var _databarWidth as Integer;
 
-	private var _sunrise as Number; // in hour, eg. 8.23
-	private var _sunset as Number;
-	private var _hour as Number;
-	private var _min as Number;
+	(:sunriseSunset) private var _sunrise as Number; // in hour, eg. 8.23
+	(:sunriseSunset) private var _sunset as Number;
+	(:sunriseSunset) private var _hour as Number;
+	(:sunriseSunset) private var _min as Number;
 
-	private var _successfulCalculation as Boolean;
+	(:sunriseSunset) private var _successfulCalculation as Boolean;
 	
 	//! Constructor
+	(:sunriseSunset)
     function initialize() {
         _successfulCalculation = calculateSunriseSunset();
     }
