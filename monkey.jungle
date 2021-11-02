@@ -31,7 +31,7 @@ fr630.excludeAnnotations = $(fr630.excludeAnnotations);background_method;weather
 fr920xt.excludeAnnotations = $(fr920xt.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation
 vivoactive.excludeAnnotations = $(vivoactive.excludeAnnotations);background_method;weather;has_storage;partial_update;standardThemes;extraThemes;burn_in_protection;background_method_motivation
 # Following devices do not have enough memory for all themes + not necessary methods
-fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background;background_method;weather;partial_update;standardThemes;extraThemes;floorsClimbed;sunriseSunset;has_no_storage;burn_in_protection;low_memory_motivation
+fr735xt.excludeAnnotations = $(fr735xt.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;floorsClimbed;sunriseSunset;has_no_storage;burn_in_protection;low_memory_motivation
 vivoactive_hr.excludeAnnotations = $(vivoactive_hr.excludeAnnotations);background_method;weather;partial_update;standardThemes;extraThemes;sunriseSunset;has_no_storage;burn_in_protection
 
 # Exclude weather annotation on devices lower than CIQ 3.2.0 too
