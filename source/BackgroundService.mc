@@ -9,7 +9,6 @@ import Toybox.Communications;
 class BackgroundService extends System.ServiceDelegate {
 	
 	//! Constructor
-	(:background_method)
 	function initialize() {
 		System.ServiceDelegate.initialize();
 	}

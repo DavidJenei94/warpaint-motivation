@@ -21,7 +21,7 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 - Enable Military time format when the 24 hour option is selected.
 - Seconds display options: No display / Display only in active mode / Display seconds also when in low power mode (It drains the battery faster and does not work for AMOLED watches beacuse they require burn in protection).
 - Set a Calorie goal which will serve as the max value on the databar (If 0, an automated calculation will be done according to your activity level).
-- Set a uniqe motivational quote to display (It is advised to use less than 50 characters, which are needed to written in UPPERCASE and besides English letters and numbers the following characters are available: ' !"%&'()+,-./:;=?_º'. Use the | character to indicate the row split, otherwise it is automatically splitted according to length and spaces).
+- Set a uniqe motivational quote to display. It is advised to use less than 50 characters, which are needed to written in UPPERCASE and besides English letters and numbers the following characters are available: ' !"%&'()+,-./:;=?_º'. Use the | character to indicate the row split, otherwise it is automatically splitted according to length and spaces. Leave empty for automatic selection.
 - Set how frequent the motivational quote is changed (15 min/30 min/60 min/2 hours/3 hours (default)/4 hours/8 hours/12 hours).
 - Data fields: Battery, Steps, Heart Rate, Calories, Sunrise/Sunset, Distance, Floors climbed, Active minutes, Weather, Device indicators (Notifications, Alarms, Do Not Disturb, Bluetooth), Remaining Days, Move Bar, Meters climbed, Off.
 - You can set a date for the 'Remaining days to selected date' data field.
@@ -52,6 +52,14 @@ The unique font is from Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.3.1
+- Fix minor bug with background service
+### 1.3.0
+- Restructure and optimize code
+- Fix AMOLED watches not updating motivational quote when in low power mode
+- Fix fr735xt false data field issue
+### 1.2.3
+- Fix Sunrise/Sunset issue
 ### 1.2.2
 - Modify Sunrise/Sunset calculation to be more accurate
 ### 1.2.1

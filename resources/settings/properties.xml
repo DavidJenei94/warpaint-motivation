@@ -12,7 +12,6 @@
     <property id="DataFieldRight" type="number">6</property>
     <property id="RemainingTimeToDate" type="number">1640995200</property>
 
-    <property id="DataBarWidth" type="number">6</property> <!-- Watch screen shape and size dependent-->
     <property id="DataBarOuterLeftTop" type="number">0</property>
     <property id="DataBarInnerRightBottom" type="number">1</property>
     <property id="SunriseSunsetDrawing" type="boolean">true</property>  <!-- Watch screen shape dependent-->
@@ -20,7 +19,6 @@
 
     <property id="MotivationalQuoteProperty" type="string"></property>
     <property id="MotivationalQuoteChangeInterval" type="number">180</property>
-    <property id="FirstMotivationLineWidthPercent" type="float">0.78</property> <!-- Watch screen shape and size dependent-->
-    <property id="SecondMotivationLineWidthPercent" type="float">0.67</property> <!-- Watch screen shape and size dependent-->
-    <property id="ThirdMotivationLineWidthPercent" type="float">0.47</property> <!-- Watch screen shape and size dependent-->
+    <property id="LowMemoryForMotivationalQuotes" type="boolean">false</property>
+    
 </properties>
