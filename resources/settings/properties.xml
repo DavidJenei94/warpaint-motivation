@@ -20,4 +20,5 @@
     <property id="MotivationalQuoteProperty" type="string"></property>
     <property id="MotivationalQuoteChangeInterval" type="number">180</property>
     <property id="LowMemoryForMotivationalQuotes" type="boolean">false</property>
+    
 </properties>

@@ -26,7 +26,6 @@ var selectedValueForDataFieldRight as Integer;
 
 var selectedToDate as Number;
 
-var dataBarWidth as Integer; //DELETE/REPLACE to layout
 var selectedValueForDataBarOuterLeftTop as Integer;
 var selectedValueForDataBarInnerRightBottom as Integer;
 var dataBarSplit as Integer;
