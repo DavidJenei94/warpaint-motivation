@@ -88,6 +88,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 		// If AMOLED watch is in low power mode it shows different layout
 		if (_burnInProtection && !_isAwake) {
 			// Clear dc with backgroundcolor
+			// Because View.onUpdate() is not called to clear background
 			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
 			dc.clear();
 
@@ -102,14 +103,12 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			// Draw To AlwaysOnLayout
 			drawAlwaysOn(dc);
 
+			_burnInTimeChanged = !_burnInTimeChanged;
+
 			// Set motivational quote
 			_motivation.checkMotivationRefresh(dc);
 			_splittedMotivationalQuote = _motivation.getSplittedMotivationalQuote(dc);
 		} else {
-			// Clear dc with backgroundcolor
-			dc.setColor(themeColors[:foregroundPrimaryColor], themeColors[:backgroundColor]);
-			dc.clear();
-
 			// Reload drawables if changed from low power mode in case of AMOLED
 			if (_burnInProtection && _burnInTimeDisplayed) {
 				setLayout(Rez.Layouts.WatchFace(dc));
@@ -149,7 +148,7 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 			viewDrawables[:middleMotivationText].setMotivationPartText(_splittedMotivationalQuote[1]);
 			viewDrawables[:bottomMotivationText].setMotivationPartText(_splittedMotivationalQuote[2]);
 
-			// Call the parent onUpdate function to redraw the layout
+			// Call the parent onUpdate function to redraw the layout - it clears the background
 			// Call the Drawables' draw function
 			// Draw Time (+AM/PM), date, data fields, databars, Motivational quote
 			View.onUpdate(dc);
@@ -218,10 +217,10 @@ class WarpaintMotivationView extends WatchUi.WatchFace {
 	//! @param dc Device context
 	(:burn_in_protection)
 	function drawAlwaysOn(dc as Dc) as Void {
-		dc.setPenWidth(1);
 		var height = dc.getHeight();
 		var width = dc.getWidth();
-		_burnInTimeChanged = !_burnInTimeChanged;
+		dc.setPenWidth(1);
+		dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
 		if (_burnInTimeChanged) {
 			// Set settings and BurnInProtection for Time layout
 			viewDrawables[:timeTextTop].setSettings(_deviceSettings);
