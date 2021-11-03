@@ -12,8 +12,8 @@ class SunriseSunset {
 
 	(:sunriseSunset) private var _databarWidth as Integer;
 
-	(:sunriseSunset) private var _sunrise as Number; // in hour, eg. 8.23
-	(:sunriseSunset) private var _sunset as Number;
+	(:sunriseSunset) private var _sunrise as Float; // in hour, eg. 8.23
+	(:sunriseSunset) private var _sunset as Float;
 	(:sunriseSunset) private var _hour as Number;
 	(:sunriseSunset) private var _min as Number;
 

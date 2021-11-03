@@ -53,7 +53,7 @@ The unique font is from Vic Fieger (https://www.vicfieger.com)
 ## What's New
 
 ### 1.3.1
-- Fix minor bug with background service
+- Fix minor bugs
 ### 1.3.0
 - Restructure and optimize code
 - Fix AMOLED watches not updating motivational quote when in low power mode
