@@ -52,6 +52,8 @@ The unique font is from Vic Fieger (https://www.vicfieger.com)
 
 ## What's New
 
+### 1.3.2
+- Code optimization
 ### 1.3.1
 - Fix minor bugs
 ### 1.3.0

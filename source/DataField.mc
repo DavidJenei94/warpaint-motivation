@@ -6,8 +6,8 @@ class DataField extends WatchUi.Text {
 	
 	private var _selectedValue as Number;
 
-	private var _x as Number;
-	private var _y as Number;
+	private var _x as Float;
+	private var _y as Float;
 	private var _pixelsBetweenIconAndData as Number;
 	
 	//! Constructor

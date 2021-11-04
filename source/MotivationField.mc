@@ -4,7 +4,7 @@ import Toybox.WatchUi;
 class MotivationField extends WatchUi.Text {
 
 	private var _motivationPartText as String;
-	private var _lineWidth as Double;
+	private var _lineWidth as Float;
 
 	//! Constructor
 	//! @param params in the layout.xml the drawable object's param tags
