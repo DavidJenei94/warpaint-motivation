@@ -6,7 +6,7 @@ import Toybox.Background;
 import Toybox.Time;
 import Toybox.System;
 
-// UAT glabal data for displays and tests
+// UAT global data for displays and tests
 var uatLogOnUpdateEllapsedTime = false;
 var uatDisplayData = false;
 var uatLogSunriseSunsetDetails = false;
