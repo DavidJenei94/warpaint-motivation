@@ -50,6 +50,9 @@ The motivational quotes are from the following youtube channels:
 - Eddie Pinero (https://www.youtube.com/channel/UCZSFzP3302RUCqPNXFGlVFw)
 The unique font is from Vic Fieger (https://www.vicfieger.com)
 
+### Tags: 
+Motivational, Inspirational, Data, Information, Stylish, Original, Creative, Customizable, Special, Cool, Awesome, Running, Race
+
 ## What's New
 
 ### 1.3.2
