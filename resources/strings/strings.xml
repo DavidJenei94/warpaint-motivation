@@ -2,6 +2,8 @@
 
     <string id="AppName">Warpaint Motivation</string>
 
+    <string id="AppVersionTitle">Warpaint Motivation version</string>
+
 	<string id="ThemeTitle">Theme</string>
 
     <!-- Basic color themes -->

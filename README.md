@@ -57,6 +57,7 @@ Motivational, Inspirational, Data, Information, Stylish, Original, Creative, Cus
 
 ### 1.3.2
 - Code optimization
+- Fix vivoactive_hr false data field issue
 ### 1.3.1
 - Fix minor bugs
 ### 1.3.0

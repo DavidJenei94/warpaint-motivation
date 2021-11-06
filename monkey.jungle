@@ -82,7 +82,7 @@ vivoactive.resourcePath = $(vivoactive.resourcePath);resources-basic_themes;reso
 # 2.4.0
 # has own resourcepath - approachs60.resourcePath = $(approachs60.resourcePath);resources-no_weather
 # has own resourcepath - fr735xt.resourcePath = $(fr735xt.resourcePath);resources-no_weather
-vivoactive_hr.resourcePath = $(vivoactive_hr.resourcePath);resources-no_weather
+# has own resourcepath - vivoactive_hr.resourcePath = $(vivoactive_hr.resourcePath);resources-no_weather
 # 3.0.0
 # has own resourcepath - approachs62.resourcePath = $(approachs62.resourcePath);resources-no_weather
 d2charlie.resourcePath = $(d2charlie.resourcePath);resources-no_weather
