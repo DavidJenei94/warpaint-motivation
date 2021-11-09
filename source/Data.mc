@@ -266,7 +266,8 @@ class Data {
     
     //API 2.1.0
 	//! get active minutes for current week
-    //! @return array of active minutes done and active minutes goal  
+    //! @return array of active minutes done and active minutes goal
+	(:activeMinutes)
     private function getActiveMinutesWeek() as Array<Number> {
     	if (_info has :activeMinutesWeek) {
 	    	var activeMinutesWeek = _info.activeMinutesWeek != null ? _info.activeMinutesWeek.total : -1;
@@ -479,7 +480,21 @@ class Data {
 	//! Get the next sunrise or sunset
 	//! @return the next sunrise or sunset according to which is the next
 	(:sunriseSunset)	
-    private function getNextSunriseSunsetTime() as String {
+    private function getNextSunriseSunsetTime() as Array<String or Boolean> {
     	return sunriseSunset.getNextSunriseSunset(_deviceSettings);
+	}
+
+	//! Get the next sunrise
+	//! @return the next sunrise
+	(:sunriseSunset)	
+    private function getNextSunriseTime() as Array<String or Boolean> {
+    	return sunriseSunset.getNextSunrise(_deviceSettings);
+	}
+
+	//! Get the next sunset
+	//! @return the next sunset
+	(:sunriseSunset)	
+    private function getNextSunsetTime() as Array<String or Boolean> {
+    	return sunriseSunset.getNextSunset(_deviceSettings);
 	}
 }

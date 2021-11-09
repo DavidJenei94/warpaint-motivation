@@ -58,6 +58,10 @@ class SunriseSunset {
 	//! @return array of the next sunrise in string and true (as it is sunrise)
 	(:sunriseSunset)
     function getNextSunrise(settings as DeviceSettings) as Array<Number or String or Boolean> {
+		if (!_successfulCalculation) {
+			return [-1, true];
+		}
+
     	return [formatHoursToTimeString(_sunrise, settings), true];
     }
 
@@ -66,6 +70,10 @@ class SunriseSunset {
 	//! @return array of the next sunset in string and false (as it is not sunrise)
 	(:sunriseSunset)
     function getNextSunset(settings as DeviceSettings) as Array<Number or String or Boolean> {
+		if (!_successfulCalculation) {
+			return [-1, false];
+		}
+
     	return [formatHoursToTimeString(_sunset, settings), false];
     }
     

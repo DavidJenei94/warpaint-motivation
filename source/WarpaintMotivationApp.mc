@@ -163,7 +163,7 @@ class WarpaintMotivationApp extends Application.AppBase {
 
     //! Set global variables with storage enabled
     (:has_storage)
-    private function setGlobalVariablesWithStorage() as void {
+    private function setGlobalVariablesWithStorage() as Void {
         theme = Properties.getValue("Theme");
 
         displaySecond = Properties.getValue("DisplaySecond");
