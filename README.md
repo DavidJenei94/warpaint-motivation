@@ -32,7 +32,7 @@ In case of any issues/questions please check the following 'Warpaint Motivation 
 ### Notes/FAQ:
 - All possibilities to change the settings and customize the watch face are present on the following page: https://apps.garmin.com/settingsHelp. 
 - The 12/24 hour mode and Statute/metric units can be changed directly on the device in Settings > System.
-- Motivational quotes are collected via an internet connected mobile phone through bluetooth connection from a continuously growing collection of currently more than 120 quotes every hour (collects more than one quote, which are put in a queue to use in case of temporary connection errors). If no connection is available and the queue is empty, or the device CIQ level is 1.4.x or below, the motivational quote is selected from a pool of 40 defaults.
+- Motivational quotes are collected via an internet connected mobile phone through bluetooth connection from a continuously growing collection of currently more than 140 quotes every hour (collects more than one quote, which are put in a queue to use in case of temporary connection errors). If no connection is available and the queue is empty, or the device CIQ level is 1.4.x or below, the motivational quote is selected from a pool of 40 defaults.
 - You can change the currently displayed motivational quote manually by changing any of the settings.
 - If Next Sunrise/Sunset data field shows '--' or the Sunrise/Sunset databar is empty, start any activities until you are located (GPS turns to green). Now the Sunrise/Sunset data will be updated in maximum of 30 minutes on the watch face.
 - If other data field shows '--', check the device support sheet mentioned before. If it should be available please contact me because I might made a mistake in the sheet.
@@ -55,6 +55,8 @@ Motivational, Inspirational, Data, Information, Stylish, Original, Creative, Cus
 
 ## What's New
 
+### 1.3.3
+- Fix issue: property without settings
 ### 1.3.2
 - Code optimization
 - Fix vivoactive_hr false data field issue
