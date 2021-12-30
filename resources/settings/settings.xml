@@ -257,4 +257,8 @@
 		</settingConfig>
 	</setting>
 
+	<setting propertyKey="@Properties.LowMemoryForMotivationalQuotes" title="@Strings.LowMemoryForMotivationalQuotesTitle">
+        <settingConfig type="boolean" readonly="true" />
+    </setting>
+
 </settings>

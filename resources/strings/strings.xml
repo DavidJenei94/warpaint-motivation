@@ -184,4 +184,6 @@
     <string id="DataBarSplitInnerRightBottom">Inner databar</string>
     <string id="DataBarSplitAll">Both</string>
 
+    <string id="LowMemoryForMotivationalQuotesTitle">Low memory device</string>
+
 </strings>
