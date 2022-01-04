@@ -55,6 +55,8 @@ Motivational, Inspirational, Data, Information, Stylish, Original, Creative, Cus
 
 ## What's New
 
+### 1.3.4
+- Add Venu 2 Plus support
 ### 1.3.3
 - Fix issue: property without settings
 ### 1.3.2
