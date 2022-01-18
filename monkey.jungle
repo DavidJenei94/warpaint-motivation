@@ -116,6 +116,7 @@ venu2.resourcePath = $(venu2.resourcePath);resources-no_partial_update
 venu2plus.resourcePath = $(venu2plus.resourcePath);resources-no_partial_update
 venu2s.resourcePath = $(venu2s.resourcePath);resources-no_partial_update
 venud.resourcePath = $(venud.resourcePath);resources-no_partial_update
+epix2.resourcePath = $(epix2.resourcePath);resources-no_partial_update
 
 
 #  fr245/fr245m, venusq/venusqm, fr55 are CIQ 3.x, but do not support floors climbed.
