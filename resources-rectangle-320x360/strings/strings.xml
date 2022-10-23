@@ -1,0 +1,9 @@
+<strings>
+
+    <string id="DataBarOuterLeftTopTitle">Top DataBar</string>
+    <string id="DataBarInnerRightBottomTitle">Bottom DataBar</string>
+
+    <string id="DataBarSplitOuterLeftTop">Top databar</string>
+    <string id="DataBarSplitInnerRightBottom">Bottom databar</string>
+
+</strings>
